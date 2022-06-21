@@ -1,0 +1,51 @@
+﻿Country,State_Short,State,Max_Week_Date,Week,Year,Tot_Cases,Tot_Death
+United States,OK,Oklahoma,2022-01-22,4,2022,893913,11872
+United States,UT,Utah,2022-01-22,4,2022,825989,4030
+United States,GA,Georgia,2022-01-22,4,2022,2229675,32294
+United States,NM,New Mexico,2022-01-22,4,2022,437934,6259
+United States,IA,Iowa,2022-01-22,4,2022,682363,8317
+United States,SD,South Dakota,2022-01-22,4,2022,216656,2601
+United States,NY,New York,2022-01-22,4,2022,2481526,25268
+United States,DE,Delaware,2022-01-22,4,2022,239562,2480
+United States,ID,Idaho,2022-01-22,4,2022,358057,4322
+United States,NH,New Hampshire,2022-01-22,4,2022,257793,2135
+United States,CA,California,2022-01-22,4,2022,7570538,77722
+United States,WI,Wisconsin,2022-01-22,4,2022,1446207,11946
+United States,AL,Alabama,2022-01-22,4,2022,1147703,17399
+United States,NE,Nebraska,2022-01-22,4,2022,413056,3569
+United States,MI,Michigan,2022-01-22,4,2022,2124225,31502
+United States,IL,Illinois,2022-01-22,4,2022,2773362,33446
+United States,MD,Maryland,2022-01-22,4,2022,953037,13069
+United States,CT,Connecticut,2022-01-22,4,2022,671674,9769
+United States,RI,Rhode Island,2022-01-22,4,2022,312476,3264
+United States,KY,Kentucky,2022-01-22,4,2022,1113282,13568
+United States,MN,Minnesota,2022-01-22,4,2022,1216734,11291
+United States,SC,South Carolina,2022-01-22,4,2022,1295494,15149
+United States,WA,Washington,2022-01-22,4,2022,1166972,10405
+United States,VT,Vermont,2022-01-22,4,2022,89058,489
+United States,NC,North Carolina,2022-01-22,4,2022,2301132,20854
+United States,ME,Maine,2022-01-22,4,2022,200357,1698
+United States,MT,Montana,2022-01-22,4,2022,222093,2976
+United States,NV,Nevada,2022-01-22,4,2022,614505,8736
+United States,MO,Missouri,2022-01-22,4,2022,1261998,17024
+United States,MS,Mississippi,2022-01-22,4,2022,681382,10721
+United States,ND,North Dakota,2022-01-22,4,2022,210478,2069
+United States,IN,Indiana,2022-01-22,4,2022,1524527,20751
+United States,WY,Wyoming,2022-01-22,4,2022,135369,1601
+United States,NJ,New Jersey,2022-01-22,4,2022,2058497,30746
+United States,LA,Louisiana,2022-01-22,4,2022,1060022,15324
+United States,OR,Oregon,2022-01-22,4,2022,570892,5936
+United States,AZ,Arizona,2022-01-22,4,2022,1729630,25557
+United States,VA,Virginia,2022-01-22,4,2022,1464850,15894
+United States,KS,Kansas,2022-01-22,4,2022,681405,7319
+United States,AK,Alaska,2022-01-22,4,2022,188612,1018
+United States,TX,Texas,2022-01-22,4,2022,5876122,76798
+United States,FL,Florida,2022-01-22,4,2022,5332376,66409
+United States,AR,Arkansas,2022-01-22,4,2022,734834,9498
+United States,HI,Hawaii,2022-01-22,4,2022,194451,1131
+United States,CO,Colorado,2022-01-22,4,2022,1221126,10799
+United States,MA,Massachusetts,2022-01-22,4,2022,1535986,21402
+United States,WV,West Virginia,2022-01-22,4,2022,413631,5609
+United States,TN,Tennessee,2022-01-22,4,2022,1752162,22151
+United States,PA,Pennsylvania,2022-01-22,4,2022,2560167,39487
+United States,OH,Ohio,2022-01-22,4,2022,2496243,31987

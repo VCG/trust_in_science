@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7f4f7cfb-a3f0-4cca-af82-2ea78565f348" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="tsconfig.json" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1xiVOTXGHvwAvCbtucih9zHG1SG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../week4" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bar_chart\simple\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\61484\WebstormProjects\Upset_plot\js" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f4f7cfb-a3f0-4cca-af82-2ea78565f348" name="Default Changelist" comment="" />
+      <created>1630837864060</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1630837864060</updated>
+      <workItem from="1630837865073" duration="27883000" />
+      <workItem from="1633317553560" duration="12272000" />
+      <workItem from="1633336817959" duration="9265000" />
+      <workItem from="1633403279298" duration="9039000" />
+      <workItem from="1633437491160" duration="916000" />
+      <workItem from="1633501154609" duration="756000" />
+      <workItem from="1633518905806" duration="169000" />
+      <workItem from="1633520308633" duration="55000" />
+      <workItem from="1633837562167" duration="1312000" />
+      <workItem from="1633923020845" duration="612000" />
+      <workItem from="1633925535303" duration="1512000" />
+      <workItem from="1633930395773" duration="4117000" />
+      <workItem from="1634287871325" duration="596000" />
+      <workItem from="1634296090697" duration="58579000" />
+      <workItem from="1635157680605" duration="10808000" />
+      <workItem from="1635931784644" duration="3858000" />
+      <workItem from="1636243580532" duration="19069000" />
+      <workItem from="1636453950973" duration="3319000" />
+      <workItem from="1636746986745" duration="1195000" />
+      <workItem from="1642658412735" duration="1198000" />
+      <workItem from="1645695374739" duration="1882000" />
+      <workItem from="1646523979040" duration="20000" />
+      <workItem from="1648968338113" duration="5000" />
+      <workItem from="1651890946474" duration="12829000" />
+      <workItem from="1651906053643" duration="944000" />
+      <workItem from="1651908631723" duration="1369000" />
+      <workItem from="1651914303215" duration="10423000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="45" y="192" key="FileChooserDialogImpl" timestamp="1651916677242">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="45" y="192" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1651916677242" />
+  </component>
+</project>
