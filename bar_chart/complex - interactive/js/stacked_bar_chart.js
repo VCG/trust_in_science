@@ -146,49 +146,57 @@
             vis.tooltip
                 .html(`
                   <b>Week:</b> ${week}<br>
-                      <b>Year:</b> ${year}<br> 
+                      <b>Year:</b> ${year}<br>
                        <br>
-                       
-                        <b>Rate of Unvaccinated (per 100k):</b>  
+
+                        <b>Rate of Unvaccinated (per 100k):</b>
                         <br>
-                       
+
                        <span style="font-size:11px;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
                        <span style="font-size:11px;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span><br>
-                       
-                 
+
+
                        <span style="font-size:11px;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
                        <span style="font-size:11px;color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span><br>
-                    
-                        
+
+
                        <span style="font-size:11px;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
                        <span style="font-size:11px;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span><br>
-                    
+
                         <br>
-                        <b>Rate of Vaccinated (per 100k):</b>  
+                        <b>Rate of Vaccinated (per 100k):</b>
                          <br>
-                      
+
                        <span style="font-size:11px;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
                        <span style="font-size:11px;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span><br>
-                    
-                        
+
+
                        <span style="font-size:11px;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
                        <span style="font-size:11px;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span><br>
-                    
-                          
+
+
                        <span style="font-size:11px;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
                        <span style="font-size:11px;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span><br>
-              
+
                       <br>`)
 
                 .style("opacity", 1)
                 .style("font-size", "11px")
                 .style("left", ((event.x) +10) + "px")
                 .style("top", ((event.y) +10) + "px");
+
+            //change opacity to all non-highlighted bars
+            vis.svg.selectAll(".main-rect").style("opacity", 0.1);
+
+            // //reference this particular, highlighted bars with 1 opacity
+            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
         }
 
 
         const mouseleave = function(event, d) {
             vis.tooltip.style("opacity", 0);
+
+            vis.svg.selectAll(".main-rect").style("opacity", 1);
         }
 
         //stack the data? --> stack per subgroup
@@ -216,12 +224,13 @@
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
             .join("rect")
+            .attr("class", d => "main-rect rect-bar-" + d.data.Week)
             .attr("x", d => vis.x_scale(d.data.Week))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
             .attr("width", vis.x_scale.bandwidth())
-             .on("mouseover", mouseover)
-             .on("mouseleave", mouseleave);
+            .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave);
 
 
         //grey y gridlines
@@ -239,9 +248,6 @@
                 .tickSize(-vis.width)
                 .tickFormat("")
             );
-
-
-
     }
 
     initBrush() {

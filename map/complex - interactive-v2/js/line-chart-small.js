@@ -47,6 +47,18 @@ class LineChartSmall {
 
         svg.call(tip);
 
+
+        svg.selectAll("dot")
+            .data(vis.data)
+            .join("circle")
+            .attr("cx", d => x(d.date))
+            .attr("cy", d => y(d.value))
+            .attr("r", 7)
+            .attr("fill", "transparent")
+            .on("mouseover", function(){d3.select(this).style("fill", "yellow");})
+            .on("mouseout", function(){d3.select(this).style("fill", "transparent");})
+
+
         svg.append("path")
             .data([vis.data])
             .attr("class", "line")
@@ -55,7 +67,7 @@ class LineChartSmall {
             .attr("d", valueline);
 
 
-
         $(vis.parentElement).css("background-color", colorScale(d3.max(vis.data, d => d.value)));
+
     }
 }

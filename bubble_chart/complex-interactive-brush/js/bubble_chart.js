@@ -100,30 +100,16 @@ class BubbleChart {
         vis.svg.selectAll(".x-axis").transition().duration(200).call(d3.axisBottom(vis.x)).style("font-size", '12');
         vis.svg.selectAll(".y-axis").transition().duration(200).call(d3.axisLeft(vis.y)).style("font-size", '12');
 
-        const weeks = [...new Set(vis.data.map(d => (d.Week)))];
-
-        weeks.forEach((week, i) => {
-            let link = $(`<a href="#">${week}</a>`);
-            link.mouseover(() => {
-                vis.wrangleData(week);
-                $(".selected").removeClass("selected");
-                link.addClass("selected");
-            });
-            $("#filter-bar").append(link);
-        });
-
-        // $(this.parentElement).mouseover(() => )
-
-        // vis.initBrush();
+        vis.initBrush();
 
         vis.wrangleData();
     }
 
-    wrangleData(week) {
+    wrangleData(startDate, endDate) {
         let vis = this;
 
-        if (week) {
-            vis.displayData = vis.data.filter(row => row.Week == week);
+        if (startDate && endDate) {
+            vis.displayData = vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate);
         }
         else {
             vis.displayData = [...vis.data];
@@ -163,60 +149,60 @@ class BubbleChart {
             .on("mouseout", vis.tip.hide)
     }
 
-    // initBrush() {
-    //     let vis = this;
-    //
-    //     const height = 20;
-    //     const width = 180;
-    //
-    //     const groups2 = vis.data.map(d => (d.Week));
-    //
-    //     let x = d3.scaleBand()
-    //         .domain(groups2)
-    //         .range([0, width])
-    //         .padding([1.5]);
-    //
-    //     let xAxis = d3.axisBottom()
-    //         .scale(x)
-    //         .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
-    //         .ticks(5)
-    //         .tickSize([10]);
-    //
-    //     let xTime = d3.scaleTime()
-    //         .domain(d3.extent(vis.data, d => d.Max_Week_Date))
-    //         .range([0, width]);
-    //
-    //     let brush = d3.brushX()
-    //         .extent([[0,0], [width, height]])
-    //         .on("brush", brushed)
-    //         .on("brush end", function(e) {
-    //             let startDate = xTime.invert(e.selection[0]);
-    //             let endDate = xTime.invert(e.selection[1]);
-    //             vis.wrangleData(startDate, endDate);
-    //         });
-    //
-    //     let svg = d3.select("#brush-chart").append("svg")
-    //         .attr("width", width)
-    //         .attr("height", height)
-    //         .call(xAxis);
-    //
-    //     let brushg = svg.append("g")
-    //         .attr("class", "brush")
-    //         .attr("width", width)
-    //         .attr("height", height)
-    //         .call(brush);
-    //
-    //     svg.append('line')
-    //         .attr('x1', 0)
-    //         .attr('y1', 0)
-    //         .attr('x2', width)
-    //         .attr('y2', 0);
-    //
-    //     function brushed() {
-    //         let range = d3.brushSelection(this);
-    //
-    //         d3.selectAll("span")
-    //             .text(function(d, i) { return Math.round(range[i]); });
-    //     }
-    // }
+    initBrush() {
+        let vis = this;
+
+        const height = 20;
+        const width = 180;
+
+        const groups2 = vis.data.map(d => (d.Week));
+
+        let x = d3.scaleBand()
+            .domain(groups2)
+            .range([0, width])
+            .padding([1.5]);
+
+        let xAxis = d3.axisBottom()
+            .scale(x)
+            .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
+            .ticks(5)
+            .tickSize([10]);
+
+        let xTime = d3.scaleTime()
+            .domain(d3.extent(vis.data, d => d.Max_Week_Date))
+            .range([0, width]);
+
+        let brush = d3.brushX()
+            .extent([[0,0], [width, height]])
+            .on("brush", brushed)
+            .on("brush end", function(e) {
+                let startDate = xTime.invert(e.selection[0]);
+                let endDate = xTime.invert(e.selection[1]);
+                vis.wrangleData(startDate, endDate);
+            });
+
+        let svg = d3.select("#brush-chart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .call(xAxis);
+
+        let brushg = svg.append("g")
+            .attr("class", "brush")
+            .attr("width", width)
+            .attr("height", height)
+            .call(brush);
+
+        svg.append('line')
+            .attr('x1', 0)
+            .attr('y1', 0)
+            .attr('x2', width)
+            .attr('y2', 0);
+
+        function brushed() {
+            let range = d3.brushSelection(this);
+
+            d3.selectAll("span")
+                .text(function(d, i) { return Math.round(range[i]); });
+        }
+    }
 }

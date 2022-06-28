@@ -1,40 +1,14 @@
+
+
 .container {
+    /*border: 1px solid red;*/
     overflow: hidden;
 }
 
 .main-content {
+    /*border: 1px solid black;*/
     float: left;
     width: 920px;
-}
-
-.filter-container {
-    margin-left: 0px;
-    margin-top: 20px;
-}
-
-.filter-bar a {
-    border: 1px solid #CCCCCC;
-    color: #000000;
-    display: inline-block;
-    width: 16px;
-    text-align: center;
-    margin: 0;
-    font-size: 11px;
-}
-
-.filter-bar a:hover {
-    background-color: #CCCCCC;
-    text-decoration: none;
-}
-
-.filter-bar a.selected {
-    background-color: #CCCCCC;
-    text-decoration: none;
-}
-
-.filter-title {
-    margin-right: 2px;
-    font-size: 12px;
 }
 
 .legend-content {
@@ -70,6 +44,8 @@
     font-size: 13px;
     margin-top: -15px;
     margin-left: 140px;
+
+
 }
 
 .legend-value svg, .legend-value rect {

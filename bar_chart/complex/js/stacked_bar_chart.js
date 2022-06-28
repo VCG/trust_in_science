@@ -49,20 +49,19 @@ class StackedBarChart {
             .attr("transform", "rotate(0)");
 
 
-
         // Add Y axis
         const y = d3.scaleLinear()
             .domain([0, 13000])
-            .range([ vis.height, 0 ]);
+            .range([vis.height, 0]);
         vis.svg.append("g")
             .call(d3.axisLeft(y))
             .attr("font-size", "12")
 
         // color palette = one color per subgroup
-       const color = d3.scaleOrdinal()
+        const color = d3.scaleOrdinal()
             .domain(subgroups)
-            .range(['#7dc9f5','#0984ea','#04386b',
-                '#f4d166','#ef701b','#9e3a26'])
+            .range(['#7dc9f5', '#0984ea', '#04386b',
+                '#f4d166', '#ef701b', '#9e3a26'])
 
 
         //stack the data? --> stack per subgroup
@@ -85,11 +84,11 @@ class StackedBarChart {
             .style("padding", "10px");
 
 
-       const yearFormat = d3.timeFormat("%Y");
+        const yearFormat = d3.timeFormat("%Y");
 
 
         // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function(event, d) {
+        const mouseover = function (event, d) {
             console.log(event, d);
             const subgroupName = d3.select(this.parentNode).datum().key;
             const subgroupValue = d.data[subgroupName];
@@ -107,8 +106,8 @@ class StackedBarChart {
 
             const color = d3.scaleOrdinal()
                 .domain(subgroups)
-                .range(['#7dc9f5','#0984ea','#04386b',
-                    '#f4d166','#ef701b','#9e3a26'])
+                .range(['#7dc9f5', '#0984ea', '#04386b',
+                    '#f4d166', '#ef701b', '#9e3a26'])
 
             tooltip
                 .html(`
@@ -152,20 +151,25 @@ class StackedBarChart {
 
                 .style("opacity", 1)
                 .style("font-size", "12px")
-                .style("left", ((event.x) +10) + "px")
-                .style("top", ((event.y) +10) + "px");
+                .style("left", ((event.x) + 10) + "px")
+                .style("top", ((event.y) + 10) + "px");
+
+            //change opacity to all non-highlighted arrows
+            vis.svg.selectAll("rect.main-rect").style("opacity", 0.1)
+
+            // //reference this particular, highlighted arrow with 1 opacity
+            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
 
         }
 
 
-
-        const mouseleave = function(event, d) {
+        const mouseleave = function (event, d) {
             console.log("mouseleave");
             tooltip
                 .style("opacity", 0)
+
+            vis.svg.selectAll("rect.main-rect").style("opacity", 1)
         }
-
-
 
 
         // Show the bars
@@ -179,39 +183,39 @@ class StackedBarChart {
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
             .join("rect")
+            .attr("class", d => "main-rect rect-bar-" + d.data.Week)
             .attr("x", d => x(d.data.Week))
             .attr("y", d => y(d[1]))
             .attr("height", d => y(d[0]) - y(d[1]))
-            .attr("width",x.bandwidth())
-             .on("mouseover", mouseover)
-             .on("mouseleave", mouseleave)
+            .attr("width", x.bandwidth())
+            .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave)
 
-        // svg_g.on("mouseleave", mouseleave);
 
         //overall chart title
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top)
+            .attr("y", (vis.margin.top / 3) - vis.margin.top)
             .attr("class", "title")
             .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "20")
-            .attr("font-weight","bold")
+            .attr("font-weight", "bold")
 
         //overall chart subtitle
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top+30)
+            .attr("y", (vis.margin.top / 3) - vis.margin.top + 30)
             .attr("class", "title")
             .text("Apr 2021-Feb 2022")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "17")
 
 
         //grey y gridlines
-        vis.make_x_gridlines= function() {
+        vis.make_x_gridlines = function () {
             return d3.axisLeft(y)
                 .ticks(5)
         }
@@ -226,17 +230,17 @@ class StackedBarChart {
 
 
         // create a list of keys
-        var keys = [ "Ages 18-49","Ages 50-79","Ages 80+"].reverse()
+        var keys = ["Ages 18-49", "Ages 50-79", "Ages 80+"].reverse()
 
 
         // Usually you have a color scale in your chart already
         var color3 = d3.scaleOrdinal()
             .domain(keys)
-            .range(['#04386b','#0984ea', '#7dc9f5'])
+            .range(['#04386b', '#0984ea', '#7dc9f5'])
 
         var color2 = d3.scaleOrdinal()
             .domain(keys)
-            .range(['#9e3a26','#ef701b','#f4d166'])
+            .range(['#9e3a26', '#ef701b', '#f4d166'])
 
         // Add one dot in the legend for each name.
         var size = 10
@@ -245,32 +249,47 @@ class StackedBarChart {
             .data(keys)
             .enter()
             .append("rect")
-            .attr("x", vis.width+50)
-            .attr("y", function(d,i){ return 30 + i*(size+8)})
+            .attr("class", "rect")
+            .attr("x", vis.width + 50)
+            .attr("y", function (d, i) {
+                return 30 + i * (size + 8)
+            })
             .attr("width", size)
             .attr("height", size)
-            .style("fill", function(d){ return color2(d)})
+            .style("fill", function (d) {
+                return color2(d)
+            })
+
 
         vis.svg.selectAll("mydots")
             .data(keys)
             .enter()
             .append("rect")
-            .attr("x", vis.width+50)
-            .attr("y", function(d,i){ return 150 + i*(size+8)})
+            .attr("class", "rect")
+            .attr("x", vis.width + 50)
+            .attr("y", function (d, i) {
+                return 150 + i * (size + 8)
+            })
             .attr("width", size)
             .attr("height", size)
-            .style("fill", function(d){ return color3(d)})
+            .style("fill", function (d) {
+                return color3(d)
+            })
 
         // Add one dot in the legend for each name.
         vis.svg.selectAll("mylabels")
             .data(keys)
             .enter()
             .append("text")
-            .attr("x", vis.width+60 + size*1.2)
-            .attr("y", function(d,i){ return 30 + i*(size+8) + (size/2)})
+            .attr("x", vis.width + 60 + size * 1.2)
+            .attr("y", function (d, i) {
+                return 30 + i * (size + 8) + (size / 2)
+            })
             .style("fill", "black")
             .style("font-size", "14px")
-            .text(function(d){ return d})
+            .text(function (d) {
+                return d
+            })
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
 
@@ -280,12 +299,16 @@ class StackedBarChart {
             .data(keys)
             .enter()
             .append("text")
-            .attr("x", vis.width+60 + size*1.2)
-            .attr("y", function(d,i){ return 150 + i*(size+8) + (size/2)})
+            .attr("x", vis.width + 60 + size * 1.2)
+            .attr("y", function (d, i) {
+                return 150 + i * (size + 8) + (size / 2)
+            })
             // .style("fill", function(d){ return color2(d)})
             .style("fill", "black")
             .style("font-size", "14px")
-            .text(function(d){ return d})
+            .text(function (d) {
+                return d
+            })
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
 
@@ -293,8 +316,8 @@ class StackedBarChart {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/4)
-            .attr("y", 0-50)
+            .attr("x", -vis.width / 4)
+            .attr("y", 0 - 50)
             .attr("font-size", "16")
             .text("Case count per 100k people");
 
@@ -302,41 +325,41 @@ class StackedBarChart {
         //share of non vaccination title
         vis.svg
             .append("text")
-            .attr("x", vis.width+50)
-            .attr("y", (vis.margin.top/3)-vis.margin.top+80)
+            .attr("x", vis.width + 50)
+            .attr("y", (vis.margin.top / 3) - vis.margin.top + 80)
             .attr("class", "title")
             .text("Rate of Unvaccinated")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "16")
 
         //share of vaccination title
         vis.svg
             .append("text")
-            .attr("x", vis.width+50)
-            .attr("y", (vis.margin.top/3)-vis.margin.top+200)
+            .attr("x", vis.width + 50)
+            .attr("y", (vis.margin.top / 3) - vis.margin.top + 200)
             .attr("class", "title")
             .text("Rate of Vaccinated")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "16")
 
         //add year labels to x axis (year 2022)
         vis.svg
             .append("text")
-            .attr("x", vis.width-125)
-            .attr("y", vis.height+40)
+            .attr("x", vis.width - 125)
+            .attr("y", vis.height + 40)
             .attr("class", "title")
             .text("2022")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "12")
 
         //add year labels to x axis (year 2021)
         vis.svg
             .append("text")
-            .attr("x", vis.margin.width+50)
-            .attr("y", vis.height+40)
+            .attr("x", vis.margin.width + 50)
+            .attr("y", vis.height + 40)
             .attr("class", "title")
             .text("2021")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "12")
 
 
@@ -344,11 +367,15 @@ class StackedBarChart {
         vis.svg
             .append("text")
             .attr("text-anchor", "middle")
-            .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
+            .attr("x", vis.width / 2)
+            .attr("y", vis.height + 60)
             .attr("class", "title")
             .text("Week Number")
-            .attr("fill","black")
+            .attr("fill", "black")
             .attr("font-size", "16")
     }
+
+
+
+
 }

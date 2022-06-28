@@ -13,7 +13,7 @@ d3.csv("data/bar_chart_complex2.csv", (row,i) => {
     row.Unvax_80 = numbers_format(+row.Unvax_80);
     row.group= row.Week;
     row.Max_Week_Date = parseDate(row.Max_Week_Date);
-
+    row.index = i;
 
     return row;
 
