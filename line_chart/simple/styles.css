@@ -30,6 +30,10 @@
     font-size: 13px;
 }
 
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+}
 
 /*.d3-tip {*/
 /*    line-height: 1;*/

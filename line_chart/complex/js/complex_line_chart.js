@@ -17,7 +17,7 @@ class LineChart {
 
 
 
-        vis.svg = d3.select("body")
+        vis.svg = d3.select("#chart")
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)

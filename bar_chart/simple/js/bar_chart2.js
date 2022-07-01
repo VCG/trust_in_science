@@ -10,7 +10,7 @@ class BarChart2 {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 10, right: 200, bottom: 140, left: 70},
+        vis.margin = {top: 10, right: 200, bottom: 100, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
             vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
@@ -111,7 +111,7 @@ class BarChart2 {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+50)
+            .attr("y", vis.height+60)
             .attr("font-size", "16")
             .text("week number");
 

@@ -136,7 +136,7 @@ class BarChart {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+50)
+            .attr("y", vis.height+60)
             .attr("font-size", "16")
             .text("week number");
 
