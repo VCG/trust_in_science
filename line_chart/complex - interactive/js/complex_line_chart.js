@@ -22,8 +22,8 @@ class LineChart {
 
 
         // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 70, left: 70};
-        vis.width = 900 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 160, bottom: 70, left: 70};
+        vis.width = 950 - vis.margin.left - vis.margin.right;
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
 

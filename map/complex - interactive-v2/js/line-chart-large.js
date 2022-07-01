@@ -37,23 +37,11 @@ class LineChartLarge {
 
         const dateFormatter = d3.timeFormat("%d/%m/%Y");
 
-        // let tip = d3.tip()
-        //     .attr("class", "d3-tip")
-        //     .offset([100, 0])
-        //     .html(function(e, d) {
-        //         let date = x.invert(e.layerX);
-        //         let value = y.invert(e.layerY);
-        //         return `<b> Date: </b> ${dateFormatter(date)}<br /><b>Number of New Cases: ${Math.floor(value)}</b>`;
-        //     });
-        //
-        // svg.call(tip);
-        //
+
         svg.append("path")
             .data([vis.data])
             .attr("class", "line")
             .attr("d", valueline)
-            // .on("mousemove", function(e, d) { tip.show(e, d, this); })
-            // .on("mouseout", tip.hide);
 
 
         svg.append("path")

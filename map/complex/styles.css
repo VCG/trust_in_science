@@ -71,6 +71,16 @@
     font-size: 13px;
 }
 
+.d3-tip2 {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
+    z-index: 3;
+}
+
 .tooltip1 {
     position: absolute;
     text-align: center;
