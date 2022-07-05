@@ -75,6 +75,8 @@ d3.json("data/sankey.json").then(function(sankeydata) {
 
 
 
+
+
 // add the rectangles for the nodes
     node.append("rect")
         .attr("x", function(d) { return d.x0; })
