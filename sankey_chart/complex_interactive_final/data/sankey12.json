@@ -1,0 +1,195 @@
+{
+  "nodes":[
+    {"node":0,"name":"Immediately"},
+    {"node":1,"name":"Delay"},
+    {"node":2,"name":"Never"},
+    {"node":3,"name":"Missing"},
+
+    {"node":4,"name":"Immediately"},
+    {"node":5,"name":"Delay"},
+    {"node":6,"name":"Never"},
+    {"node":7,"name":"Missing"},
+
+    {"node":8,"name":"Immediately"},
+    {"node":9,"name":"Vaccinated"},
+    {"node":10,"name":"Delay"},
+    {"node":11,"name":"Never"},
+    {"node":12,"name":"Missing"},
+
+    {"node":13,"name":"Immediately"},
+    {"node":14,"name":"Vaccinated"},
+    {"node":15,"name":"Delay"},
+    {"node":16,"name":"Never"},
+    {"node":17,"name":"Missing"},
+
+    {"node":18,"name":"Immediately"},
+    {"node":19,"name":"Vaccinated"},
+    {"node":20,"name":"Delay"},
+    {"node":21,"name":"Never"},
+    {"node":22,"name":"Missing"}
+
+  ],
+  "links":[
+    {"source":0,"target":4,"value":1678},
+    {"source":0,"target":5,"value":259},
+    {"source":0,"target":6,"value":14},
+    {"source":0,"target":7,"value":68},
+
+
+
+    {"source":1,"target":4,"value":607},
+    {"source":1,"target":5,"value":1726},
+    {"source":1,"target":6,"value":75},
+    {"source":1,"target":7,"value":177},
+
+
+
+    {"source":2,"target":4,"value":68},
+    {"source":2,"target":5,"value":61},
+    {"source":2,"target":6,"value":225},
+    {"source":2,"target":7,"value":55},
+
+
+
+
+    {"source":3,"target":4,"value":116},
+    {"source":3,"target":5,"value":102},
+    {"source":3,"target":6,"value":48},
+    {"source":3,"target":7,"value":177},
+
+
+    {"source":4,"target":8,"value":1946},
+    {"source":4,"target":9,"value":27},
+    {"source":4,"target":10,"value":235},
+    {"source":4,"target":11,"value":45},
+    {"source":4,"target":12,"value":217},
+
+
+
+
+
+    {"source":5,"target":8,"value":676},
+    {"source":5,"target":9,"value":15},
+    {"source":5,"target":10,"value":1240},
+    {"source":5,"target":11,"value":69},
+    {"source":5,"target":12,"value":149},
+
+
+
+    {"source":6,"target":8,"value":27},
+    {"source":6,"target":9,"value":27},
+    {"source":6,"target":10,"value":143},
+    {"source":6,"target":11,"value":143},
+    {"source":6,"target":12,"value":22},
+
+
+
+
+    {"source":7,"target":8,"value":78},
+    {"source":7,"target":9,"value":7},
+    {"source":7,"target":10,"value":68},
+    {"source":7,"target":11,"value":33},
+    {"source":7,"target":12,"value":292},
+
+
+
+
+
+    {"source":8,"target":13,"value":642},
+    {"source":8,"target":14,"value":1710},
+    {"source":8,"target":15,"value":125},
+    {"source":8,"target":16,"value":125},
+    {"source":8,"target":17,"value":125},
+
+
+
+    {"source":9,"target":13,"value":75},
+    {"source":9,"target":14,"value":0},
+    {"source":9,"target":15,"value":0},
+    {"source":9,"target":16,"value":0},
+    {"source":9,"target":17,"value":0},
+
+
+    {"source":10,"target":13,"value":552},
+    {"source":10,"target":14,"value":142},
+    {"source":10,"target":15,"value":187},
+    {"source":10,"target":16,"value":670},
+    {"source":10,"target":17,"value":135},
+
+
+
+
+
+
+    {"source":11,"target":13,"value":40},
+    {"source":11,"target":14,"value":84},
+    {"source":11,"target":15,"value":26},
+    {"source":11,"target":16,"value":148},
+    {"source":11,"target":17,"value":0},
+
+
+
+
+
+    {"source":12,"target":13,"value":178},
+    {"source":12,"target":14,"value":67},
+    {"source":12,"target":15,"value":10},
+    {"source":12,"target":16,"value":50},
+    {"source":12,"target":17,"value":375},
+
+
+
+
+
+    {"source":13,"target":18,"value":35},
+    {"source":13,"target":19,"value":2290},
+    {"source":13,"target":20,"value":68},
+    {"source":13,"target":21,"value":12},
+    {"source":13,"target":22,"value":75},
+
+
+
+
+
+    {"source":14,"target":18,"value":0},
+    {"source":14,"target":19,"value":1002},
+    {"source":14,"target":20,"value":0},
+    {"source":14,"target":21,"value":0},
+    {"source":14,"target":22,"value":0},
+
+
+
+    {"source":15,"target":18,"value":45},
+    {"source":15,"target":19,"value":180},
+    {"source":15,"target":20,"value":58},
+    {"source":15,"target":21,"value":24},
+    {"source":15,"target":22,"value":41},
+
+
+
+
+
+    {"source":16,"target":18,"value":96},
+    {"source":16,"target":19,"value":285},
+    {"source":16,"target":20,"value":143},
+    {"source":16,"target":21,"value":381},
+    {"source":16,"target":22,"value":88},
+
+
+
+
+
+    {"source":17,"target":18,"value":145},
+    {"source":17,"target":19,"value":452},
+    {"source":17,"target":20,"value":14},
+    {"source":17,"target":21,"value":14},
+    {"source":17,"target":22,"value":10}
+
+
+
+
+
+
+
+
+  ]}
