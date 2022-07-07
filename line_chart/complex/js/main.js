@@ -36,6 +36,6 @@ d3.csv("data/line_chart_complex.csv", (row,i) => {
 
 
     .then(data => {
-      console.log(new LineChart(data))
-      //  new LineChart(data)
+     //console.log(new LineChart(data))
+        new LineChart(data)
     });
