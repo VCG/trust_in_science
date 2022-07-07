@@ -36,7 +36,7 @@ d3.csv("https://raw.githubusercontent.com/barbarakulaga/trust_in_science/main/li
 })
 
 
-    .then(data => {
-     //console.log(new LineChart(data))
-        new LineChart(data)
-    });
+//     .then(data => {
+//      //console.log(new LineChart(data))
+//         new LineChart(data)
+//     });
