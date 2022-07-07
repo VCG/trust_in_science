@@ -7,6 +7,8 @@ let formatTime = d3.timeFormat("%Y-%m-%d");
 
 const yearFormat = d3.timeFormat("%Y");
 
+let data;
+
 number_format = d3.format(".2d")
 
 console.log('updated')
@@ -36,7 +38,8 @@ d3.csv("https://raw.githubusercontent.com/barbarakulaga/trust_in_science/main/li
 })
 
 
-//     .then(data => {
+//     .then(loadData => {
+            data = loadData
 //      //console.log(new LineChart(data))
 //         new LineChart(data)
 //     });
