@@ -38,8 +38,8 @@ d3.csv("https://raw.githubusercontent.com/barbarakulaga/trust_in_science/main/li
 })
 
 
-//     .then(loadData => {
+     .then(loadData => {
             data = loadData
 //      //console.log(new LineChart(data))
 //         new LineChart(data)
-//     });
+     });
