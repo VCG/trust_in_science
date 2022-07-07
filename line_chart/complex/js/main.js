@@ -10,7 +10,7 @@ const yearFormat = d3.timeFormat("%Y");
 number_format = d3.format(".2d")
 
 
-d3.csv("https://barbarakulaga.github.io/trust_in_science/line_chart/complex/data/line_chart_complex.csv", (row,i) => {
+d3.csv("https://raw.githubusercontent.com/barbarakulaga/trust_in_science/main/line_chart/complex/data/line_chart_complex.csv", (row,i) => {
 
     row.Vax_18_49 = number_format(+row.Vax_18_49);
     row.Vax_50_79 = number_format(+row.Vax_50_79);
