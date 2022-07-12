@@ -44,7 +44,7 @@ const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 var path = sankey.links();
 
 // load the data
-d3.json("data/sankey2.json").then(function(sankeydata) {
+d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
 
     graph = sankey(sankeydata);
 
@@ -91,7 +91,7 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
         .enter().append("g")
         .attr("class", "node")
         //.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-        .on("click",highlight_node_links)
+        // .on("click",highlight_node_links)
 
 // add the rectangles for the nodes
     node.append("rect")

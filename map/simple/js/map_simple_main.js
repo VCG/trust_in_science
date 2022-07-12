@@ -8,7 +8,7 @@ number_format = d3.format(",")
 let promises = [
     d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // not projected -> you need to do it
     // d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json"), // already projected -> you can just scale it to fit your browser window
-    d3.csv("data/cumulative_cases_simple_map.csv", (row, _) => {
+    d3.csv("map_simple_data/cumulative_cases_simple_map.csv", (row, _) => {
         row.Tot_Cases = +row.Tot_Cases;
         row.Tot_Cases2 = number_format(+row.Tot_Cases);
         return row;

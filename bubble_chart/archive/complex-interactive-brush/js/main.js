@@ -48,6 +48,6 @@ function initMainPage(dataArray) {
     let Bubble_Chart = new BubbleChart("#Bubble_Chart_Div", dataArray[0]);
 
     // init map
-    let Legend_Chart = new Legend(dataArray[1]);
+    let Legend_Chart = new Bubble_chart_complex_legend(dataArray[1]);
 
 }

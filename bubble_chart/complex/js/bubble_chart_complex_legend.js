@@ -1,4 +1,4 @@
-class Legend {
+class Bubble_chart_complex_legend {
     constructor(data) {
 
         this.data = data;

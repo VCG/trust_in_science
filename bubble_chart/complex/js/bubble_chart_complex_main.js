@@ -9,7 +9,7 @@ const p = Math.max(0, d3.precisionFixed(0.05) - 2);
 const percentFormat = d3.format("." + p + "%");
 
 let promises = [
-    d3.csv("data/bubble_chart_complex.csv", (row,i) => {
+    d3.csv("bubble_chart_complex_data/bubble_chart_complex.csv", (row,i) => {
 
         row.New_Case_per_100 = formatDecimal(+row.New_Case_per_100);
         row.New_Death_per_100 = formatDecimal2(+row.New_Death_per_100);
@@ -18,7 +18,7 @@ let promises = [
         return row;
 
         }),
-    d3.csv("data/legend.csv", (row,i) => {
+    d3.csv("bubble_chart_complex_data/legend.csv", (row,i) => {
     //   row.size = +row.size;
         row.size = +row.size;
         row.position = +row.position;
@@ -41,7 +41,7 @@ function initMainPage(dataArray) {
     let Bubble_Chart = new BubbleChart("#Bubble_Chart_Div", dataArray[0]);
 
     // init map
-    let Legend_Chart = new Legend(dataArray[1]);
+    let Legend_Chart = new Bubble_chart_complex_legend(dataArray[1]);
 
 }
 
