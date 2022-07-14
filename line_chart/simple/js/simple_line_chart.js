@@ -1,4 +1,4 @@
-class LineChart {
+class LineChartSimple {
     constructor(data) {
 
         this.data = data;

@@ -1,4 +1,4 @@
-class BubbleChart {
+class BubbleChartSimple {
     constructor(data) {
 
         this.data = data;

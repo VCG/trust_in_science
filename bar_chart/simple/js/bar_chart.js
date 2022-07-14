@@ -1,4 +1,4 @@
-class BarChart {
+class BarChartSimple {
     constructor(data) {
 
         this.data = data;

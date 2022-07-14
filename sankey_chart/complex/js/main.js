@@ -49,16 +49,6 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
     graph = sankey(sankeydata);
 
 
-// add in the links
-//     var link = svg.append("g").selectAll(".link")
-//         .data(graph.links)
-//         .enter().append("path")
-//         .attr("class", "link")
-//         .attr("d", d3.sankeyLinkHorizontal())
-//         .attr("stroke-width", function(d) { return d.width; })
-//         .style("stroke", function(d) {
-//             return "grey"});
-
     var link = svg.append("g").selectAll(".link")
         .data(graph.links)
         .enter().append("path")
