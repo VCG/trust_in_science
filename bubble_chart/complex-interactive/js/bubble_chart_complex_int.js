@@ -147,16 +147,18 @@ class BubbleChart {
                 .attr("y",1);
 
         //Add dots
+        console.log('test')
         vis.svg.append('g')
-            .selectAll("dot")
+            .selectAll(".dot")
             .data(vis.displayData)
             .join("circle")
+            .attr("class", "dot")
             .attr("cx", d => vis.x(d.New_Death_per_100))
             .attr("cy", d => vis.y(d.New_Case_per_100))
             .attr("r", d => vis.z(d.Share_Vaccination))
             .style("fill", "#02254a")
             .style("fill", d => vis.myColor(d.Share_Vaccination))
-            .style("opacity", "0.7")
+            // .style("opacity", "0.7")
             .attr("clip-path", "url(#clip")
            // .attr("stroke", "black")
             .on("mouseover", function(e, d) { vis.tip.show(d, this); })
