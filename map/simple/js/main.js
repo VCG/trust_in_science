@@ -1,6 +1,6 @@
 
 // init global variables & switches
-let myMapVis;
+let myMapSimple;
 
 number_format = d3.format(",")
 
@@ -11,8 +11,6 @@ let promises = [
     //d3.csv("data/cumulative_cases_simple_map.csv", (row, _) => {
 
     d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/barbara_branch/map/simple/data/cumulative_cases_simple_map.csv", (row,i) => {
-
-
 
 
         row.Tot_Cases = +row.Tot_Cases;
@@ -31,5 +29,5 @@ function initMainPage(dataArray) {
     console.debug("check out the data", dataArray);
 
     // init map
-    myMapVis = new MapVis("mapDiv", dataArray[0], dataArray[1]);
+    myMapSimple = new MapVisSimple("mapDiv", dataArray[0], dataArray[1]);
 }

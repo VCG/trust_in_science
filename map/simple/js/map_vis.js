@@ -1,4 +1,4 @@
-class MapVis {
+class MapVisSimple {
 
     constructor(parentElement, geoData, CovidData) {
         this.parentElement = parentElement;
