@@ -1,4 +1,4 @@
-class LineChartSmall {
+class LineChartSmallComplex {
     constructor(parentElement, data, state, maxValue) {
         this.data = data.filter(d => d.State == state);
         this.state = state;

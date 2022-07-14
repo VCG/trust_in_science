@@ -21,7 +21,7 @@ d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/barbara_branch/ma
     const maxNewCases = d3.max(data, d => d.value);
     let states = _.chain(data).groupBy("State").map((v, k) => ({ code: k, name: v[0].State2 })).value();
     states.forEach(state => {
-        new LineChartSmall(`.state-${state.code.toLowerCase()}`, data, state.code, maxNewCases);
+        new LineChartSmallComplex(`.state-${state.code.toLowerCase()}`, data, state.code, maxNewCases);
         // $(`.state-${state.code.toLowerCase()}`).click(() => {
         //     new LineChartLarge("#chart-overlay", data, state.code);
         //     $("#chart-overlay .title").text(state.name);
