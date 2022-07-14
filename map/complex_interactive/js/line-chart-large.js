@@ -1,4 +1,4 @@
-class LineChartLarge {
+class LineChartLargeComplexInt {
     constructor(parentElement, data, state) {
         this.data = data.filter(d => d.State == state);
         this.state = state;
