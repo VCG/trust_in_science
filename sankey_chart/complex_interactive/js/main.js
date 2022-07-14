@@ -44,7 +44,12 @@ const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 var path = sankey.links();
 
 // load the data
-d3.json("data/sankey2.json").then(function(sankeydata) {
+// d3.json("data/sankey2.json")
+
+d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/barbara_branch/sankey_chart/complex/data/sankey2.json")
+
+
+    .then(function(sankeydata) {
 
     graph = sankey(sankeydata);
 

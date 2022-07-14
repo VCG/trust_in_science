@@ -9,7 +9,9 @@ const p = Math.max(0, d3.precisionFixed(0.05) - 2);
 const percentFormat = d3.format("." + p + "%");
 
 let promises = [
-    d3.csv("data/bubble_chart_complex.csv", (row,i) => {
+    // d3.csv("data/bubble_chart_complex.csv", (row,i) => {
+        d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/barbara_branch/bubble_chart/complex/data/bubble_chart_complex.csv", (row,i) => {
+
 
         row.New_Case_per_100 = formatDecimal(+row.New_Case_per_100);
         row.New_Death_per_100 = formatDecimal2(+row.New_Death_per_100);
