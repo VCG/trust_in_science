@@ -3,6 +3,7 @@
     fill-opacity: .9;
     shape-rendering: crispEdges;
     cursor: pointer;
+    stroke-width: 0;
 }
 
 .node text {

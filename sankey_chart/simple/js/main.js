@@ -30,7 +30,7 @@ var sankey = d3.sankey()
 var path = sankey.links();
 
 // load the data
-d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_chart/simple/data/sankey.json").then(function(sankeydata) {
+d3.json("data/sankey.json").then(function(sankeydata) {
 
     graph = sankey(sankeydata);
     console.log(graph)
@@ -70,7 +70,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
             return d3.rgb(d.color).darker(2); })
         .append("title")
         .text(function(d) {
-            return d.name + "\n" + "Number of participants: " + format(d.value); });
+            return d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc; });
 
 // add in the title for the nodes
     node.append("text")

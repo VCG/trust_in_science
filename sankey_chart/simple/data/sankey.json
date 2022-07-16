@@ -1,15 +1,15 @@
 {
   "nodes":[
-    {"node":0,"name":"Immediately"},
-    {"node":1,"name":"Delay"},
-    {"node":2,"name":"Never"},
-    {"node":3,"name":"Missing"},
+    {"node":0,"name":"Immediately","perc":"37%"},
+    {"node":1,"name":"Delay","perc":"47%"},
+    {"node":2,"name":"Never","perc":"7%"},
+    {"node":3,"name":"Missing","perc":"8%"},
 
-    {"node":4,"name":"Vaccinated"},
-    {"node":5,"name":"Immediately"},
-    {"node":6,"name":"Delay"},
-    {"node":7,"name":"Never"},
-    {"node":8,"name":"Missing"}
+    {"node":4,"name":"Vaccinated","perc":"77%"},
+    {"node":5,"name":"Immediately","perc":"6%"},
+    {"node":6,"name":"Delay","perc":"5%"},
+    {"node":7,"name":"Never","perc":"8%"},
+    {"node":8,"name":"Missing","perc":"4%"}
 
   ],
   "links":[

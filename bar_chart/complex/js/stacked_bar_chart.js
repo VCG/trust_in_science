@@ -158,7 +158,7 @@ class StackedBarChartComplex {
                 .style("left", ((event.x) + 10) + "px")
                 .style("top", ((event.y) + 10) + "px");
 
-         
+
 
         }
 

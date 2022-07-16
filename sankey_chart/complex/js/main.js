@@ -67,7 +67,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
     link.append("title")
         .text(function(d) {
             return d.source.name + " → " +
-                d.target.name + "\n" + "Number of participants: " + format(d.value); });
+                d.target.name + "\n" + "Number of participants: " + format(d.value)});
 
 
     var node = svg.append("g").selectAll(".node")
@@ -88,7 +88,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("class", d => hiddenNodes.includes(d.index) ? "hidden-node" : "")
         .attr("id", d => `node-${d.index}`)
         .append("title")
-        .text(d => d.name + "\n" + "Number of participants: " + format(d.value));
+        .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc);
 
 
     function highlight_node_links(e, node){
