@@ -30,7 +30,7 @@ var sankey = d3.sankey()
 var path = sankey.links();
 
 // load the data
-d3.json("data/sankey.json").then(function(sankeydata) {
+d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_chart/simple/data/sankey.json").then(function(sankeydata) {
 
     graph = sankey(sankeydata);
     console.log(graph)

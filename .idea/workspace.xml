@@ -5,7 +5,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="" />
+    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex/js/stacked_bar_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/bar_chart/complex/js/stacked_bar_chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/simple/data/sankey.json" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/simple/data/sankey.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/simple/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/simple/js/main.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,12 +35,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart\complex-interactive3\data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\61484\WebstormProjects\trust_in_science\sankey_chart" />
       <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\src\trust_in_science\map\archive" />
+      <recent name="C:\src\trust_in_science\line_chart\archive" />
+      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart\complex-interactive3\data" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
