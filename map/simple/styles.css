@@ -19,12 +19,14 @@
     color: #fff;
     border-radius: 2px;
     font-size: 13px;
+    font-family: Segoe UI;
 }
 
 
 .tooltip h3 {
     margin-top: 10px;
     font-size: 20px;
+    font-family: Segoe UI;
 }
 
 .box {
@@ -36,4 +38,5 @@
 .source {
     margin-left: 150px;
     font-size: 12px;
+    font-family:Segoe UI
 }
