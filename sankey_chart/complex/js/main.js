@@ -44,20 +44,10 @@ const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 var path = sankey.links();
 
 // load the data
-d3.json("data/sankey2.json").then(function(sankeydata) {
+d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_chart/complex/data/sankey2.json").then(function(sankeydata) {
 
     graph = sankey(sankeydata);
 
-
-// add in the links
-//     var link = svg.append("g").selectAll(".link")
-//         .data(graph.links)
-//         .enter().append("path")
-//         .attr("class", "link")
-//         .attr("d", d3.sankeyLinkHorizontal())
-//         .attr("stroke-width", function(d) { return d.width; })
-//         .style("stroke", function(d) {
-//             return "grey"});
 
     var link = svg.append("g").selectAll(".link")
         .data(graph.links)
@@ -79,12 +69,6 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
             return d.source.name + " → " +
                 d.target.name + "\n" + "Number of participants: " + format(d.value); });
 
-// add in the nodes
-//     var node = svg.append("g").selectAll(".node")
-//         .data(graph.nodes)
-//         .enter().append("g")
-//         .attr("class", "node")
-//         .on("click",highlight_node_links);
 
     var node = svg.append("g").selectAll(".node")
         .data(graph.nodes)
@@ -268,16 +252,6 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
         .attr("fill","black")
         .attr("font-size", "15")
         .attr("font-weight",'bold')
-
-    // svg
-    //     .append("text")
-    //     .attr("x", 690)
-    //     .attr("y", height+40)
-    //     .attr("class", "title")
-    //     .text("May 2021")
-    //     .attr("fill","black")
-    //     .attr("font-size", "15")
-    //     .attr("font-weight",'bold')
 
     svg
         .append("text")
