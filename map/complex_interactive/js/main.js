@@ -3,7 +3,7 @@ $("#chart-overlay .close").click(() => $("#chart-overlay").hide());
 
 let parseDate = d3.timeParse("%Y-%m-%d");
 
-d3.csv("data/data_fin.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/map/complex_interactive/data/data_fin.csv").then(function(data) {
     data.forEach(d => {
         d.date = parseDate(d.SubmissionDate);
         d.value = +d.NewCasesAdj;
