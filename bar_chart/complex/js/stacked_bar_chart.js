@@ -69,6 +69,10 @@ class StackedBarChartComplex {
             .keys(subgroups)
             (vis.data)
 
+        // let tooltip = vis.svg.append("g")
+        //     .attr("display", "none")
+        //     .attr("class", "tooltip-group");
+
         // tooltip
         const tooltip = d3.select("body")
             .append("div")
@@ -154,11 +158,7 @@ class StackedBarChartComplex {
                 .style("left", ((event.x) + 10) + "px")
                 .style("top", ((event.y) + 10) + "px");
 
-            //change opacity to all non-highlighted arrows
-            // vis.svg.selectAll("rect.main-rect").style("opacity", 0.1)
-            //
-            // // //reference this particular, highlighted arrow with 1 opacity
-            // vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
+         
 
         }
 
