@@ -112,9 +112,21 @@ d3.json("data/sankey.json").then(function(sankeydata) {
         .attr("font-weight",'bold');
 
 
+    svg
+        .append("text")
+        .attr("x", width+50)
+        .attr("y", -7)
+        .attr("class", "title")
+        .text("Option on taking the vaccine:")
+        .attr("fill","#212529")
+        .attr("font-size", "16")
+        .attr("font-family", "Segoe UI")
+       // .attr("font-weight",'bold');
+
+
     //legend
     // create a list of keys
-    var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
+    var keys = [ "Vaccinated","Immediately - would take it immediately","Delay - would delay it","Never- would never take it","Missing - mising responses"]
 
 
     var color_legend = d3.scaleOrdinal()
@@ -142,9 +154,10 @@ d3.json("data/sankey.json").then(function(sankeydata) {
         .attr("x", width+60 + size*1.2)
         .attr("y", function(d,i){ return 10 + i*(size+8) + (size/2)})
         .style("fill", "black")
-        .style("font-size", "16px")
+        .style("font-size", "12px")
         .text(function(d){ return d})
         .attr("text-anchor", "left")
+        .attr("font-family", "Segoe UI")
         .style("alignment-baseline", "middle")
 
 

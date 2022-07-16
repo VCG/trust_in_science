@@ -300,9 +300,24 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
         .attr("font-size", "15")
         .attr("font-weight",'bold')
 
+
+    svg
+        .append("text")
+        .attr("x", width+60)
+        .attr("y", -7)
+        .attr("class", "title")
+        .text("Option on taking the vaccine:")
+        .attr("fill","#212529")
+        .attr("font-size", "14")
+        .attr("font-family", "Segoe UI")
+       //.attr("font-weight",'bold');
+
+
     //legend
     // create a list of keys
-    var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
+    //var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
+    var keys = [ "Vaccinated","Immediately - would take it immediately","Delay - would delay it","Never- would never take it","Missing - mising responses"]
+
 
 
     var color_legend = d3.scaleOrdinal()
@@ -317,7 +332,7 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
         .data(keys)
         .enter()
         .append("rect")
-        .attr("x", width+70)
+        .attr("x", width+60)
         .attr("y", function(d,i){ return 10 + i*(size+8)})
         .attr("width", size)
         .attr("height", size)
@@ -327,10 +342,10 @@ d3.json("data/sankey2.json").then(function(sankeydata) {
         .data(keys)
         .enter()
         .append("text")
-        .attr("x", width+80 + size*1.2)
+        .attr("x", width+70 + size*1.2)
         .attr("y", function(d,i){ return 10 + i*(size+8) + (size/2)})
         .style("fill", "black")
-        .style("font-size", "13px")
+        .style("font-size", "12px")
         .text(function(d){ return d})
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")

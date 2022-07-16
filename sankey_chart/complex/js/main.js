@@ -44,7 +44,7 @@ const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 var path = sankey.links();
 
 // load the data
-d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
+d3.json("data/sankey2.json").then(function(sankeydata) {
 
     graph = sankey(sankeydata);
 
@@ -105,6 +105,7 @@ d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
         .attr("id", d => `node-${d.index}`)
         .append("title")
         .text(d => d.name + "\n" + "Number of participants: " + format(d.value));
+
 
     function highlight_node_links(e, node){
         var remainingNodes=[],
@@ -257,15 +258,6 @@ d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
         .attr("font-size", "15")
         .attr("font-weight",'bold')
 
-    // svg
-    //     .append("text")
-    //     .attr("x", 480)
-    //     .attr("y", height+40)
-    //     .attr("class", "title")
-    //     .text("Mar 2021")
-    //     .attr("fill","black")
-    //     .attr("font-size", "15")
-    //     .attr("font-weight",'bold')
 
     svg
         .append("text")
@@ -297,9 +289,23 @@ d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
         .attr("font-size", "15")
         .attr("font-weight",'bold')
 
+    svg
+        .append("text")
+        .attr("x", width+60)
+        .attr("y", -7)
+        .attr("class", "title")
+        .text("Option on taking the vaccine:")
+        .attr("fill","#212529")
+        .attr("font-size", "16")
+        .attr("font-family", "Segoe UI")
+       // .attr("font-weight",'bold');
+
+
     //legend
     // create a list of keys
-    var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
+    //var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
+    var keys = [ "Vaccinated","Immediately - would take it immediately","Delay - would delay it","Never- would never take it","Missing - mising responses"]
+
 
 
     var color_legend = d3.scaleOrdinal()
@@ -314,7 +320,7 @@ d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
         .data(keys)
         .enter()
         .append("rect")
-        .attr("x", width+70)
+        .attr("x", width+60)
         .attr("y", function(d,i){ return 10 + i*(size+8)})
         .attr("width", size)
         .attr("height", size)
@@ -324,10 +330,10 @@ d3.json("sankey_complex_data/sankey2.json").then(function(sankeydata) {
         .data(keys)
         .enter()
         .append("text")
-        .attr("x", width+80 + size*1.2)
+        .attr("x", width+70 + size*1.2)
         .attr("y", function(d,i){ return 10 + i*(size+8) + (size/2)})
         .style("fill", "black")
-        .style("font-size", "13px")
+        .style("font-size", "12px")
         .text(function(d){ return d})
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
