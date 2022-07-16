@@ -176,7 +176,7 @@ class LineChart {
             .attr("text-anchor", "middle")
             .attr("font-size","12")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+70)
+            .attr("y", vis.height+60)
             .attr("font-size", "16")
             .text("week number");
 
