@@ -9,7 +9,7 @@ const p = Math.max(0, d3.precisionFixed(0.05) - 2);
 const percentFormat = d3.format("." + p + "%");
 
 let promises = [
-    d3.csv("bubble_chart_complex_int_data/bubbles_chart_complex_interactive3.csv", (row,i) => {
+    d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bubble_chart/complex-interactive/bubble_chart_complex_int_data/bubbles_chart_complex_interactive3.csv", (row,i) => {
 
         row.New_Case_per_100 = formatDecimal(+row.New_Case_per_100);
         row.New_Death_per_100 = formatDecimal2(+row.New_Death_per_100);
@@ -25,7 +25,7 @@ let promises = [
 
 
     }),
-    d3.csv("bubble_chart_complex_int_data/legend.csv", (row,i) => {
+    d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bubble_chart/complex-interactive/bubble_chart_complex_int_data/legend.csv", (row,i) => {
     //   row.size = +row.size;
         row.size = +row.size;
         row.position = +row.position;
@@ -45,9 +45,9 @@ function initMainPage(dataArray) {
     console.debug("check out the data", dataArray);
 
     // init table
-    let Bubble_Chart = new BubbleChart("#Bubble_Chart_Div", dataArray[0]);
+    let Bubble_Chart = new BubbleChartComplexInt("#Bubble_Chart_Div", dataArray[0]);
 
     // init map
-    let Legend_Chart = new Bubble_chart_Legend(dataArray[1]);
+    let Legend_Chart = new BubbleChartComplexIntLegend(dataArray[1]);
 
 }

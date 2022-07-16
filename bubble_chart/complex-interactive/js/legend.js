@@ -1,4 +1,4 @@
-class Bubble_chart_Legend {
+class BubbleChartComplexIntLegend {
     constructor(data) {
 
         this.data = data;

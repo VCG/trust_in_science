@@ -1,4 +1,4 @@
-class BubbleChart {
+class BubbleChartComplex {
     constructor(parentElement, data) {
         this.parentElement = parentElement;
         this.data = data;
