@@ -5,7 +5,7 @@ let parseDate = d3.timeParse("%Y-%m-%d");
 let formatDecimal = d3.format(",.2f");
 let formatDecimal2 = d3.format(",.4f");
 
-d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bubble_chart/simple/bubble_chart_simple_data/bubble_chart_simple.csv", (row,i) => {
+d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bubble_chart/simple/data/bubble_chart_simple.csv", (row,i) => {
 
     row.New_Case_per_100 = formatDecimal(+row.New_Case_per_100);
     row.New_Death_per_100 = formatDecimal2(+row.New_Death_per_100);

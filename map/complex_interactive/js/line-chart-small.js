@@ -43,20 +43,10 @@ class LineChartSmall {
                 let date = x.invert(e.layerX);
                 let value = y.invert(e.layerY);
                 return `<b> Date: </b> ${dateFormatter(date)}<br /><b>Number of New Cases: ${Math.floor(value)}</b> `;
-            });
+
+                });
 
         svg.call(tip);
-
-
-        svg.selectAll("dot")
-            .data(vis.data)
-            .join("circle")
-            .attr("cx", d => x(d.date))
-            .attr("cy", d => y(d.value))
-            .attr("r", 7)
-            .attr("fill", "transparent")
-            .on("mouseover", function(){d3.select(this).style("fill", "yellow");})
-            .on("mouseout", function(){d3.select(this).style("fill", "transparent");})
 
 
         svg.append("path")

@@ -10,7 +10,7 @@ class LineChartLarge {
     initVis() {
         let vis = this;
 
-        let margin = { top: 50, right: 120, bottom: 50, left: 120 },
+        let margin = { top: 50, right: 148, bottom: 50, left: 50 },
             width = 700 - margin.left - margin.right,
             height = 440 - margin.top - margin.bottom;
 
@@ -92,7 +92,6 @@ class LineChartLarge {
             .call(d3.axisLeft(y));
 
 
-
         let tooltip = svg.append("g")
             .attr("display", "none")
             .attr("class", "tooltip-group");
@@ -125,6 +124,13 @@ class LineChartLarge {
             .style("font-size", '10')
             .attr("x", 5)
             .attr("y", 80)
+            .style("fill", "black");
+
+        let text4 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .style("font-size", '10')
+            .attr("x", 5)
+            .attr("y", 100)
             .style("fill", "red");
 
         let overlay = svg.append("rect")
@@ -158,12 +164,61 @@ class LineChartLarge {
 
 
             tooltip.attr("transform", "translate(" + x_coordinate + ")")
-            text.text("Date: " + formatTime(closest.date));
-            text2.text("New Cases: " + closest.value);
-            text3.text("7-Day New Cases Avg: " + (closest.value2.toFixed(0)));
+            text.text("State: " + (closest.State2));
+            text2.text("Date: " + formatTime(closest.date));
+            text3.text("New Cases: " + closest.value);
+            text4.text("7-Day New Cases Avg: " + (closest.value2.toFixed(0)));
 
 
         }
+
+
+        var keys = [" "]
+
+
+        var legend = svg.selectAll(".legend")
+            .data(keys)//data set for legends
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+
+        legend.append("line")//making a line for legend
+            .attr("x1", width + 40)
+            .attr("x2", width+20)
+            .attr("y1", 25)
+            .attr("y2", 25)
+            .attr("stroke", "red")
+            .attr("stroke-width", 2)
+
+
+        legend.append("line")//making a line for legend
+            .attr("x1", width + 40)
+            .attr("x2", width+20)
+            .attr("y1", 5)
+            .attr("y2", 5)
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+
+
+        legend.append("text")
+            .attr("x", width +42)
+            .attr("y", 5)
+            .attr("dy", ".35em")
+            .style("text-anchor", "left")
+            .text("New Cases")
+            .attr("font-family", "Segoe UI")
+            .attr("font-size", "9");
+
+        legend.append("text")
+            .attr("x", width +42)
+            .attr("y", 25)
+            .attr("dy", ".35em")
+            .style("text-anchor", "left")
+            .text("7-Day New Cases Average")
+            .attr("font-family", "Segoe UI")
+            .attr("font-size", "9");
+
 
     }
 }

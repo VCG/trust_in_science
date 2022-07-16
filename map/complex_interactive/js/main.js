@@ -3,7 +3,7 @@ $("#chart-overlay .close").click(() => $("#chart-overlay").hide());
 
 let parseDate = d3.timeParse("%Y-%m-%d");
 
-d3.csv("map_complex_int_data/data_fin.csv").then(function(data) {
+d3.csv("data/data_fin.csv").then(function(data) {
     data.forEach(d => {
         d.date = parseDate(d.SubmissionDate);
         d.value = +d.NewCasesAdj;

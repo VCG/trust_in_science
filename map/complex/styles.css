@@ -34,11 +34,11 @@
     stroke-width: 1px;
 }
 
-.line2 {
-    fill: none;
-    stroke: #f5033b;
-    stroke-width: 1px;
-}
+/*.line2 {*/
+/*    fill: none;*/
+/*    stroke: #f5033b;*/
+/*    stroke-width: 1px;*/
+/*}*/
 
 #chart-overlay {
     border: 1px solid grey;
@@ -163,17 +163,6 @@
 }
 
 
-.line_avg{
-    position: absolute;
-    right: 520px;
-    width: 35px;
-    height: 2px;
-    /*color: red;*/
-    /*stroke: #f5033b;*/
-    background-color: red;
-    /*border-bottom: 2px solid red;*/
-
-}
 
 .source {
     margin-left: 0px;

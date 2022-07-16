@@ -1,4 +1,4 @@
-class LineChart {
+class LineChartComplexInt {
     constructor(data) {
         this.data = data;
 

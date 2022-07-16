@@ -3,7 +3,7 @@ let parseDate = d3.timeParse("%Y-%m-%d");
 
 numbers_format = d3.format(".4r")
 
-d3.csv("data/bar_chart_complex2.csv", (row,i) => {
+d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bar_chart/complex/data/bar_chart_complex2.csv", (row,i) => {
 
 
     row.Vax_18_49 = numbers_format(+row.Vax_18_49);
@@ -23,6 +23,6 @@ d3.csv("data/bar_chart_complex2.csv", (row,i) => {
 
 
     .then(data => {
-     console.log(new StackedBarChart(data))
+        new StackedBarChartComplex(data)
 
     });

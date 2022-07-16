@@ -1,4 +1,4 @@
-class LineChart {
+class LineChartSimple {
     constructor(data) {
 
         this.data = data;
@@ -11,7 +11,7 @@ class LineChart {
         let vis = this;
 
 
-        vis.margin = {top: 100, right: 200, bottom: 70, left: 70},
+        vis.margin = {top: 100, right: 210, bottom: 70, left: 70},
             vis.width = 1000 - vis.margin.left - vis.margin.right,
             vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
@@ -89,9 +89,40 @@ class LineChart {
             )
 
 
+        // // tooltip
+        const tooltip2 = vis.svg
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px");
+
+
         let tooltip = vis.svg.append("g")
             .attr("display", "none")
             .attr("class", "tooltip-group");
+
+
+        tooltip
+            .append("div")
+            .style("opacity", 0)
+            // .attr("class", "tooltip")
+            .style("background-color", "red")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px");
+
+
 
         tooltip.append("line")
             .attr("stroke", "black")
@@ -132,11 +163,20 @@ class LineChart {
 
 
 
+
         let overlay = vis.svg.append("rect")
             .attr("width", vis.width)
             .attr("height", vis.height)
             .attr("x", 0)
             .attr("y", 0)
+            //.style("background-color", "white")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px")
             .attr("fill", "transparent")
             .on("mouseover", function (event, d) {
                 tooltip.attr("display", "null");

@@ -1,4 +1,4 @@
-class StackedBarChart {
+class StackedBarChartComplex {
     constructor(data) {
 
         this.data = data;
