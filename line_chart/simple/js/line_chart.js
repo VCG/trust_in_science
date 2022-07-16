@@ -195,6 +195,7 @@ class LineChart {
             .attr("fill","black")
             .attr("font-size", "20")
             .attr("font-weight","bold")
+            .attr("font-family", "Segoe UI");
 
         //overall chart subtitle
         vis.svg
@@ -204,6 +205,7 @@ class LineChart {
             .attr("class", "title")
             .text("Apr 2021-Feb 2022")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "17")
 
 
@@ -214,6 +216,7 @@ class LineChart {
             .attr("x", -vis.width/3)
             .attr("y", 0-50)
             .attr("font-size", "16")
+            .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
         //x axis label
@@ -223,6 +226,7 @@ class LineChart {
             .attr("x", vis.width/2)
             .attr("y", vis.height+70)
             .attr("font-size", "16")
+            .attr("font-family", "Segoe UI")
             .text("week number");
 
 
@@ -264,6 +268,7 @@ class LineChart {
             .attr("dy", ".35em")
             .style("text-anchor", "left")
             .text("Rate of Unvaccinated")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "14");
 
         legend.append("text")
@@ -272,6 +277,7 @@ class LineChart {
             .attr("dy", ".35em")
             .style("text-anchor", "left")
             .text("Rate of Vaccinated")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "14");
 
 

@@ -45,6 +45,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 10)
             .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
             .style("fill", "black");
 
         let text2 = tooltip.append("text")
@@ -52,6 +53,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 30)
             .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
             .style("fill", "black");
 
         let text3 = tooltip.append("text")
@@ -59,6 +61,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 60)
             .style("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr('font-weight','bold')
             .style("font-size", '14');
 
@@ -67,6 +70,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 80)
             .style("fill", "#9e3a26")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
         let text5 = tooltip.append("text")
@@ -74,6 +78,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 100)
             .style("fill", "#ef701b")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
         let text6 = tooltip.append("text")
@@ -81,6 +86,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 120)
             .style("fill", "#f4d166")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
         let text7 = tooltip.append("text")
@@ -89,6 +95,7 @@ class LineChart {
             .attr("y", 160)
             .style("fill", "black")
             .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
 
@@ -97,6 +104,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 180)
             .style("fill", "#04386b")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
         let text9 = tooltip.append("text")
@@ -104,6 +112,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 200)
             .style("fill", "#0984ea")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
         let text10 = tooltip.append("text")
@@ -111,6 +120,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 220)
             .style("fill", "#7dc9f5")
+            .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
 
@@ -386,6 +396,7 @@ class LineChart {
             .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age")
             .attr("fill","black")
             .attr("font-size", "20")
+            .attr("font-family", "Segoe UI")
             .attr("font-weight","bold")
 
         //overall chart subtitle
@@ -396,6 +407,7 @@ class LineChart {
             .attr("class", "title")
             .text("Apr 2021-Feb 2022")
             .attr("fill","black")
+           .attr("font-family", "Segoe UI")
             .attr("font-size", "17")
 
 
@@ -407,6 +419,7 @@ class LineChart {
             .attr("x", vis.width/2)
             .attr("y", vis.height+70)
             .attr("font-size", "16")
+            .attr("font-family", "Segoe UI")
             .text("week number");
 
 
@@ -496,6 +509,7 @@ class LineChart {
             .attr("x", -vis.width/4)
             .attr("y", 0-50)
             .attr("font-size", "16")
+            .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
 
@@ -507,6 +521,7 @@ class LineChart {
             .attr("class", "title")
             .text("Rate of Unvaccinated")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "15")
 
         //share of vaccination title
@@ -517,6 +532,7 @@ class LineChart {
             .attr("class", "title")
             .text("Rate of Vaccinated")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "15")
 
 
@@ -527,6 +543,7 @@ class LineChart {
             .attr("y", vis.height+40)
             .attr("class", "title")
             .text("2022")
+            .attr("font-family", "Segoe UI")
             .attr("fill","black")
             .attr("font-size", "12")
 
@@ -537,6 +554,7 @@ class LineChart {
             .attr("y", vis.height+40)
             .attr("class", "title")
             .text("2021")
+            .attr("font-family", "Segoe UI")
             .attr("fill","black")
             .attr("font-size", "12")
 
