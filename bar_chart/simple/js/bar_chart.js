@@ -11,9 +11,10 @@ class BarChart {
         let vis = this;
 
 
-        vis.margin = {top: 100, right: 200, bottom: 70, left: 70},
+        vis.margin = {top: 100, right: 210, bottom: 70, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 300 - vis.margin.top - vis.margin.bottom;
+            vis.height = 330 - vis.margin.top - vis.margin.bottom;
+
 
 
         vis.svg = d3.select("#bar_chart")
@@ -111,6 +112,7 @@ class BarChart {
             .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19")
             .attr("fill","black")
             .attr("font-size", "20")
+            .attr("font-family", "Segoe UI")
             .attr("font-weight","bold")
 
         //overall chart subtitle
@@ -121,23 +123,26 @@ class BarChart {
             .attr("class", "title")
             .text("Apr 2021-Feb 2022")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "17")
 
         //y axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/10)
+            .attr("x", -vis.width/10-10)
             .attr("y", 0-50)
-            .attr("font-size", "16")
+            .attr("font-size", "14")
+            .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
         //x axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
-            .attr("font-size", "16")
+            .attr("y", vis.height+50)
+            .attr("font-size", "14")
+            .attr("font-family", "Segoe UI")
             .text("week number");
 
 
@@ -171,6 +176,7 @@ class BarChart {
             .attr("y", function(d,i){ return 0 + i*(size+8) + (size/2)})
             .style("fill", "black")
             .style("font-size", "14px")
+            .attr("font-family", "Segoe UI")
             .text(function(d){ return d})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
@@ -183,6 +189,7 @@ class BarChart {
             .attr("class", "title")
             .text("2022")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
         //add year labels to x axis (year 2021)
@@ -193,6 +200,7 @@ class BarChart {
             .attr("class", "title")
             .text("2021")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
 

@@ -3,7 +3,7 @@ let parseDate = d3.timeParse("%Y-%m-%d");
 
 numbers_format = d3.format(".4r")
 
-d3.csv("bar_chart_complex_int_data/bar_chart_complex2.csv", (row,i) => {
+d3.csv("data/bar_chart_complex2.csv", (row,i) => {
 
     row.Index = i;
     row.Vax_18_49 = numbers_format(+row.Vax_18_49);

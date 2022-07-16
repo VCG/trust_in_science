@@ -10,9 +10,9 @@ class BarChart2 {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 10, right: 200, bottom: 100, left: 70},
+        vis.margin = {top: 10, right: 210, bottom: 100, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 300 - vis.margin.top - vis.margin.bottom;
+            vis.height = 280 - vis.margin.top - vis.margin.bottom;
 
 
         vis.svg = d3.select("#bar_chart2")
@@ -101,9 +101,10 @@ class BarChart2 {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/10)
+            .attr("x", -vis.width/10-20)
             .attr("y", 0-50)
-            .attr("font-size", "16")
+            .attr("font-size", "14")
+            .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
 
@@ -111,8 +112,9 @@ class BarChart2 {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
-            .attr("font-size", "16")
+            .attr("y", vis.height+50)
+            .attr("font-size", "14")
+            .attr("font-family", "Segoe UI")
             .text("week number");
 
         //add year labels to x axis (year 2022)
@@ -123,6 +125,7 @@ class BarChart2 {
             .attr("class", "title")
             .text("2022")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
         //add year labels to x axis (year 2021)
@@ -133,6 +136,7 @@ class BarChart2 {
             .attr("class", "title")
             .text("2021")
             .attr("fill","black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
     }

@@ -286,6 +286,7 @@ class StackedBarChart {
                 return 30 + i * (size + 8) + (size / 2)
             })
             .style("fill", "black")
+            .attr("font-family", "Segoe UI")
             .style("font-size", "14px")
             .text(function (d) {
                 return d
@@ -305,6 +306,7 @@ class StackedBarChart {
             })
             // .style("fill", function(d){ return color2(d)})
             .style("fill", "black")
+            .attr("font-family", "Segoe UI")
             .style("font-size", "14px")
             .text(function (d) {
                 return d
@@ -319,6 +321,7 @@ class StackedBarChart {
             .attr("x", -vis.width / 4)
             .attr("y", 0 - 50)
             .attr("font-size", "16")
+            .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
 
@@ -330,6 +333,7 @@ class StackedBarChart {
             .attr("class", "title")
             .text("Rate of Unvaccinated")
             .attr("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
 
         //share of vaccination title
@@ -340,6 +344,7 @@ class StackedBarChart {
             .attr("class", "title")
             .text("Rate of Vaccinated")
             .attr("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
 
         //add year labels to x axis (year 2022)
@@ -350,6 +355,7 @@ class StackedBarChart {
             .attr("class", "title")
             .text("2022")
             .attr("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
         //add year labels to x axis (year 2021)
@@ -360,6 +366,7 @@ class StackedBarChart {
             .attr("class", "title")
             .text("2021")
             .attr("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "12")
 
 
@@ -372,6 +379,7 @@ class StackedBarChart {
             .attr("class", "title")
             .text("Week Number")
             .attr("fill", "black")
+            .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
     }
 
