@@ -1,11 +1,10 @@
-class Legend {
+class Bubble_chart_complex_legend {
     constructor(data) {
 
         this.data = data;
 
         this.initVis();
 
-        // this.legend();
     }
 
 
@@ -57,7 +56,8 @@ class Legend {
             .attr("cy", d => y(d.size))
            .attr("r", d => z(d.size))
             .style("fill", d => myColor(d.size))
-            .style("opacity", "0.7");
+            .attr("stroke", "white")
+           // .style("opacity", "0.7");
 
 
         // legend bubbles
@@ -93,7 +93,7 @@ class Legend {
             .attr("class", "title")
             .text("Vaccination Rate")
             .attr("fill","black")
-            .attr("font-size", "15")
+            .attr("font-size", "14")
 
 
     }

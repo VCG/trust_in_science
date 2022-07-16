@@ -27,12 +27,14 @@ class BubbleChart {
             .range(["lightblue", "darkblue"]);
 
         vis.x = d3.scaleLinear()
-            .domain(d3.extent(vis.data, function(d) { return +d.New_Death_per_100 }))
+            .domain([-0.0004, 0.016])
+            //.domain(d3.extent(vis.data, function(d) { return +d.New_Death_per_100 }))
             .range([0, vis.width]);
 
         // // Add Y axis
         vis.y = d3.scaleLinear()
-            .domain(d3.extent(vis.data, function(d) { return +d.New_Case_per_100 }))
+            .domain([-0.35, 9])
+          //  .domain(d3.extent(vis.data, function(d) { return +d.New_Case_per_100 }))
             .range([vis.height, 0]);
 
         // Add a scale for bubble size
@@ -137,17 +139,17 @@ class BubbleChart {
 
         vis.svg.selectAll("circle").remove();
 
-       //clip path
-            vis.svg.append("clipPath")
-                .attr("id", "clip")
-                .append("rect")
-                .attr("width", vis.width)
-                .attr("height", vis.height)
-                .attr("x", 1)
-                .attr("y",1);
+       // //clip path
+       //      vis.svg.append("clipPath")
+       //          .attr("id", "clip")
+       //          .append("rect")
+       //          .attr("width", vis.width)
+       //          .attr("height", vis.height)
+       //          .attr("x", 1)
+       //          .attr("y",1);
 
         //Add dots
-        console.log('test')
+        // console.log('test')
         vis.svg.append('g')
             .selectAll(".dot")
             .data(vis.displayData)
@@ -159,8 +161,9 @@ class BubbleChart {
             .style("fill", "#02254a")
             .style("fill", d => vis.myColor(d.Share_Vaccination))
             // .style("opacity", "0.7")
-            .attr("clip-path", "url(#clip")
+            // .attr("clip-path", "url(#clip")
            // .attr("stroke", "black")
+            .attr("stroke", "white")
             .on("mouseover", function(e, d) { vis.tip.show(d, this); })
             .on("mouseout", vis.tip.hide)
     }
