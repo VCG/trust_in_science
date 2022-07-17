@@ -16,7 +16,10 @@
 
 
 .tooltip-group {
-    pointer-events: none;
+    /*pointer-events: none;*/
+
+    /*position: absolute;*/
+    /*z-index: 999;*/
 
 }
 
@@ -35,4 +38,13 @@
     stroke: black;
     /*stroke-dasharray: 10,8;*/
 
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
 }

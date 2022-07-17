@@ -27,32 +27,29 @@ class LineChartComplex {
 
 
 
+
+
         let tooltip = vis.svg.append("g")
             .attr("display", "none")
             .attr("class", "tooltip-group")
 
-        const tooltip2 = d3.select("#chart")
-            .append("div")
-            .style("opacity", 0)
-            // .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            //.style("position", "absolute")
-            .attr("stroke", "black")
-            //.style("box-shadow", "10px 10px 40px lightgrey")
-            .style("padding", "10px");
 
 
         tooltip.append("line")
             .attr("stroke", "black")
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 2)
             .attr("x1", 0)
             .attr("y1", vis.height)
             .attr("x2", 0)
             .attr("y2", 0);
+
+        // tooltip.append("rect")
+        //     .attr("width", 170)
+        //     .attr("height", vis.height)
+        //     .attr("x", 0)
+        //     .attr("y", -5)
+        //     .attr("z-index", 1)
+        //     .style("fill", "red");
 
 
         let text = tooltip.append("text")
@@ -147,6 +144,7 @@ class LineChartComplex {
             .attr("fill", "transparent")
             .on("mouseover", function (event, d) {
                 tooltip.attr("display", "null");
+
             })
             .on("mouseout", function (event, d) {
                 tooltip.attr("display", "none");
@@ -160,16 +158,14 @@ class LineChartComplex {
         // const year = yearFormat(d.data.Max_Week_Date);
 
         function mousemove(event) {
+
+
+
             let x_coordinate = d3.pointer(event)[0];
             let x_date = x_time.invert(x_coordinate);
             let index = bisectDate(vis.data, x_date);
             let closest = vis.data[index];
 
-            tooltip2
-                .style("opacity", 1)
-                .style("font-size", "12px")
-                .style("left", ((event.x) + 2) + "px")
-                .style("top", ((event.y) + -200) + "px");
 
 
             tooltip.attr("transform", "translate(" + x_coordinate + ")")

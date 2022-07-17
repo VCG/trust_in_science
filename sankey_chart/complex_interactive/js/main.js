@@ -99,7 +99,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
             d3.select(this).attr("data-clicked","1");
             stroke_opacity = 0.5;
             showPercentage = true;
-            d3.selectAll(".link").style("stroke-opacity", 0.1);
+            d3.selectAll(".link").style("stroke-opacity", 0.1).style('filter', 'url(#grayscale)');
         }
 
         var traverse = [
