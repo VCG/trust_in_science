@@ -84,7 +84,7 @@ class BubbleChartSimple {
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top)
+            .attr("y", (vis.margin.top/5)-vis.margin.top)
             .attr("class", "title")
             .text("New Covid-19 case & death count per 100k people across the US states")
             .attr("fill","black")
@@ -96,12 +96,25 @@ class BubbleChartSimple {
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top+30)
+            .attr("y", (vis.margin.top/5)-vis.margin.top+30)
             .attr("class", "title")
             .text("Week 4, 2022")
             .attr("fill","black")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "17")
+
+        //add instructions
+        vis.svg
+            .append("text")
+            .attr("x", 0)
+            .attr("y", (vis.margin.top/5)-vis.margin.top+60)
+            .attr("class", "title")
+            .text("*Hover over the bubbles to explore further")
+            .attr("fill", "black")
+            .attr("font-size", "12")
+            .attr("font-family", "Segoe UI")
+            .attr("font-style", "italic")
+
 
 
         //y axis label

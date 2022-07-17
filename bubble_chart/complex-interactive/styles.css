@@ -180,10 +180,17 @@ h3 {
     font-size: 17px;
 }
 
+.instructions {
+    margin-left: 70px;
+    font-size: 12px;
+    font-style: italic;
+}
+
 .form {
     margin-top: 20px;
     margin-left: 70px;
     font-size: 13px;
+
 }
 
 .form .form-group {
