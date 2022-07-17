@@ -25,7 +25,7 @@ class StackedBarChartComplex {
 
 
         // List of subgroups = header of the csv files = soil condition here
-        const subgroups = vis.data.columns.slice(4)
+        const subgroups = vis.data.columns.slice(5)
         console.log(subgroups)
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis

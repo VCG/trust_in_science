@@ -186,7 +186,7 @@
                 .style("top", ((event.y) +10) + "px");
 
             //change opacity to all non-highlighted bars
-            vis.svg.selectAll(".main-rect").style("opacity", 0.5);
+            vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
             // //reference this particular, highlighted bars with 1 opacity
             vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);

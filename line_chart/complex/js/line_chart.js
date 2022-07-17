@@ -29,7 +29,22 @@ class LineChartComplex {
 
         let tooltip = vis.svg.append("g")
             .attr("display", "none")
-            .attr("class", "tooltip-group");
+            .attr("class", "tooltip-group")
+
+        const tooltip2 = d3.select("#chart")
+            .append("div")
+            .style("opacity", 0)
+            // .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            //.style("position", "absolute")
+            .attr("stroke", "black")
+            //.style("box-shadow", "10px 10px 40px lightgrey")
+            .style("padding", "10px");
+
 
         tooltip.append("line")
             .attr("stroke", "black")
@@ -150,6 +165,12 @@ class LineChartComplex {
             let index = bisectDate(vis.data, x_date);
             let closest = vis.data[index];
 
+            tooltip2
+                .style("opacity", 1)
+                .style("font-size", "12px")
+                .style("left", ((event.x) + 2) + "px")
+                .style("top", ((event.y) + -200) + "px");
+
 
             tooltip.attr("transform", "translate(" + x_coordinate + ")")
             text.text("Week: " + (closest.Max_Week_Date1));
@@ -165,6 +186,7 @@ class LineChartComplex {
             text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
             text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
             text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+
 
 
         }
