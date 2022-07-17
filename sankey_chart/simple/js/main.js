@@ -85,6 +85,20 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("text-anchor", "start")
         .attr("font-weight",'bold');
 
+
+    // add in the title for the nodes - %
+    node.append("text")
+        .attr("x", function(d) { return d.x0; })
+        .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "end")
+        .attr("font-weight",'bold')
+        .text(function(d) { return d.perc; })
+        //.filter(function(d) { return d.x0 < width / 2; })
+        .attr("x", function(d) { return d.x1 -30; })
+        .attr("text-anchor", "start")
+        .attr("font-weight",'bold');
+
     svg.selectAll(".link")
         .style('stroke', function(d){
             return d.source.color;

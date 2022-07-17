@@ -23,7 +23,7 @@ var svg = d3.select("#chart").append("svg")
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(10)
+    .nodeWidth(30)
     .nodePadding(20)
     // .nodeId(d => d.id)
     // // .nodeAlign(nodeAlignment)
@@ -157,7 +157,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
 // add in the title for the nodes
     node.append("text")
-        .attr("x", function(d) { return d.x0 + 15; })
+        .attr("x", function(d) { return d.x0 + 35; })
         .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
         .attr("dy", "0.35em")
         .attr("text-anchor", "start")
@@ -169,20 +169,29 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         // .attr("x", function(d) { return d.x1 + 6; })
         // .attr("text-anchor", "start");
 
-    //% values
+    // add in the title for the nodes - %
     node.append("text")
-        .attr("x", function(d) { return d.x0 + 15; })
+        .attr("x", function(d) { return d.x0; })
+        .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "end")
+        .attr("font-weight",'bold')
+        .text(function(d) { return d.perc; })
+        .attr("x", function(d) { return d.x1 -25; })
+        .attr("text-anchor", "start")
+        .attr("font-weight",'bold');
+
+    //show values displayed upon a click
+    node.append("text")
+        .attr("x", function(d) { return d.x0 + 35; })
         .attr("y", function(d) { return (d.y1 + d.y0) / 2 + 15; })
         .attr("dy", "0.55em")
         .attr("text-anchor", "start")
-        .text(function(d) { return d.perc; })
+        .text(function(d) { return d.value; })
         .attr("font-weight",'bold')
         .attr("id", d => `percentage-${d.index}`)
         .style("visibility", "hidden");
-    // .filter(function(d) { return d.x0 < width / 2; })
-    // .attr("font-weight",'bold')
-    // .attr("x", function(d) { return d.x1 + 6; })
-    // .attr("text-anchor", "start");
+
 
     svg.selectAll(".link").style('stroke', d => d.source.color);
 

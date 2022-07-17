@@ -2,11 +2,11 @@
 .node rect {
     fill-opacity: .9;
     shape-rendering: crispEdges;
+    stroke-width: 0;
 }
 
 .node text {
     pointer-events: none;
-    text-shadow: 0 1px 0 #fff;
     font-size: 14px;
 }
 

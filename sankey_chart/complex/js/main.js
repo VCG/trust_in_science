@@ -23,7 +23,7 @@ var svg = d3.select("#chart").append("svg")
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(10)
+    .nodeWidth(30)
     .nodePadding(20)
     // .nodeId(d => d.id)
     // // .nodeAlign(nodeAlignment)
@@ -162,7 +162,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
 // add in the title for the nodes
     node.append("text")
-        .attr("x", function(d) { return d.x0 + 15; })
+        .attr("x", function(d) { return d.x0 + 35; })
         .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
         .attr("dy", "0.35em")
         .attr("text-anchor", "start")
@@ -173,6 +173,19 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         // .attr("font-weight",'bold')
         // .attr("x", function(d) { return d.x1 + 6; })
         // .attr("text-anchor", "start");
+
+
+    // add in the title for the nodes - %
+    node.append("text")
+        .attr("x", function(d) { return d.x0; })
+        .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "end")
+        .attr("font-weight",'bold')
+        .text(function(d) { return d.perc; })
+        .attr("x", function(d) { return d.x1 -25; })
+        .attr("text-anchor", "start")
+        .attr("font-weight",'bold');
 
     //% values
     node.append("text")
