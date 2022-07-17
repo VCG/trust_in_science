@@ -229,7 +229,7 @@ class LineChartSimple {
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top)
+            .attr("y", (vis.margin.top/5)-vis.margin.top)
             .attr("class", "title")
             .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19")
             .attr("fill","black")
@@ -241,12 +241,25 @@ class LineChartSimple {
         vis.svg
             .append("text")
             .attr("x", 0)
-            .attr("y", (vis.margin.top/3)-vis.margin.top+30)
+            .attr("y", (vis.margin.top/5)-vis.margin.top+30)
             .attr("class", "title")
             .text("Apr 2021-Feb 2022")
             .attr("fill","black")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "17")
+
+        //add instructions
+        vis.svg
+            .append("text")
+            .attr("x", 0)
+            .attr("y", (vis.margin.top/5)-vis.margin.top+60)
+            .attr("class", "title")
+            .text("*Hover over the lines to explore further")
+            .attr("fill", "black")
+            .attr("font-size", "12")
+            .attr("font-family", "Segoe UI")
+            .attr("font-style", "italic")
+
 
 
         //y axis label
