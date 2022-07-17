@@ -32,19 +32,126 @@ class LineChartSimple {
         const Year_format1 = d3.timeFormat("%Y");
 
 
+
+        const month_groups = vis.data.map(d => (d.month))
+        console.log(month_groups)
+
+
+        // Add X axis
         const x = d3.scaleBand()
             .domain(groups)
             .range([0, vis.width])
-            // .padding([0.7])
+            .padding([0.2])
+
+        var x2 = d3.scaleBand()
+            .domain(month_groups)
+            .range([0, vis.width])
+            .padding([0.2])
+
+
+        let xAxisGenerator = d3.axisBottom(x)
+            .tickSize(10)
+        // .tickPadding(5)
+
+
+        //show major axis lines
+        let xAxisGenerator2 = d3.axisBottom(x2)
+            .tickSize(30)
+            .tickValues([2,6,11,15,19,24,28,32,37,41,46])
+
+
+        //set axis labels
+        let xAxisGenerator3 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([16,,25,29,,38,42,,51,,])
+
+        //set axis labels
+        let xAxisGenerator4 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,20,,,,,,45,,,])
+
+
+        //set axis labels
+        let xAxisGenerator5 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,,,,33,,,,,3,])
+
+
+        let tickLabels = [];
+        xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+
+
+        let tickLabels2 = [];
+        xAxisGenerator2.tickFormat((d,i) => tickLabels2[i]);
+
+
+        let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
+        xAxisGenerator3.tickFormat((d,i) => tickLabels3[i]);
+
+        let tickLabels4 = ['', 'May','', '' , '', '', '', 'November', '', '','']
+        xAxisGenerator4.tickFormat((d,i) => tickLabels4[i]);
+
+        let tickLabels5 = ['', '','', '' , 'August', '', '', '', '', 'January','']
+        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);
+
+
+
+
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
-            .call(d3.axisBottom(x))
+            .call(xAxisGenerator)
             .selectAll("text")
+            .attr("font-size", "12")
             .style("text-anchor", "end")
-            .attr("dx", "0.25em")
+            .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .style("font-size", '12')
             .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths2")
+            .call(xAxisGenerator2)
+            .selectAll("text").attr("id", "xAxis2")
+            .attr("font-size", "12")
+            .style("text-anchor", "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator3)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "middle")
+            .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator4)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator5)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "-0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+
 
 
         const x_time = d3.scaleTime()
@@ -140,24 +247,24 @@ class LineChartSimple {
             .attr('font-weight','bold')
             .style("fill", "black");
 
-        let text2 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 30)
-            .attr('font-weight','bold')
-            .style("fill", "black");
+        // let text2 = tooltip.append("text")
+        //     .attr("class", "tooltip-text")
+        //     .attr("x", 10)
+        //     .attr("y", 30)
+        //     .attr('font-weight','bold')
+        //     .style("fill", "black");
 
         let text3 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 60)
+            .attr("y", 40)
             .style("fill", "orange")
             .style("font-size", '15');
 
         let text4 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 80)
+            .attr("y", 60)
             .style("fill", "blue")
             .style("font-size", '15');
 
@@ -204,8 +311,8 @@ class LineChartSimple {
 
             tooltip.attr("transform", "translate(" + x_coordinate + ")")
         //    text.text("Week: " + console.log(formatDate(closest.date)));
-            text.text("Week: " + (closest.Week_no));
-            text2.text("Year: " + yearFormat(closest.date));
+            text.text("Week: " + (closest.Max_Week_Date2));
+            // text2.text("Year: " + yearFormat(closest.date));
             text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
             text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
 
@@ -334,25 +441,25 @@ class LineChartSimple {
             .attr("font-size", "14");
 
 
-        //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width-110)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2022")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", vis.margin.width+50)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2021")
-            .attr("fill","black")
-            .attr("font-size", "12")
+        // //add year labels to x axis (year 2022)
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.width-110)
+        //     .attr("y", vis.height+40)
+        //     .attr("class", "title")
+        //     .text("2022")
+        //     .attr("fill","black")
+        //     .attr("font-size", "12")
+        //
+        // //add year labels to x axis (year 2021)
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.margin.width+50)
+        //     .attr("y", vis.height+40)
+        //     .attr("class", "title")
+        //     .text("2021")
+        //     .attr("fill","black")
+        //     .attr("font-size", "12")
 
 
     }

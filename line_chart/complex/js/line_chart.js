@@ -51,7 +51,7 @@ class LineChartComplex {
         let text2 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 30)
+            .attr("y", 20)
             .attr('font-weight','bold')
             .attr("font-family", "Segoe UI")
             .style("fill", "black");
@@ -59,7 +59,7 @@ class LineChartComplex {
         let text3 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 60)
+            .attr("y", 50)
             .style("fill", "black")
             .attr("font-family", "Segoe UI")
             .attr('font-weight','bold')
@@ -68,7 +68,7 @@ class LineChartComplex {
         let text4 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 80)
+            .attr("y", 70)
             .style("fill", "#9e3a26")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -76,7 +76,7 @@ class LineChartComplex {
         let text5 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 100)
+            .attr("y", 90)
             .style("fill", "#ef701b")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -84,7 +84,7 @@ class LineChartComplex {
         let text6 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 120)
+            .attr("y", 110)
             .style("fill", "#f4d166")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -92,7 +92,7 @@ class LineChartComplex {
         let text7 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 160)
+            .attr("y", 150)
             .style("fill", "black")
             .attr('font-weight','bold')
             .attr("font-family", "Segoe UI")
@@ -102,7 +102,7 @@ class LineChartComplex {
         let text8 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 180)
+            .attr("y", 170)
             .style("fill", "#04386b")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -110,7 +110,7 @@ class LineChartComplex {
         let text9 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 200)
+            .attr("y", 190)
             .style("fill", "#0984ea")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -118,7 +118,7 @@ class LineChartComplex {
         let text10 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 220)
+            .attr("y", 210)
             .style("fill", "#7dc9f5")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
@@ -152,8 +152,8 @@ class LineChartComplex {
 
 
             tooltip.attr("transform", "translate(" + x_coordinate + ")")
-            text.text("Week: " + (closest.Week1));
-            text2.text("Year: " + yearFormat(closest.date));
+            text.text("Week: " + (closest.Max_Week_Date1));
+            // text2.text("Year: " + yearFormat(closest.date));
 
             text3.text("Rate of Unvaccinated: ");
             text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
@@ -179,20 +179,126 @@ class LineChartComplex {
         const Year_format1 = d3.timeFormat("%Y");
 
 
+
+        const month_groups = vis.data.map(d => (d.month))
+        console.log(month_groups)
+
+
+        // Add X axis
         const x = d3.scaleBand()
             .domain(groups)
             .range([0, vis.width])
-            .padding([0.7])
-        console.log(x)
+            .padding([0.2])
+
+        var x2 = d3.scaleBand()
+            .domain(month_groups)
+            .range([0, vis.width])
+            .padding([0.2])
+
+
+        let xAxisGenerator = d3.axisBottom(x)
+            .tickSize(10)
+        // .tickPadding(5)
+
+
+        //show major axis lines
+        let xAxisGenerator2 = d3.axisBottom(x2)
+            .tickSize(30)
+            .tickValues([2,6,11,15,19,24,28,32,37,41,46])
+
+
+        //set axis labels
+        let xAxisGenerator3 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([16,,25,29,,38,42,,51,,])
+
+        //set axis labels
+        let xAxisGenerator4 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,20,,,,,,45,,,])
+
+
+        //set axis labels
+        let xAxisGenerator5 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,,,,33,,,,,3,])
+
+
+        let tickLabels = [];
+        xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+
+
+        let tickLabels2 = [];
+        xAxisGenerator2.tickFormat((d,i) => tickLabels2[i]);
+
+
+        let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
+        xAxisGenerator3.tickFormat((d,i) => tickLabels3[i]);
+
+        let tickLabels4 = ['', 'May','', '' , '', '', '', 'November', '', '','']
+        xAxisGenerator4.tickFormat((d,i) => tickLabels4[i]);
+
+        let tickLabels5 = ['', '','', '' , 'August', '', '', '', '', 'January','']
+        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);
+
+
+
+
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
-            .call(d3.axisBottom(x))
+            .call(xAxisGenerator)
             .selectAll("text")
+            .attr("font-size", "12")
             .style("text-anchor", "end")
-            .attr("dx", "0.25em")
+            .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .style("font-size", '12')
             .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths2")
+            .call(xAxisGenerator2)
+            .selectAll("text").attr("id", "xAxis2")
+            .attr("font-size", "12")
+            .style("text-anchor", "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator3)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "middle")
+            .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator4)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator5)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "-0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+
 
 
         const x_time = d3.scaleTime()
@@ -432,7 +538,7 @@ class LineChartComplex {
             .attr("y", vis.height+60)
             .attr("font-size", "16")
             .attr("font-family", "Segoe UI")
-            .text("week number");
+            .text("Week");
 
 
         // create a list of keys
@@ -550,27 +656,27 @@ class LineChartComplex {
             .attr("font-size", "15")
 
 
-        //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width-120)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2022")
-            .attr("font-family", "Segoe UI")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", vis.margin.width+50)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2021")
-            .attr("font-family", "Segoe UI")
-            .attr("fill","black")
-            .attr("font-size", "12")
+        // //add year labels to x axis (year 2022)
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.width-120)
+        //     .attr("y", vis.height+40)
+        //     .attr("class", "title")
+        //     .text("2022")
+        //     .attr("font-family", "Segoe UI")
+        //     .attr("fill","black")
+        //     .attr("font-size", "12")
+        //
+        // //add year labels to x axis (year 2021)
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.margin.width+50)
+        //     .attr("y", vis.height+40)
+        //     .attr("class", "title")
+        //     .text("2021")
+        //     .attr("font-family", "Segoe UI")
+        //     .attr("fill","black")
+        //     .attr("font-size", "12")
 
 
 
