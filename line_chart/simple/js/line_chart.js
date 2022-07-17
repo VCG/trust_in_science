@@ -269,8 +269,6 @@ class LineChartSimple {
             .style("font-size", '15');
 
 
-
-
         let overlay = vis.svg.append("rect")
             .attr("width", vis.width)
             .attr("height", vis.height)
