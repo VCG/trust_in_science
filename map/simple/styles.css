@@ -40,3 +40,10 @@
     font-size: 12px;
     font-family:Segoe UI
 }
+
+.instructions {
+    font-size: 12px;
+    font-family:Segoe UI;
+    font-style: italic;
+
+}
