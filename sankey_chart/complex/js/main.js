@@ -31,14 +31,6 @@ var sankey = d3.sankey()
     .size([width, height]);
 
 
-// const sankey = d3.sankey()
-//     .size(graphSize)
-//     .nodeId(d => d.id)
-//     // .nodeWidth(nodeWidth)
-//     // .nodePadding(0.5)
-//     .nodeAlign(nodeAlignment)
-//     .nodeSort(null) //creates sankey nodes as ordered in the data
-
 const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
 
 var path = sankey.links();
@@ -74,8 +66,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .data(graph.nodes)
         .enter().append("g")
         .attr("class", "node")
-        //.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-        // .on("click",highlight_node_links)
+
 
 // add the rectangles for the nodes
     node.append("rect")
@@ -169,10 +160,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .text(function(d) { return d.name; })
         .attr("font-weight",'bold')
         .style("visibility", d => hiddenNodes.includes(d.index) ? "hidden" : "visible");
-        // .filter(function(d) { return d.x0 < width / 2; })
-        // .attr("font-weight",'bold')
-        // .attr("x", function(d) { return d.x1 + 6; })
-        // .attr("text-anchor", "start");
+
 
 
     // add in the title for the nodes - %
@@ -197,10 +185,7 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("font-weight",'bold')
         .attr("id", d => `percentage-${d.index}`)
         .style("visibility", "hidden");
-    // .filter(function(d) { return d.x0 < width / 2; })
-    // .attr("font-weight",'bold')
-    // .attr("x", function(d) { return d.x1 + 6; })
-    // .attr("text-anchor", "start");
+
 
     svg.selectAll(".link").style('stroke', d => d.source.color);
 
@@ -289,8 +274,6 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
 
     //legend
-    // create a list of keys
-    //var keys = [ "Vaccinated","Immediately","Delay","Never","Missing"]
     var keys = [ "Vaccinated","Immediately - would take it immediately","Delay - would delay it","Never- would never take it","Missing - mising responses"]
 
 
