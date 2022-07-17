@@ -92,6 +92,7 @@ class BubbleChartSimple {
             .attr("font-family", "Segoe UI")
             .attr("font-weight","bold")
 
+
         //overall chart subtitle
         vis.svg
             .append("text")
