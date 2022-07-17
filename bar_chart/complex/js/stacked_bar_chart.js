@@ -32,21 +32,129 @@ class StackedBarChartComplex {
         const groups = vis.data.map(d => (d.group))
         console.log(groups)
 
+        const month_groups = vis.data.map(d => (d.month))
+        console.log(month_groups)
+
 
         // Add X axis
         const x = d3.scaleBand()
             .domain(groups)
             .range([0, vis.width])
             .padding([0.2])
+
+
+        var x2 = d3.scaleBand()
+            .domain(month_groups)
+            .range([0, vis.width])
+            .padding([0.2])
+
+
+        var x3 = d3.scaleLinear()
+            .domain(month_groups)
+            .range([0, vis.width])
+
+
+
+        let xAxisGenerator = d3.axisBottom(x)
+            .tickSize(10)
+            // .tickPadding(5)
+
+
+        //show major axis lines
+        let xAxisGenerator2 = d3.axisBottom(x2)
+            .tickSize(30)
+            .tickValues([2,6,11,15,19,24,28,32,37,41,46])
+
+
+        //set axis labels
+        let xAxisGenerator3 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([16,,25,29,,38,42,,51,,])
+
+        //set axis labels
+        let xAxisGenerator4 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,20,,,,,,45,,,])
+
+
+        //set axis labels
+        let xAxisGenerator5 = d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues([,,,,33,,,,,3,])
+
+
+        let tickLabels = [];
+        xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+
+
+        let tickLabels2 = [];
+        xAxisGenerator2.tickFormat((d,i) => tickLabels2[i]);
+
+
+        let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
+        xAxisGenerator3.tickFormat((d,i) => tickLabels3[i]);
+
+        let tickLabels4 = ['', 'May','', '' , '', '', '', 'November', '', '','']
+        xAxisGenerator4.tickFormat((d,i) => tickLabels4[i]);
+
+        let tickLabels5 = ['', '','', '' , 'August', '', '', '', '', 'January','']
+        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);
+
+
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
-            .call(d3.axisBottom(x))
+            .call(xAxisGenerator)
             .selectAll("text")
             .attr("font-size", "12")
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
             .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths2")
+            .call(xAxisGenerator2)
+            .selectAll("text").attr("id", "xAxis2")
+            .attr("font-size", "12")
+            .style("text-anchor", "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)");
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator3)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "middle")
+           .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator4)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "0em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "axisMonths")
+            .call(xAxisGenerator5)
+            .selectAll("text")
+            .attr("font-size", "12")
+            .style("text-anchor", "start")
+            .attr("dx", "-0.5em")
+            .attr("dy", "1em")
+            .attr("transform", "rotate(0)")
+
 
 
         // Add Y axis
@@ -69,9 +177,6 @@ class StackedBarChartComplex {
             .keys(subgroups)
             (vis.data)
 
-        // let tooltip = vis.svg.append("g")
-        //     .attr("display", "none")
-        //     .attr("class", "tooltip-group");
 
         // tooltip
         const tooltip = d3.select("body")
@@ -97,14 +202,14 @@ class StackedBarChartComplex {
             const subgroupName = d3.select(this.parentNode).datum().key;
             const subgroupValue = d.data[subgroupName];
             const date = d.data.group;
-            const year = yearFormat(d.data.Max_Week_Date);
+            // const year = parseDate(d.data.Max_Week_Date);
             const week = d.data.Week;
+            const week2 = d.data.Max_Week_Date;
 
             let dataForDate = vis.data.filter(f => f.group === date)[0];
             let total = 0;
             subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
 
-            // console.log(dataForDate)
 
             const number_format = d3.format(',');
 
@@ -115,39 +220,36 @@ class StackedBarChartComplex {
 
             tooltip
                 .html(`
-                  <span style="font-size:15px"><b>Week: </b>${week}<br></span><br>
-                  
-                   <span style="font-size:15px"><b>Year: </b>${year}<br></span><br>
-                
-                       
-                        <span style="font-size:15px"><b>Rate of Unvaccinated (per 100k):</b></span>  
+                  <span style="font-size:14px;font-family:Segoe UI"><b>Week: </b>${week2}<br></span><br>
+               
+                        <span style="font-size:12px;font-family:Segoe UI"><b>Rate of Unvaccinated (per 100k):</b></span>  
                         <br>
                        
-                       <span style="font-size:15px;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:15px;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span><br>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span><br>
                        
                  
-                       <span style="font-size:15px;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
                        <span style="font-size:15px;color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span><br>
                     
                         
-                       <span style="font-size:15px;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:15px;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span><br>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span><br>
                     
                         <br>
-                        <span style="font-size:15px"><b>Rate of Vaccinated (per 100k):</b></span> 
+                        <span style="font-size:12px;font-family:Segoe UI"><b>Rate of Vaccinated (per 100k):</b></span> 
                          <br>
                       
-                       <span style="font-size:15px;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:15px;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span><br>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span><br>
                     
                         
-                       <span style="font-size:15px;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
-                       <span style="font-size:15px;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span><br>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span><br>
                     
                           
-                       <span style="font-size:15px;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:15px;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span><br>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
+                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span><br>
                     
                        
                   
@@ -362,36 +464,36 @@ class StackedBarChartComplex {
             .attr("font-size", "16")
 
         //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width - 125)
-            .attr("y", vis.height + 40)
-            .attr("class", "title")
-            .text("2022")
-            .attr("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", vis.margin.width + 50)
-            .attr("y", vis.height + 40)
-            .attr("class", "title")
-            .text("2021")
-            .attr("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "12")
-
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.width - 125)
+        //     .attr("y", vis.height + 70)
+        //     .attr("class", "title")
+        //     .text("2022")
+        //     .attr("fill", "black")
+        //     .attr("font-family", "Segoe UI")
+        //     .attr("font-size", "12")
+        //
+        // //add year labels to x axis (year 2021)
+        // vis.svg
+        //     .append("text")
+        //     .attr("x", vis.margin.width + 50)
+        //     .attr("y", vis.height + 70)
+        //     .attr("class", "title")
+        //     .text("2021")
+        //     .attr("fill", "black")
+        //     .attr("font-family", "Segoe UI")
+        //     .attr("font-size", "12")
+        //
 
         //add x label
         vis.svg
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width / 2)
-            .attr("y", vis.height + 60)
+            .attr("y", vis.height + 70)
             .attr("class", "title")
-            .text("Week Number")
+            .text("Week")
             .attr("fill", "black")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
