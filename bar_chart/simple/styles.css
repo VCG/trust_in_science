@@ -46,3 +46,15 @@
     font-family: Segoe UI
 
 }
+
+.axisMonths line{
+    stroke: transparent;
+
+}
+
+
+.axisMonths2 line{
+    stroke: black;
+    /*stroke-dasharray: 10,8;*/
+
+}

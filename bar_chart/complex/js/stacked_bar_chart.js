@@ -49,11 +49,6 @@ class StackedBarChartComplex {
             .padding([0.2])
 
 
-        var x3 = d3.scaleLinear()
-            .domain(month_groups)
-            .range([0, vis.width])
-
-
 
         let xAxisGenerator = d3.axisBottom(x)
             .tickSize(10)
