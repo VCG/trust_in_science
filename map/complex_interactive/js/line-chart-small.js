@@ -35,6 +35,48 @@ class LineChartSmall {
 
         const dateFormatter = d3.timeFormat("%d/%m/%Y");
 
+
+
+        // //ADD LINE PATH HERE (DEBUG)
+        //
+        // let tooltip = svg.append("g")
+        //     .attr("display", "none")
+        //     .attr("class", "tooltip-group");
+        //
+        // tooltip.append("line")
+        //     .attr("stroke", "black")
+        //     .attr("stroke-width", 1)
+        //     .attr("x1", 0)
+        //     .attr("y1", height)
+        //     .attr("x2", 0)
+        //     .attr("y2", 0);
+        //
+        // let bisectDate = d3.bisector(d=>d.date).left;
+        // let formatTime = d3.timeFormat("%Y-%m-%d");
+        //
+        // const yearFormat = d3.timeFormat("%Y");
+        //
+        // const x_time = d3.scaleTime()
+        //     .domain(d3.extent(vis.data, function(d) { return d.date; }))
+        //     .range([0, width]);
+        //
+        // function mousemove(event) {
+        //     let x_coordinate = d3.pointer(event)[0];
+        //     let x_date = x_time.invert(x_coordinate);
+        //     let index = bisectDate(vis.data, x_date);
+        //     let closest = vis.data[index];
+        //
+        //
+        //     tooltip.attr("transform", "translate(" + x_coordinate + ")")
+        //     // text.text("State: " + (closest.State2));
+        //     // text2.text("Date: " + formatTime(closest.date));
+        //     // text3.text("New Cases: " + closest.value);
+        //     // text4.text("7-Day New Cases Avg: " + (closest.value2.toFixed(0)));
+        //
+        //
+        // }
+
+
         // Tooltip - vaccinated
         let tip = d3.tip()
             .attr("class", "d3-tip")
@@ -52,8 +94,10 @@ class LineChartSmall {
         svg.append("path")
             .data([vis.data])
             .attr("class", "line")
+           // .on("mousemove", function(e, d) { tip.show(e, d, this);  tooltip.attr("display", "null"); })
             .on("mousemove", function(e, d) { tip.show(e, d, this); })
             .on("mouseout", tip.hide)
+           // .on("mousemove", mousemove)
             .attr("d", valueline);
 
 
