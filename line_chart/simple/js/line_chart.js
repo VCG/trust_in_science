@@ -211,111 +211,7 @@ class LineChartSimple {
             .style("padding", "10px");
 
 
-        let tooltip = vis.svg.append("g")
-            .attr("display", "none")
-            .attr("class", "tooltip-group");
 
-
-        tooltip
-            .append("div")
-            .style("opacity", 0)
-            // .attr("class", "tooltip")
-            .style("background-color", "red")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            .style("position", "absolute")
-            .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px");
-
-
-
-        tooltip.append("line")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("x1", 0)
-            .attr("y1", vis.height)
-            .attr("x2", 0)
-            .attr("y2", 0);
-
-
-        let text = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 10)
-            .attr('font-weight','bold')
-            .style("fill", "black");
-
-        // let text2 = tooltip.append("text")
-        //     .attr("class", "tooltip-text")
-        //     .attr("x", 10)
-        //     .attr("y", 30)
-        //     .attr('font-weight','bold')
-        //     .style("fill", "black");
-
-        let text3 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 40)
-            .style("fill", "orange")
-            .style("font-size", '15');
-
-        let text4 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 60)
-            .style("fill", "blue")
-            .style("font-size", '15');
-
-
-        let overlay = vis.svg.append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .attr("x", 0)
-            .attr("y", 0)
-            //.style("background-color", "white")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            .style("position", "absolute")
-            .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px")
-            .attr("fill", "transparent")
-            .on("mouseover", function (event, d) {
-                tooltip.attr("display", "null");
-            })
-            .on("mouseout", function (event, d) {
-                tooltip.attr("display", "none");
-            })
-            .on("mousemove", mousemove);
-
-        let bisectDate = d3.bisector(d=>d.date).left;
-        let formatTime = d3.timeFormat("%Y-%m-%d");
-
-        const yearFormat = d3.timeFormat("%Y");
-        // const year = yearFormat(d.data.Max_Week_Date);
-
-        function mousemove(event) {
-            let x_coordinate = d3.pointer(event)[0];
-            let x_date = x_time.invert(x_coordinate);
-            let index = bisectDate(vis.data, x_date);
-            let closest = vis.data[index];
-
-
-            let formatDate = d3.timeFormat("%V");
-
-
-            tooltip.attr("transform", "translate(" + x_coordinate + ")")
-        //    text.text("Week: " + console.log(formatDate(closest.date)));
-            text.text("Week: " + (closest.Max_Week_Date2));
-            // text2.text("Year: " + yearFormat(closest.date));
-            text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
-            text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
-
-
-        }
 
         // Add the vaccinated line
         vis.svg.append("path")
@@ -437,6 +333,121 @@ class LineChartSimple {
             .text("Rate of Vaccinated")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "14");
+
+
+        let tooltip = vis.svg.append("g")
+            .attr("display", "none")
+            .attr("class", "tooltip-group");
+
+
+        tooltip
+            .append("div")
+            .style("opacity", 0)
+            // .attr("class", "tooltip")
+            .style("background-color", "red")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px");
+
+
+        tooltip.append("rect")
+            .attr("width", 250)
+            .attr("height", vis.height-350)
+            .attr("x", 0)
+            .attr("y", -5)
+            .style("fill", "white")
+            .attr("class","tool-rect-background")
+
+
+        tooltip.append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", 0)
+            .attr("y1", vis.height)
+            .attr("x2", 0)
+            .attr("y2", 0);
+
+
+        let text = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 20)
+            .attr('font-weight','bold')
+            .style("fill", "black");
+
+        // let text2 = tooltip.append("text")
+        //     .attr("class", "tooltip-text")
+        //     .attr("x", 10)
+        //     .attr("y", 30)
+        //     .attr('font-weight','bold')
+        //     .style("fill", "black");
+
+        let text3 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 40)
+            .style("fill", "orange")
+            .style("font-size", '15');
+
+        let text4 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 60)
+            .style("fill", "blue")
+            .style("font-size", '15');
+
+
+        let overlay = vis.svg.append("rect")
+            .attr("width", vis.width)
+            .attr("height", vis.height)
+            .attr("x", 0)
+            .attr("y", 0)
+            //.style("background-color", "white")
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px")
+            .attr("fill", "transparent")
+            .on("mouseover", function (event, d) {
+                tooltip.attr("display", "null");
+            })
+            .on("mouseout", function (event, d) {
+                tooltip.attr("display", "none");
+            })
+            .on("mousemove", mousemove);
+
+        let bisectDate = d3.bisector(d=>d.date).left;
+        let formatTime = d3.timeFormat("%Y-%m-%d");
+
+        const yearFormat = d3.timeFormat("%Y");
+        // const year = yearFormat(d.data.Max_Week_Date);
+
+        function mousemove(event) {
+            let x_coordinate = d3.pointer(event)[0];
+            let x_date = x_time.invert(x_coordinate);
+            let index = bisectDate(vis.data, x_date);
+            let closest = vis.data[index];
+
+
+            let formatDate = d3.timeFormat("%V");
+
+
+            tooltip.attr("transform", "translate(" + x_coordinate + ")")
+            //    text.text("Week: " + console.log(formatDate(closest.date)));
+            text.text("Week: " + (closest.Max_Week_Date2));
+            // text2.text("Year: " + yearFormat(closest.date));
+            text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
+            text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
+
+
+        }
 
 
         // //add year labels to x axis (year 2022)

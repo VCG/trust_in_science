@@ -29,111 +29,6 @@ class LineChartComplex {
 
 
 
-        let tooltip = vis.svg.append("g")
-            .attr("display", "none")
-            .attr("class", "tooltip-group")
-
-
-
-        tooltip.append("line")
-            .attr("stroke", "black")
-            .attr("stroke-width", 2)
-            .attr("x1", 0)
-            .attr("y1", vis.height)
-            .attr("x2", 0)
-            .attr("y2", 0);
-
-        // tooltip.append("rect")
-        //     .attr("width", 170)
-        //     .attr("height", vis.height)
-        //     .attr("x", 0)
-        //     .attr("y", -5)
-        //     .attr("z-index", 1)
-        //     .style("fill", "red");
-
-
-        let text = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 10)
-            .attr('font-weight','bold')
-            .attr("font-family", "Segoe UI")
-            .style("fill", "black");
-
-        let text2 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 20)
-            .attr('font-weight','bold')
-            .attr("font-family", "Segoe UI")
-            .style("fill", "black");
-
-        let text3 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 50)
-            .style("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
-            .style("font-size", '14');
-
-        let text4 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 70)
-            .style("fill", "#9e3a26")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        let text5 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 90)
-            .style("fill", "#ef701b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        let text6 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 110)
-            .style("fill", "#f4d166")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        let text7 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 150)
-            .style("fill", "black")
-            .attr('font-weight','bold')
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-
-        let text8 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 170)
-            .style("fill", "#04386b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        let text9 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 190)
-            .style("fill", "#0984ea")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        let text10 = tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 210)
-            .style("fill", "#7dc9f5")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
 
 
         let overlay = vis.svg.append("rect")
@@ -672,6 +567,118 @@ class LineChartComplex {
             .attr("fill","black")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "15")
+
+
+        let tooltip = vis.svg.append("g")
+            .attr("display", "none")
+            .attr("class", "tooltip-group")
+
+
+
+        tooltip.append("rect")
+            .attr("width", 180)
+            .attr("height", vis.height-200)
+            .attr("x", 0)
+            .attr("y", -5)
+            .style("fill", "white")
+            .attr("class","tool-rect-background")
+
+
+
+        tooltip.append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", 0)
+            .attr("y1", vis.height)
+            .attr("x2", 0)
+            .attr("y2", 0);
+
+
+        let text = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 20)
+            .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
+            .style("fill", "black");
+
+        let text2 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 20)
+            .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
+            .style("fill", "black");
+
+        let text3 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 50)
+            .style("fill", "black")
+            .attr("font-family", "Segoe UI")
+            .attr('font-weight','bold')
+            .style("font-size", '14');
+
+        let text4 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 70)
+            .style("fill", "#9e3a26")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        let text5 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 90)
+            .style("fill", "#ef701b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        let text6 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 110)
+            .style("fill", "#f4d166")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        let text7 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 150)
+            .style("fill", "black")
+            .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+
+        let text8 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 170)
+            .style("fill", "#04386b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        let text9 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 190)
+            .style("fill", "#0984ea")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        let text10 = tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 210)
+            .style("fill", "#7dc9f5")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+
+
 
 
         // //add year labels to x axis (year 2022)
