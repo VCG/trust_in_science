@@ -31,7 +31,8 @@ var sankey = d3.sankey()
     .size([width, height]);
 
 
-const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
+const hiddenNodes = [13, 14, 15, 16, 17, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+
 
 var path = sankey.links();
 
@@ -77,11 +78,12 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("height", d => d.y1 - d.y0)
         .attr("width", sankey.nodeWidth())
         .style("fill", d => d.color = color(d.name.replace(/ .*/, "")))
-        .style("stroke", d => d3.rgb(d.color).darker(2))
+        // .style("stroke", d => d3.rgb(d.color))
         .attr("class", d => hiddenNodes.includes(d.index) ? "hidden-node" : "")
         .attr("id", d => `node-${d.index}`)
         .append("title")
-        .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc);
+        .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc)
+
 
     function highlight_node_links(e, node){
         var remainingNodes=[],
@@ -89,17 +91,20 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
         var stroke_opacity = 0;
         let showPercentage = true;
+
         if (d3.select(this).attr("data-clicked") == "1" ) {
             d3.select(this).attr("data-clicked","0");
-            stroke_opacity = 0.2;
+            stroke_opacity = 0.8;
             showPercentage = false;
             d3.selectAll(".link").style("stroke-opacity", 0.2);
+            d3.selectAll(".hidden-node").style("fill-opacity", 0.2);
         }
         else {
             d3.select(this).attr("data-clicked","1");
             stroke_opacity = 0.5;
             showPercentage = true;
             d3.selectAll(".link").style("stroke-opacity", 0.1)
+            d3.selectAll(".hidden-node").style("fill-opacity", 0.1)
                 // .style('url(#grayscale)')
         }
 

@@ -2,7 +2,7 @@
 .node rect {
     fill-opacity: .9;
     cursor: pointer;
-    stroke-width: 0;
+    stroke-width: 0.5;
 }
 
 .node text {
@@ -21,10 +21,16 @@
 }
 
 .node rect.hidden-node {
-    fill-opacity: .2;
+    fill-opacity: 0.2;
     shape-rendering: auto;
     stroke-width: 0;
 }
+
+/*.node rect.hidden-node-click {*/
+/*    fill-opacity: 0.1;*/
+/*    shape-rendering: auto;*/
+/*    stroke-width: 0;*/
+/*}*/
 
 .title {
     margin-left: 70px;
