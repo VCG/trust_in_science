@@ -358,7 +358,7 @@ class LineChartSimple {
             .attr("width", 250)
             .attr("height", vis.height-350)
             .attr("x", 0)
-            .attr("y", -5)
+            .attr("y", 50)
             .style("fill", "white")
             .attr("class","tool-rect-background")
 
@@ -375,7 +375,7 @@ class LineChartSimple {
         let text = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 20)
+            .attr("y", 70)
             .attr('font-weight','bold')
             .style("fill", "black");
 
@@ -389,14 +389,14 @@ class LineChartSimple {
         let text3 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 40)
+            .attr("y", 90)
             .style("fill", "orange")
             .style("font-size", '15');
 
         let text4 = tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 60)
+            .attr("y", 110)
             .style("fill", "blue")
             .style("font-size", '15');
 

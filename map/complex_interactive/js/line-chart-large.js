@@ -150,7 +150,7 @@ class LineChartLarge {
 
         tooltip.append("rect")
             .attr("width", 140)
-            .attr("height", height-200)
+            .attr("height", height-230)
             .attr("x", 0)
             .attr("y", 30)
             .style("fill", "white")
