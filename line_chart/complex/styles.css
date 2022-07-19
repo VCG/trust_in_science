@@ -15,13 +15,6 @@
 }
 
 
-.tooltip-group {
-    /*pointer-events: none;*/
-
-    /*position: absolute;*/
-    /*z-index: 999;*/
-
-}
 
 .source {
     margin-left: 70px;
@@ -47,4 +40,18 @@
     color: #fff;
     border-radius: 2px;
     font-size: 13px;
+}
+
+.tool-rect-background {
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .3));
+}
+
+.tooltip-group {
+
+    pointer-events: none;
+
+    /*position: absolute;*/
+    /*z-index: 999;*/
+
 }
