@@ -453,7 +453,13 @@ class LineChart {
                 .text(function(d, i) { return Math.round(range[i]); });
         }
 
-        // v3:  brushed();
-        // brush.move(brushg, [20, 50].map(x));
+        // // v3:  brushed();
+        brush.move(brushg, [20, 50].map(x));
+
+        // function resetBrush() {
+        //     brush
+        //         .clear()
+        //         .event(d3.select(".brush"));
+        // }
     }
 }
