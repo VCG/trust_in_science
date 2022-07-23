@@ -27,10 +27,6 @@ class LineChartComplex {
 
 
 
-
-
-
-
         let overlay = vis.svg.append("rect")
             .attr("width", vis.width)
             .attr("height", vis.height)

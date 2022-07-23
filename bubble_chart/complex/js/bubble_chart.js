@@ -97,6 +97,10 @@ class BubbleChartComplex {
             .attr("stroke", "white")
             .on("mouseover", function(e, d) { tip.show(d, this); })
             .on("mouseout", tip.hide)
+            .call(d3.zoom().on("zoom", function () {
+                vis.svg.attr("transform", d3.event.transform)
+            }))
+
 
 
 

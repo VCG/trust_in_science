@@ -139,17 +139,8 @@ class BubbleChartComplexInt {
 
         vis.svg.selectAll("circle").remove();
 
-       // //clip path
-       //      vis.svg.append("clipPath")
-       //          .attr("id", "clip")
-       //          .append("rect")
-       //          .attr("width", vis.width)
-       //          .attr("height", vis.height)
-       //          .attr("x", 1)
-       //          .attr("y",1);
 
         //Add dots
-        // console.log('test')
         vis.svg.append('g')
             .selectAll(".dot")
             .data(vis.displayData)
@@ -160,12 +151,34 @@ class BubbleChartComplexInt {
             .attr("r", d => vis.z(d.Share_Vaccination))
             .style("fill", "#02254a")
             .style("fill", d => vis.myColor(d.Share_Vaccination))
-            // .style("opacity", "0.7")
-            // .attr("clip-path", "url(#clip")
-           // .attr("stroke", "black")
             .attr("stroke", "white")
             .on("mouseover", function(e, d) { vis.tip.show(d, this); })
             .on("mouseout", vis.tip.hide)
+
+
+
+        var zoom = d3.zoom()
+            .scaleExtent([0,4])
+            .on('zoom', function(event) {
+                vis.svg.selectAll('.dot')
+                    .attr('transform', event.transform)
+
+            });
+
+
+
+        vis.svg.call(zoom);
+
+
+
+        $("#Reset").click(() => {
+            vis.svg.transition()
+                .duration(750)
+                .call(zoom.transform, d3.zoomIdentity);
+        });
+
+
+
     }
 
     // initBrush() {

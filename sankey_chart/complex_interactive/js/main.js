@@ -53,8 +53,8 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         })
         .attr("d", d3.sankeyLinkHorizontal())
         .attr("stroke-width", function(d) { return d.width; })
-        .style("stroke", function(d) {
-            return "grey"});
+        // .style("stroke", function(d) {
+        //     return "grey"});
 
 
 // add the link titles
@@ -94,17 +94,23 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
         if (d3.select(this).attr("data-clicked") == "1" ) {
             d3.select(this).attr("data-clicked","0");
-            stroke_opacity = 0.8;
+            stroke_opacity = 0.8; //ligher
             showPercentage = false;
-            d3.selectAll(".link").style("stroke-opacity", 0.2);
-            d3.selectAll(".hidden-node").style("fill-opacity", 0.2);
+            d3.selectAll(".link")
+                .style("stroke-opacity", 0.2)
+            d3.selectAll(".hidden-node")
+                .style("fill-opacity", 0.2);
         }
         else {
             d3.select(this).attr("data-clicked","1");
-            stroke_opacity = 0.5;
+            stroke_opacity = 0.5; ///darker
             showPercentage = true;
-            d3.selectAll(".link").style("stroke-opacity", 0.1)
-            d3.selectAll(".hidden-node").style("fill-opacity", 0.1)
+            d3.selectAll(".link")
+               // .style("stroke","grey")
+                .style("stroke-opacity", 0.1)
+                //.attr("class","link test123")
+            d3.selectAll(".hidden-node")
+                .style("fill-opacity", 0.1)
                 // .style('url(#grayscale)')
         }
 
@@ -142,7 +148,9 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
     }
 
     function highlight_link(id, index, opacity, showPercentage){
-        d3.select(`#link-${id}`).style("stroke-opacity", opacity);
+        d3.select(`#link-${id}`)
+            // .style("stroke", null)
+            .style("stroke-opacity", opacity);
         d3.select(`#percentage-${index}`).style("visibility", (showPercentage ? "visible" : "hidden"));
 
         // HACK:
