@@ -297,7 +297,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Unvax_18_49) })
-            );
+            )
+            .style("pointer-events", "none");
 
         // Add the unvaccinated line 50-79
         vis.svg.append("path")
@@ -309,7 +310,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Unvax_50_79) })
-            );
+            )
+            .style("pointer-events", "none");
 
         // Add the unvaccinated line 80+
         vis.svg.append("path")
@@ -321,7 +323,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Unvax_80) })
-            );
+            )
+            .style("pointer-events", "none");
 
         // Add the vaccinated line 18-49
         vis.svg.append("path")
@@ -334,7 +337,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Vax_18_49) })
-            );
+            )
+            .style("pointer-events", "none");
 
         // Add the vaccinated line 50-79
         vis.svg.append("path")
@@ -347,7 +351,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Vax_50_79) })
-            );
+            )
+            .style("pointer-events", "none");
 
         // Add the vaccinated line 80
         vis.svg.append("path")
@@ -360,8 +365,8 @@ class LineChartComplexInt {
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.Week1) })
                 .y(function(d) { return vis.y(d.Vax_80) })
-            );
-
+            )
+            .style("pointer-events", "none");
 
 
     }

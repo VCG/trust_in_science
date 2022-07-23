@@ -42,12 +42,14 @@ class LineChartLarge {
             .data([vis.data])
             .attr("class", "line")
             .attr("d", valueline)
+            .style("pointer-events", "none");
 
 
         svg.append("path")
             .data([vis.data])
             .attr("class", "line2")
-            .attr("d", valueline2);
+            .attr("d", valueline2)
+            .style("pointer-events", "none");
 
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -58,25 +60,6 @@ class LineChartLarge {
         svg.append("g")
             .call(d3.axisLeft(y));
 
-        // // Tooltip - vaccinated
-        // let tip = d3.tip()
-        //     .attr("class", "d3-tip")
-        //     .offset([30, 0])
-        //     .html(function(d) {
-        //         let chartType = d3.select(vis.parentElement).node().value;
-        //         // return "<b>"+ "Date: "+ "</b>" + (vis.data, d => d.date) + "<br>" + "<b>" + "Number of New Cases: " + "</b>" + (d.value);
-        //         return "date:" + d.value;
-        //     });
-        //
-        //
-        // svg.call(tip);
-
-        // svg.append("path")
-        //     .data([vis.data])
-        //     .attr("class", "line")
-        //     .on("mouseover", function(e, d) { tip.show(d, this); })
-        //     .on("mouseout", tip.hide)
-        //     .attr("d", valueline);
 
 
 

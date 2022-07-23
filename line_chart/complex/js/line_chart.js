@@ -240,6 +240,7 @@ class LineChartComplex {
                 .tickSize(-vis.width)
                 .tickFormat("")
             )
+            .style("pointer-events", "none")
 
         // Add the unvaccinated line 18-49
         vis.svg.append("path")
@@ -250,9 +251,8 @@ class LineChartComplex {
             .attr("d", d3.line()
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Unvax_18_49) })
-
-            )
-
+                        )
+            .style("pointer-events", "none")
 
         // Add the unvaccinated line 50-79
         vis.svg.append("path")
@@ -263,8 +263,8 @@ class LineChartComplex {
             .attr("d", d3.line()
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Unvax_50_79) })
-
             )
+            .style("pointer-events", "none")
 
         // Add the unvaccinated line 80+
         vis.svg.append("path")
@@ -275,8 +275,8 @@ class LineChartComplex {
             .attr("d", d3.line()
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Unvax_80) })
-
             )
+            .style("pointer-events", "none")
 
         // Add the vaccinated line 18-49
         vis.svg.append("path")
@@ -285,10 +285,12 @@ class LineChartComplex {
             .attr("stroke", "#7dc9f5")
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
+
             .attr("d", d3.line()
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Vax_18_49) })
             )
+            .style("pointer-events", "none")
 
         // Add the vaccinated line 50-79
         vis.svg.append("path")
@@ -301,109 +303,21 @@ class LineChartComplex {
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Vax_50_79) })
             )
+            .style("pointer-events", "none")
 
         // Add the vaccinated line 80
         vis.svg.append("path")
             .datum(vis.data)
             .attr("fill", "none")
             .attr("stroke", "#04386b")
+
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
                 .x(function(d) { return x(d.Week1) })
                 .y(function(d) { return y(d.Vax_80) })
             )
-
-        let dots0 = vis.svg.selectAll("circle1").data(vis.data);
-        dots0
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#9e3a26")
-            .attr("fill", "transparent")
-            // .attr("fill", "")
-            .merge(dots0)
-            // .on("mouseover", function(e, d) { tip_unvax_80.show(d, this); })
-            // .on("mouseout", tip_unvax_80.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Unvax_80))
-            .attr("r", 3);
-
-        let dots1 = vis.svg.selectAll("circle2").data(vis.data);
-        dots1
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#ef701b")
-            .attr("fill", "transparent")
-            // .attr("fill", "")
-            .merge(dots1)
-            // .on("mouseover", function(e, d) { tip_unvax_50.show(d, this); })
-            // .on("mouseout", tip_unvax_50.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Unvax_50_79))
-            .attr("r", 3);
-
-
-        let dots2 = vis.svg.selectAll("circle3").data(vis.data);
-        dots2
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#f4d166")
-            .attr("fill", "transparent")
-            // .attr("stroke", "darkblue")
-            .merge(dots2)
-            // .on("mouseover", function(e, d) { tip_unvax_18.show(d, this); })
-            // .on("mouseout", tip_unvax_18.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Unvax_18_49))
-            .attr("r", 3);
-
-        let dots3 = vis.svg.selectAll("circle4").data(vis.data);
-        dots3
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#7dc9f5")
-            .attr("fill", "transparent")
-            // .attr("stroke", "darkblue")
-            .merge(dots3)
-            // .on("mouseover", function(e, d) { tip_vax_18.show(d, this); })
-            // .on("mouseout", tip_vax_18.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Vax_18_49))
-            .attr("r", 3);
-
-        let dots4 = vis.svg.selectAll("circle5").data(vis.data);
-        dots4
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#0984ea")
-            .attr("fill", "transparent")
-            // .attr("stroke", "darkblue")
-            .merge(dots4)
-            // .on("mouseover", function(e, d) { tip_vax_50.show(d, this); })
-            // .on("mouseout", tip_vax_50.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Vax_50_79))
-            .attr("r", 3);
-
-        let dots5 = vis.svg.selectAll("circle6").data(vis.data);
-        dots5
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            // .attr("fill", "#04386b")
-            .attr("fill", "transparent")
-            // .attr("stroke", "darkblue")
-            .merge(dots5)
-            // .on("mouseover", function(e, d) { tip_vax_80.show(d, this); })
-            // .on("mouseout", tip_vax_80.hide)
-            .attr("cx", d => x(d.Week1))
-            .attr("cy", d => y(d.Vax_80))
-            .attr("r", 3);
+            .style("pointer-events", "none")
 
 
         //overall chart title
