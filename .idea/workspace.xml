@@ -7,23 +7,21 @@
   <component name="ChangeListManager">
     <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex/js/line-chart-small.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex/js/line-chart-small.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/archive/data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/archive/data/data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/archive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/archive/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/archive/js/linechart.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/archive/js/linechart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/archive/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/archive/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/archive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/archive/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/data/data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/data/data_fin.csv" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/data/data_fin.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/d3-tip.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/js/d3-tip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-large.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/js/line-chart-large.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-small.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/js/line-chart-small.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/map/archive/complex_interactive/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/.idea/Upset_plot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/data/Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Final.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/data/bar_chart_complex.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/data/bar_chart_complex2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/d3-tip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/d3.v6.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/guided_tour.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/stacked_bar_chart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/styles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +71,7 @@
       <workItem from="1656426174702" duration="4958000" />
       <workItem from="1656672951058" duration="13900000" />
       <workItem from="1656936685256" duration="14085000" />
-      <workItem from="1658560774672" duration="61304000" />
+      <workItem from="1658560774672" duration="63484000" />
     </task>
     <servers />
   </component>

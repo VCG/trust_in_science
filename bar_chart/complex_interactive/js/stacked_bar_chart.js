@@ -7,6 +7,7 @@
 
         // List of subgroups = header of the csv files = soil condition here
         this.subgroups = this.data.columns.slice(4);
+        // console.log(this.subgroups);
 
         // color palette = one color per subgroup
         this.color = d3.scaleOrdinal()
@@ -23,7 +24,7 @@
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 70, left: 70};
         vis.width = 900 - vis.margin.left - vis.margin.right;
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
 
         vis.svg = d3.select("#chart")
@@ -118,87 +119,6 @@
         // List of groups = species here = value of the first column called group -> I show them on the X axis
         vis.groups = vis.displayData.map(d => (d.Week));
 
-
-        const yearFormat = d3.timeFormat("%Y");
-
-        // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function(event, d) {
-            console.log(event, d);
-            const subgroupName = d3.select(this.parentNode).datum().key;
-            const subgroupValue = d.data[subgroupName];
-            const date = d.data.group;
-            const year = yearFormat(d.data.Max_Week_Date);
-            console.log(year)
-            const week = d.data.Week;
-
-            let dataForDate = vis.data.filter(f => f.group === date)[0];
-            let total = 0;
-            vis.subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
-
-            const number_format = d3.format(',');
-
-
-            const color = d3.scaleOrdinal()
-                .domain(vis.subgroups)
-                .range(['#7dc9f5','#0984ea','#04386b',
-                    '#f4d166','#ef701b','#9e3a26'])
-
-            vis.tooltip
-                .html(`
-                  <b>Week:</b> ${week}<br>
-                      <b>Year:</b> ${year}<br>
-                       <br>
-
-                        <b>Rate of Unvaccinated (per 100k):</b>
-                        <br>
-
-                       <span style="font-size:11px;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:11px;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span><br>
-
-
-                       <span style="font-size:11px;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
-                       <span style="font-size:11px;color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span><br>
-
-
-                       <span style="font-size:11px;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:11px;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span><br>
-
-                        <br>
-                        <b>Rate of Vaccinated (per 100k):</b>
-                         <br>
-
-                       <span style="font-size:11px;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:11px;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span><br>
-
-
-                       <span style="font-size:11px;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
-                       <span style="font-size:11px;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span><br>
-
-
-                       <span style="font-size:11px;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:11px;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span><br>
-
-                      <br>`)
-
-                .style("opacity", 1)
-                .style("font-size", "11px")
-                .style("left", ((event.x) +10) + "px")
-                .style("top", ((event.y) +10) + "px");
-
-            //change opacity to all non-highlighted bars
-            vis.svg.selectAll(".main-rect").style("opacity", 0.3);
-
-            // //reference this particular, highlighted bars with 1 opacity
-            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
-        }
-
-
-        const mouseleave = function(event, d) {
-            vis.tooltip.style("opacity", 0);
-
-            vis.svg.selectAll(".main-rect").style("opacity", 1);
-        }
-
         //stack the data? --> stack per subgroup
         const stackedData = d3.stack()
             .keys(vis.subgroups)
@@ -228,10 +148,7 @@
             .attr("x", d => vis.x_scale(d.data.Week))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
-            .attr("width", vis.x_scale.bandwidth())
-            .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave);
-
+            .attr("width", vis.x_scale.bandwidth());
 
         //grey y gridlines
         const make_x_gridlines = function() {
@@ -248,6 +165,81 @@
                 .tickSize(-vis.width)
                 .tickFormat("")
             );
+
+        const yearFormat = d3.timeFormat("%Y");
+        const number_format = d3.format(',');
+        const color = d3.scaleOrdinal()
+            .domain(vis.subgroups)
+            .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']);
+
+        // Three function that change the tooltip when user hover / move / leave a cell
+        const mouseover = function(e, d) {
+            const date = d.data.group;
+            const year = yearFormat(d.data.Max_Week_Date);
+            const week = d.data.Week;
+            let dataForDate = d.data;
+            let total = 0;
+            vis.subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
+
+            vis.tooltip
+                .html(`
+                    <b>Week:</b> ${week}<br>
+                    <b>Year:</b> ${year}<br>
+                    <br>
+                    <b>Rate of Unvaccinated (per 100k):</b>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
+                    <span style="font-size:11px;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
+                    <span style="font-size:11px;color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
+                    <span style="font-size:11px;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span>
+                    <br><br>
+                    <b>Rate of Vaccinated (per 100k):</b>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
+                    <span style="font-size:11px;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
+                    <span style="font-size:11px;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span>
+                    <br>
+                    <span style="font-size:11px;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
+                    <span style="font-size:11px;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span>
+                    <br><br>
+                `)
+                .style("opacity", 1)
+                .style("font-size", "11px")
+                .style("left", ((event.x) +10) + "px")
+                .style("top", ((event.y) -100) + "px");
+
+            // change opacity to all non-highlighted bars
+            vis.svg.selectAll(".main-rect").style("opacity", 0.3);
+
+            // reference this particular, highlighted bars with 1 opacity
+            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
+        };
+
+        const mouseleave = function(event, d) {
+            vis.tooltip.style("opacity", 0);
+            vis.svg.selectAll(".main-rect").style("opacity", 1);
+        }
+
+        vis.svg.selectAll(".overlay").remove();
+
+        vis.svg.append("g")
+            .selectAll(".overlay")
+            .data(stackedData[5])
+            .join("rect")
+            .attr("class", "overlay")
+            .attr("x", d => vis.x_scale(d.data.Week))
+            .attr("y", d => vis.y_scale(d[1]))
+            .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1]))
+            .attr("width", vis.x_scale.bandwidth())
+            .style("fill", "transparent")
+            .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave);
     }
 
     initBrush() {
