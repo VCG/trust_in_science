@@ -79,13 +79,13 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("width", sankey.nodeWidth())
         .style("fill", d => d.color = color(d.name.replace(/ .*/, "")))
         // .style("stroke", d => d3.rgb(d.color))
-        .attr("class", d => hiddenNodes.includes(d.index) ? "hidden-node" : "visible-node")
+        .attr("class", d => hiddenNodes.includes(d.index) ? "hidden-node" : "")
         .attr("id", d => `node-${d.index}`)
         .append("title")
         .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc)
 
 
-    function highlight_node_links(e, node) {
+    function highlight_node_links(e, node){
         var remainingNodes=[],
             nextNodes=[];
 
@@ -94,31 +94,24 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
 
         if (d3.select(this).attr("data-clicked") == "1" ) {
             d3.select(this).attr("data-clicked","0");
-            stroke_opacity = 0.2; //ligher
+            stroke_opacity = 0.8; //ligher
             showPercentage = false;
             d3.selectAll(".link")
                 .style("stroke-opacity", 0.2)
-                .style("stroke", d => d.source.color);
             d3.selectAll(".hidden-node")
                 .style("fill-opacity", 0.2);
-            d3.selectAll(".node > rect")
-                .style("fill", d => d.color);
         }
         else {
             d3.select(this).attr("data-clicked","1");
             stroke_opacity = 0.5; ///darker
             showPercentage = true;
             d3.selectAll(".link")
-                .style("stroke", "#aca9a9")
-                .style("stroke-opacity", 0.1);
+               // .style("stroke","grey")
+                .style("stroke-opacity", 0.1)
+                //.attr("class","link test123")
             d3.selectAll(".hidden-node")
-                .style("fill", "#aca9a9")
-                .style("fill-opacity", 0.1);
-            d3.selectAll(".node > rect")
-                .style("fill", "#aca9a9");
-            d3.select(this)
-                .selectAll("rect")
-                .style("fill", d => d.color);
+                .style("fill-opacity", 0.1)
+                // .style('url(#grayscale)')
         }
 
         var traverse = [
@@ -154,37 +147,22 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         });
     }
 
-    function highlight_link(id, index, opacity, showPercentage) {
+    function highlight_link(id, index, opacity, showPercentage){
         d3.select(`#link-${id}`)
-            .style("stroke", d => d.source.color)
+            // .style("stroke", null)
             .style("stroke-opacity", opacity);
         d3.select(`#percentage-${index}`).style("visibility", (showPercentage ? "visible" : "hidden"));
 
         // HACK:
         if (id >= 41 && id <=60) {
-            d3.select(`#node-${index+5}`)
-                .style("fill-opacity", opacity);
-            d3.selectAll(`.node > #node-${index+5}`)
-                .style("fill", d => d.color);
-            d3.select(`#link-${id+25}`)
-                .style("stroke", d => d.source.color)
-                .style("stroke-opacity", opacity);
+            d3.select(`#node-${index+5}`).style("fill-opacity", opacity);
+            d3.select(`#link-${id+25}`).style("stroke-opacity", opacity);
         }
         else if (id >= 86 && id <=110) {
-            d3.select(`#node-${index+5}`)
-                .style("fill-opacity", opacity);
-            d3.selectAll(`.node > #node-${index+5}`)
-                .style("fill", d => d.color);
-            d3.select(`#node-${index+10}`)
-                .style("fill-opacity", opacity);
-            d3.selectAll(`.node > #node-${index+10}`)
-                .style("fill", d => d.color);
-            d3.select(`#link-${id+25}`)
-                .style("stroke", d => d.source.color)
-                .style("stroke-opacity", opacity);
-            d3.select(`#link-${id+50}`)
-                .style("stroke", d => d.source.color)
-                .style("stroke-opacity", opacity);
+            d3.select(`#node-${index+5}`).style("fill-opacity", opacity);
+            d3.select(`#node-${index+10}`).style("fill-opacity", opacity);
+            d3.select(`#link-${id+25}`).style("stroke-opacity", opacity);
+            d3.select(`#link-${id+50}`).style("stroke-opacity", opacity);
         }
     }
 

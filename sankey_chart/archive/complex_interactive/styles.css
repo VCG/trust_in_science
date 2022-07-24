@@ -1,7 +1,9 @@
+.test123{
+    stroke: grey;
+}
 
 .node rect {
     fill-opacity: .9;
-    shape-rendering: crispEdges;
     cursor: pointer;
     stroke-width: 0.5;
 }
@@ -22,6 +24,11 @@
     /* stroke-opacity: .5; */
 }
 
+.node rect.hidden-node {
+    fill-opacity: 0.2;
+    shape-rendering: auto;
+    stroke-width: 0;
+}
 .node rect.hidden-node {
     fill-opacity: 0.2;
     shape-rendering: auto;
@@ -72,3 +79,4 @@ h3 {
     font-size: 13px;
     font-style: italic;
 }
+

@@ -3,18 +3,17 @@
     fill-opacity: .9;
     shape-rendering: crispEdges;
     cursor: pointer;
-    stroke-width: 0.5;
 }
 
 .node text {
     pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
     font-size: 12px;
 }
 
 .link {
     fill: none;
     /*stroke: #ec1111;*/
-    /*stroke: #CCCCCC;*/
     stroke-opacity: .2;
 }
 
@@ -23,16 +22,10 @@
 }
 
 .node rect.hidden-node {
-    fill-opacity: 0.2;
+    fill-opacity: .2;
     shape-rendering: auto;
     stroke-width: 0;
 }
-
-/*.node rect.hidden-node-click {*/
-/*    fill-opacity: 0.1;*/
-/*    shape-rendering: auto;*/
-/*    stroke-width: 0;*/
-/*}*/
 
 .title {
     margin-left: 70px;
@@ -65,10 +58,4 @@ h3 {
 .source {
     margin-left: 70px;
     font-size: 12px;
-}
-
-.helper {
-    margin-left: 70px;
-    font-size: 13px;
-    font-style: italic;
 }
