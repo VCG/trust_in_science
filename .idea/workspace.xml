@@ -5,37 +5,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/data/Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Final.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/data/bar_chart_complex.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/data/bar_chart_complex2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/js/d3-tip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/js/d3.v6.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/js/stacked_bar_chart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/archive/complex_2/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/data/Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Rates_of_COVID-19_Cases_or_Deaths_by_Age_Group_and_Vaccination_Status_Final.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/data/bar_chart_complex.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/data/bar_chart_complex2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/js/d3-tip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/js/d3.v6.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/js/guided_tour.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/js/stacked_bar_chart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bar_chart/complex_3/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/stacked_bar_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/bar_chart/complex_interactive/js/stacked_bar_chart.js" afterDir="false" />
-    </list>
+    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +55,7 @@
       <workItem from="1656426174702" duration="4958000" />
       <workItem from="1656672951058" duration="13900000" />
       <workItem from="1656936685256" duration="14085000" />
-      <workItem from="1658560774672" duration="67408000" />
+      <workItem from="1658560774672" duration="67818000" />
     </task>
     <servers />
   </component>

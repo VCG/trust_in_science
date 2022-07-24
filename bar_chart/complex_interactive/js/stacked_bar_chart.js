@@ -311,11 +311,15 @@
             let range = d3.brushSelection(this);
 
 
+
             d3.selectAll("span")
                 .text(function(d, i) { return Math.round(range[i]); });
 
 
         }
+
+        // // v3:  brushed();
+        brush.move(brushg, [20, 50].map(x));
 
         //y axis label
         vis.svg.append("text")
