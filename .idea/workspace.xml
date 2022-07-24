@@ -7,11 +7,22 @@
   <component name="ChangeListManager">
     <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bar_chart/complex/js/stacked_bar_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/bar_chart/complex/js/stacked_bar_chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/line_chart/complex/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/line_chart/complex/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/line_chart/simple/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/line_chart/simple/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-large.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-large.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-small.js" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex_interactive/js/line-chart-small.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/bubble_chart_complex_int_data/bubble_chart_complex.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/bubble_chart_complex_int_data/bubble_chart_complex_test.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/bubble_chart_complex_int_data/bubbles_chart_complex_interactive.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/bubble_chart_complex_int_data/bubbles_chart_complex_interactive3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/bubble_chart_complex_int_data/legend.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/js/bubble_chart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/js/d3-tip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/js/d3.v6.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/js/legend.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive2/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex/js/bubble_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/bubble_chart/complex/js/bubble_chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,18 +41,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/trust_in_science" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bubble_chart" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\sankey_chart" />
-      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\src\trust_in_science\map\archive" />
       <recent name="C:\src\trust_in_science\line_chart\archive" />
       <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart\complex-interactive3\data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\src\trust_in_science\bubble_chart" />
+      <recent name="C:\src\trust_in_science\bubble_chart\complex-interactive" />
+      <recent name="C:\src\trust_in_science\line_chart\complex_interactive" />
+      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\sankey_chart" />
+      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,6 +71,7 @@
       <workItem from="1656426174702" duration="4958000" />
       <workItem from="1656672951058" duration="13900000" />
       <workItem from="1656936685256" duration="14085000" />
+      <workItem from="1658560774672" duration="57988000" />
     </task>
     <servers />
   </component>
@@ -76,10 +91,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1658237517703">
+    <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1658639609122">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1658237517703" />
+    <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1658639609122" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1656422690724">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
