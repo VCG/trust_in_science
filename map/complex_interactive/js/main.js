@@ -3,6 +3,8 @@ $("#chart-overlay .close").click(() => $("#chart-overlay").hide());
 
 let parseDate = d3.timeParse("%Y-%m-%d");
 
+// let commaFormat = d3.format(',');
+
 d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/map/complex_interactive/data/data_fin.csv").then(function(data) {
     data.forEach(d => {
         d.date = parseDate(d.SubmissionDate);
@@ -13,7 +15,7 @@ d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/map/complex_
     const maxNewCases = d3.max(data, d => d.value);
     let states = _.chain(data).groupBy("State").map((v, k) => ({ code: k, name: v[0].State2 })).value();
     states.forEach(state => {
-        new LineChartSmall(`.state-${state.code.toLowerCase()}`, data, state.code, maxNewCases);
+        new LineChartSmall(`.state-${state.code.toLowerCase()}`, data, state, maxNewCases);
         $(`.state-${state.code.toLowerCase()}`).click(() => {
             new LineChartLarge("#chart-overlay", data, state.code);
             $("#chart-overlay .title").text(state.name);

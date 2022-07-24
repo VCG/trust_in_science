@@ -16,10 +16,9 @@
 <body>
 <div class="container">
     <h6>New Covid-19 Cases across the US states, Jan 2020 - Apr 2022</h6>
+    <div class="helper">*Hover over the states to explore further</div>
     <br>
-    <div class="instructions">*Hover over the states to explore further</div>
-    <br>
-    <div class ="legend_title">Legend</div>
+    <div class = "legend_title">Legend</div>
 
     <div id="chart-overlay">
         <div class="title"></div>
@@ -61,7 +60,8 @@
             <div class="grid-cell state state-state"><div class="state-label">State</div></div>
             <!--                <div class="legend_title_year3">New Case</div>-->
 
-        <!--    <div class ="legend_background">Colour indicates total volume of new cases</div>-->
+            <!--    <div class ="legend_background">Colour indicates total volume of new cases</div>-->
+
             <div class ="legend_background">Background color intensity scales according to the total volume of new cases</div>
             <hr class="line_background">
         </div>
@@ -90,7 +90,10 @@
             <div class="legend_title_year3">New Cases</div>
             <hr class="line">
             <br>
-
+            <!--                <br>-->
+            <!--            <div class="legend_title_year3">7-Day New Cases Average</div>-->
+            <!--            <hr class="line_avg">-->
+            <!--                <br>-->
 
         </div>
         <div class="grid-row">
@@ -159,10 +162,8 @@
             <div class="grid-cell empty"></div>
         </div>
     </div>
-
     <br>
     <br>
-
     <div class="source">Source: Centers for Disease Control and Prevention <a href="https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36" target="_blank">Here</a></div>
 
 </div>
@@ -181,6 +182,7 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <script src="js/line-chart-small.js"></script>
+<!--<script src="js/line-chart-large.js"></script>-->
 <script src="js/main.js"></script>
 </body>
 
