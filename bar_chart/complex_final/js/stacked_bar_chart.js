@@ -23,14 +23,10 @@
         let vis = this;
 
 
-       // set the dimensions and margins of the graph
+        // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 70, left: 70};
         vis.width = 900 - vis.margin.left - vis.margin.right;
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
-        //
-        // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
-        //     vis.width = 1200 - vis.margin.left - vis.margin.right,
-        //     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
 
         vis.svg = d3.select("#chart")
@@ -70,7 +66,7 @@
         // tooltip
         vis.tooltip = d3.select("body")
             .append("div")
-            .style("opacity", 0)
+            // .style("opacity", 0)
             .attr("class", "tooltip")
             .style("background-color", "white")
             .style("border-radius", "2px")
@@ -79,8 +75,7 @@
             .style('font-size', '14px')
             .style("position", "absolute")
             .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px")
-
+            .style("padding", "10px");
 
         //add year labels to x axis (year 2021)
         vis.svg
@@ -155,7 +150,8 @@
             .attr("x", d => vis.x_scale(d.data.Week))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
-            .attr("width", vis.x_scale.bandwidth());
+            .attr("width", vis.x_scale.bandwidth())
+            .style("pointer-events", "none");
 
         //grey y gridlines
         const make_x_gridlines = function() {
@@ -218,8 +214,8 @@
                 `)
                 .style("opacity", 1)
                 .style("font-size", "11px")
-                .style("left", ((event.x) +10) + "px")
-                .style("top", ((event.y) -100) + "px");
+                .style("left", ((event.x) +20) + "px")
+                .style("top", ((event.y - 100) ) + "px");
 
             // change opacity to all non-highlighted bars
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
@@ -246,7 +242,7 @@
             .attr("width", vis.x_scale.bandwidth())
             .style("fill", "transparent")
             .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave)
+            .on("mouseleave", mouseleave);
     }
 
     initBrush() {
