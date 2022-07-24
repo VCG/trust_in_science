@@ -89,7 +89,6 @@ class BubbleChartComplex {
             )
 
 
-
         // Add a clipPath: everything out of this area won't be drawn.
         var clip = vis.svg.append("defs").append("clipPath")
             .attr("id", "clip")
@@ -119,66 +118,6 @@ class BubbleChartComplex {
             .attr("stroke", "white")
             .on("mouseover", function(e, d) { tip.show(d, this); })
             .on("mouseout", tip.hide)
-
-
-
-
-
-        var zoom = d3.zoom()
-            .scaleExtent([1, 3])  // This control how much you can unzoom (x0.5) and zoom (x20)
-            .extent([[0, 0], [vis.width, vis.height]])
-            .on("zoom", updateChart);
-
-        vis.svg.append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .style("fill", "none")
-            .style("pointer-events", "all")
-            .attr('transform', 'translate(' + vis.margin.left + ',' + vis.margin.top + ')')
-            .call(zoom);
-
-        function updateChart(event) {
-
-            // recover the new scale
-            var newX = event.transform.rescaleX(x);
-            var newY = event.transform.rescaleY(y);
-
-            // update axes with these new boundaries
-            xAxis.call(d3.axisBottom(newX))
-            yAxis.call(d3.axisLeft(newY))
-
-            // update circle position
-            scatter
-                .selectAll(".circles")
-                // .data(vis.data)
-                // .enter()
-                // .append("circle")
-                .attr("cx", d => newX(d.New_Death_per_100))
-                .attr("cy", d => newY(d.New_Case_per_100))
-               // .attr('cx', function(d) {return 50})
-                //.attr('cy', function(d) {return 50});
-
-
-        }
-
-        // Add dots
-        // vis.svg.append('g')
-        //     .selectAll("dot")
-        //     .data(vis.data)
-        //     .join("circle")
-        //     .attr("cx", d => x(d.New_Death_per_100))
-        //     .attr("cy", d => y(d.New_Case_per_100))
-        //     .attr("r", d => z(d.Share_Vaccination))
-        //     .style("fill", "#02254a")
-        //     .style("fill", d => myColor(d.Share_Vaccination))
-        //     //.style("opacity", "0.7")
-        //     .attr("stroke", "white")
-        //     .on("mouseover", function(e, d) { tip.show(d, this); })
-        //     .on("mouseout", tip.hide)
-        //     .call(d3.zoom().on("zoom", function () {
-        //         vis.svg.attr("transform", d3.event.transform)
-        //     }))
-
 
 
 
