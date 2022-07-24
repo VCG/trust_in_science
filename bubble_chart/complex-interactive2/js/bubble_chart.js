@@ -11,10 +11,10 @@ class BubbleChartComplexInt {
 
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 110, left: 40};
-       // vis.margin = {top: 430, right: 20, bottom: 30, left: 40};
+        vis.margin2 = {top: 430, right: 20, bottom: 30, left: 40};
         vis.width = 900 - vis.margin.left - vis.margin.right;
         vis.height = 600 - vis.margin.top - vis.margin.bottom;
-
+        vis.height2 = 600 - vis.margin2.top - vis.margin2.bottom;
 
 
         vis.svg = d3.select(this.parentElement)
@@ -34,11 +34,21 @@ class BubbleChartComplexInt {
             //.domain(d3.extent(vis.data, function(d) { return +d.New_Death_per_100 }))
             .range([0, vis.width]);
 
+        vis.x2 = d3.scaleLinear()
+            .domain([-0.0004, 0.016])
+            //.domain(d3.extent(vis.data, function(d) { return +d.New_Death_per_100 }))
+            .range([0, vis.width]);
+
         // // Add Y axis
         vis.y = d3.scaleLinear()
             .domain([-0.35, 9])
           //  .domain(d3.extent(vis.data, function(d) { return +d.New_Case_per_100 }))
             .range([vis.height, 0]);
+
+        vis.y2 = d3.scaleLinear()
+            .domain([-0.35, 9])
+            //  .domain(d3.extent(vis.data, function(d) { return +d.New_Case_per_100 }))
+            .range([vis.height2, 0]);
 
         // Add a scale for bubble size
         vis.z = d3.scalePow()
@@ -46,6 +56,26 @@ class BubbleChartComplexInt {
             .domain([0, 100])
             .range([ 0, 20]);
 
+        // vis.xAxis = d3.axisBottom(vis.x),
+        // vis.xAxis2 = d3.axisBottom(vis.x2),
+        // vis.yAxis = d3.axisLeft(vis.y);
+
+
+        vis.xAxis = vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .call(d3.axisBottom(vis.x))
+            .attr("font-size", "12");
+
+        vis.xAxis2 = vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .call(d3.axisBottom(vis.x2))
+            .attr("font-size", "12");
+
+
+        vis.yAxis = vis.svg.append("g")
+            .attr("transform", `translate(0, ${0})`)
+            .call(d3.axisLeft(vis.y))
+            .attr("font-size", "12");
         //grey x gridlines
         vis.make_x_gridlines= function() { return d3.axisLeft(vis.y).ticks(5) };
 
@@ -56,6 +86,7 @@ class BubbleChartComplexInt {
                 .call(vis.make_x_gridlines()
                     .tickSize(-vis.width)
                     .tickFormat(""));
+
 
 
         //y axis label
@@ -78,16 +109,7 @@ class BubbleChartComplexInt {
 
 
 
-        vis.xAxis = vis.svg.append("g")
-            .attr("transform", `translate(0, ${vis.height})`)
-            .call(d3.axisBottom(vis.x))
-            .attr("font-size", "12");
 
-
-        vis.yAxis = vis.svg.append("g")
-            .attr("transform", `translate(0, ${0})`)
-            .call(d3.axisLeft(vis.y))
-            .attr("font-size", "12");
 
         // vis.xAxis = vis.svg.selectAll(".x-axis").transition().duration(200).call(d3.axisBottom(vis.x)).style("font-size", '12');
         // vis.yAxis = vis.svg.selectAll(".y-axis").transition().duration(200).call(d3.axisLeft(vis.y)).style("font-size", '12');
@@ -143,36 +165,16 @@ class BubbleChartComplexInt {
 
 
            vis.svg.call(vis.tip);
+            //console.log(vis.tip)
 
 
 
-        vis.svg.append("defs").append("clipPath")
-            .attr("id", "clip")
-            .append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .attr("x", 0)
-            .attr("y", 0);
 
-
-        var zoom = d3.zoom()
-            .scaleExtent([1, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
-            .extent([[0, 0], [vis.width, vis.height]])
-            .on("zoom", updateChart);
-
-        vis.svg.append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .style("fill", "transparent")
-            .style("pointer-events", "all")
-            .attr('transform', 'translate(' + 0 + ',' +0 + ')')
-            .call(zoom)
-
-
-        var scatter = vis.svg.append('g')
+        vis.scatter = vis.svg.append('g')
             .attr("clip-path", "url(#clip)")
 
-        scatter
+
+        vis.scatter
             .selectAll("circle")
             .data(vis.displayData)
             .enter()
@@ -185,28 +187,69 @@ class BubbleChartComplexInt {
             .style("fill", d => vis.myColor(d.Share_Vaccination))
             //.style("opacity", "0.7")
             .attr("stroke", "white")
+            // .on("mouseover", function(e, d) { vis.tip.show(d, this); })
+            // .on("mouseout", vis.tip.hide)
+
+
+
+        var zoom = d3.zoom()
+            .scaleExtent([1, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+            .extent([[0, 0], [vis.width, vis.height]])
+            .on("zoom", updateChart);
+
+
+        vis.scatter2 = vis.svg.append('g')
+            .attr("clip-path", "url(#clip)")
+
+
+        vis.scatter2
+            .selectAll("circle")
+            .data(vis.displayData)
+            .enter()
+            .append("circle")
+            .attr("class","circles2")
+            .attr("cx", d => vis.x2(d.New_Death_per_100))
+            .attr("cy", d => vis.y2(d.New_Case_per_100))
+            .attr("r", d => vis.z(d.Share_Vaccination))
+            // .style("fill", "#02254a")
+            .style("fill", "transparent")
+            //.style("opacity", "0.7")
+            .attr("stroke", "transparent")
             .on("mouseover", function(e, d) { vis.tip.show(d, this); })
             .on("mouseout", vis.tip.hide)
+
 
 
         function updateChart(event) {
 
             // recover the new scale
-            var newX = event.transform.rescaleX(vis.x);
+            var newX = event.transform.rescaleX(vis.x2);
             var newY = event.transform.rescaleY(vis.y);
 
             // update axes with these new boundaries
             vis.xAxis.call(d3.axisBottom(newX))
             vis.yAxis.call(d3.axisLeft(newY))
 
+
             // update circle position
-            scatter
-                .selectAll(".circles")
+            vis.scatter.selectAll(".circles2")
                 .attr("cx", d => newX(d.New_Death_per_100))
                 .attr("cy", d => newY(d.New_Case_per_100))
 
 
+
         }
+
+
+        vis.svg.append("rect")
+            .attr("width", vis.width)
+            .attr("height", vis.height)
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .attr('transform', 'translate(' + 0 + ',' +0 + ')')
+            .call(zoom)
+
+
 
 
         $("#Reset").click(() => {
