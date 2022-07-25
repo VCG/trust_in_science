@@ -72,3 +72,19 @@ h3 {
     font-size: 13px;
     font-style: italic;
 }
+
+
+#tooltip {
+    position: absolute;
+    pointer-events: none;
+    font-size: 0.7em;
+    font-family: sans-serif;
+    padding: 3px;
+    width: auto;
+    height: auto;
+    background-color: #F2F2F2;
+    -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    -mox-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 5px rbga(0, 0, 0, 0.4);
+    pointer-events: none;
+}

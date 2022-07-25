@@ -55,14 +55,45 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("stroke-width", function(d) { return d.width; })
         // .style("stroke", function(d) {
         //     return "grey"});
+        .on("mouseover", mouseover_link)
+        .on("mouseleave", mouseleave_link);
+
+
+
+   tooltip = d3.select("#chart")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border-radius", "2px")
+        .style("padding", "12px")
+        .style("color", "#0c0c0c")
+        .style('font-size', '14px')
+        .style("position", "absolute")
+        .style("box-shadow", "2px 2px 4px lightgrey")
+        .style("padding", "10px");
+
+    tooltip2 = d3.select("#chart")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border-radius", "2px")
+        .style("padding", "12px")
+        .style("color", "#0c0c0c")
+        .style('font-size', '14px')
+        .style("position", "absolute")
+        .style("box-shadow", "2px 2px 4px lightgrey")
+        .style("padding", "10px");
+
 
 
 // add the link titles
-    link.append("title")
-        .text(function(d) {
-            return d.source.name + " → " +
-                d.target.name + "\n" + "Number of participants: " + format(d.value); });
+//     link.append("title")
+//         .text(function(d) {
+//             return d.source.name + " → " +
+//                 d.target.name + "\n" + "Number of participants: " + format(d.value); });
 
+    // link.on("mouseover", mouseover_link)
+    //     .on("mouseleave", mouseleave_link);
 
     var node = svg.append("g").selectAll(".node")
         .data(graph.nodes)
@@ -81,8 +112,69 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         // .style("stroke", d => d3.rgb(d.color))
         .attr("class", d => hiddenNodes.includes(d.index) ? "hidden-node" : "visible-node")
         .attr("id", d => `node-${d.index}`)
-        .append("title")
-        .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc)
+        // .append("title")
+        // .text(d => d.name + "\n" + "Number of participants: " + format(d.value) + "\n" + "% of participants: " + d.perc)
+        .on("mouseover", mouseover_node)
+        .on("mouseleave", mouseleave_node);
+
+
+    let text = tooltip.append("text")
+        .attr("class", "tooltip-text")
+        .attr("x", 10)
+        .attr("y", 20)
+        .attr('font-weight','bold')
+        .attr("font-family", "Segoe UI")
+        .style("fill", "black");
+
+
+    function mouseover_node(e,d) {
+        const name = d.name;
+        const value = format(d.value);
+        const perc = d.perc;
+
+        // console.log(value)
+
+        tooltip
+            .html(`
+            <b>Status :</b> ${name}<br>
+            <b>Number of participants: </b> ${value}<br> 
+            <b>% of participants: </b> ${perc}<br> 
+             `)
+            .style("opacity", 1)
+            .style("font-size", "11px")
+            .style("left", ((event.x) +20) + "px")
+            .style("top", ((event.y - 0) ) + "px");
+    }
+
+
+    function mouseleave_node(e, d) {
+        tooltip.style("opacity", 0);
+    }
+
+
+    function mouseover_link(e,d) {
+
+        const source = d.source.name;
+        const target = d.target.name;
+        const value = format(d.value);
+
+        tooltip
+            .html(`
+            <b> ${source} -> ${target}</b><br>
+            <b>Number of participants: </b> ${value}<br>
+            `)
+            .style("opacity", 1)
+            .style("font-size", "11px")
+            .style("left", ((event.x) +20) + "px")
+            .style("top", ((event.y - 0) ) + "px");
+
+    }
+
+
+    function mouseleave_link(e, d) {
+        tooltip.style("opacity", 0);
+    }
+
 
 
     function highlight_node_links(e, node) {
@@ -108,6 +200,9 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
             d3.select(this).attr("data-clicked","1");
             stroke_opacity = 0.5; ///darker
             showPercentage = true;
+
+            mouseleave_node()
+
             d3.selectAll(".link")
                 .style("stroke", "#aca9a9")
                 .style("stroke-opacity", 0.1);

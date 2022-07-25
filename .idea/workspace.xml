@@ -5,7 +5,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="" />
+    <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bar_chart" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -55,7 +59,9 @@
       <workItem from="1656426174702" duration="4958000" />
       <workItem from="1656672951058" duration="13900000" />
       <workItem from="1656936685256" duration="14085000" />
-      <workItem from="1658560774672" duration="67818000" />
+      <workItem from="1658560774672" duration="74721000" />
+      <workItem from="1658755891646" duration="63000" />
+      <workItem from="1658755984688" duration="27000" />
     </task>
     <servers />
   </component>
