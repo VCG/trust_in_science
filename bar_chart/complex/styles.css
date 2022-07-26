@@ -1,105 +1,12 @@
 
-.container {
-    /*border: 1px solid red;*/
-    overflow: hidden;
-}
-
-.main-content {
-    /*border: 1px solid black;*/
-    float: left;
-    width: 920px;
-}
-
-.legend-content {
-    width: 180px;
-    float: right;
-    font-size: 12px;
-    margin-top: 60px;
-}
-
-.brush-label {
-    font-size: 13px;
-    padding-bottom: 4px;
-}
-
-.legend {
-    margin-top: 40px;
-}
-
-.legend-title {
-    font-size: 13px;
-}
-
-.legend-row {
-    overflow: hidden;
-}
-
-.legend-value {
-    display: inline;
-    padding: 0 10px 0 0;
-}
-
-.legend-row2 {
-    overflow: hidden;
-    margin-top: -20px;
-    margin-left: 140px;
-
-
-}
-
-.legend-value svg, .legend-value rect {
-    width: 10px;
-    height: 10px;
-}
-
-.legend-label {
-    display: inline-block;
-}
-
-.title {
-    margin-left: 70px;
-    margin-bottom: 0;
-}
-
-h3 {
-    font-size: 20px;
-}
-
-.subtitle {
-    margin-left: 70px;
-    font-size: 17px;
-}
-
-.source {
-    margin-left: 70px;
-    font-size: 12px;
-}
-
-.form {
-    margin-top: 20px;
-    margin-left: 70px;
-    font-size: 13px;
-}
-
-.form .form-group {
-    padding: 0;
-}
-
-.form .spacer {
-    margin: 0 10px;
-}
-
 .axis path,
 .axis line {
-
     stroke: #000;
     shape-rendering: crispEdges;
 }
 
-.helper {
-    margin-left: 70px;
-    font-size: 13px;
-    font-style: italic;
+.axis text {
+    font-size: 11px;
 }
 
 .grid line {
@@ -112,26 +19,21 @@ h3 {
     stroke-width: 0;
 }
 
-.brush .extent {
-    fill-opacity: .125;
-    shape-rendering: crispEdges;
-   ;
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+    font-family: Segoe UI
 }
 
+.axisMonths line{
+    stroke: transparent;
 
-.axis {
-    shape-rendering: crispEdges;
 }
 
-.x.axis line {
-    stroke: #fff;
+.axisMonths2 line{
+    stroke: black;
+    /*stroke-dasharray: 10,8;*/
+
 }
 
-.x.axis .minor {
-    stroke-opacity: .5;
-}
-
-.x.axis path {
-    display: none;
-}
 

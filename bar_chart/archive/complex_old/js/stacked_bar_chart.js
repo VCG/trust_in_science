@@ -1,4 +1,4 @@
-class StackedBarChartComplex {
+class StackedBarChart{
     constructor(data) {
 
         this.data = data;
@@ -10,9 +10,9 @@ class StackedBarChartComplex {
     initVis() {
         let vis = this;
 
-
-        vis.margin = {top: 100, right: 210, bottom: 70, left: 70},
-            vis.width = 1050 - vis.margin.left - vis.margin.right,
+        // set the dimensions and margins of the graph
+        vis.margin = {top: 110, right: 300, bottom: 70, left: 70},
+            vis.width = 1200 - vis.margin.left - vis.margin.right,
             vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
 
@@ -29,7 +29,7 @@ class StackedBarChartComplex {
         console.log(subgroups)
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis
-        const groups = vis.data.map(d => (d.Week))
+        const groups = vis.data.map(d => (d.group))
         console.log(groups)
 
         const month_groups = vis.data.map(d => (d.month))
@@ -52,7 +52,7 @@ class StackedBarChartComplex {
 
         let xAxisGenerator = d3.axisBottom(x)
             .tickSize(10)
-            // .tickPadding(5)
+        // .tickPadding(5)
 
 
         //show major axis lines
@@ -124,7 +124,7 @@ class StackedBarChartComplex {
             .selectAll("text")
             .attr("font-size", "12")
             .style("text-anchor", "middle")
-           .attr("dx", "0em")
+            .attr("dx", "0em")
             .attr("dy", "1em")
             .attr("transform", "rotate(0)")
 
@@ -288,6 +288,12 @@ class StackedBarChartComplex {
             .on("mouseover", mouseover)
             .on("mouseleave", mouseleave)
         //
+
+        // vis.svg.selectAll(".rect-bar-52")
+        //   .on("mouseover", mouseover)
+
+        // "08-09"
+
 
 
         //overall chart title
@@ -480,7 +486,7 @@ class StackedBarChartComplex {
         //     .attr("fill", "black")
         //     .attr("font-family", "Segoe UI")
         //     .attr("font-size", "12")
-
+        //
 
         //add x label
         vis.svg
