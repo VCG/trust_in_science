@@ -80,6 +80,7 @@
             .style("position", "absolute")
             .style("box-shadow", "2px 2px 4px lightgrey")
             .style("padding", "10px")
+            .style("display", "none")
 
 
         //add year labels to x axis (year 2021)
@@ -122,6 +123,7 @@
 
     updateVis() {
         let vis = this;
+
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis
         vis.groups = vis.displayData.map(d => (d.Week));
@@ -218,8 +220,10 @@
                 `)
                 .style("opacity", 1)
                 .style("font-size", "11px")
+                .style("display", "block")
                 .style("left", ((event.x) +10) + "px")
-                .style("top", ((event.y) -100) + "px");
+                .style("top", ((event.y) -70) + "px");
+
 
             // change opacity to all non-highlighted bars
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
@@ -229,8 +233,11 @@
         };
 
         const mouseleave = function(event, d) {
-            vis.tooltip.style("opacity", 0);
-            vis.svg.selectAll(".main-rect").style("opacity", 1);
+            vis.tooltip.style("opacity", 0)
+                .style("display", "none")
+            vis.svg.selectAll(".main-rect").style("opacity", 1)
+
+
         }
 
         vis.svg.selectAll(".overlay").remove();
@@ -247,6 +254,9 @@
             .style("fill", "transparent")
             .on("mouseover", mouseover)
             .on("mouseleave", mouseleave)
+
+
+
     }
 
     initBrush() {
