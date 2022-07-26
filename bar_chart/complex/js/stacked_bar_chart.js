@@ -2,7 +2,9 @@ class StackedBarChartComplex {
     constructor(data) {
 
         this.data = data;
+        this.displayData = [];
 
+        console.log(this.data)
         this.initVis();
     }
 
@@ -16,12 +18,15 @@ class StackedBarChartComplex {
             vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
 
+
+
         vis.svg = d3.select("#chart")
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append("g")
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
+
 
 
         // List of subgroups = header of the csv files = soil condition here
@@ -189,83 +194,67 @@ class StackedBarChartComplex {
 
 
         const yearFormat = d3.timeFormat("%Y");
-
+        const number_format = d3.format(',');
+        let parseDate = d3.timeParse("%Y-%m-%d");
 
         // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function (event, d) {
-            console.log(event, d);
-            const subgroupName = d3.select(this.parentNode).datum().key;
-            const subgroupValue = d.data[subgroupName];
+        const mouseover = function(e, d) {
             const date = d.data.group;
-            // const year = parseDate(d.data.Max_Week_Date);
+            const week_day = d.data.Max_Week_Date;
+            const year = d.data.Year;
             const week = d.data.Week;
-            const week2 = d.data.Max_Week_Date;
-
-            let dataForDate = vis.data.filter(f => f.group === date)[0];
+            let dataForDate = d.data;
             let total = 0;
             subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
 
-
-            const number_format = d3.format(',');
-
-            const color = d3.scaleOrdinal()
-                .domain(subgroups)
-                .range(['#7dc9f5', '#0984ea', '#04386b',
-                    '#f4d166', '#ef701b', '#9e3a26'])
-
             tooltip
                 .html(`
-                  <span style="font-size:14px;font-family:Segoe UI"><b>Week: </b>${week2}<br></span><br>
-               
-                        <span style="font-size:12px;font-family:Segoe UI"><b>Rate of Unvaccinated (per 100k):</b></span>  
-                        <br>
-                       
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span><br>
-                       
-                 
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
-                       <span style="font-size:15px;color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span><br>
-                    
-                        
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span><br>
-                    
-                        <br>
-                        <span style="font-size:12px;font-family:Segoe UI"><b>Rate of Vaccinated (per 100k):</b></span> 
-                         <br>
-                      
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span><br>
-                    
-                        
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span><br>
-                    
-                          
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
-                       <span style="font-size:12px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span><br>
-                    
-                       
-                  
-                      <br>`)
-
+                    <b><span style="font-size:11px; font-family:Segoe UI">Week:</b> ${week_day}</span></b><br>
+                    <b><span style="font-size:11px; font-family:Segoe UI">Year:</b> ${year}</span></b><br>
+                    <br>
+                    <b><span style="font-size:11px; font-family:Segoe UI">Rate of Unvaccinated (per 100k):</span></b>
+                    <br>
+                    <span style="font-size:11px; font-family:Segoe UI; color: ${color('Unvax_80')}"> <b>Ages 80+:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Unvax_80')}"> ${number_format(dataForDate['Unvax_80'])}</span>
+                    <br>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Unvax_50_79')}"> <b>Ages 50-79:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Unvax_50_79')}"> ${number_format(dataForDate['Unvax_50_79'])}</span>
+                    <br>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Unvax_18_49')}"> <b>Ages 18-49:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Unvax_18_49')}"> ${number_format(dataForDate['Unvax_18_49'])}</span>
+                    <br><br>
+                    <b><span style="font-size:11px; font-family:Segoe UI">Rate of Vaccinated (per 100k):</span></b>
+                    <br>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Vax_80')}"> <b>Ages 80+:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Vax_80')}"> ${number_format(dataForDate['Vax_80'])}</span>
+                    <br>
+                    <span style="font-size:11px;font-family:Segoe UI; color: ${color('Vax_50_79')}"> <b>Ages 50-79:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI;color: ${color('Vax_50_79')}"> ${number_format(dataForDate['Vax_50_79'])}</span>
+                    <br>
+                    <span style="font-size:11px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> <b>Ages 18-49:</b></span>
+                    <span style="font-size:11px;font-family:Segoe UI;color: ${color('Vax_18_49')}"> ${number_format(dataForDate['Vax_18_49'])}</span>
+                    <br><br>
+                `)
                 .style("opacity", 1)
-                .style("font-size", "12px")
-                .style("left", ((event.x) + 10) + "px")
-                .style("top", ((event.y) + 10) + "px");
+                .style("font-size", "11px")
+                .style("display", "block")
+                .style("left", ((event.x) +10) + "px")
+                .style("top", ((event.y) -70) + "px");
 
 
+            // change opacity to all non-highlighted bars
+            vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
-        }
+            // reference this particular, highlighted bars with 1 opacity
+            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
+        };
+
+        const mouseleave = function(event, d) {
+            tooltip.style("opacity", 0)
+                .style("display", "none")
+            vis.svg.selectAll(".main-rect").style("opacity", 1)
 
 
-        const mouseleave = function (event, d) {
-            console.log("mouseleave");
-            tooltip
-                .style("opacity", 0)
-
-            vis.svg.selectAll("rect.main-rect").style("opacity", 1)
         }
 
 
@@ -285,8 +274,8 @@ class StackedBarChartComplex {
             .attr("y", d => y(d[1]))
             .attr("height", d => y(d[0]) - y(d[1]))
             .attr("width", x.bandwidth())
-            .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave)
+            // .on("mouseover", mouseover)
+            // .on("mouseleave", mouseleave)
         //
 
 
@@ -493,6 +482,22 @@ class StackedBarChartComplex {
             .attr("fill", "black")
             .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
+
+
+        vis.svg.selectAll(".overlay").remove();
+
+        vis.svg.append("g")
+            .selectAll(".overlay")
+            .data(stackedData[5])
+            .join("rect")
+            .attr("class", "overlay")
+            .attr("x", d => x(d.data.Week))
+            .attr("y", d => y(d[1]))
+            .attr("height", d => y(0) - y(d[1]))
+            .attr("width", x.bandwidth())
+            .style("fill", "transparent")
+            .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave)
     }
 
 
