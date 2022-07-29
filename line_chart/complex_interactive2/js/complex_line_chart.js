@@ -35,14 +35,25 @@ class LineChart {
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .attr("class", "x-axis")
+            // .attr("class", "axisRed")
             .selectAll("text")
             .style("text-anchor", "end")
-            .attr("dx", "0.25em")
-            .attr("dy", "1em")
+            // .attr("dx", "2em")
+            .attr("dy", "20px")
             .style("font-size", '12')
             .attr("font-family", "Segoe UI")
             .attr("transform", "rotate(0)");
 
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "x-axis2 axisTwo")
+            .selectAll("text")
+            .style("text-anchor", "end")
+            // .attr("dx", "0.25em")
+            .attr("dy", "20px")
+            .style("font-size", '12')
+            .attr("font-family", "Segoe UI")
+            .attr("transform", "rotate(0)");
 
 
         vis.svg.append("g").attr("class", "y-axis");
@@ -81,31 +92,7 @@ class LineChart {
             .attr("y", 0-50)
             .attr("font-family", "Segoe UI")
             .attr("font-size", "16")
-
             .text("Case count per 100k people");
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2021")
-            .attr("fill","black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width-100)
-            .attr("y", vis.height+40)
-            .attr("class", "title")
-            .text("2022")
-            .attr("fill","black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "12")
-
 
 
         vis.initBrush();
@@ -132,32 +119,43 @@ class LineChart {
         vis.svg.selectAll(".line").remove();
         vis.svg.selectAll(".grid").remove();
 
-        const groups = vis.displayData.map(d => (d.Week1))
-        const groups2 = vis.displayData.map(d => (d.Week2))
-
-        const month_groups = vis.displayData.map(d => (d.month))
 
 
-        vis.x = d3.scaleBand()
-            .domain(groups)
-            .range([0, vis.width])
-            .padding([0.7]);
+       vis.x_time = d3.scaleTime()
+            .domain(d3.extent(vis.displayData, function(d) { return d.Max_Week_Date; }))
+            .range([ 0, vis.width ])
 
 
-        vis.x_time = d3.scaleTime()
-            .domain(d3.extent(vis.displayData, function(d) { return d.date; }))
-            .range([0, vis.width]);
+        // vis.x_time.ticks(d3.time.months, 1);
+
 
         // // Add Y axis
         vis.y = d3.scaleLinear()
             .domain([0, d3.max(vis.displayData, function(d) { return +d.Unvax_50_79; })+500])
             .range([ vis.height, 0 ]);
 
-        vis.svg.selectAll(".x-axis").transition().duration(200).call(d3.axisBottom(vis.x));
-        vis.svg.selectAll(".y-axis").transition().duration(200).call(d3.axisLeft(vis.y));
+       vis.test = vis.svg.selectAll(".x-axis").transition().call(d3.axisBottom(vis.x_time).ticks(d3.timeWeek));
+
+       // vis.svg.selectAll(".tick text").remove();
+
+        vis.test.selectAll("text").remove();
+
+
+        vis.svg.selectAll(".x-axis2")
+            .transition()
+            .call(d3.axisBottom(vis.x_time).tickSize(10));
+
+        //
+        // var axisElements = svg.append("g").call(axis);
+        // axisElements.selectAll("text").remove();
+
+
+
+        vis.svg.selectAll(".y-axis").transition().call(d3.axisLeft(vis.y));
 
         //grey y gridlines
         vis.make_x_gridlines= function() { return d3.axisLeft(vis.y).ticks(10); };
+
 
         vis.svg.append("g")
             .attr("class", "grid")
@@ -168,9 +166,6 @@ class LineChart {
                 .tickFormat("")
             );
 
-        // List of groups = species here = value of the first column called group -> I show them on the X axis
-        // vis.groups = vis.displayData.map(d => (d.Week1));
-
         // Add the unvaccinated line 18-49
         vis.svg.append("path")
             .datum(vis.displayData)
@@ -179,7 +174,7 @@ class LineChart {
             .attr("stroke", "#f4d166")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Unvax_18_49) })
             )
             .style("pointer-events", "none");
@@ -192,10 +187,11 @@ class LineChart {
             .attr("stroke", "#ef701b")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Unvax_50_79) })
             )
             .style("pointer-events", "none");
+
 
         // Add the unvaccinated line 80+
         vis.svg.append("path")
@@ -205,7 +201,7 @@ class LineChart {
             .attr("stroke", "#9e3a26")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Unvax_80) })
             )
             .style("pointer-events", "none");
@@ -219,7 +215,7 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Vax_18_49) })
             )
             .style("pointer-events", "none");
@@ -233,7 +229,7 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Vax_50_79) })
             )
             .style("pointer-events", "none");
@@ -247,7 +243,7 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x(d.Week1) })
+                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
                 .y(function(d) { return vis.y(d.Vax_80) })
             )
             .style("pointer-events", "none");
@@ -370,7 +366,7 @@ class LineChart {
             })
             .on("mousemove", mousemove);
 
-        let bisectDate = d3.bisector(d=>d.date).left;
+        let bisectDate = d3.bisector(d=>d.Max_Week_Date).left;
         const yearFormat = d3.timeFormat("%Y");
 
         function mousemove(event) {
@@ -380,8 +376,8 @@ class LineChart {
             let closest = vis.data[index];
 
             vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
-            vis.text.text("Week: " + (closest.Week1));
-            vis.text2.text("Year: " + yearFormat(closest.date));
+            vis.text.text("Week: " + (closest.Max_Week_Date1));
+            vis.text2.text("Year: " + yearFormat(closest.Max_Week_Date));
 
             vis.text3.text("Rate of Unvaccinated: ");
             vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
@@ -397,13 +393,22 @@ class LineChart {
 
     }
 
+
+
     initBrush() {
         let vis = this;
 
         const height = 20;
         const width = 180;
 
+
+        // let x = d3.scaleTime()
+        //     .domain(d3.extent(vis.data, d => d.Max_Week_Date))
+        //     .range([0, width])
+        //  //   .padding([1.5]);
+
         const groups2 = vis.data.map(d => (d.Week1));
+
 
         let x = d3.scaleBand()
             .domain(groups2)
@@ -413,8 +418,8 @@ class LineChart {
         let xAxis = d3.axisBottom()
             .scale(x)
             .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
-            .ticks(5)
-            .tickSize([10]);
+           //  .ticks(5)
+           //  .tickSize([10]);
 
         let xTime = d3.scaleTime()
             .domain(d3.extent(vis.data, d => d.Max_Week_Date))
