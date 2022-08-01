@@ -67,7 +67,7 @@ class LineChart {
             .attr("y", vis.height+70)
             .attr("font-size", "16")
             .attr("font-family", "Segoe UI")
-            .text("Week");
+            .text("week number");
 
         //unvaccinated legend
         var legend = vis.svg.selectAll(".legend")
@@ -143,12 +143,13 @@ class LineChart {
 
         vis.svg.selectAll(".x-axis2")
             .transition()
-            .call(d3.axisBottom(vis.x_time).tickSize(10));
+            .call(d3.axisBottom(vis.x_time)
+                .tickSize(12));
+
 
         //
         // var axisElements = svg.append("g").call(axis);
         // axisElements.selectAll("text").remove();
-
 
 
         vis.svg.selectAll(".y-axis").transition().call(d3.axisLeft(vis.y));
@@ -428,6 +429,7 @@ class LineChart {
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
+            // .on("brush", brushended)
             .on("brush end", function(e) {
                 let startDate = xTime.invert(e.selection[0]);
                 let endDate = xTime.invert(e.selection[1]);
@@ -458,6 +460,22 @@ class LineChart {
             d3.selectAll("span")
                 .text(function(d, i) { return Math.round(range[i]); });
         }
+
+
+        // function brushended() {
+        //     if (!d3.event.sourceEvent) return; // only transition after input
+        //     var extent0 = brush.extent(),
+        //         extent1 = extent0.map(d3.time.year.round);
+        //     // if empty when rounded, use floor & ceil instead
+        //     if (extent1[0] >= extent1[1]) {
+        //         extent1[0] = d3.time.year.floor(extent0[0]);
+        //         extent1[1] = d3.time.year.ceil(extent0[1]);
+        //     }
+        //     d3.select(this).transition()
+        //         .call(brush.extent(extent1))
+        //         .call(brush.event);
+        // }
+
 
         // // v3:  brushed();
         brush.move(brushg, [20, 50].map(x));

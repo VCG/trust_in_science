@@ -1,0 +1,289 @@
+
+.axis text {
+    font-size: 11px;
+    font-family:Segoe UI;
+}
+
+/*.axis2 text {*/
+/*    font-size: 11px;*/
+/*    font-family:Segoe UI;*/
+/*    background-color: red;*/
+
+/*}*/
+
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+
+
+.container {
+    /*border: 1px solid red;*/
+    overflow: hidden;
+}
+
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+.legend-content {
+    width: 180px;
+    float: left;
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+.brush-label {
+    font-size: 13px;
+    padding-bottom: 4px;
+}
+
+.legend {
+    margin-top: 40px;
+}
+
+
+
+.legend-row {
+    overflow: hidden;
+}
+
+.legend-value {
+    display: inline;
+    /*padding: 0 10px 0 0;*/
+}
+
+.legend-row2 {
+    overflow: hidden;
+    margin-top: -15px;
+    margin-left: 140px;
+
+
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
+}
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.axis path,
+.axis line {
+
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+;
+}
+
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: #fff;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+
+.container {
+    /*border: 1px solid red;*/
+    overflow: hidden;
+}
+
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+
+
+.brush-label {
+    font-size: 13px;
+    padding-bottom: 4px;
+    font-family: Segoe UI;
+    margin-top: 70px;
+}
+
+.legend {
+    margin-top: 30px;
+}
+
+.legend-title {
+    margin-top: 50px;
+    font-size: 15px;
+    font-family: Segoe UI;
+}
+
+
+
+.legend-value {
+    display: inline;
+    padding: 0 10px 0 0;
+}
+
+
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
+    font-family: Segoe UI;
+}
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+    font-family: Segoe UI;
+}
+
+h3 {
+    font-size: 20px;
+    font-family: Segoe UI;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+    font-family: Segoe UI;
+}
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+;
+}
+
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: #fff;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.helper {
+    margin-left: 70px;
+    font-size: 13px;
+    font-style: italic;
+    font-family: Segoe UI;
+}
+
+.tool-rect-background {
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .3));
+}
+
+.axisTwo line{
+    stroke: transparent;
+}
+
+/*.axisRed path{*/
+/*    stroke: red;*/
+/*}*/
+
+/*.axisRed text{*/
+/*    fill: red;*/
+/*}*/
