@@ -148,17 +148,30 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
     }
 
 // add in the title for the nodes
+//     node.append("text")
+//         .attr("x", function(d) { return d.x0 - 6; })
+//         .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+//         .attr("dy", "0.35em")
+//         .attr("text-anchor", "end")
+//         .attr("font-weight",'bold')
+//         .text(function(d) { return d.name; })
+//         .filter(function(d) { return d.x0 < width / 2; })
+//         .attr("x", function(d) { return d.x1 + 6; })
+//         .attr("text-anchor", "start")
+//         .attr("font-weight",'bold');
+
+
+    // add in the title for the nodes
     node.append("text")
-        .attr("x", function(d) { return d.x0 - 6; })
+        //.attr("x", function(d) { return d.x0 + 35; })
+        .attr("x", function(d) { return d.x0 + 40;; })
         .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
         .attr("dy", "0.35em")
-        .attr("text-anchor", "end")
-        .attr("font-weight",'bold')
-        .text(function(d) { return d.name; })
-        .filter(function(d) { return d.x0 < width / 2; })
-        .attr("x", function(d) { return d.x1 + 6; })
         .attr("text-anchor", "start")
-        .attr("font-weight",'bold');
+        .text(function(d) { return d.name; })
+        .attr("font-weight",'bold')
+      //  .style("visibility", d => hiddenNodes.includes(d.index) ? "hidden" : "visible");
+
 
 
     // add in the title for the nodes - %
