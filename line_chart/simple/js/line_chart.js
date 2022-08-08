@@ -95,6 +95,58 @@ class LineChartSimple {
         xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);
 
 
+        var id = "md-shadow";
+        var deviation = 2;
+        var offset = 2;
+        var slope = 0.25;
+
+        // var svg = d3.select("#yoursvg");
+        // var defs = svg.select("defs");
+
+// create filter and assign provided id
+        var filter = vis.svg.append("filter")
+            .attr("height", "125%")    // adjust this if shadow is clipped
+            .attr("id", id);
+
+// ambient shadow into ambientBlur
+//   may be able to offset and reuse this for cast, unless modified
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", deviation)
+            .attr("result", "ambientBlur");
+
+// cast shadow into castBlur
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", deviation)
+            .attr("result", "castBlur");
+
+// offsetting cast shadow into offsetBlur
+        filter.append("feOffset")
+            .attr("in", "castBlur")
+            .attr("dx", offset - 1)
+            .attr("dy", offset)
+            .attr("result", "offsetBlur");
+
+// combining ambient and cast shadows
+        filter.append("feComposite")
+            .attr("in", "ambientBlur")
+            .attr("in2", "offsetBlur")
+            .attr("result", "compositeShadow");
+
+// applying alpha and transferring shadow
+        filter.append("feComponentTransfer")
+            .append("feFuncA")
+            .attr("type", "linear")
+            .attr("slope", slope);
+
+// merging and outputting results
+        var feMerge = filter.append("feMerge");
+        feMerge.append('feMergeNode')
+        feMerge.append("feMergeNode")
+            .attr("in", "SourceGraphic");
+
+
 
 
         vis.svg.append("g")
@@ -340,26 +392,13 @@ class LineChartSimple {
             .attr("class", "tooltip-group");
 
 
-        tooltip
-            .append("div")
-            .style("opacity", 0)
-            // .attr("class", "tooltip")
-            .style("background-color", "red")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            .style("position", "absolute")
-            .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px");
-
-
         tooltip.append("rect")
             .attr("width", 250)
             .attr("height", vis.height-350)
             .attr("x", 0)
             .attr("y", 50)
             .style("fill", "white")
+            .style("filter", "url(#md-shadow)")
             .attr("class","tool-rect-background")
 
 

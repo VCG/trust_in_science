@@ -77,6 +77,60 @@ class LineChartLarge {
 
 
 
+        var id = "md-shadow";
+        var deviation = 2;
+        var offset = 2;
+        var slope = 0.25;
+
+
+
+// create filter and assign provided id
+        var filter = svg.append("filter")
+            .attr("height", "125%")    // adjust this if shadow is clipped
+            .attr("id", id);
+
+// ambient shadow into ambientBlur
+//   may be able to offset and reuse this for cast, unless modified
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", deviation)
+            .attr("result", "ambientBlur");
+
+// cast shadow into castBlur
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", deviation)
+            .attr("result", "castBlur");
+
+// offsetting cast shadow into offsetBlur
+        filter.append("feOffset")
+            .attr("in", "castBlur")
+            .attr("dx", offset - 1)
+            .attr("dy", offset)
+            .attr("result", "offsetBlur");
+
+// combining ambient and cast shadows
+        filter.append("feComposite")
+            .attr("in", "ambientBlur")
+            .attr("in2", "offsetBlur")
+            .attr("result", "compositeShadow");
+
+// applying alpha and transferring shadow
+        filter.append("feComponentTransfer")
+            .append("feFuncA")
+            .attr("type", "linear")
+            .attr("slope", slope);
+
+// merging and outputting results
+        var feMerge = filter.append("feMerge");
+        feMerge.append('feMergeNode')
+        feMerge.append("feMergeNode")
+            .attr("in", "SourceGraphic");
+
+
+
+
+
 
         var keys = [" "]
 
@@ -131,13 +185,17 @@ class LineChartLarge {
             .attr("class", "tooltip-group");
 
 
+
         tooltip.append("rect")
             .attr("width", 140)
             .attr("height", height-230)
             .attr("x", 0)
             .attr("y", 30)
             .style("fill", "white")
+        //    .style("filter", "url(#md-shadow)")
             .attr("class","tool-rect-background")
+
+
 
 
         tooltip.append("line")
@@ -182,12 +240,16 @@ class LineChartLarge {
             .attr("height", height)
             .attr("x", 0)
             .attr("y", 0)
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px")
             .attr("fill", "transparent")
             .on("mouseover", function (event, d) {
                 tooltip.attr("display", "null");
             })
             .on("mouseout", function (event, d) {
-                tooltip.attr("display", "none");
+                tooltip.attr("display", "none")
+                    .style("opacity", 0)
             })
             .on("mousemove", mousemove);
 

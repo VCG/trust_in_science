@@ -445,6 +445,27 @@ class LineChart {
             .attr("height", height)
             .call(brush);
 
+
+        // svg.append("g")
+        //     .attr("class", "axis axis--grid")
+        //     .attr("transform", "translate(0," + height + ")")
+        //     .call(d3.axisBottom(x)
+        //         .ticks(d3.timeHour, 12)
+        //         .tickSize(-height)
+        //         .tickFormat(function() { return null; }))
+        //     .selectAll(".tick")
+        //     .classed("tick--minor", function(d) { return d.getHours(); });
+        //
+        // vis.svg.append("g")
+        //     .attr("class", "axis axis--x")
+        //     .attr("transform", "translate(0," + height + ")")
+        //     // .call(d3.axisBottom(x)
+        //     //     .ticks(d3.timeDay)
+        //     //     .tickPadding(0))
+        //     .attr("text-anchor", null)
+        //     .selectAll("text")
+        //     .attr("x", 6);
+
         svg.append('line')
             .attr('x1', 0)
             .attr('y1', 0)
@@ -462,10 +483,10 @@ class LineChart {
         // // v3:  brushed();
         brush.move(brushg, [20, 50].map(x));
 
-        // function resetBrush() {
-        //     brush
-        //         .clear()
-        //         .event(d3.select(".brush"));
-        // }
+        function resetBrush() {
+            brush
+                .clear()
+                .event(d3.select(".brush"));
+        }
     }
 }

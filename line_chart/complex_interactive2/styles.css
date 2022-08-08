@@ -244,6 +244,7 @@ h3 {
 .brush .extent {
     fill-opacity: .125;
     shape-rendering: crispEdges;
+    fill: #ddd;
 ;
 }
 
@@ -286,4 +287,18 @@ h3 {
 
 /*.axisRed text{*/
 /*    fill: red;*/
+/*}*/
+
+/*.axis grid .domain {*/
+/*    fill: #ddd;*/
+/*    stroke: none;*/
+/*}*/
+
+/*.axis--x .domain,*/
+/*.axis--grid .tick line {*/
+/*    stroke: #fff;*/
+/*}*/
+
+/*.axis--grid .tick--minor line {*/
+/*    stroke-opacity: .5;*/
 /*}*/
