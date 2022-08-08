@@ -265,6 +265,7 @@ class StackedBarChartComplex {
             .data(stackedData)
             .join("g")
             .attr("fill", d => color(d.key))
+            // .attr("stroke", "black")
             .selectAll("rect")
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
@@ -484,21 +485,26 @@ class StackedBarChartComplex {
             .attr("font-size", "16")
 
 
-        vis.svg.selectAll(".overlay").remove();
+        // vis.svg.selectAll(".overlay").remove();
 
         vis.svg.append("g")
             .selectAll(".overlay")
             .data(stackedData[5])
             .join("rect")
+            // .attr("stroke", "black")
             .attr("class", "overlay")
             .attr("x", d => x(d.data.Week))
-            .attr("y", d => y(d[1]))
-            .attr("height", d => y(0) - y(d[1]))
+            .attr("y", d => y(d[1]+y(35)))
+            .attr("height", d => y(0) - y(d[1])+15)
             .attr("width", x.bandwidth())
             .style("fill", "transparent")
             .on("mouseover", mouseover)
             .on("mouseleave", mouseleave)
+
+
+
     }
+
 
 
 

@@ -159,6 +159,9 @@
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
             .attr("width", vis.x_scale.bandwidth());
 
+
+
+
         //grey y gridlines
         const make_x_gridlines = function() {
             return d3.axisLeft(vis.y_scale).ticks(5);
@@ -182,7 +185,7 @@
             .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']);
 
         // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function(e, d) {
+        vis.mouseover = function(e, d) {
             const date = d.data.group;
             const year = yearFormat(d.data.Max_Week_Date);
             const week = d.data.Week;
@@ -232,7 +235,7 @@
             vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
         };
 
-        const mouseleave = function(event, d) {
+        vis.mouseleave = function(event, d) {
             vis.tooltip.style("opacity", 0)
                 .style("display", "none")
             vis.svg.selectAll(".main-rect").style("opacity", 1)
@@ -247,13 +250,14 @@
             .data(stackedData[5])
             .join("rect")
             .attr("class", "overlay")
+            // .attr("stroke", "black")
             .attr("x", d => vis.x_scale(d.data.Week))
-            .attr("y", d => vis.y_scale(d[1]))
-            .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1]))
+            .attr("y", d => vis.y_scale(d[1])-500)
+            .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1])+500)
             .attr("width", vis.x_scale.bandwidth())
-            .style("fill", "transparent")
-            .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave)
+           .style("fill", "transparent")
+            .on("mouseover", vis.mouseover)
+            .on("mouseleave", vis.mouseleave)
 
 
 
