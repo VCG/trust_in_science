@@ -249,18 +249,18 @@ class LineChartSimple {
 
 
         // // tooltip
-        const tooltip2 = vis.svg
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            .style("position", "absolute")
-            .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px");
+        // const tooltip2 = vis.svg
+        //     .append("div")
+        //     .style("opacity", 0)
+        //     .attr("class", "tooltip")
+        //     .style("background-color", "white")
+        //     .style("border-radius", "2px")
+        //     .style("padding", "12px")
+        //     .style("color", "#0c0c0c")
+        //     .style('font-size', '14px')
+        //     .style("position", "absolute")
+        //     .style("box-shadow", "2px 2px 4px lightgrey")
+        //     .style("padding", "10px");
 
 
 
@@ -455,13 +455,13 @@ class LineChartSimple {
             .attr("x", 0)
             .attr("y", 0)
             //.style("background-color", "white")
-            .style("border-radius", "2px")
-            .style("padding", "12px")
-            .style("color", "#0c0c0c")
-            .style('font-size', '14px')
-            .style("position", "absolute")
-            .style("box-shadow", "2px 2px 4px lightgrey")
-            .style("padding", "10px")
+            // .style("border-radius", "2px")
+            // .style("padding", "12px")
+            // .style("color", "#0c0c0c")
+            // .style('font-size', '14px')
+            // .style("position", "absolute")
+            // .style("box-shadow", "2px 2px 4px lightgrey")
+            // .style("padding", "10px")
             .attr("fill", "transparent")
             .on("mouseover", function (event, d) {
                 tooltip.attr("display", "null");
