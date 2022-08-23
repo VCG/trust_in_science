@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>US Covid Cases - Map</title>
+</head>
+
+<body>
+<div class="container">
+    <h6>New Covid-19 Cases across the US states, Jan 2020 - Apr 2022</h6>
+    <div class="helper">*Hover over the states to explore further</div>
+    <br>
+    <div class = "legend_title">Legend</div>
+
+    <div id="chart-overlay">
+        <div class="title"></div>
+        <button type="button" class="close" aria-label="Close" title="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="grid-map">
+        <div class="grid-row">
+            <div class = "legend_title">Legend</div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-ak"><div class="state-label">AK</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-me"><div class="state-label">ME</div></div>
+
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-wi"><div class="state-label">WI</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-vt"><div class="state-label">VT</div></div>
+            <div class="grid-cell state state-nh"><div class="state-label">NH</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-state"><div class="state-label">State</div></div>
+            <!--                <div class="legend_title_year3">New Case</div>-->
+
+            <!--    <div class ="legend_background">Colour indicates total volume of new cases</div>-->
+
+            <div class ="legend_background">Background color intensity scales according to the total volume of new cases</div>
+            <hr class="line_background">
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell state state-wa"><div class="state-label">WA</div></div>
+            <div class="grid-cell state state-id"><div class="state-label">ID</div></div>
+            <div class="grid-cell state state-mt"><div class="state-label">MT</div></div>
+            <div class="grid-cell state state-nd"><div class="state-label">ND</div></div>
+            <div class="grid-cell state state-mn"><div class="state-label">MN</div></div>
+            <div class="grid-cell state state-il"><div class="state-label">IL</div></div>
+            <div class="grid-cell state state-mi"><div class="state-label">MI</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-ny"><div class="state-label">NY</div></div>
+            <div class="grid-cell state state-ma"><div class="state-label">MA</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class ="legend_title_year1">2020</div>
+            <div class ="legend_title_year2">2022</div>
+            <br>
+
+
+            <!--                <div class="line"></div>-->
+            <div class="legend_title_year3">New Cases</div>
+            <hr class="line">
+            <br>
+            <!--                <br>-->
+            <!--            <div class="legend_title_year3">7-Day New Cases Average</div>-->
+            <!--            <hr class="line_avg">-->
+            <!--                <br>-->
+
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell state state-or"><div class="state-label">OR</div></div>
+            <div class="grid-cell state state-nv"><div class="state-label">NV</div></div>
+            <div class="grid-cell state state-wy"><div class="state-label">WY</div></div>
+            <div class="grid-cell state state-sd"><div class="state-label">SD</div></div>
+            <div class="grid-cell state state-ia"><div class="state-label">IA</div></div>
+            <div class="grid-cell state state-in"><div class="state-label">IN</div></div>
+            <div class="grid-cell state state-oh"><div class="state-label">OH</div></div>
+            <div class="grid-cell state state-pa"><div class="state-label">PA</div></div>
+            <div class="grid-cell state state-nj"><div class="state-label">NJ</div></div>
+            <div class="grid-cell state state-ct"><div class="state-label">CT</div></div>
+            <div class="grid-cell state state-ri"><div class="state-label">RI</div></div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell state state-ca"><div class="state-label">CA</div></div>
+            <div class="grid-cell state state-ut"><div class="state-label">UT</div></div>
+            <div class="grid-cell state state-co"><div class="state-label">CO</div></div>
+            <div class="grid-cell state state-ne"><div class="state-label">NE</div></div>
+            <div class="grid-cell state state-mo"><div class="state-label">MO</div></div>
+            <div class="grid-cell state state-ky"><div class="state-label">KY</div></div>
+            <div class="grid-cell state state-wv"><div class="state-label">WV</div></div>
+            <div class="grid-cell state state-va"><div class="state-label">VA</div></div>
+            <div class="grid-cell state state-md"><div class="state-label">MD</div></div>
+            <div class="grid-cell state state-de"><div class="state-label">DE</div></div>
+            <div class="grid-cell empty"></div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-az"><div class="state-label">AZ</div></div>
+            <div class="grid-cell state state-nm"><div class="state-label">NM</div></div>
+            <div class="grid-cell state state-ks"><div class="state-label">KS</div></div>
+            <div class="grid-cell state state-ar"><div class="state-label">AR</div></div>
+            <div class="grid-cell state state-tn"><div class="state-label">TN</div></div>
+            <div class="grid-cell state state-nc"><div class="state-label">NC</div></div>
+            <div class="grid-cell state state-sc"><div class="state-label">SC</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-ok"><div class="state-label">OK</div></div>
+            <div class="grid-cell state state-la"><div class="state-label">LA</div></div>
+            <div class="grid-cell state state-ms"><div class="state-label">MS</div></div>
+            <div class="grid-cell state state-al"><div class="state-label">AL</div></div>
+            <div class="grid-cell state state-ga"><div class="state-label">GA</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+        </div>
+        <div class="grid-row">
+            <div class="grid-cell state state-hi"><div class="state-label">HI</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-tx"><div class="state-label">TX</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell state state-fl"><div class="state-label">FL</div></div>
+            <div class="grid-cell empty"></div>
+            <div class="grid-cell empty"></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="source">Source: Centers for Disease Control and Prevention <a href="https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36" target="_blank">Here</a></div>
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="js/d3-tip.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<script src="js/line-chart-small.js"></script>
+<!--<script src="js/line-chart-large.js"></script>-->
+<script src="js/main.js"></script>
+</body>
+
+</html>
