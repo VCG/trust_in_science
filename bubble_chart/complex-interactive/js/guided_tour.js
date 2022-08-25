@@ -15,12 +15,12 @@ const tour = new Shepherd.Tour({
 
 
 var steps =[];
-steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
-steps.push(['#chart', '','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
-steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
-    <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
-steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
-    <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
+
+steps.push(['', '','Bubble Chart Tour','Before we show you the interactive bubble chart, we will first guide you through the main components of the visualization.']);
+steps.push(['#Bubble_Chart_Div', '','Bubble Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here. <br> <b>Your turn:</b> Hover over a bubble to see details about that data point. Then, use the scroll wheel on the background of the visualization to zoom in on the data.']);
+steps.push(['#filter-bar', 'bottom','This is a time filter!','You can use this filter to select a specific week. Only the data of the selected week will be shown in the visualization.\
+    <br> <b>Your turn:</b> Try creating a filter by clicking on a week.']);
+steps.push(['#button_zoom_reset', 'right', 'Zoom reset.', 'You can reset the zoom of the visualization here.<br><br> That\'s it, have fun exploring the data!']);
 
 
 

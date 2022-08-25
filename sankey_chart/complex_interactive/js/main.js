@@ -400,7 +400,11 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
         .attr("font-weight",'bold')
 
 
-    svg
+    var g_legend = svg.append("g")
+        .attr("id", "sankey_legend");
+
+
+    g_legend
         .append("text")
         .attr("x", width+60)
         .attr("y", -7)
@@ -425,20 +429,22 @@ d3.json("https://raw.githubusercontent.com/VCG/trust_in_science/main/sankey_char
     // Add one dot in the legend for each name.
     var size = 10
 
-    svg.selectAll("mydots")
+    g_legend.selectAll("mydots")
         .data(keys)
         .enter()
         .append("rect")
+        .attr("class", "mydots")
         .attr("x", width+60)
         .attr("y", function(d,i){ return 10 + i*(size+8)})
         .attr("width", size)
         .attr("height", size)
         .style("fill", function(d){ return color_legend(d)})
 
-    svg.selectAll("mylabels")
+    g_legend.selectAll("mylabels")
         .data(keys)
         .enter()
         .append("text")
+        .attr("class", "mylabels")
         .attr("x", width+70 + size*1.2)
         .attr("y", function(d,i){ return 10 + i*(size+8) + (size/2)})
         .style("fill", "black")

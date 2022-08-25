@@ -15,11 +15,12 @@ const tour = new Shepherd.Tour({
 
 
 var steps =[];
-steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
-steps.push(['#chart', '','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
+
+steps.push(['', '','Line Chart Tour','Before we show you the interactive line chart, we will first guide you through the main components of the visualization.']);
+steps.push(['#chart', '','Line Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here. <br> <b>Your turn:</b> Hover over the visualization to see details about a certain date.']);
 steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
     <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
-steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
+steps.push(['#legend_age', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
     <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
 
 

@@ -15,12 +15,13 @@ const tour = new Shepherd.Tour({
 
 
 var steps =[];
-steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
-steps.push(['#chart', '','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
-steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
-    <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
-steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
-    <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
+
+steps.push(['', '','Sankey Chart Tour','Before we show you the interactive Sankey chart, we will first guide you through the main components of the visualization.']);
+steps.push(['#chart', '','Sankey Chart Visualization','This is the main visualization. You can see how vaccine hesitancy changed over time. Once you filter the data, all changes will directly show up here. <br> <b>Your turn:</b> Hover over the visualization to see details about a certain categories.']);
+steps.push(['#chart', '','Sankey Chart Visualization!','If you click on a bar, you can see how this group split up in the next time step.\
+   <br> <b>Your turn:</b> Try clicking on a bar to see details. Once you are done, click the bar again to reset the visualization.']);
+steps.push(['#sankey_legend', 'left', 'This is the legend.', 'You can use this legend to highlight different vaccine hesitance groups!\
+    <br> <b>Your turn:</b> Try hovering over a group to highlight that group in the visualization.<br><br> That\'s it, have fun exploring the data!']);
 
 
 

@@ -8,6 +8,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/8.0.0/css/shepherd.min.css" integrity="sha512-zNOBFuXnJUnyPDwC1sN92qTVoFhONNoanpfr1tY8o5akFsqocpPSnxem7yPEqQ4NNkYpgtLomg3rqyuK8XCzKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/8.0.0/js/shepherd.min.js" integrity="sha512-g6UoKc+cPrVq13/iMhDdv+shNha5ZZ9HeEc+qPK7zFulktsi82ajrlXt14o6qFGG504f5U3+B16JtwGIAUAgfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <link rel="stylesheet" href="styles.css" />
 
     <title>US Covid Cases - Map</title>
@@ -27,7 +31,7 @@
         </button>
     </div>
 
-    <div class="grid-map">
+    <div id="map_vis" class="grid-map">
         <div class="grid-row">
             <div class = "legend_title">Legend</div>
             <div class="grid-cell empty"></div>
@@ -184,6 +188,7 @@
 <script src="js/line-chart-small.js"></script>
 <script src="js/line-chart-large.js"></script>
 <script src="js/main.js"></script>
+<script src="js/guided_tour.js"></script>
 </body>
 
 </html>
