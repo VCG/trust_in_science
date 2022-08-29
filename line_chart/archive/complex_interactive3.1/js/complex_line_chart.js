@@ -98,8 +98,6 @@ class LineChart {
         vis.initBrush();
 
         vis.wrangleData();
-
-        vis.initTooltip();
     }
 
     wrangleData(startDate, endDate) {
@@ -251,6 +249,146 @@ class LineChart {
             .style("pointer-events", "none");
 
 
+
+        vis.tooltip = vis.svg.append("g")
+            .attr("display", "none")
+            .attr("class", "tooltip-group");
+
+        // vis.tooltip.append("rect")
+        //     .attr("width", 180)
+        //     .attr("height", vis.height-170)
+        //     .attr("x", 0)
+        //     .attr("y", -5)
+        //     .style("fill", "white")
+        //     .attr("class","tool-rect-background")
+
+
+
+
+        vis.tooltip.append("rect")
+            .attr("width", 200)
+            .attr("height", vis.height-180)
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("fill", "white")
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-r")
+
+        vis.tooltip.append("rect")
+            .attr("width", 200)
+            .attr("height", vis.height-180)
+            .attr("x", -200)
+            .attr("y", 0)
+            .style("fill", "white")
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-l")
+
+
+        vis.tooltip.append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", 0)
+            .attr("y1", vis.height)
+            .attr("x2", 0)
+            .attr("y2", 0);
+
+        vis.text = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 10)
+            .attr("font-family", "Segoe UI")
+            .attr('font-weight','bold')
+            .style("fill", "black");
+
+        vis.text2 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 30)
+            .attr("font-family", "Segoe UI")
+            .attr('font-weight','bold')
+            .style("fill", "black");
+
+        vis.text3 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 60)
+            .attr("font-family", "Segoe UI")
+            .style("fill", "black")
+            .attr('font-weight','bold')
+            .style("font-size", '14');
+
+        vis.text4 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 80)
+            .style("fill", "#9e3a26")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text5 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 100)
+            .style("fill", "#ef701b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text6 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 120)
+            .style("fill", "#f4d166")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text7 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 160)
+            .style("fill", "black")
+            .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        vis.text8 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 180)
+            .style("fill", "#04386b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text9 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 200)
+            .style("fill", "#0984ea")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text10 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 220)
+            .style("fill", "#7dc9f5")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        // vis.overlay = vis.svg.append("rect")
+        //     .attr("width", vis.width)
+        //     .attr("height", vis.height)
+        //     .attr("x", 0)
+        //     .attr("y", 0)
+        //     .attr("fill", "transparent")
+        //     .on("mouseover", function (event, d) {
+        //         vis.tooltip.attr("display", "null");
+        //     })
+        //     .on("mouseout", function (event, d) {
+        //         vis.tooltip.attr("display", "none");
+        //     })
+        //     .on("mousemove", mousemove);
+
+
         vis.overlay = vis.svg.append("rect")
             .attr("width", vis.width)
             .attr("height", vis.height)
@@ -326,17 +464,26 @@ class LineChart {
                 }
             }
 
+            console.log(hang_right)
+
             if (x_coordinate > (vis.width / 2)) {
+                // $("#tool-rect-background-2")
                 vis.svg.select(".tool-rect-background-r")
-                    .attr("visibility", "hidden");
+                    .attr("visibility", "hidden")
                 vis.svg.select(".tool-rect-background-l")
-                    .attr("visibility", "visible");
+                    .attr("visibility", "visible")
+
+
             }
+
             else {
+
                 vis.svg.select(".tool-rect-background-r")
-                    .attr("visibility", "visible");
+                    .attr("visibility", "visible")
                 vis.svg.select(".tool-rect-background-l")
-                    .attr("visibility", "hidden");
+                    .attr("visibility", "hidden")
+
+
             }
 
 
@@ -405,6 +552,8 @@ class LineChart {
         }
 
     }
+
+
 
     initBrush() {
         let vis = this;
@@ -499,121 +648,5 @@ class LineChart {
                 .clear()
                 .event(d3.select(".brush"));
         }
-    }
-
-    initTooltip() {
-        let vis = this;
-
-        vis.tooltip = vis.svg.append("g")
-            .attr("display", "none")
-            .attr("class", "tooltip-group");
-
-        vis.tooltip.append("rect")
-            .attr("width", 200)
-            .attr("height", vis.height-180)
-            .attr("x", 0)
-            .attr("y", 0)
-            .style("fill", "white")
-            // .style("filter", "url(#md-shadow)")
-            .attr("class","tool-rect-background-r");
-
-        vis.tooltip.append("rect")
-            .attr("width", 200)
-            .attr("height", vis.height-180)
-            .attr("x", -200)
-            .attr("y", 0)
-            .style("fill", "white")
-            // .style("filter", "url(#md-shadow)")
-            .attr("class","tool-rect-background-l");
-
-        vis.tooltip.append("line")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("x1", 0)
-            .attr("y1", vis.height)
-            .attr("x2", 0)
-            .attr("y2", 0);
-
-        vis.text = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 10)
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
-            .style("fill", "black");
-
-        vis.text2 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 30)
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
-            .style("fill", "black");
-
-        vis.text3 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 60)
-            .attr("font-family", "Segoe UI")
-            .style("fill", "black")
-            .attr('font-weight','bold')
-            .style("font-size", '14');
-
-        vis.text4 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 80)
-            .style("fill", "#9e3a26")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text5 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 100)
-            .style("fill", "#ef701b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text6 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 120)
-            .style("fill", "#f4d166")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text7 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 160)
-            .style("fill", "black")
-            .attr('font-weight','bold')
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        vis.text8 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 180)
-            .style("fill", "#04386b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text9 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 200)
-            .style("fill", "#0984ea")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text10 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 220)
-            .style("fill", "#7dc9f5")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
     }
 }
