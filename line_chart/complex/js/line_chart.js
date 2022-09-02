@@ -27,58 +27,6 @@ class LineChartComplex {
 
 
 
-        let overlay = vis.svg.append("rect")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("fill", "transparent")
-            .on("mouseover", function (event, d) {
-                tooltip.attr("display", "null");
-
-            })
-            .on("mouseout", function (event, d) {
-                tooltip.attr("display", "none");
-            })
-            .on("mousemove", mousemove);
-
-        let bisectDate = d3.bisector(d=>d.date).left;
-        let formatTime = d3.timeFormat("%Y-%m-%d");
-
-        const yearFormat = d3.timeFormat("%Y");
-        // const year = yearFormat(d.data.Max_Week_Date);
-
-        function mousemove(event) {
-
-
-
-            let x_coordinate = d3.pointer(event)[0];
-            let x_date = x_time.invert(x_coordinate);
-            let index = bisectDate(vis.data, x_date);
-            let closest = vis.data[index];
-
-
-
-            tooltip.attr("transform", "translate(" + x_coordinate + ")")
-            text.text("Week: " + (closest.Max_Week_Date1));
-            // text2.text("Year: " + yearFormat(closest.date));
-
-            text3.text("Rate of Unvaccinated: ");
-            text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
-            text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
-            text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
-
-            text7.text("Rate of Vaccinated: ");
-
-            text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
-            text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
-            text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
-
-
-
-        }
-
-
 
 
         const groups = vis.data.map(d => (d.Week1))
@@ -484,15 +432,23 @@ class LineChartComplex {
             .attr("class", "tooltip-group")
 
 
+        tooltip.append("rect")
+            .attr("width", 200)
+            .attr("height", vis.height-190)
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("fill", "white")
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-r")
 
         tooltip.append("rect")
-            .attr("width", 180)
-            .attr("height", vis.height-200)
-            .attr("x", 0)
-            .attr("y", -5)
+            .attr("width", 200)
+            .attr("height", vis.height-190)
+            .attr("x", -200)
+            .attr("y", 0)
             .style("fill", "white")
-            .attr("class","tool-rect-background")
-
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-l")
 
 
         tooltip.append("line")
@@ -586,6 +542,213 @@ class LineChartComplex {
             .style("fill", "#7dc9f5")
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
+
+
+        let overlay = vis.svg.append("rect")
+            .attr("width", vis.width)
+            .attr("height", vis.height)
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px")
+            .attr("fill", "transparent")
+            //  .attr("fill", "white")
+            .on("mouseover", function (event, d) {
+                tooltip.attr("display", "null");
+
+            })
+            .on("mouseout", function (event, d) {
+                tooltip.attr("display", "none");
+            })
+            .on("mousemove", mousemove);
+
+
+
+        // let overlay = vis.svg.append("rect")
+        //     .attr("width", vis.width)
+        //     .attr("height", vis.height)
+        //     .attr("x", 0)
+        //     .attr("y", 0)
+        //     //.style("background-color", "white")
+        //     .style("border-radius", "2px")
+        //     .style("padding", "12px")
+        //     .style("color", "#0c0c0c")
+        //     .style('font-size', '14px')
+        //     .style("position", "absolute")
+        //     .style("box-shadow", "2px 2px 4px lightgrey")
+        //     .style("padding", "10px")
+        //     .attr("fill", "transparent")
+        //     .on("mouseover", function (event, d) {
+        //         tooltip.attr("display", "null");
+        //     })
+        //     .on("mouseout", function (event, d) {
+        //         tooltip.attr("display", "none");
+        //     })
+        //     .on("mousemove", mousemove);
+
+
+
+
+
+        let bisectDate = d3.bisector(d=>d.date).left;
+        let formatTime = d3.timeFormat("%Y-%m-%d");
+
+        const yearFormat = d3.timeFormat("%Y");
+        // const year = yearFormat(d.data.Max_Week_Date);
+
+
+
+
+        function mousemove(event) {
+
+
+            let x_coordinate = d3.pointer(event)[0];
+            let x_date = x_time.invert(x_coordinate);
+            let index = bisectDate(vis.data, x_date);
+            // let closest = vis.data[index];
+
+            let hang_right = false
+
+            let closest = null;
+            let right = vis.data[index];
+            let x_right = x_time(right.date);
+            if (Math.abs(x_right - x_coordinate) < 10) {
+                closest = right;
+                hang_right = true
+
+            } else if (index) {
+                let left = vis.data[index-1];
+                let x_left = x_time(left.date);
+                if (Math.abs(x_left - x_coordinate) < 10) {
+                    closest = left;
+
+                }
+            }
+
+            console.log(hang_right)
+
+            if (x_coordinate > (vis.width / 2)) {
+                // $("#tool-rect-background-2")
+                vis.svg.select(".tool-rect-background-r")
+                    .attr("visibility", "hidden")
+                vis.svg.select(".tool-rect-background-l")
+                    .attr("visibility", "visible")
+
+
+            }
+
+            else {
+
+                vis.svg.select(".tool-rect-background-r")
+                    .attr("visibility", "visible")
+                vis.svg.select(".tool-rect-background-l")
+                    .attr("visibility", "hidden")
+
+
+            }
+
+
+            let anchor = (x_coordinate > (vis.width / 2)) ? "end" : "start";
+            let x_text = (x_coordinate > (vis.width / 2)) ? -20 : 20;
+
+            text.attr("text-anchor", anchor).attr("x", x_text);
+            // text1.attr("text-anchor", anchor).attr("x", x_text);
+            // text2.attr("text-anchor", anchor).attr("x", x_text);
+            text3.attr("text-anchor", anchor).attr("x", x_text);
+            text4.attr("text-anchor", anchor).attr("x", x_text);
+            text5.attr("text-anchor", anchor).attr("x", x_text);
+            text6.attr("text-anchor", anchor).attr("x", x_text);
+            text7.attr("text-anchor", anchor).attr("x", x_text);
+            text8.attr("text-anchor", anchor).attr("x", x_text);
+            text9.attr("text-anchor", anchor).attr("x", x_text);
+            text10.attr("text-anchor", anchor).attr("x", x_text);
+
+
+
+
+            tooltip.attr("transform", "translate(" + x_coordinate + ")")
+            text.text("Week: " + (closest.Max_Week_Date1));
+            // text2.text("Year: " + yearFormat(closest.date));
+
+            text3.text("Rate of Unvaccinated: ");
+            text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
+            text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
+            text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
+
+            text7.text("Rate of Vaccinated: ");
+
+            text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
+            text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
+            text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+
+
+            //
+
+            // function mousemove(event) {
+            //     let x_coordinate = d3.pointer(event)[0];
+            //     let x_date = x_time.invert(x_coordinate);
+            //     let index = bisectDate(vis.data, x_date);
+
+            // tooltip.attr("transform", "translate(" + x_coordinate + ")");
+
+
+
+
+
+
+
+
+            // text.text("Week: " + (closest.Max_Week_Date2));
+            // // text2.text("Year: " + yearFormat(closest.date));
+            // text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
+            // text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
+
+
+            // }
+
+            //
+
+
+        }
+
+
+
+
+        // const tooltip = vis.svg
+        //     .append("div")
+        //     .style("opacity", 0)
+        //     .attr("class", "tooltip")
+        //     .style("background-color", "white")
+        //     .style("border-radius", "2px")
+        //     .style("padding", "12px")
+        //     .style("color", "#0c0c0c")
+        //     .style('font-size', '14px')
+        //     .style("position", "absolute")
+        //     .style("box-shadow", "2px 2px 4px lightgrey")
+        //     .style("padding", "10px");
+
+
+
+
+
+
+
+
+
+
+        // tooltip.append("rect")
+        //     .attr("width", 180)
+        //     .attr("height", vis.height-200)
+        //     .attr("x", 0)
+        //     .attr("y", -5)
+        //     .style("fill", "white")
+        //     .attr("class","tool-rect-background")
+
 
 
 

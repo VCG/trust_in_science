@@ -7,8 +7,13 @@
   <component name="ChangeListManager">
     <list default="true" id="83ec4675-bc49-49f8-85c0-8cdf7885e3b7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/bar_chart/complex_interactive/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bar_chart/complex_interactive/js/guided_tour.js" beforeDir="false" afterPath="$PROJECT_DIR$/bar_chart/complex_interactive/js/guided_tour.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bubble_chart/complex-interactive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/bubble_chart/complex-interactive/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/line_chart/complex_interactive2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/line_chart/complex_interactive2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/complex_interactive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/map/complex_interactive/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/sankey_chart/complex_interactive/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,10 +32,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sankey_chart/complex_interactive/js" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sankey_chart/complex_interactive/js" />
+      <recent name="$PROJECT_DIR$/map/complex_interactive/js" />
+      <recent name="$PROJECT_DIR$/line_chart/complex_interactive2/js" />
+      <recent name="$PROJECT_DIR$/bubble_chart/complex-interactive/js" />
+      <recent name="C:\src\trust_in_science\bar_chart" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\src\trust_in_science\bar_chart\archive" />
       <recent name="C:\src\trust_in_science\map\archive" />
@@ -38,13 +50,32 @@
       <recent name="C:\src\trust_in_science\line_chart\archive" />
       <recent name="C:\Users\61484\WebstormProjects\trust_in_science\bubble_chart\complex-interactive3\data" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\src\trust_in_science\bar_chart" />
-      <recent name="C:\src\trust_in_science\bubble_chart" />
-      <recent name="C:\src\trust_in_science\bubble_chart\complex-interactive" />
-      <recent name="C:\src\trust_in_science\line_chart\complex_interactive" />
-      <recent name="C:\Users\61484\WebstormProjects\trust_in_science\sankey_chart" />
-    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/trust_in_vis/line_chart/complex_interactive2/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html (3)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/trust_in_vis/line_chart/complex_interactive/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html (4)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/trust_in_vis/map/complex_7day_avg/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html (5)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/trust_in_vis/map/complex_interactive/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/trust_in_vis/sankey_chart/complex_interactive/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.index.html (5)" />
+        <item itemvalue="JavaScript Debug.index.html (4)" />
+        <item itemvalue="JavaScript Debug.index.html (2)" />
+        <item itemvalue="JavaScript Debug.index.html (3)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -62,6 +93,7 @@
       <workItem from="1658560774672" duration="74721000" />
       <workItem from="1658755891646" duration="63000" />
       <workItem from="1658755984688" duration="27000" />
+      <workItem from="1661440570369" duration="12370000" />
     </task>
     <servers />
   </component>
@@ -79,15 +111,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1658639609122">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1658639609122" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1656422690724">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1656422690724" />
   </component>
 </project>

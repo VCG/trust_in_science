@@ -98,6 +98,8 @@ class LineChart {
         vis.initBrush();
 
         vis.wrangleData();
+
+        vis.initTooltip();
     }
 
     wrangleData(startDate, endDate) {
@@ -249,117 +251,23 @@ class LineChart {
             .style("pointer-events", "none");
 
 
-
-        vis.tooltip = vis.svg.append("g")
-            .attr("display", "none")
-            .attr("class", "tooltip-group");
-
-        vis.tooltip.append("rect")
-            .attr("width", 180)
-            .attr("height", vis.height-170)
-            .attr("x", 0)
-            .attr("y", -5)
-            .style("fill", "white")
-            .attr("class","tool-rect-background")
-
-        vis.tooltip.append("line")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("x1", 0)
-            .attr("y1", vis.height)
-            .attr("x2", 0)
-            .attr("y2", 0);
-
-        vis.text = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 10)
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
-            .style("fill", "black");
-
-        vis.text2 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 30)
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
-            .style("fill", "black");
-
-        vis.text3 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 60)
-            .attr("font-family", "Segoe UI")
-            .style("fill", "black")
-            .attr('font-weight','bold')
-            .style("font-size", '14');
-
-        vis.text4 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 80)
-            .style("fill", "#9e3a26")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text5 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 100)
-            .style("fill", "#ef701b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text6 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 120)
-            .style("fill", "#f4d166")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text7 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 160)
-            .style("fill", "black")
-            .attr('font-weight','bold')
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '14');
-
-        vis.text8 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 180)
-            .style("fill", "#04386b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text9 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 200)
-            .style("fill", "#0984ea")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
-        vis.text10 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 220)
-            .style("fill", "#7dc9f5")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
         vis.overlay = vis.svg.append("rect")
             .attr("width", vis.width)
             .attr("height", vis.height)
             .attr("x", 0)
             .attr("y", 0)
+            .style("border-radius", "2px")
+            .style("padding", "12px")
+            .style("color", "#0c0c0c")
+            .style('font-size', '14px')
+            .style("position", "absolute")
+            .style("box-shadow", "2px 2px 4px lightgrey")
+            .style("padding", "10px")
             .attr("fill", "transparent")
+            //  .attr("fill", "white")
             .on("mouseover", function (event, d) {
                 vis.tooltip.attr("display", "null");
+
             })
             .on("mouseout", function (event, d) {
                 vis.tooltip.attr("display", "none");
@@ -368,16 +276,92 @@ class LineChart {
 
         let bisectDate = d3.bisector(d=>d.Max_Week_Date).left;
         const yearFormat = d3.timeFormat("%Y");
+        //
+        // function mousemove(event) {
+        //     let x_coordinate = d3.pointer(event)[0];
+        //     let x_date = vis.x_time.invert(x_coordinate);
+        //     let index = bisectDate(vis.data, x_date);
+        //     let closest = vis.data[index];
+        //
+        //     vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
+        //     vis.text.text("Week: " + (closest.Max_Week_Date1));
+        //     vis.text2.text("Year: " + yearFormat(closest.Max_Week_Date));
+        //
+        //     vis.text3.text("Rate of Unvaccinated: ");
+        //     vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
+        //     vis.text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
+        //     vis.text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
+        //
+        //     vis.text7.text("Rate of Vaccinated: ");
+        //
+        //     vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
+        //     vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
+        //     vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+        // }
 
         function mousemove(event) {
+
+
             let x_coordinate = d3.pointer(event)[0];
             let x_date = vis.x_time.invert(x_coordinate);
             let index = bisectDate(vis.data, x_date);
-            let closest = vis.data[index];
+            // let closest = vis.data[index];
+
+
+            let hang_right = false
+
+            let closest = null;
+            let right = vis.data[index];
+            let x_right = vis.x_time(right.date);
+            if (Math.abs(x_right - x_coordinate) < 10) {
+                closest = right;
+                hang_right = true
+
+            } else if (index) {
+                let left = vis.data[index-1];
+                let x_left = vis.x_time(left.date);
+                if (Math.abs(x_left - x_coordinate) < 10) {
+                    closest = left;
+
+                }
+            }
+
+            if (x_coordinate > (vis.width / 2)) {
+                vis.svg.select(".tool-rect-background-r")
+                    .attr("visibility", "hidden");
+                vis.svg.select(".tool-rect-background-l")
+                    .attr("visibility", "visible");
+            }
+            else {
+                vis.svg.select(".tool-rect-background-r")
+                    .attr("visibility", "visible");
+                vis.svg.select(".tool-rect-background-l")
+                    .attr("visibility", "hidden");
+            }
+
+
+            let anchor = (x_coordinate > (vis.width / 2)) ? "end" : "start";
+            let x_text = (x_coordinate > (vis.width / 2)) ? -20 : 20;
+
+            vis.text.attr("text-anchor", anchor).attr("x", x_text);
+            // text1.attr("text-anchor", anchor).attr("x", x_text);
+            //vis.text2.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text3.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text4.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text5.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text6.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text7.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text8.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text9.attr("text-anchor", anchor).attr("x", x_text);
+            vis.text10.attr("text-anchor", anchor).attr("x", x_text);
+
+
+
 
             vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
             vis.text.text("Week: " + (closest.Max_Week_Date1));
-            vis.text2.text("Year: " + yearFormat(closest.Max_Week_Date));
+            //vis.text.text("Week: " );
+            //vis.text2.text("Year: " + yearFormat(closest.date));
 
             vis.text3.text("Rate of Unvaccinated: ");
             vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
@@ -389,11 +373,38 @@ class LineChart {
             vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
             vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
             vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+
+
+            //
+
+            // function mousemove(event) {
+            //     let x_coordinate = d3.pointer(event)[0];
+            //     let x_date = x_time.invert(x_coordinate);
+            //     let index = bisectDate(vis.data, x_date);
+
+            // tooltip.attr("transform", "translate(" + x_coordinate + ")");
+
+
+
+
+
+
+
+
+            // text.text("Week: " + (closest.Max_Week_Date2));
+            // // text2.text("Year: " + yearFormat(closest.date));
+            // text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
+            // text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
+
+
+            // }
+
+            //
+
+
         }
 
     }
-
-
 
     initBrush() {
         let vis = this;
@@ -488,5 +499,121 @@ class LineChart {
                 .clear()
                 .event(d3.select(".brush"));
         }
+    }
+
+    initTooltip() {
+        let vis = this;
+
+        vis.tooltip = vis.svg.append("g")
+            .attr("display", "none")
+            .attr("class", "tooltip-group");
+
+        vis.tooltip.append("rect")
+            .attr("width", 200)
+            .attr("height", vis.height-180)
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("fill", "white")
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-r");
+
+        vis.tooltip.append("rect")
+            .attr("width", 200)
+            .attr("height", vis.height-180)
+            .attr("x", -200)
+            .attr("y", 0)
+            .style("fill", "white")
+            // .style("filter", "url(#md-shadow)")
+            .attr("class","tool-rect-background-l");
+
+        vis.tooltip.append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("x1", 0)
+            .attr("y1", vis.height)
+            .attr("x2", 0)
+            .attr("y2", 0);
+
+        vis.text = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 10)
+            .attr("font-family", "Segoe UI")
+            .attr('font-weight','bold')
+            .style("fill", "black");
+
+        vis.text2 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 30)
+            .attr("font-family", "Segoe UI")
+            .attr('font-weight','bold')
+            .style("fill", "black");
+
+        vis.text3 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 60)
+            .attr("font-family", "Segoe UI")
+            .style("fill", "black")
+            .attr('font-weight','bold')
+            .style("font-size", '14');
+
+        vis.text4 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 80)
+            .style("fill", "#9e3a26")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text5 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 100)
+            .style("fill", "#ef701b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text6 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 120)
+            .style("fill", "#f4d166")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text7 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 160)
+            .style("fill", "black")
+            .attr('font-weight','bold')
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '14');
+
+        vis.text8 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 180)
+            .style("fill", "#04386b")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text9 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 200)
+            .style("fill", "#0984ea")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
+
+        vis.text10 = vis.tooltip.append("text")
+            .attr("class", "tooltip-text")
+            .attr("x", 10)
+            .attr("y", 220)
+            .style("fill", "#7dc9f5")
+            .attr("font-family", "Segoe UI")
+            .style("font-size", '13');
     }
 }
