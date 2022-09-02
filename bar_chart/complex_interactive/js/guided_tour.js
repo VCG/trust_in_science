@@ -1,5 +1,5 @@
 const tour = new Shepherd.Tour({
-    useModalOverlay: false,
+    useModalOverlay: true,
     defaultStepOptions: {
       cancelIcon: {
         enabled: true

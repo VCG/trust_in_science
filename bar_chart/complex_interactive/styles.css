@@ -4,6 +4,13 @@
     overflow: hidden;
 }
 
+.shepherd-modal-overlay-container{
+    opacity:.2 !important
+}
+.shepherd-header{    
+    background:#cac4ee !important
+}
+
 .main-content {
     /*border: 1px solid black;*/
     float: left;
