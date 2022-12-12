@@ -1,13 +1,13 @@
 class BarChart {
-    constructor(data) {
+    constructor(data, selector) {
 
         this.data = data;
 
-        this.initVis();
+        this.initVis(selector);
     }
 
 
-    initVis() {
+    initVis(selector) {
         let vis = this;
 
 
@@ -16,8 +16,12 @@ class BarChart {
             vis.height = 330 - vis.margin.top - vis.margin.bottom;
 
 
+        let currQuestion = d3.select(`#${selector.questionId}`)
+                            .select('.QuestionBody')
+                            .insert('div',':first-child')
+                                
 
-        vis.svg = d3.select("#bar_chart")
+        vis.svg = currQuestion
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -94,7 +98,7 @@ class BarChart {
 
 
 
-
+        //Draw x axis
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .call(xAxisGenerator)
@@ -166,6 +170,7 @@ class BarChart {
             return d3.axisLeft(y)
                 .ticks(5)
         }
+        
         vis.svg.append("g")
             .attr("class", "grid")
             .attr("transform", "translate(" + 0 + ",0)")
