@@ -1,13 +1,13 @@
 class BarChart2 {
-    constructor(data) {
+    constructor(data,selector) {
 
         this.data = data;
 
-        this.initVis();
+        this.initVis(selector);
     }
 
 
-    initVis() {
+    initVis(selector) {
         let vis = this;
 
         vis.margin = {top: 10, right: 210, bottom: 100, left: 70},
