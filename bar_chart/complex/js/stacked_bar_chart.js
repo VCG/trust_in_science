@@ -1,15 +1,15 @@
 class StackedBarChartComplex {
-    constructor(data) {
+    constructor(data, selector) {
 
         this.data = data;
         this.displayData = [];
 
         console.log(this.data)
-        this.initVis();
+        this.initVis(selector);
     }
 
 
-    initVis() {
+    initVis(selector) {
         let vis = this;
 
 
@@ -18,9 +18,11 @@ class StackedBarChartComplex {
             vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
 
+        let currQuestion = d3.select(`#${selector.questionId}`)
+                            .select('.QuestionText')
+                            .insert('div', ':first-child')
 
-
-        vis.svg = d3.select("#chart")
+        vis.svg = currQuestion
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)

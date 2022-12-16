@@ -1,6 +1,6 @@
  class StackedBarChart {
 
-    constructor(data) {
+    constructor(data, selector) {
         this.data = data;
         this.displayData = [];
         // console.log(data);
@@ -14,12 +14,12 @@
             .domain(this.subgroups)
             .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
 
-        this.initVis();
+        this.initVis(selector);
 
         // this.initBrush()
     }
 
-    initVis() {
+    initVis(selector) {
         let vis = this;
 
 
@@ -32,8 +32,11 @@
         //     vis.width = 1200 - vis.margin.left - vis.margin.right,
         //     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
+        let currQuestion = d3.select(`#${selector.questionId}`)
+                            .select('.QuestionText')
+                            .insert('div',':first-child')
 
-        vis.svg = d3.select("#chart")
+        vis.svg = currQuestion
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
