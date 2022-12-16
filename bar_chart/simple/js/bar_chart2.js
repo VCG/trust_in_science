@@ -18,6 +18,7 @@ class BarChart2 {
                             .select('.QuestionBody')
                             .insert('div',':first-child')
 
+        console.log('bar chart 2')                    
         vis.svg = currQuestion
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
