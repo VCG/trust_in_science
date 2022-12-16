@@ -15,7 +15,7 @@ class BarChart2 {
             vis.height = 280 - vis.margin.top - vis.margin.bottom;
 
         let currQuestion = d3.select(`#${selector.questionId}`)
-                            .select('.QuestionBody')
+                            .select('.QuestionText')
                             .insert('div',':first-child')
 
         console.log('bar chart 2')                    

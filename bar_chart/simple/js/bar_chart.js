@@ -17,7 +17,7 @@ class BarChart {
 
 
         let currQuestion = d3.select(`#${selector.questionId}`)
-                            .select('.QuestionBody')
+                            .select('.QuestionText')
                             .insert('div',':first-child')
                                 
 
