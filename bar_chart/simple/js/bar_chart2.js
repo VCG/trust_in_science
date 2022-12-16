@@ -14,8 +14,11 @@ class BarChart2 {
             vis.width = 1050 - vis.margin.left - vis.margin.right,
             vis.height = 280 - vis.margin.top - vis.margin.bottom;
 
+        let currQuestion = d3.select(`#${selector.questionId}`)
+                            .select('.QuestionBody')
+                            .insert('div',':first-child')
 
-        vis.svg = d3.select("#bar_chart2")
+        vis.svg = currQuestion
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
