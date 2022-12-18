@@ -175,9 +175,10 @@ class StackedBarChartComplex {
 
 
         //stack the data? --> stack per subgroup
-        const stackedData = d3.stack()
+        const stackedDataPre = d3.stack()
             .keys(subgroups)
-            (vis.data)
+
+        const stackedData = stackedDataPre(vis.data)
 
 
         // tooltip
