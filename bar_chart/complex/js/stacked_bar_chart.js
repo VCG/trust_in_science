@@ -18,9 +18,9 @@ class StackedBarChartComplex {
             vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
 
-        let currQuestion = d3.select(`#${selector.questionId}`)
+        let currQuestion = selector ? d3.select(`#${selector.questionId}`)
                             .select('.QuestionText')
-                            .insert('div', ':first-child')
+                            .insert('div', ':first-child') : d3.select('#chart')
 
         vis.svg = currQuestion
             .append("svg")
