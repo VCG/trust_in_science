@@ -15,63 +15,13 @@
 </head>
 
 <body style="padding: 5vh">
-<div class="container">
-    <div class="main-content">
-        <div class="title">
-            <h3>Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age</h3>
-        </div>
-        <div class="subtitle">Apr 2021-Feb 2022</div>
-        <br>
-        <div class="helper">*Hover over the bars to explore further and brush the timeline on the right to filter the data</div>
-        <br>
-        <div id="chart"></div>
-        <div class="source">Source: Centers for Disease Control and Prevention <a href="https://data.cdc.gov/Public-Health-Surveillance/Rates-of-COVID-19-Cases-or-Deaths-by-Age-Group-and/3rge-nu2a/data" target="_blank">Here</a></div>
-
-    </div>
-    <div class="legend-content">
-        <div id="time_filter_div">
-            <div class="brush-label">Filter by a Week Range</div>
-            <div id="brush-chart"></div>
-            <div class="legend-row">2021</div>
-            <div class="legend-row2">2022</div>
-        </div>
-        <div class="legend">
-            <div class="legend-title">Rate of Vaccinated</div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#9e3a26"></rect></svg></div>
-                <div class="legend-label">Ages 80+</div>
-            </div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#ef701b"></rect></svg></div>
-                <div class="legend-label">Ages 50-79</div>
-            </div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#f4d166"></rect></svg></div>
-                <div class="legend-label">Ages 18-49</div>
-            </div>
-        </div>
-        <div class="legend">
-            <div class="legend-title">Rate of Unvaccinated</div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#04386b"></rect></svg></div>
-                <div class="legend-label">Ages 80+</div>
-            </div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#0984ea"></rect></svg></div>
-                <div class="legend-label">Ages 50-79</div>
-            </div>
-            <div class="legend-row">
-                <div class="legend-value"><svg><rect fill="#7dc9f5"></rect></svg></div>
-                <div class="legend-label">Ages 18-49</div>
-            </div>
-        </div>
-
-    </div>
+<div id="main-container" class="container">
+    
 
 </div>
 
 <!-- Load external JS files -->
-<script src="js/d3.v6.min.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="js/d3-tip.js"></script>
 <script src="js/main.js"></script>
 <script src="js/stacked_bar_chart.js"></script>

@@ -14,12 +14,101 @@
             .domain(this.subgroups)
             .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
 
-        this.initVis(selector);
+        this.buildHtml(selector);
+        this.initVis();
 
         // this.initBrush()
     }
 
-    initVis(selector) {
+    buildHtml(selector) {
+        console.log('building html')
+        let container = selector 
+                    ? $(`#${selector.questionId}`).find('.QuestionText')
+                    : $('#main-container')
+        
+        let mc = $('<div>', {class: 'main-content'}),
+            lc = $('<div>', {class: 'legend-content'})
+
+        mc.append($('<div>', {class: 'title'}).append($('<h3>', {html: 'Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age'})))
+          .append($('<div>', {class: 'subtitle', html: 'Apr 2021-Feb 2022'}))
+          .append($('<br>'))
+          .append($('<div>', {class: 'helper', html: '*Hover over the bars to explore further and brush the timeline on the right to filter the data'}))
+          .append($('<br>'))
+          .append($('<div>', {id: 'chart'}))
+          .append($('<div>', {class: 'source', html: 'Source: Centers for Disease Control and Prevention'}))
+            
+        let time = $('<div>', {id: 'time_filter_div'}), 
+            vac = $('<div>', {class: 'legend'}), 
+            unv = $('<div>', {class: 'legend'})
+        
+        time.append($('<div>', {class: 'brush-label', html: 'Filter by a Week Range'}))
+            .append($('<div>', {id: 'brush-chart'}))
+            .append($('<div>', {class: 'legend-row', html: '2021'}))
+            .append($('<div>', {class: 'legend-row2', html: '2022'}))
+        
+        let vac_row1 = $('<div>', {class: 'legend_row'}), 
+            vac_row2 = $('<div>', {class: 'legend_row'}), 
+            vac_row3 = $('<div>', {class: 'legend_row'})
+        
+        vac_row1.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#9e3a26'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
+        
+        vac_row2.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#ef701b'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
+
+        vac_row3.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#f4d166'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
+
+        vac.append($('<div>', {class: 'legend-title', html: 'Rate of Vaccinated'}))
+           .append(vac_row1).append(vac_row2).append(vac_row2)
+            
+        
+        let unv_row1 = $('<div>', {class: 'legend_row'}), 
+            unv_row2 = $('<div>', {class: 'legend_row'}), 
+            unv_row3 = $('<div>', {class: 'legend_row'})
+        
+        unv_row1.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#04386b'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
+        
+        unv_row2.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#0984ea'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
+
+        unv_row3.append(
+                    $('<div>', {class: 'legend-value'})
+                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                                .append('<rect>', {fill: '#7dc9f5'}))
+                )
+                .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
+
+        unv.append($('<div>', {class: 'legend-title', html: 'Rate of Unvaccinated'}))
+           .append(unv_row1).append(unv_row2).append(unv_row2)
+        
+        lc.append(time).append(vac).append(unv)
+    
+        container.append(mc).append(lc)
+    }
+
+    initVis() {
         let vis = this;
 
 
@@ -32,11 +121,7 @@
         //     vis.width = 1200 - vis.margin.left - vis.margin.right,
         //     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
-        let currQuestion = d3.select(`#${selector.questionId}`)
-                            .select('.QuestionText')
-                            .insert('div',':first-child')
-
-        vis.svg = currQuestion
+        vis.svg = d3.select('#chart')
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
