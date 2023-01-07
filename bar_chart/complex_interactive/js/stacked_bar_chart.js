@@ -24,7 +24,9 @@
         console.log('building html')
         let container = selector 
                     ? $(`#${selector.questionId}`).find('.QuestionText')
-                    : $('#main-container')
+                    : $('#main-container').find('.QuestionText')
+        
+        console.log(container)
         
         let mc = $('<div>', {class: 'main-content'}),
             lc = $('<div>', {class: 'legend-content'})
