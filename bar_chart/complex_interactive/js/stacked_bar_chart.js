@@ -106,8 +106,9 @@
            .append(unv_row1).append(unv_row2).append(unv_row2)
         
         lc.append(time).append(vac).append(unv)
-    
-        container.append(mc).append(lc)
+
+        if(selector) container.append($('<div>', {class: 'container'}).append(mc).append(lc))
+        else container.append(mc).append(lc)
     }
 
     initVis() {
