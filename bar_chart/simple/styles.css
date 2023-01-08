@@ -74,7 +74,47 @@ h3 {
     font-size: 17px;
 }
 
-.source {
+.helper {
     margin-left: 70px;
-    font-size: 12px;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.brush-label {
+    font-size: 13px;
+    padding-bottom: 4px;
+}
+
+.legend {
+    margin-top: 40px;
+}
+
+.legend-title {
+    font-size: 13px;
+}
+
+.legend-row {
+    overflow: hidden;
+}
+
+.legend-value {
+    display: inline;
+    padding: 0 10px 0 0;
+}
+
+.legend-row2 {
+    overflow: hidden;
+    margin-top: -20px;
+    margin-left: 140px;
+
+
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
 }
