@@ -45,7 +45,12 @@
 .axisMonths2 line{
     stroke: black;
     /*stroke-dasharray: 10,8;*/
+}
 
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
 }
 
 .legend-content {
