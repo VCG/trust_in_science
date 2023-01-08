@@ -107,7 +107,7 @@
         
         lc.append(time).append(vac).append(unv)
 
-        if(selector) container.append($('<div>', {class: 'container'}).append(mc).append(lc))
+        if(selector) container.append($('<div>', {class: 'row'}).append(mc).append(lc))
         else container.append(mc).append(lc)
     }
 
