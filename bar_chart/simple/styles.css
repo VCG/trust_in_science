@@ -47,3 +47,10 @@
     /*stroke-dasharray: 10,8;*/
 
 }
+
+.legend-content {
+    width: 180px;
+    float: right;
+    font-size: 12px;
+    margin-top: 60px;
+}
