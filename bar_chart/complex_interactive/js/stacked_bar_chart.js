@@ -28,8 +28,8 @@
         
         console.log(container)
         
-        let mc = $('<div>', {class: 'main-content'}),
-            lc = $('<div>', {class: 'legend-content'})
+        let mc = $('<div>', {class: 'col-8 main-content'}),
+            lc = $('<div>', {class: 'col-4 legend-content'})
 
         mc.append($('<div>', {class: 'title'}).append($('<h3>', {html: 'Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age'})))
           .append($('<div>', {class: 'subtitle', html: 'Apr 2021-Feb 2022'}))
