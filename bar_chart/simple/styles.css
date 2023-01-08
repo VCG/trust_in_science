@@ -59,3 +59,22 @@
     font-size: 12px;
     margin-top: 60px;
 }
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+}
