@@ -179,7 +179,7 @@ class StackedBarChartComplex {
             .keys(subgroups)
 
         console.log(stackedDataPre)
-        console.log(vis.data)
+        console.log(vis.data.length)
         
         const stackedData = stackedDataPre(vis.data)
 

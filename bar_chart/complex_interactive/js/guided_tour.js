@@ -152,4 +152,4 @@ tour.addStep({
 */
 
 
-  //tour.start();
+  tour.start();
