@@ -26,8 +26,6 @@
                     ? $(`#${selector.questionId}`).find('.QuestionText')
                     : $('#main-container').find('.QuestionText')
         
-        console.log(container)
-        
         let mc = $('<div>', {class: 'col-8 main-content'}),
             lc = $('<div>', {class: 'col-4 legend-content'})
 
@@ -50,65 +48,63 @@
         
         let vac_row1 = $('<div>', {class: 'legend_row'}), 
             vac_row2 = $('<div>', {class: 'legend_row'}), 
-            vac_row3 = $('<div>', {class: 'legend_row'})
+            vac_row3 = $('<div>', {class: 'legend_row'}),
+            vac_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+            vac_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+            vac_svg3 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
         
-        vac_row1.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#9e3a26'}))
-                )
+        vac_svg1.setAttribute('id','vsvg1')
+        vac_svg2.setAttribute('id','vsvg2')
+        vac_svg3.setAttribute('id','vsvg3')
+        
+        vac_row1.append($('<div>', {class: 'legend-value'}).append(vac_svg1))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
         
-        vac_row2.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#ef701b'}))
-                )
+        vac_row2.append($('<div>', {class: 'legend-value'}).append(vac_svg2))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
 
-        vac_row3.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#f4d166'}))
-                )
+        vac_row3.append($('<div>', {class: 'legend-value'}).append(vac_svg3))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
 
         vac.append($('<div>', {class: 'legend-title', html: 'Rate of Vaccinated'}))
-           .append(vac_row1).append(vac_row2).append(vac_row2)
+           .append(vac_row1).append(vac_row2).append(vac_row3)
             
         
         let unv_row1 = $('<div>', {class: 'legend_row'}), 
             unv_row2 = $('<div>', {class: 'legend_row'}), 
-            unv_row3 = $('<div>', {class: 'legend_row'})
+            unv_row3 = $('<div>', {class: 'legend_row'}),
+            unv_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+            unv_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+            unv_svg3 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
         
-        unv_row1.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#04386b'}))
-                )
+        unv_svg1.setAttribute('id','usvg1')
+        unv_svg2.setAttribute('id','usvg2')
+        unv_svg3.setAttribute('id','usvg3')
+
+        unv_row1.append($('<div>', {class: 'legend-value'}).append(unv_svg1))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
         
-        unv_row2.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#0984ea'}))
-                )
+        unv_row2.append($('<div>', {class: 'legend-value'}).append(unv_svg2))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
 
-        unv_row3.append(
-                    $('<div>', {class: 'legend-value'})
-                        .append(document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-                                .append('<rect>', {fill: '#7dc9f5'}))
-                )
+        unv_row3.append($('<div>', {class: 'legend-value'}).append(unv_svg3))
                 .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
 
         unv.append($('<div>', {class: 'legend-title', html: 'Rate of Unvaccinated'}))
-           .append(unv_row1).append(unv_row2).append(unv_row2)
+           .append(unv_row1).append(unv_row2).append(unv_row3)
         
         lc.append(time).append(vac).append(unv)
 
         if(selector) container.append($('<div>', {class: 'row'}).append(mc).append(lc))
         else container.append(mc).append(lc)
+
+        d3.select('#vsvg1').append('rect').style('fill', '#9e3a26')
+        d3.select('#vsvg2').append('rect').style('fill', '#ef701b')
+        d3.select('#vsvg3').append('rect').style('fill', '#f4d166')
+
+        d3.select('#usvg1').append('rect').style('fill', '#04386b')
+        d3.select('#usvg2').append('rect').style('fill', '#0984ea')
+        d3.select('#usvg3').append('rect').style('fill', '#7dc9f5')
     }
 
     initVis() {
