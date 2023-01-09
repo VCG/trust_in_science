@@ -175,11 +175,12 @@ class StackedBarChartComplex {
 
 
         //stack the data? --> stack per subgroup
-        const stackedDataPre = d3.stack()
+        var stackedDataPre = d3.stack()
             .keys(subgroups)
 
         console.log(stackedDataPre)
         console.log(vis.data.length)
+        console.log(vis.data.map(d => d.Vax_18_49))
         
         const stackedData = stackedDataPre(vis.data)
 
