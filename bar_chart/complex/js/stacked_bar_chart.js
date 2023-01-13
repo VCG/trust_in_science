@@ -13,9 +13,9 @@ class StackedBarChartComplex {
         let vis = this;
 
 
-        vis.margin = {top: 100, right: 210, bottom: 70, left: 70},
+        vis.margin = {top: 100, right: 210, bottom: 130, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 600 - vis.margin.top - vis.margin.bottom;
+            vis.height = 660 - vis.margin.top - vis.margin.bottom;
 
 
         let currQuestion = selector ? d3.select(`#${selector.questionId}`)
@@ -84,12 +84,33 @@ class StackedBarChartComplex {
             .tickSize(13)
             .tickValues([,,,,33,,,,,3,])
 
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        let num_days = [31,28,31,30,31,30,31,31,30,31,30,31]
 
-        let tickLabels = [];
-        xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+        vis.formatWeekDateRange = function(max_week_date){
+            let [yr,mo,day] = max_week_date.split('-')
+            let yr2 = yr, mo2 = mo, day2 = +day+7
+            if(day2 > num_days[mo-1]){
+                day2 -= num_days[mo-1]
+                mo2 = +mo+1
+                if(+mo2 > 12){
+                    mo2 = 1
+                    yr2 = +yr2+1
+                }
+            }
+            
+            return yr2 == yr 
+                ? `${months[mo-1]} ${day} - ${months[mo2-1]} ${day2}, ${yr}`
+                : `${months[mo-1]} ${day}, ${yr} - ${months[mo2-1]} ${day2}, ${yr2}`
+        }
+
+        //let tickLabels = [];
+        xAxisGenerator.tickFormat((d,i) => {
+            return this.formatWeekDateRange(vis.data[i].Max_Week_Date)
+        });
 
 
-        let tickLabels2 = [];
+        /*let tickLabels2 = [];
         xAxisGenerator2.tickFormat((d,i) => tickLabels2[i]);
 
 
@@ -100,8 +121,7 @@ class StackedBarChartComplex {
         xAxisGenerator4.tickFormat((d,i) => tickLabels4[i]);
 
         let tickLabels5 = ['', '','', '' , 'August', '', '', '', '', 'January','']
-        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);
-
+        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);*/
 
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
@@ -111,9 +131,9 @@ class StackedBarChartComplex {
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .attr("transform", "rotate(0)");
+            .attr("transform", "translate(-20,8) rotate(-45)");
 
-        vis.svg.append("g")
+        /*vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .attr("class", "axisMonths2")
             .call(xAxisGenerator2)
@@ -155,7 +175,7 @@ class StackedBarChartComplex {
             .style("text-anchor", "start")
             .attr("dx", "-0.5em")
             .attr("dy", "1em")
-            .attr("transform", "rotate(0)")
+            .attr("transform", "rotate(0)")*/
 
 
 
@@ -484,7 +504,7 @@ class StackedBarChartComplex {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width / 2)
-            .attr("y", vis.height + 70)
+            .attr("y", vis.height + 120)
             .attr("class", "title")
             .text("Week")
             .attr("fill", "black")

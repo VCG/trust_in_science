@@ -11,14 +11,15 @@ class BarChart {
         let vis = this;
 
 
-        vis.margin = {top: 100, right: 210, bottom: 70, left: 70},
+        vis.margin = {top: 100, right: 210, bottom: 150, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 330 - vis.margin.top - vis.margin.bottom;
+            vis.height = 380 - vis.margin.top - vis.margin.bottom;
 
 
-        let currQuestion = d3.select(`#${selector.questionId}`)
+        let currQuestion = selector ? d3.select(`#${selector.questionId}`)
                             .select('.QuestionText')
                             .insert('div',':first-child')
+                            : d3.select('#bar_chart')
                                 
 
         vis.svg = currQuestion
@@ -78,9 +79,30 @@ class BarChart {
             .tickSize(13)
             .tickValues([,,,,33,,,,,3,])
 
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        let num_days = [31,28,31,30,31,30,31,31,30,31,30,31]
+        
+        vis.formatWeekDateRange = function(max_week_date){
+            let [yr,mo,day] = max_week_date.split('-')
+            let yr2 = yr, mo2 = mo, day2 = +day+7
+            if(day2 > num_days[mo-1]){
+                day2 -= num_days[mo-1]
+                mo2 = +mo+1
+                if(+mo2 > 12){
+                    mo2 = 1
+                    yr2 = +yr2+1
+                }
+            }
+            
+            return yr2 == yr 
+                ? `${months[mo-1]} ${day} - ${months[mo2-1]} ${day2}, ${yr}`
+                : `${months[mo-1]} ${day}, ${yr} - ${months[mo2-1]} ${day2}, ${yr2}`
+        }
 
-        let tickLabels = [];
-        xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+        //let tickLabels = ['','January','','','','','','','','',''];
+        xAxisGenerator.tickFormat((d,i) => {
+            return this.formatWeekDateRange(vis.data[i].Max_Week_Date2)
+        });
 
 
         let tickLabels2 = [];
@@ -103,13 +125,13 @@ class BarChart {
             .attr("transform", `translate(0, ${vis.height})`)
             .call(xAxisGenerator)
             .selectAll("text")
-            .attr("font-size", "12")
+            .attr("font-size", "10")
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .attr("transform", "rotate(0)");
+            .attr("transform", "translate(-15,6)rotate(-45)");
 
-        vis.svg.append("g")
+        /*vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .attr("class", "axisMonths2")
             .call(xAxisGenerator2)
@@ -154,7 +176,7 @@ class BarChart {
             .attr("transform", "rotate(0)")
 
 
-        //
+        */
 
 
         // Add y axis
@@ -261,10 +283,12 @@ class BarChart {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
+            .attr("y", vis.height+110)
             .attr("font-size", "13")
             .attr("font-family", "Segoe UI")
+            .attr('transform','translate(0,10)')
             .text("Week");
+            
 
 
         // create a list of keys
