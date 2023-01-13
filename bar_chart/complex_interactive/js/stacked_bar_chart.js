@@ -112,9 +112,9 @@
 
 
        // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 70, left: 70};
+        vis.margin = {top: 20, right: 20, bottom: 150, left: 70};
         vis.width = 900 - vis.margin.left - vis.margin.right;
-        vis.height = 450 - vis.margin.top - vis.margin.bottom;
+        vis.height = 530 - vis.margin.top - vis.margin.bottom;
         //
         // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
         //     vis.width = 1200 - vis.margin.left - vis.margin.right,
@@ -132,8 +132,33 @@
         vis.x_scale = d3.scaleBand()
             .range([0, vis.width])
             .padding([0.2]);
+        
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        let num_days = [31,28,31,30,31,30,31,31,30,31,30,31]
 
-        vis.x_axis = d3.axisBottom().scale(vis.x_scale);
+        vis.formatWeekDateRange = function(max_week_date){
+            let [yr,mo,day] = max_week_date.split('-')
+            let yr2 = yr, mo2 = mo, day2 = +day+7
+            if(day2 > num_days[mo-1]){
+                day2 -= num_days[mo-1]
+                mo2 = +mo+1
+                if(+mo2 > 12){
+                    mo2 = 1
+                    yr2 = +yr2+1
+                }
+            }
+            
+            return yr2 == yr 
+                ? `${months[mo-1]} ${day} - ${months[mo2-1]} ${day2}, ${yr}`
+                : `${months[mo-1]} ${day}, ${yr} - ${months[mo2-1]} ${day2}, ${yr2}`
+        }
+
+        vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
+            (d,i) => {
+                console.log(vis.data[i].Max_Week_Date)
+                return this.formatWeekDateRange(vis.data[i].Max_Week_Date2)
+            }
+        );
 
         // Add Y axis
         vis.y_scale = d3.scaleLinear().range([vis.height, 0]);
@@ -148,8 +173,7 @@
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .style('font-size', '12px')
-            .attr("transform", "rotate(0)");
+            .style('font-size', '12px');
 
         vis.svg.append("g").attr("class", "y-axis");
 
@@ -225,6 +249,9 @@
 
         vis.svg.selectAll(".x-axis").transition().duration(200).call(vis.x_axis).style('font-size', '12px');
         vis.svg.selectAll(".y-axis").transition().duration(200).call(vis.y_axis).style('font-size', '12px');
+
+        console.log(vis.svg.select('.x-axis').selectAll('.tick'))
+        vis.svg.select('.x-axis').selectAll('text').attr('transform','translate(-48,45) rotate(-45)')
 
         vis.svg.selectAll(".stacked").remove();
 
@@ -436,7 +463,7 @@
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
+            .attr("y", vis.height+120)
             .attr("class", "title")
             .text("Week Number")
             .attr("fill","black")
