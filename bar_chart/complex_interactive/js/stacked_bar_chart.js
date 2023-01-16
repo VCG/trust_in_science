@@ -14,7 +14,8 @@
         // color palette = one color per subgroup
         this.color = d3.scaleOrdinal()
             .domain(this.subgroups)
-            .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
+            .range(['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'])
+            //.range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
 
         this.buildHtml(selector);
         this.initVis();
@@ -31,8 +32,7 @@
         let mc = $('<div>', {class: 'col-8 main-content'}),
             lc = $('<div>', {class: 'col-4 legend-content'})
 
-        mc.append($('<div>', {class: 'title'}).append($('<h3>', {html: 'Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age'})))
-          .append($('<div>', {class: 'subtitle', html: 'Apr 2021-Feb 2022'}))
+        mc.append($('<div>', {class: 'title'}).append($('<h3>', {id: 'chart-title', html: 'Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age'})))
           .append($('<br>'))
           .append($('<div>', {class: 'helper', html: '*Hover over the bars to explore further and brush the timeline on the right to filter the data'}))
           .append($('<br>'))
@@ -40,8 +40,9 @@
           .append($('<div>', {class: 'source', html: 'Source: Centers for Disease Control and Prevention'}))
             
         let time = $('<div>', {id: 'time_filter_div'}), 
-            vac = $('<div>', {class: 'legend'}), 
-            unv = $('<div>', {class: 'legend'})
+            leg = $('<div>', {id: 'leg', class: 'legend'}),
+            vac = $('<div>', {id: 'vax-leg', class: 'legend'}), 
+            unv = $('<div>', {id: 'unvax-leg', class: 'legend'})
         
         time.append($('<div>', {class: 'brush-label', html: 'Filter by a Week Range'}))
             .append($('<div>', {id: 'left-date', class: 'legend-row', html: ''}))
@@ -50,6 +51,22 @@
             .append($('<div>', {class: 'legend-row', html: '2021'}))
             .append($('<div>', {class: 'legend-row2', html: '2022'}))
         
+        let leg_row1 = $('<div>', {class: 'legend_row'}),
+            leg_row2 = $('<div>', {class: 'legend_row'}),
+            leg_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+            leg_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+        
+        leg_svg1.setAttribute('id','lsvg1')
+        leg_svg2.setAttribute('id','lsvg2')
+
+        leg_row1.append($('<div>', {class: 'legend-value'}).append(leg_svg1))
+                .append($('<div>', {class: 'legend-label', html: 'Unvaccinated Persons'}))
+        
+        leg_row2.append($('<div>', {class: 'legend-value'}).append(leg_svg2))
+                .append($('<div>', {class: 'legend-label', html: 'Vaccinated Persons'}))
+        
+        leg.append(leg_row1).append(leg_row2)
+
         let vac_row1 = $('<div>', {class: 'legend_row'}), 
             vac_row2 = $('<div>', {class: 'legend_row'}), 
             vac_row3 = $('<div>', {class: 'legend_row'}),
@@ -97,18 +114,23 @@
         unv.append($('<div>', {class: 'legend-title', html: 'Rate of Unvaccinated'}))
            .append(unv_row1).append(unv_row2).append(unv_row3)
         
-        lc.append(time).append(vac).append(unv)
+        lc.append(time).append(leg).append(unv).append(vac)
 
         if(selector) container.append($('<div>', {class: 'row'}).append(mc).append(lc))
         else container.append(mc).append(lc)
 
-        d3.select('#vsvg1').append('rect').style('fill', '#9e3a26')
-        d3.select('#vsvg2').append('rect').style('fill', '#ef701b')
-        d3.select('#vsvg3').append('rect').style('fill', '#f4d166')
+        d3.select('#lsvg1').append('rect').style('fill', '#ef701b')
+        d3.select('#lsvg2').append('rect').style('fill', '#0984ea')
 
-        d3.select('#usvg1').append('rect').style('fill', '#04386b')
-        d3.select('#usvg2').append('rect').style('fill', '#0984ea')
-        d3.select('#usvg3').append('rect').style('fill', '#7dc9f5')
+        d3.select('#usvg1').append('rect').style('fill', '#9e3a26')
+        d3.select('#usvg2').append('rect').style('fill', '#ef701b')
+        d3.select('#usvg3').append('rect').style('fill', '#f4d166')
+
+        d3.select('#vsvg1').append('rect').style('fill', '#04386b')
+        d3.select('#vsvg2').append('rect').style('fill', '#0984ea')
+        d3.select('#vsvg3').append('rect').style('fill', '#7dc9f5')
+
+        leg.hide()
     }
 
     initVis() {
@@ -388,11 +410,12 @@
         const width = 220;
 
         const groups2 = vis.data.map(d => (d.Week));
+        console.log('groups2',groups2)
 
         let x = d3.scaleBand()
             .domain(groups2)
             .range([0, width])
-            .padding([1.5]);
+            .padding([2]);
 
         this.weeks = {
             14: 'Apr',
@@ -410,8 +433,7 @@
 
         let xAxis = d3.axisBottom()
             .scale(x)
-            .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
-            .ticks(5)
+            .ticks(4)
             .tickSize([10])
             .tickFormat(d => {
                 return this.weeks[d] ? this.weeks[d] : ''
@@ -427,11 +449,32 @@
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
             .on("brush end", function(e) {
-                let startDate = xTime.invert(e.selection[0]);
-                let endDate = xTime.invert(e.selection[1]);
+                
+                if(!e.selection || e.selection[0] === e.selection[1]){
+                    console.log($('#leg'))
+                    $('#vax-leg').hide()
+                    $('#unvax-leg').hide()
+                    $('#leg').show()
+                    $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
+                } 
+                else{
+                    console.log($('#vax-leg'))
+                    $('#leg').hide()
+                    $('#vax-leg').show()
+                    $('#unvax-leg').show()
+                    $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
+                }
+                
+                let startDate = e.selection ? xTime.invert(e.selection[0]) : xTime.invert(0);
+                let endDate = e.selection ? xTime.invert(e.selection[1]) : xTime.invert(220);
 
                 $('#left-date').html(startDate.toISOString().split('T')[0])
                 $('#right-date').html(endDate.toISOString().split('T')[0])
+
+                let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
+                    sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
+
+                vis.color.range(e.selection ? ((e.selection[0] === e.selection[1]) ? twoColors : sixColors) : twoColors)
 
                 vis.wrangleData(startDate, endDate);
 
@@ -462,8 +505,6 @@
 
         function brushed() {
             let range = d3.brushSelection(this);
-            console.log(range)
-            console.log('brushed')
 
 
 
@@ -474,7 +515,7 @@
         }
 
         // // v3:  brushed();
-        brush.move(brushg, [20, 50].map(x));
+        brush.move(brushg, [13, 13].map(x));
 
         //y axis label
         vis.svg.append("text")
