@@ -5,11 +5,10 @@
         this.displayData = [];
         this.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         this.num_days = [31,28,31,30,31,30,31,31,30,31,30,31];
-        // console.log(data);
+        this.weeks = { 14: 'Apr', 18: 'May', 23: 'Jun', 27: 'Jul', 31: 'Aug', 36: 'Sep', 40: 'Oct', 44: 'Nov', 49: 'Dec', 1: 'Jan', 6: 'Feb'}
 
         // List of subgroups = header of the csv files = soil condition here
         this.subgroups = this.data.columns.slice(4);
-        // console.log(this.subgroups);
 
         // color palette = one color per subgroup
         this.color = d3.scaleOrdinal()
@@ -161,14 +160,14 @@
 
         vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
             (d,i) => {
-                let [_,mo,day] = vis.data[i].Max_Week_Date2.split('-')
+                let [_,mo,day] = d.toISOString().split('T')[0].split('-')
                 return `${vis.months[+mo-1]} ${day}`
             }
         );
 
         vis.x_axis2 = d3.axisBottom().scale(vis.x_scale).tickFormat(
             (d,i) => {
-                let [_,mo,da] = vis.data[i].Max_Week_Date2.split('-').map(d => +d)
+                let [_,mo,da] = d.toISOString().split('T')[0].split('-').map(d => +d)
                 return (i===0) ? '2021' : ((mo === 1 && da-7 < 0) ? '2022' : '')
             });
 
@@ -214,27 +213,6 @@
             .style("padding", "10px")
             .style("display", "none")
 
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", vis.height+200)
-            .attr("class", "title_legend")
-            .text("2021")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width-100)
-            .attr("y", vis.height+40)
-            .attr("class", "title_legend1")
-            .text("2022")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
         vis.initBrush();
 
         vis.wrangleData();
@@ -258,7 +236,7 @@
 
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis
-        vis.groups = vis.displayData.map(d => (d.Week));
+        vis.groups = vis.displayData.map(d => (d.Max_Week_Date));
 
         //stack the data? --> stack per subgroup
         const stackedData = d3.stack()
@@ -289,8 +267,8 @@
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
             .join("rect")
-            .attr("class", d => "main-rect rect-bar-" + d.data.Week)
-            .attr("x", d => vis.x_scale(d.data.Week))
+            .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date)
+            .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
             .attr("width", vis.x_scale.bandwidth());
@@ -368,7 +346,7 @@
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
             // reference this particular, highlighted bars with 1 opacity
-            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
+            vis.svg.selectAll(".rect-bar-" + d.data.Max_Week_Date).style("opacity", 1);
         };
 
         vis.mouseleave = function(event, d) {
@@ -387,7 +365,7 @@
             .join("rect")
             .attr("class", "overlay")
             // .attr("stroke", "black")
-            .attr("x", d => vis.x_scale(d.data.Week))
+            .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1])-500)
             .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1])+500)
             .attr("width", vis.x_scale.bandwidth())
@@ -405,47 +383,24 @@
         const height = 25;
         const width = 220;
 
-        const groups2 = vis.data.map(d => (d.Week));
-        console.log('groups2',groups2)
-
-        let x = d3.scaleBand()
-            .domain(groups2)
-            .range([0, width])
-            .padding([2]);
-
-        vis.weeks = {
-            14: 'Apr',
-            18: 'May',
-            23: 'Jun',
-            27: 'Jul',
-            31: 'Aug',
-            36: 'Sep',
-            40: 'Oct',
-            44: 'Nov',
-            49: 'Dec',
-            1: 'Jan',
-            6: 'Feb'
-        }
+        let x = d3.scaleTime()
+            .domain([new Date(2021,3,5), new Date(2022,1,7)])
+            .range([0, width]);
 
         let xAxis = d3.axisBottom()
             .scale(x)
-            .ticks(4)
+            .ticks(21)
             .tickSize([10])
-            .tickFormat(d => {
-                return vis.weeks[d] ? vis.weeks[d] : ''
-            });
+            .tickFormat(d3.timeFormat('%b'));
 
 
-        let xTime = d3.scaleTime()
-            .domain(d3.extent(vis.data, d => d.Max_Week_Date))
-            .range([0, width]);
+        
 
 
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
             .on("brush end", function(e) {
-                console.log(e.selection)
                 
                 if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
                     $('#vax-leg').hide()
@@ -460,8 +415,8 @@
                     $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
                 }
                 
-                let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? xTime.invert(e.selection[0]) : xTime.invert(0) : xTime.invert(0);
-                let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? xTime.invert(e.selection[1]) : xTime.invert(220) : xTime.invert(220);
+                let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
+                let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[1]) : x.invert(width) : x.invert(width);
 
                 $('#left-date').html(startDate.toISOString().split('T')[0])
                 $('#right-date').html(endDate.toISOString().split('T')[0])
@@ -472,9 +427,6 @@
                 vis.color.range(e.selection ? ((e.selection[1] - e.selection[0] < 5) ? twoColors : sixColors) : twoColors)
 
                 vis.wrangleData(startDate, endDate);
-
-                vis.svg.select(".title_legend").remove();
-                vis.svg.select(".title_legend1").remove();
             });
 
         let svg = d3.select("#brush-chart").append("svg")

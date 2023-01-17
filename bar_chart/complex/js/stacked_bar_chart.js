@@ -4,14 +4,12 @@ class StackedBarChartComplex {
         this.data = data;
         this.displayData = [];
 
-        console.log(this.data)
         this.initVis(selector);
     }
 
 
     initVis(selector) {
         let vis = this;
-
 
         vis.margin = {top: 100, right: 210, bottom: 100, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
@@ -30,7 +28,6 @@ class StackedBarChartComplex {
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
 
 
-
         // List of subgroups = header of the csv files = soil condition here
         const subgroups = vis.data.columns.slice(5)
         console.log(subgroups)
@@ -42,20 +39,16 @@ class StackedBarChartComplex {
         const month_groups = vis.data.map(d => (d.month))
         console.log(month_groups)
 
-
         // Add X axis
         const x = d3.scaleBand()
             .domain(groups)
             .range([0, vis.width])
             .padding([0.2])
 
-
         var x2 = d3.scaleBand()
             .domain(month_groups)
             .range([0, vis.width])
             .padding([0.2])
-
-
 
         let xAxisGenerator = d3.axisBottom(x)
             .tickSize(10)
@@ -66,7 +59,6 @@ class StackedBarChartComplex {
                 }
             )
 
-
         //show major axis lines
         let xAxisGenerator2 = d3.axisBottom(x2)
             .tickSize(10)
@@ -76,16 +68,6 @@ class StackedBarChartComplex {
                     return (i===0) ? '2021' : ((mo === 1 && da-7 < 0) ? '2022' : '')
                 }
             );
-
-
-       /*let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
-        xAxisGenerator3.tickFormat((d,i) => tickLabels3[i]);
-
-        let tickLabels4 = ['', 'May','', '' , '', '', '', 'November', '', '','']
-        xAxisGenerator4.tickFormat((d,i) => tickLabels4[i]);
-
-        let tickLabels5 = ['', '','', '' , 'August', '', '', '', '', 'January','']
-        xAxisGenerator5.tickFormat((d,i) => tickLabels5[i]);*/
 
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
