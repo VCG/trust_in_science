@@ -60,10 +60,10 @@
         leg_svg2.setAttribute('id','lsvg2')
 
         leg_row1.append($('<div>', {class: 'legend-value'}).append(leg_svg1))
-                .append($('<div>', {class: 'legend-label', html: 'Unvaccinated Persons'}))
+                .append($('<div>', {class: 'legend-label', html: 'Rate of Unvaccinated'}))
         
         leg_row2.append($('<div>', {class: 'legend-value'}).append(leg_svg2))
-                .append($('<div>', {class: 'legend-label', html: 'Vaccinated Persons'}))
+                .append($('<div>', {class: 'legend-label', html: 'Rate of Vaccinated'}))
         
         leg.append(leg_row1).append(leg_row2)
 
@@ -158,34 +158,19 @@
         vis.x_scale = d3.scaleBand()
             .range([0, vis.width])
             .padding([0.2]);
-        
-        
-        
-
-        vis.formatWeekDateRange = function(max_week_date){
-            let [yr,mo,day] = max_week_date.split('-')
-            let yr2 = yr, mo2 = mo, day2 = +day+6
-            if(day2 > this.num_days[mo-1]){
-                day2 -= this.num_days[mo-1]
-                mo2 = +mo+1
-                if(+mo2 > 12){
-                    mo2 = 1
-                    yr2 = +yr2+1
-                }
-            }
-            
-            return yr2 == yr 
-                ? `${this.months[mo-1]} ${day} - ${this.months[mo2-1]} ${day2}, ${yr}`
-                : `${this.months[mo-1]} ${day}, ${yr} - ${this.months[mo2-1]} ${day2}, ${yr2}`
-        }
 
         vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
             (d,i) => {
-                let n = 46,b =13
-                if(i==0) console.log(vis.data.length)
-                return this.formatWeekDateRange(vis.data[((d-b % n) + n) % n].Max_Week_Date2)
+                let [_,mo,day] = vis.data[i].Max_Week_Date2.split('-')
+                return `${vis.months[+mo-1]} ${day}`
             }
         );
+
+        vis.x_axis2 = d3.axisBottom().scale(vis.x_scale).tickFormat(
+            (d,i) => {
+                let [_,mo,da] = vis.data[i].Max_Week_Date2.split('-').map(d => +d)
+                return (i===0) ? '2021' : ((mo === 1 && da-7 < 0) ? '2022' : '')
+            });
 
         // Add Y axis
         vis.y_scale = d3.scaleLinear().range([vis.height, 0]);
@@ -196,6 +181,15 @@
         vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .attr("class", "x-axis")
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "1em")
+            .style('font-size', '12px');
+        
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "x-axis2")
             .selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
@@ -275,9 +269,11 @@
         vis.y_scale.domain([0, d3.max(stackedData, d => d3.max(d, function (d) { return d[1]; }))]);
 
         vis.svg.selectAll(".x-axis").transition().duration(200).call(vis.x_axis).style('font-size', '12px');
+        vis.svg.selectAll(".x-axis2").transition().duration(200).call(vis.x_axis2).style('font-size', '12px');
         vis.svg.selectAll(".y-axis").transition().duration(200).call(vis.y_axis).style('font-size', '12px');
 
-        vis.svg.select('.x-axis').selectAll('text').attr('transform','translate(-48,45) rotate(-45)')
+        vis.svg.select('.x-axis').selectAll('text').attr('transform','translate(-20,20) rotate(-45)')
+        vis.svg.select('.x-axis2').selectAll('text').attr('transform','translate(-20,40)')
 
         vis.svg.selectAll(".stacked").remove();
 
@@ -328,7 +324,7 @@
         vis.mouseover = function(e, d) {
             const date = d.data.group;
             const year = yearFormat(d.data.Max_Week_Date);
-            const week = d.data.Week;
+            const week = d.data.Max_Week_Date2;
             let dataForDate = d.data;
             let total = 0;
             vis.subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
@@ -417,7 +413,7 @@
             .range([0, width])
             .padding([2]);
 
-        this.weeks = {
+        vis.weeks = {
             14: 'Apr',
             18: 'May',
             23: 'Jun',
@@ -436,7 +432,7 @@
             .ticks(4)
             .tickSize([10])
             .tickFormat(d => {
-                return this.weeks[d] ? this.weeks[d] : ''
+                return vis.weeks[d] ? vis.weeks[d] : ''
             });
 
 
@@ -449,24 +445,23 @@
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
             .on("brush end", function(e) {
+                console.log(e.selection)
                 
-                if(!e.selection || e.selection[0] === e.selection[1]){
-                    console.log($('#leg'))
+                if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
                     $('#vax-leg').hide()
                     $('#unvax-leg').hide()
                     $('#leg').show()
                     $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
                 } 
                 else{
-                    console.log($('#vax-leg'))
                     $('#leg').hide()
                     $('#vax-leg').show()
                     $('#unvax-leg').show()
                     $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
                 }
                 
-                let startDate = e.selection ? xTime.invert(e.selection[0]) : xTime.invert(0);
-                let endDate = e.selection ? xTime.invert(e.selection[1]) : xTime.invert(220);
+                let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? xTime.invert(e.selection[0]) : xTime.invert(0) : xTime.invert(0);
+                let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? xTime.invert(e.selection[1]) : xTime.invert(220) : xTime.invert(220);
 
                 $('#left-date').html(startDate.toISOString().split('T')[0])
                 $('#right-date').html(endDate.toISOString().split('T')[0])
@@ -474,7 +469,7 @@
                 let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
                     sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
 
-                vis.color.range(e.selection ? ((e.selection[0] === e.selection[1]) ? twoColors : sixColors) : twoColors)
+                vis.color.range(e.selection ? ((e.selection[1] - e.selection[0] < 5) ? twoColors : sixColors) : twoColors)
 
                 vis.wrangleData(startDate, endDate);
 
@@ -515,7 +510,7 @@
         }
 
         // // v3:  brushed();
-        brush.move(brushg, [13, 13].map(x));
+        brush.move(brushg, [14, 14].map(x));
 
         //y axis label
         vis.svg.append("text")
@@ -531,7 +526,7 @@
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+120)
+            .attr("y", vis.height+80)
             .attr("class", "title")
             .text("Week")
             .attr("fill","black")

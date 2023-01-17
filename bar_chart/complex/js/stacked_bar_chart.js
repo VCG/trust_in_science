@@ -1,6 +1,6 @@
 class StackedBarChartComplex {
     constructor(data, selector) {
-
+        this.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
         this.data = data;
         this.displayData = [];
 
@@ -13,9 +13,9 @@ class StackedBarChartComplex {
         let vis = this;
 
 
-        vis.margin = {top: 100, right: 210, bottom: 130, left: 70},
+        vis.margin = {top: 100, right: 210, bottom: 100, left: 70},
             vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 660 - vis.margin.top - vis.margin.bottom;
+            vis.height = 630 - vis.margin.top - vis.margin.bottom;
 
 
         let currQuestion = selector ? d3.select(`#${selector.questionId}`)
@@ -59,62 +59,26 @@ class StackedBarChartComplex {
 
         let xAxisGenerator = d3.axisBottom(x)
             .tickSize(10)
-            // .tickPadding(5)
+            .tickFormat(
+                (d,i) => {
+                    let [_,mo,day] = vis.data[i].Max_Week_Date.split('-')
+                    return `${vis.months[+mo-1]} ${day}`
+                }
+            )
 
 
         //show major axis lines
         let xAxisGenerator2 = d3.axisBottom(x2)
-            .tickSize(30)
-            .tickValues([2,6,11,15,19,24,28,32,37,41,46])
-
-
-        //set axis labels
-        let xAxisGenerator3 = d3.axisBottom(x)
-            .tickSize(13)
-            .tickValues([16,,25,29,,38,42,,51,,])
-
-        //set axis labels
-        let xAxisGenerator4 = d3.axisBottom(x)
-            .tickSize(13)
-            .tickValues([,20,,,,,,45,,,])
-
-
-        //set axis labels
-        let xAxisGenerator5 = d3.axisBottom(x)
-            .tickSize(13)
-            .tickValues([,,,,33,,,,,3,])
-
-        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-        let num_days = [31,28,31,30,31,30,31,31,30,31,30,31]
-
-        vis.formatWeekDateRange = function(max_week_date){
-            let [yr,mo,day] = max_week_date.split('-')
-            let yr2 = yr, mo2 = mo, day2 = +day+7
-            if(day2 > num_days[mo-1]){
-                day2 -= num_days[mo-1]
-                mo2 = +mo+1
-                if(+mo2 > 12){
-                    mo2 = 1
-                    yr2 = +yr2+1
+            .tickSize(10)
+            .tickFormat(
+                (d,i) => {
+                    let [_,mo,da] = vis.data[i].Max_Week_Date.split('-').map(d => +d)
+                    return (i===0) ? '2021' : ((mo === 1 && da-7 < 0) ? '2022' : '')
                 }
-            }
-            
-            return yr2 == yr 
-                ? `${months[mo-1]} ${day} - ${months[mo2-1]} ${day2}, ${yr}`
-                : `${months[mo-1]} ${day}, ${yr} - ${months[mo2-1]} ${day2}, ${yr2}`
-        }
-
-        //let tickLabels = [];
-        xAxisGenerator.tickFormat((d,i) => {
-            return this.formatWeekDateRange(vis.data[i].Max_Week_Date)
-        });
+            );
 
 
-        /*let tickLabels2 = [];
-        xAxisGenerator2.tickFormat((d,i) => tickLabels2[i]);
-
-
-        let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
+       /*let tickLabels3 = ['April', '','June', 'July' , '', 'September', 'October', '', 'December', '','February']
         xAxisGenerator3.tickFormat((d,i) => tickLabels3[i]);
 
         let tickLabels4 = ['', 'May','', '' , '', '', '', 'November', '', '','']
@@ -133,7 +97,7 @@ class StackedBarChartComplex {
             .attr("dy", "1em")
             .attr("transform", "translate(-20,8) rotate(-45)");
 
-        /*vis.svg.append("g")
+        vis.svg.append("g")
             .attr("transform", `translate(0, ${vis.height})`)
             .attr("class", "axisMonths2")
             .call(xAxisGenerator2)
@@ -142,40 +106,8 @@ class StackedBarChartComplex {
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .attr("transform", "rotate(0)");
+            .attr("transform", "translate(0,35) rotate(0)");
 
-        vis.svg.append("g")
-            .attr("transform", `translate(0, ${vis.height})`)
-            .attr("class", "axisMonths")
-            .call(xAxisGenerator3)
-            .selectAll("text")
-            .attr("font-size", "12")
-            .style("text-anchor", "middle")
-           .attr("dx", "0em")
-            .attr("dy", "1em")
-            .attr("transform", "rotate(0)")
-
-        vis.svg.append("g")
-            .attr("transform", `translate(0, ${vis.height})`)
-            .attr("class", "axisMonths")
-            .call(xAxisGenerator4)
-            .selectAll("text")
-            .attr("font-size", "12")
-            .style("text-anchor", "start")
-            .attr("dx", "0em")
-            .attr("dy", "1em")
-            .attr("transform", "rotate(0)")
-
-        vis.svg.append("g")
-            .attr("transform", `translate(0, ${vis.height})`)
-            .attr("class", "axisMonths")
-            .call(xAxisGenerator5)
-            .selectAll("text")
-            .attr("font-size", "12")
-            .style("text-anchor", "start")
-            .attr("dx", "-0.5em")
-            .attr("dy", "1em")
-            .attr("transform", "rotate(0)")*/
 
 
 
@@ -190,8 +122,9 @@ class StackedBarChartComplex {
         // color palette = one color per subgroup
         const color = d3.scaleOrdinal()
             .domain(subgroups)
-            .range(['#7dc9f5', '#0984ea', '#04386b',
-                '#f4d166', '#ef701b', '#9e3a26'])
+            .range(['#0984ea','#0984ea','#0984ea','#ef701b','#ef701b','#ef701b'])
+            //.range(['#7dc9f5', '#0984ea', '#04386b',
+                //'#f4d166', '#ef701b', '#9e3a26'])
 
 
         //stack the data? --> stack per subgroup
@@ -202,7 +135,7 @@ class StackedBarChartComplex {
         console.log(vis.data.length)
         console.log(vis.data.map(d => d.Vax_18_49))
         
-        const stackedData = stackedDataPre(vis.data)
+        var stackedData = stackedDataPre(vis.data)
 
 
         // tooltip
@@ -313,7 +246,7 @@ class StackedBarChartComplex {
             .attr("x", 0)
             .attr("y", (vis.margin.top / 5) - vis.margin.top)
             .attr("class", "title")
-            .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age")
+            .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19")
             .attr("fill", "black")
             .attr("font-size", "20")
             .attr("font-family", "Segoe UI")
@@ -359,17 +292,22 @@ class StackedBarChartComplex {
 
 
         // create a list of keys
-        var keys = ["Ages 18-49", "Ages 50-79", "Ages 80+"].reverse()
+        //var keys = ["Ages 18-49", "Ages 50-79", "Ages 80+"].reverse()
+        var keys = ['Rate of Unvaccinated', 'Rate of Vaccinated']
 
 
         // Usually you have a color scale in your chart already
-        var color3 = d3.scaleOrdinal()
+        /*var color3 = d3.scaleOrdinal()
             .domain(keys)
             .range(['#04386b', '#0984ea', '#7dc9f5'])
 
         var color2 = d3.scaleOrdinal()
             .domain(keys)
-            .range(['#9e3a26', '#ef701b', '#f4d166'])
+            .range(['#9e3a26', '#ef701b', '#f4d166'])*/
+        
+        var color2 = d3.scaleOrdinal()
+                    .domain(keys)
+                    .range(['#ef701b', '#0984ea'])
 
         // Add one dot in the legend for each name.
         var size = 10
@@ -390,7 +328,7 @@ class StackedBarChartComplex {
             })
 
 
-        vis.svg.selectAll("mydots")
+        /*vis.svg.selectAll("mydots")
             .data(keys)
             .enter()
             .append("rect")
@@ -403,7 +341,7 @@ class StackedBarChartComplex {
             .attr("height", size)
             .style("fill", function (d) {
                 return color3(d)
-            })
+            })*/
 
         // Add one dot in the legend for each name.
         vis.svg.selectAll("mylabels")
@@ -425,7 +363,7 @@ class StackedBarChartComplex {
 
 
         // Add one dot in the legend for each name.
-        vis.svg.selectAll("mylabels")
+        /*vis.svg.selectAll("mylabels")
             .data(keys)
             .enter()
             .append("text")
@@ -441,7 +379,7 @@ class StackedBarChartComplex {
                 return d
             })
             .attr("text-anchor", "left")
-            .style("alignment-baseline", "middle")
+            .style("alignment-baseline", "middle")*/
 
         //y axis label
         vis.svg.append("text")
@@ -455,7 +393,7 @@ class StackedBarChartComplex {
 
 
         //share of non vaccination title
-        vis.svg
+        /*vis.svg
             .append("text")
             .attr("x", vis.width + 50)
             .attr("y", (vis.margin.top / 3) - vis.margin.top + 80)
@@ -463,10 +401,10 @@ class StackedBarChartComplex {
             .text("Rate of Unvaccinated")
             .attr("fill", "black")
             .attr("font-family", "Segoe UI")
-            .attr("font-size", "16")
+            .attr("font-size", "16")*/
 
         //share of vaccination title
-        vis.svg
+        /*vis.svg
             .append("text")
             .attr("x", vis.width + 50)
             .attr("y", (vis.margin.top / 3) - vis.margin.top + 200)
@@ -474,7 +412,7 @@ class StackedBarChartComplex {
             .text("Rate of Vaccinated")
             .attr("fill", "black")
             .attr("font-family", "Segoe UI")
-            .attr("font-size", "16")
+            .attr("font-size", "16")*/
 
         //add year labels to x axis (year 2022)
         // vis.svg
@@ -504,7 +442,7 @@ class StackedBarChartComplex {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width / 2)
-            .attr("y", vis.height + 120)
+            .attr("y", vis.height + 80)
             .attr("class", "title")
             .text("Week")
             .attr("fill", "black")
