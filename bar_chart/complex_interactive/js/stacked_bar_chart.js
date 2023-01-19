@@ -137,9 +137,9 @@
 
 
        // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 150, left: 70};
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
         vis.width = 850 - vis.margin.left - vis.margin.right;
-        vis.height = 530 - vis.margin.top - vis.margin.bottom;
+        vis.height = 480 - vis.margin.top - vis.margin.bottom;
         //
         // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
         //     vis.width = 1200 - vis.margin.left - vis.margin.right,
