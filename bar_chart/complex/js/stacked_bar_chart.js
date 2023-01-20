@@ -113,7 +113,7 @@ class StackedBarChartComplex {
         var stackedDataPre = d3.stack()
             .keys(subgroups)
 
-        console.log(vis.data)
+        console.log('vis.data',vis.data)
         
         var stackedData = stackedDataPre(vis.data)
 
