@@ -138,8 +138,9 @@
 
        // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
-        vis.width = 850 - vis.margin.left - vis.margin.right;
-        vis.height = 480 - vis.margin.top - vis.margin.bottom;
+        vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        vis.height = vis.totalWidth/2 - vis.margin.top - vis.margin.bottom;
         //
         // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
         //     vis.width = 1200 - vis.margin.left - vis.margin.right,
