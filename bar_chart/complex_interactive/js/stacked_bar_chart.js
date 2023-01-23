@@ -274,7 +274,6 @@
                 let ret = vis.y_scale(d[0]) - vis.y_scale(d[1])
                 if(ret < 0){
                     ret = -ret
-                    console.log(ret)
                 }
                 if(isNaN(ret)){
                     console.log(d)
