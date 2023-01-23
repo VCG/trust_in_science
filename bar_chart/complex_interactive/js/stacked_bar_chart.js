@@ -139,8 +139,11 @@
        // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
         vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        if(vis.totalWidth < 0) console.log(vis.totalWidth)
         vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        if(vis.width < 0) console.log(vis.width)
         vis.height = vis.totalWidth/2 - vis.margin.top - vis.margin.bottom;
+        if(vis.height < 0) console.log(vis.height)
 
         vis.svg = d3.select('#chart')
             .append("svg")
@@ -267,7 +270,12 @@
             .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date2)
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1]))
-            .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
+            .attr("height", d => {
+                if(vis.y_scale(d[0]) - vis.y_scale(d[1]) < 0){
+                    console.log('stacked', vis.y_scale(d[0]) - vis.y_scale(d[1]))
+                }
+                return vis.y_scale(d[0]) - vis.y_scale(d[1])
+            })
             .attr("width", vis.x_scale.bandwidth());
 
 
@@ -365,7 +373,6 @@
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1])-500)
             .attr("height", d => {
-                console.log(vis.y_scale(0) - vis.y_scale(d[1])+500)
                 return vis.y_scale(0) - vis.y_scale(d[1])+500
             })
             .attr("width", vis.x_scale.bandwidth())
