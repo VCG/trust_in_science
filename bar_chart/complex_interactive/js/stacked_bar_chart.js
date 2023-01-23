@@ -44,8 +44,7 @@
             unv = $('<div>', {id: 'unvax-leg', class: 'legend'})
         
         time.append($('<div>', {class: 'brush-label', html: 'Filter by a Week Range'}))
-            .append($('<div>', {id: 'left-date', class: 'legend-row', html: ''}))
-            .append($('<div>', {id: 'right-date', class: 'legend-row3', html: ''}))
+            .append($('<div>', {class: 'legend-row'}).append($('<p>',{id: 'left-date', class: 'alignLeft', html:''})).append($('<p>',{id: 'right-date', class: 'alignRight', html:''})))
             .append($('<div>', {id: 'brush-chart'}))
             .append($('<div>', {class: 'legend-row', html: '2021'}))
             .append($('<div>', {class: 'legend-row2', html: '2022'}))
