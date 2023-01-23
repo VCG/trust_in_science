@@ -276,6 +276,9 @@
                     ret = -ret
                     console.log(ret)
                 }
+                if(isNaN(ret)){
+                    console.log(d)
+                }
                 return ret
             })
             .attr("width", vis.x_scale.bandwidth());
@@ -375,7 +378,12 @@
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1])-500)
             .attr("height", d => {
-                return vis.y_scale(0) - vis.y_scale(d[1])+500
+                let ret = vis.y_scale(0) - vis.y_scale(d[1])+500
+                if(ret < 0) ret = -ret;
+                if(isNaN(ret)){
+                    console.log(d)
+                }
+                return ret
             })
             .attr("width", vis.x_scale.bandwidth())
            .style("fill", "transparent")
