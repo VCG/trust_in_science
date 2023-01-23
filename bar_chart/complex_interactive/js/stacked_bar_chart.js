@@ -419,6 +419,7 @@
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
             .on("brush end", function(e) {
+                console.log(e.selection)
                 
                 if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
                     $('#vax-leg').hide()
