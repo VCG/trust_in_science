@@ -343,7 +343,6 @@
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
             // reference this particular, highlighted bars with 1 opacity
-            console.log(".rect-bar-" + d.data.Max_Week_Date2)
             vis.svg.selectAll(".rect-bar-" + d.data.Max_Week_Date2).style("opacity", 1);
         };
 
