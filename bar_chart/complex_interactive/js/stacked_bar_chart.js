@@ -46,8 +46,7 @@
         time.append($('<div>', {class: 'brush-label', html: 'Filter by a Week Range'}))
             .append($('<div>', {class: 'legend-row'}).append($('<p>',{id: 'left-date', class: 'alignLeft', html:''})).append($('<p>',{id: 'right-date', class: 'alignRight', html:''})))
             .append($('<div>', {id: 'brush-chart'}))
-            .append($('<div>', {class: 'legend-row', html: '2021'}))
-            .append($('<div>', {class: 'legend-row2', html: '2022'}))
+            .append($('<div>', {class: 'legend-row'}).append($('<p>',{class: 'alignLeft', html:'2021'})).append($('<p>',{class: 'alignRight', html:'2022'})))
         
         let leg_row1 = $('<div>', {class: 'legend_row'}),
             leg_row2 = $('<div>', {class: 'legend_row'}),
@@ -397,8 +396,8 @@
     initBrush() {
         let vis = this;
 
-        const height = 25;
-        const width = 220;
+        const width = d3.select('#brush-chart').node().getBoundingClientRect().width;
+        const height = width/8.8;
 
         let x = d3.scaleTime()
             .domain([new Date(2021,3,5), new Date(2022,1,7)])
