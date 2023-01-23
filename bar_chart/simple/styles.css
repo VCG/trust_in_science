@@ -112,8 +112,12 @@ h3 {
     overflow: hidden;
     margin-top: -20px;
     margin-left: 140px;
+}
 
-
+.legend-row3 {
+    overflow: hidden;
+    margin-top: -20px;
+    margin-left: 148px;
 }
 
 .legend-value svg, .legend-value rect {
