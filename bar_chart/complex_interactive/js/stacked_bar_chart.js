@@ -473,7 +473,8 @@
         function brushed() {
             let range = d3.brushSelection(this);
 
-
+            console.log(range)
+            console.log(range[i])
 
             d3.selectAll("span")
                 .text(function(d, i) { return Math.round(range[i]); });
