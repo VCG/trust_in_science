@@ -85,6 +85,12 @@ h3 {
     padding-bottom: 4px;
 }
 
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+   ;
+}
+
 .legend {
     margin-top: 40px;
 }

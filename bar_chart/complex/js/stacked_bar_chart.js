@@ -371,52 +371,6 @@ class StackedBarChartComplex {
             .attr("font-family", "Segoe UI")
             .text("Case count per 100k people");
 
-
-        //share of non vaccination title
-        /*vis.svg
-            .append("text")
-            .attr("x", vis.width + 50)
-            .attr("y", (vis.margin.top / 3) - vis.margin.top + 80)
-            .attr("class", "title")
-            .text("Rate of Unvaccinated")
-            .attr("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "16")*/
-
-        //share of vaccination title
-        /*vis.svg
-            .append("text")
-            .attr("x", vis.width + 50)
-            .attr("y", (vis.margin.top / 3) - vis.margin.top + 200)
-            .attr("class", "title")
-            .text("Rate of Vaccinated")
-            .attr("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "16")*/
-
-        //add year labels to x axis (year 2022)
-        // vis.svg
-        //     .append("text")
-        //     .attr("x", vis.width - 125)
-        //     .attr("y", vis.height + 70)
-        //     .attr("class", "title")
-        //     .text("2022")
-        //     .attr("fill", "black")
-        //     .attr("font-family", "Segoe UI")
-        //     .attr("font-size", "12")
-        //
-        // //add year labels to x axis (year 2021)
-        // vis.svg
-        //     .append("text")
-        //     .attr("x", vis.margin.width + 50)
-        //     .attr("y", vis.height + 70)
-        //     .attr("class", "title")
-        //     .text("2021")
-        //     .attr("fill", "black")
-        //     .attr("font-family", "Segoe UI")
-        //     .attr("font-size", "12")
-
-
         //add x label
         vis.svg
             .append("text")
