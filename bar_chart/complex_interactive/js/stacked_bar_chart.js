@@ -413,7 +413,7 @@
 
 
         
-
+        console.log('width,height', [width,height])
 
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
