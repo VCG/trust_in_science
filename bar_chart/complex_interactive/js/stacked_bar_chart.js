@@ -376,11 +376,10 @@
             .attr("class", "overlay")
             // .attr("stroke", "black")
             .attr("x", d => {
-                console.log('d',d);
-                console.log('d.data',d.data);
-                console.log('d.data.Max_Week_Date2', d.data.Max_Week_Date)
-                console.log('vis.x_scale(d.data.Max_Week_Date2)',vis.x_scale(d.data.Max_Week_Date))
-                return vis.x_scale(d.data.Max_Week_Date)
+                let ret = vis.x_scale(d.data.Max_Week_Date)
+                if(ret < 0) ret = -ret;
+                if(isNaN(ret)) console.log('ret',ret)
+                return ret;
             })
             .attr("y", d => vis.y_scale(d[1])-500)
             .attr("height", d => {
