@@ -435,6 +435,9 @@
                 let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
                 let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[1]) : x.invert(width) : x.invert(width);
 
+                console.log(startDate, endDate)
+                console.log(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0])
+
                 $('#left-date').html(startDate.toISOString().split('T')[0])
                 $('#right-date').html(endDate.toISOString().split('T')[0])
 
