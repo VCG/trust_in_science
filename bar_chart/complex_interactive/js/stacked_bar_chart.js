@@ -141,10 +141,6 @@
         vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
         vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
         vis.height = vis.totalWidth/2 - vis.margin.top - vis.margin.bottom;
-        //
-        // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
-        //     vis.width = 1200 - vis.margin.left - vis.margin.right,
-        //     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select('#chart')
             .append("svg")
@@ -268,7 +264,7 @@
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
             .join("rect")
-            .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date)
+            .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date2)
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
@@ -347,7 +343,8 @@
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
             // reference this particular, highlighted bars with 1 opacity
-            vis.svg.selectAll(".rect-bar-" + d.data.Max_Week_Date).style("opacity", 1);
+            console.log(".rect-bar-" + d.data.Max_Week_Date2)
+            vis.svg.selectAll(".rect-bar-" + d.data.Max_Week_Date2).style("opacity", 1);
         };
 
         vis.mouseleave = function(event, d) {
