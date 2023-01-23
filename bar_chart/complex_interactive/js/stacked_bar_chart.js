@@ -364,7 +364,10 @@
             // .attr("stroke", "black")
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1])-500)
-            .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1])+500)
+            .attr("height", d => {
+                console.log(vis.y_scale(0) - vis.y_scale(d[1])+500)
+                return vis.y_scale(0) - vis.y_scale(d[1])+500
+            })
             .attr("width", vis.x_scale.bandwidth())
            .style("fill", "transparent")
             .on("mouseover", vis.mouseover)
