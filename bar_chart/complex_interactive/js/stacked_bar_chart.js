@@ -375,7 +375,7 @@
             .join("rect")
             .attr("class", "overlay")
             // .attr("stroke", "black")
-            .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
+            .attr("x", d => vis.x_scale(d.data.Max_Week_Date2))
             .attr("y", d => vis.y_scale(d[1])-500)
             .attr("height", d => {
                 let ret = vis.y_scale(0) - vis.y_scale(d[1])+500
