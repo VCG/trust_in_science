@@ -271,10 +271,12 @@
             .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1]))
             .attr("height", d => {
-                if(vis.y_scale(d[0]) - vis.y_scale(d[1]) < 0){
-                    console.log('stacked', vis.y_scale(d[0]) - vis.y_scale(d[1]))
+                let ret = vis.y_scale(d[0]) - vis.y_scale(d[1])
+                if(ret < 0){
+                    ret = -ret
+                    console.log(ret)
                 }
-                return vis.y_scale(d[0]) - vis.y_scale(d[1])
+                return ret
             })
             .attr("width", vis.x_scale.bandwidth());
 
