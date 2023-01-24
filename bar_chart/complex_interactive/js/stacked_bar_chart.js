@@ -25,109 +25,57 @@
     buildHtml(selector) {
         console.log('building html')
         let container = selector 
-                    ? $(`#${selector.questionId}`).find('.QuestionText')
-                    : $('#main-container').find('.QuestionText')
-        
-        let mc = $('<div>', {class: 'col-8 main-content'}),
-            lc = $('<div>', {class: 'col-4 legend-content'})
+                    ? d3.select(`#${selector.questionId}`).select('.QuestionText')
+                        .insert('div',':first-child')
+                    : d3.select('#main-container').select('.QuestionText')
 
-        mc.append($('<div>', {class: 'title'}).append($('<h3>', {id: 'chart-title', html: 'Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age'})))
-          .append($('<br>'))
-          .append($('<div>', {class: 'helper', html: '*Hover over the bars to explore further and brush the timeline on the right to filter the data'}))
-          .append($('<br>'))
-          .append($('<div>', {id: 'chart'}))
-          .append($('<div>', {class: 'source', html: 'Source: Centers for Disease Control and Prevention'}))
+
+        let mc = container.append('div').attr('class','col-8 main-content'),
+            lc = container.append('div').attr('class','col-4 legend-content')
+        
+        mc.append('div').attr('class', 'title')
+            .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+        mc.append('br');
+        mc.append('div').attr('class','helper').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
+        mc.append('br');
+        mc.append('div').attr('id','chart');
+        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
             
-        let time = $('<div>', {id: 'time_filter_div'}), 
-            leg = $('<div>', {id: 'leg', class: 'legend'}),
-            vac = $('<div>', {id: 'vax-leg', class: 'legend'}), 
-            unv = $('<div>', {id: 'unvax-leg', class: 'legend'})
-        
-        time.append($('<div>', {class: 'brush-label', html: 'Filter by a Week Range'}))
-            .append($('<div>', {class: 'legend-row'}).append($('<p>',{id: 'left-date', class: 'alignLeft', html:''})).append($('<p>',{id: 'right-date', class: 'alignRight', html:''})))
-            .append($('<div>', {id: 'brush-chart'}))
-            .append($('<div>', {class: 'legend-row'}).append($('<p>',{class: 'alignLeft', html:'2021'})).append($('<p>',{class: 'alignRight', html:'2022'})))
-        
-        let leg_row1 = $('<div>', {class: 'legend_row'}),
-            leg_row2 = $('<div>', {class: 'legend_row'}),
-            leg_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-            leg_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-        
-        leg_svg1.setAttribute('id','lsvg1')
-        leg_svg2.setAttribute('id','lsvg2')
+        let time = lc.append('div').attr('id','time_filter_div'),
+            leg = lc.append('div').attr('id','leg').attr('class','legend'),
+            vac = lc.append('div').attr('id','vax-leg').attr('class','legend'),
+            unv = lc.append('div').attr('id','unvax-leg').attr('class','legend')
 
-        leg_row1.append($('<div>', {class: 'legend-value'}).append(leg_svg1))
-                .append($('<div>', {class: 'legend-label', html: 'Rate of Unvaccinated'}))
+        time.append('div').attr('class','brush-label').text('Filter by Month Range')
+
+        let dates = time.append('div').attr('class','legend-row')
+        dates.append('p').attr('id','left-date').attr('class','alignLeft').text('')
+        dates.append('p').attr('id','right-date').attr('class','alignRight ').text('')
+
+        time.append('div').attr('id','brush-chart')
+
+        let years = time.append('div').attr('class', 'legend-row')
+        years.append('p').attr('class','alignLeft').text('2021')
+        years.append('p').attr('class','alignRight ').text('2022')
+
+        vac.append('div').attr('class','legend-title').text('Rate of Vaccinated')
+        unv.append('div').attr('class','legend-title').text('Rate of Unvaccinated')
         
-        leg_row2.append($('<div>', {class: 'legend-value'}).append(leg_svg2))
-                .append($('<div>', {class: 'legend-label', html: 'Rate of Vaccinated'}))
+        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
+            vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
+            unv_row1 = unv.append('div'), unv_row2 = unv.append('div'), unv_row3 = unv.append('div')
         
-        leg.append(leg_row1).append(leg_row2)
-
-        let vac_row1 = $('<div>', {class: 'legend_row'}), 
-            vac_row2 = $('<div>', {class: 'legend_row'}), 
-            vac_row3 = $('<div>', {class: 'legend_row'}),
-            vac_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-            vac_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-            vac_svg3 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+        let rows = [leg_row1,leg_row2,vac_row1,vac_row2,vac_row3,unv_row1,unv_row2,unv_row3].map(d => d.attr('class','legend-row')),
+            rids = ['lsvg1','lsvg2','vsvg1','vsvg2','vsvg3','usvg1','usvg2','usvg3'],
+            rcolors = ['#ef701b','#0984ea','#9e3a26','#ef701b','#f4d166','#04386b','#0984ea','#7dc9f5'],
+            rlabels = ['Rate of Unvaccinated','Rate of Vaccinated','Ages 80+','Ages 50-79','Ages 18-49','Ages 80+','Ages 50-79','Ages 18-49']
         
-        vac_svg1.setAttribute('id','vsvg1')
-        vac_svg2.setAttribute('id','vsvg2')
-        vac_svg3.setAttribute('id','vsvg3')
-        
-        vac_row1.append($('<div>', {class: 'legend-value'}).append(vac_svg1))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
-        
-        vac_row2.append($('<div>', {class: 'legend-value'}).append(vac_svg2))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
+        rows.forEach((d,i) => {
+            d.append('div').attr('class','legend-value').append('svg').attr('id',rids[i]).append('rect').style('fill',rcolors[i])
+            d.append('div').attr('class','legend-label').text(rlabels[i])
+        })
 
-        vac_row3.append($('<div>', {class: 'legend-value'}).append(vac_svg3))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
-
-        vac.append($('<div>', {class: 'legend-title', html: 'Rate of Vaccinated'}))
-           .append(vac_row1).append(vac_row2).append(vac_row3)
-            
-        
-        let unv_row1 = $('<div>', {class: 'legend_row'}), 
-            unv_row2 = $('<div>', {class: 'legend_row'}), 
-            unv_row3 = $('<div>', {class: 'legend_row'}),
-            unv_svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-            unv_svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-            unv_svg3 = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-        
-        unv_svg1.setAttribute('id','usvg1')
-        unv_svg2.setAttribute('id','usvg2')
-        unv_svg3.setAttribute('id','usvg3')
-
-        unv_row1.append($('<div>', {class: 'legend-value'}).append(unv_svg1))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 80+'}))
-        
-        unv_row2.append($('<div>', {class: 'legend-value'}).append(unv_svg2))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 50-79'}))
-
-        unv_row3.append($('<div>', {class: 'legend-value'}).append(unv_svg3))
-                .append($('<div>', {class: 'legend-label', html: 'Ages 18-49'}))
-
-        unv.append($('<div>', {class: 'legend-title', html: 'Rate of Unvaccinated'}))
-           .append(unv_row1).append(unv_row2).append(unv_row3)
-        
-        lc.append(time).append(leg).append(unv).append(vac)
-
-        if(selector) container.append($('<div>', {class: 'row'}).append(mc).append(lc))
-        else container.append(mc).append(lc)
-
-        d3.select('#lsvg1').append('rect').style('fill', '#ef701b')
-        d3.select('#lsvg2').append('rect').style('fill', '#0984ea')
-
-        d3.select('#usvg1').append('rect').style('fill', '#9e3a26')
-        d3.select('#usvg2').append('rect').style('fill', '#ef701b')
-        d3.select('#usvg3').append('rect').style('fill', '#f4d166')
-
-        d3.select('#vsvg1').append('rect').style('fill', '#04386b')
-        d3.select('#vsvg2').append('rect').style('fill', '#0984ea')
-        d3.select('#vsvg3').append('rect').style('fill', '#7dc9f5')
-
-        leg.hide()
+        leg.style('display','none')
     }
 
     initVis() {
@@ -420,16 +368,16 @@
                 console.log(e.selection)
                 
                 if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
-                    $('#vax-leg').hide()
-                    $('#unvax-leg').hide()
-                    $('#leg').show()
-                    $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
+                    d3.select('#vax-leg').style('display','none')
+                    d3.select('#unvax-leg').style('display','none')
+                    d3.select('#leg').style('display','block')
+                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
                 } 
                 else{
-                    $('#leg').hide()
-                    $('#vax-leg').show()
-                    $('#unvax-leg').show()
-                    $('#chart-title').html('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
+                    d3.select('#vax-leg').style('display','block')
+                    d3.select('#unvax-leg').style('display','block')
+                    d3.select('#leg').style('display','none')
+                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
                 }
                 
                 let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
@@ -438,8 +386,8 @@
                 //console.log(startDate, endDate)
                 //console.log(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0])
 
-                $('#left-date').html(startDate.toISOString().split('T')[0])
-                $('#right-date').html(endDate.toISOString().split('T')[0])
+                d3.select('#left-date').text(startDate.toISOString().split('T')[0])
+                d3.select('#right-date').text(endDate.toISOString().split('T')[0])
 
                 let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
                     sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
