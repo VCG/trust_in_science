@@ -27,6 +27,7 @@
         let container = selector 
                     ? d3.select(`#${selector.questionId}`).select('.QuestionText')
                         .insert('div',':first-child')
+                        .attr('class','row')
                     : d3.select('#main-container').select('.QuestionText')
 
 
