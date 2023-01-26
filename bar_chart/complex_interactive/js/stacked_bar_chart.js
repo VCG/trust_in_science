@@ -1,6 +1,7 @@
  class StackedBarChart {
 
     constructor(data, selector) {
+        this.whole_data = true;
         this.data = data;
         this.displayData = [];
         this.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -107,8 +108,9 @@
 
         vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
             (d,i) => {
+                
                 let [_,mo,day] = d.toISOString().split('T')[0].split('-')
-                return `${vis.months[+mo-1]} ${day}`
+                return (vis.whole_data && i%2==0) ? '' : `${vis.months[+mo-1]} ${day}`
             }
         );
 
@@ -167,6 +169,10 @@
 
     wrangleData(startDate, endDate) {
         let vis = this;
+        if(startDate.getDate()==5 && startDate.getMonth()==3 && endDate.getMonth()==1 && endDate.getDate()==7){
+            vis.whole_data = true;
+        }
+        else vis.whole_data = false;
 
         if (startDate && endDate) {
             vis.displayData = vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate);
