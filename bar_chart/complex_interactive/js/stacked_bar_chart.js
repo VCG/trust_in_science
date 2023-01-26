@@ -169,7 +169,7 @@
 
     wrangleData(startDate, endDate) {
         let vis = this;
-        if(startDate.getDate()==5 && startDate.getMonth()==3 && endDate.getMonth()==1 && endDate.getDate()==7){
+        if(Math.abs(startDate-endDate) > 12528000000){
             vis.whole_data = true;
         }
         else vis.whole_data = false;
