@@ -35,12 +35,12 @@
             lc = container.append('div').attr('class','col-4 legend-content')
         
         mc.append('div').attr('class', 'title')
-            .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+            .append('h3').attr('id','chart-title').attr('class','VisText').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
         mc.append('br');
-        mc.append('div').attr('class','helper').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
+        mc.append('div').append('p').attr('class','helper VisText').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
         mc.append('br');
         mc.append('div').attr('id','chart');
-        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+        mc.append('div').append('p').attr('class','source VisText').text('Source: Centers for Disease Control and Prevention');
             
         let time = lc.append('div').attr('id','time_filter_div'),
             leg = lc.append('div').attr('id','leg').attr('class','legend'),
@@ -59,8 +59,8 @@
         years.append('p').attr('class','alignLeft').text('2021')
         years.append('p').attr('class','alignRight ').text('2022')
 
-        vac.append('div').attr('class','legend-title').text('Rate of Vaccinated')
-        unv.append('div').attr('class','legend-title').text('Rate of Unvaccinated')
+        vac.append('div').attr('class','legend-title').append('p').attr('class','VisText').text('Rate of Vaccinated')
+        unv.append('div').attr('class','legend-title').append('p').attr('class','VisText').text('Rate of Unvaccinated')
         
         let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
             vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
@@ -73,7 +73,7 @@
         
         rows.forEach((d,i) => {
             d.append('div').attr('class','legend-value').append('svg').attr('id',rids[i]).append('rect').style('fill',rcolors[i])
-            d.append('div').attr('class','legend-label').text(rlabels[i])
+            d.append('div').attr('class','legend-label').append('p').attr('class','VisText').text(rlabels[i])
         })
 
         leg.style('display','none')
