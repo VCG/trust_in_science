@@ -436,14 +436,16 @@
         // // v3:  brushed();
         brush.move(brushg, [14, 14].map(x));
 
+        let fontsize = Math.max(11,vis.width/36)
+
         //y axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/4)
-            .attr("y", 0-50)
-            .attr("font-size", "16")
-            .text("Case count per 100k people");
+            .attr("x", -vis.width/6)
+            .attr("y", 0-55)
+            .attr("font-size", fontsize)
+            .text("Cases per 100k people");
 
         //add x label
         vis.svg
@@ -452,9 +454,9 @@
             .attr("x", vis.width/2)
             .attr("y", vis.height+80)
             .attr("class", "title")
-            .text("Week")
+            .text("Week Start Date")
             .attr("fill","black")
-            .attr("font-size", "16")
+            .attr("font-size", fontsize)
 
     }
 }
