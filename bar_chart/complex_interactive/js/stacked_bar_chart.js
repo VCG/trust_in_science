@@ -108,9 +108,8 @@
 
         vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
             (d,i) => {
-                
                 let [_,mo,day] = d.toISOString().split('T')[0].split('-')
-                return (vis.whole_data && i%2==0) ? '' : `${vis.months[+mo-1]} ${day}`
+                return (vis.whole_data && i%2==1) ? '' : `${vis.months[+mo-1]} ${day}`
             }
         );
 
@@ -169,10 +168,7 @@
 
     wrangleData(startDate, endDate) {
         let vis = this;
-        if(Math.abs(startDate-endDate) > 12528000000){
-            vis.whole_data = true;
-        }
-        else vis.whole_data = false;
+        vis.whole_data = Math.abs(startDate-endDate) > 15033600000 || isNaN(Math.abs(startDate-endDate))
 
         if (startDate && endDate) {
             vis.displayData = vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate);
