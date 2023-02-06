@@ -4,23 +4,54 @@ class StackedBarChartComplex {
         this.data = data;
         this.displayData = [];
 
-        this.initVis(selector);
+        this.buildHtml(selector);
+        this.initVis();
     }
 
+    buildHtml(selector){
+        let container = selector 
+                    ? d3.select(`#${selector.questionId}`).select('.QuestionText')
+                        .insert('div',':first-child')
+                        .attr('class','row')
+                    : d3.select('#main-container').select('.QuestionText')
+        
+        let mc = container.append('div').attr('class','col-8 main-content'),
+            lc = container.append('div').attr('class','col-4 legend-content')
 
-    initVis(selector) {
+        mc.append('div').attr('class', 'title')
+            .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+        mc.append('br');
+        mc.append('div').attr('class','helper').text('*Hover over the bars to explore further');
+        mc.append('br');
+        mc.append('div').attr('id','chart');
+        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+
+        let leg = lc.append('div').attr('id','leg').attr('class','legend')
+        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div')
+
+        let rows = [leg_row1,leg_row2].map(d => d.attr('class','legend-row')),
+            rids = ['lsvg1', 'lsvg2'],
+            rcolors = ['#ef701b','#0984ea'],
+            rlabels = ['Rate of Unvaccinated','Rate of Vaccinated']
+        
+        rows.forEach((d,i) => {
+            d.append('div').attr('class','legend-value').append('svg').attr('id',rids[i]).append('rect').style('fill',rcolors[i])
+            d.append('div').attr('class','legend-label').text(rlabels[i])
+        })
+    }
+
+    initVis() {
         let vis = this;
 
-        vis.margin = {top: 100, right: 210, bottom: 100, left: 70},
-            vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = 630 - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
+        vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        if(vis.totalWidth < 0) console.log(vis.totalWidth)
+        vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        if(vis.width < 0) console.log(vis.width)
+        vis.height = vis.totalWidth/2 - vis.margin.top - vis.margin.bottom;
+        if(vis.height < 0) console.log(vis.height)
 
-
-        let currQuestion = selector ? d3.select(`#${selector.questionId}`)
-                            .select('.QuestionText')
-                            .insert('div', ':first-child') : d3.select('#chart')
-
-        vis.svg = currQuestion
+        vis.svg = d3.select('#chart')
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -30,14 +61,11 @@ class StackedBarChartComplex {
 
         // List of subgroups = header of the csv files = soil condition here
         const subgroups = vis.data.columns.slice(5)
-        console.log(subgroups)
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis
         const groups = vis.data.map(d => (d.Week))
-        console.log(groups)
 
         const month_groups = vis.data.map(d => (d.month))
-        console.log(month_groups)
 
         // Add X axis
         const x = d3.scaleBand()
@@ -220,42 +248,6 @@ class StackedBarChartComplex {
         //
 
 
-        //overall chart title
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", (vis.margin.top / 5) - vis.margin.top)
-            .attr("class", "title")
-            .text("Weekly count of vaccinated & unvaccinated individuals who caught Covid-19")
-            .attr("fill", "black")
-            .attr("font-size", "20")
-            .attr("font-family", "Segoe UI")
-            .attr("font-weight", "bold")
-
-        //overall chart subtitle
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", (vis.margin.top / 5) - vis.margin.top + 30)
-            .attr("class", "title")
-            .text("Apr 2021-Feb 2022")
-            .attr("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "17")
-
-        //add instructions
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", (vis.margin.top / 5) - vis.margin.top + 55)
-            .attr("class", "title")
-            .text("*Hover over the bars to explore further")
-            .attr("fill", "black")
-            .attr("font-size", "12")
-            .attr("font-family", "Segoe UI")
-            .attr("font-style", "italic")
-
-
         //grey y gridlines
         vis.make_x_gridlines = function () {
             return d3.axisLeft(y)
@@ -307,22 +299,6 @@ class StackedBarChartComplex {
                 return color2(d)
             })
 
-
-        /*vis.svg.selectAll("mydots")
-            .data(keys)
-            .enter()
-            .append("rect")
-            .attr("class", "rect")
-            .attr("x", vis.width + 50)
-            .attr("y", function (d, i) {
-                return 150 + i * (size + 8)
-            })
-            .attr("width", size)
-            .attr("height", size)
-            .style("fill", function (d) {
-                return color3(d)
-            })*/
-
         // Add one dot in the legend for each name.
         vis.svg.selectAll("mylabels")
             .data(keys)
@@ -340,26 +316,6 @@ class StackedBarChartComplex {
             })
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
-
-
-        // Add one dot in the legend for each name.
-        /*vis.svg.selectAll("mylabels")
-            .data(keys)
-            .enter()
-            .append("text")
-            .attr("x", vis.width + 60 + size * 1.2)
-            .attr("y", function (d, i) {
-                return 150 + i * (size + 8) + (size / 2)
-            })
-            // .style("fill", function(d){ return color2(d)})
-            .style("fill", "black")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", "14px")
-            .text(function (d) {
-                return d
-            })
-            .attr("text-anchor", "left")
-            .style("alignment-baseline", "middle")*/
 
         //y axis label
         vis.svg.append("text")
