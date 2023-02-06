@@ -4,21 +4,51 @@ class BarChart {
         this.data = data;
     }
 
-    initVis(isOne,selector) {
+    buildHtml(selector){
+        let container = selector 
+                    ? d3.select(`#${selector.questionId}`).select('.QuestionText')
+                        .insert('div',':first-child')
+                        .attr('class','row')
+                    : d3.select('#main-container').select('.QuestionText')
+        
+        let mc = container.append('div').attr('class','col-8 main-content'),
+            lc = container.append('div').attr('class','col-4 legend-content')
+        
+        mc.append('div').attr('class', 'title')
+            .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+        mc.append('br');
+        mc.append('div').attr('class','helper').text('*Hover over the bars to explore further');
+        mc.append('br');
+        mc.append('div').attr('id','chart');
+        mc.append('div').attr('id','chart2');
+        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+
+        let leg = lc.append('div').attr('id','leg').attr('class','legend')
+        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div')
+
+        let rows = [leg_row1,leg_row2].map(d => d.attr('class','legend-row')),
+            rids = ['lsvg1', 'lsvg2'],
+            rcolors = ['#ef701b','#0984ea'],
+            rlabels = ['Rate of Unvaccinated','Rate of Vaccinated']
+        
+        rows.forEach((d,i) => {
+            d.append('div').attr('class','legend-value').append('svg').attr('id',rids[i]).append('rect').style('fill',rcolors[i])
+            d.append('div').attr('class','legend-label').text(rlabels[i])
+        })
+    }
+
+    initVis(isOne) {
         let vis = this;
 
-        vis.margin = {top: isOne ? 100 : 10, right: 210, bottom: 90, left: 70},
-            vis.width = 1050 - vis.margin.left - vis.margin.right,
-            vis.height = (isOne ? 380 : 290) - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
+        vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        if(vis.totalWidth < 0) console.log(vis.totalWidth)
+        vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        if(vis.width < 0) console.log(vis.width)
+        vis.height = vis.totalWidth/3 - vis.margin.top - vis.margin.bottom;
+        if(vis.height < 0) console.log(vis.height)          
 
-
-        let currQuestion = selector ? d3.select(`#${selector.questionId}`)
-                            .select('.QuestionText')
-                            .insert('div',':first-child')
-                            : d3.select(isOne ? `#bar_chart` : '#bar_chart2')
-                                
-
-        vis.svg = currQuestion
+        vis.svg = d3.select(isOne ? `#chart` : '#chart2')
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)

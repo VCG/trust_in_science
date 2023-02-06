@@ -14,7 +14,7 @@ d3.csv("https://raw.githubusercontent.com/VCG/trust_in_science/main/bar_chart/si
 })
 .then(data => {
     let bar = new BarChart(data);
+    bar.buildHtml()
     bar.initVis(false)
     bar.initVis(true)
-    bar.buildLegend()
 });
