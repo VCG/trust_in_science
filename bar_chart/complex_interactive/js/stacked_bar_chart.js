@@ -1,22 +1,83 @@
  class StackedBarChart {
 
-    constructor(data) {
+    constructor(data, selector) {
+        this.whole_data = true;
         this.data = data;
         this.displayData = [];
-        // console.log(data);
+        this.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        this.num_days = [31,28,31,30,31,30,31,31,30,31,30,31];
+        this.weeks = { 14: 'Apr', 18: 'May', 23: 'Jun', 27: 'Jul', 31: 'Aug', 36: 'Sep', 40: 'Oct', 44: 'Nov', 49: 'Dec', 1: 'Jan', 6: 'Feb'}
 
         // List of subgroups = header of the csv files = soil condition here
         this.subgroups = this.data.columns.slice(4);
-        // console.log(this.subgroups);
 
         // color palette = one color per subgroup
         this.color = d3.scaleOrdinal()
             .domain(this.subgroups)
-            .range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
+            .range(['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'])
+            //.range(['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26'])
 
+        this.buildHtml(selector);
         this.initVis();
 
         // this.initBrush()
+    }
+
+    buildHtml(selector) {
+        console.log('building html')
+        let container = selector 
+                    ? d3.select(`#${selector.questionId}`).select('.QuestionText')
+                        .insert('div',':first-child')
+                        .attr('class','row')
+                    : d3.select('#main-container').select('.QuestionText')
+
+
+        let mc = container.append('div').attr('class','col-8 main-content'),
+            lc = container.append('div').attr('class','col-4 legend-content')
+        
+        mc.append('div').attr('class', 'title')
+            .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+        mc.append('br');
+        mc.append('div').attr('class','helper').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
+        mc.append('br');
+        mc.append('div').attr('id','chart');
+        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+            
+        let time = lc.append('div').attr('id','time_filter_div'),
+            leg = lc.append('div').attr('id','leg').attr('class','legend'),
+            vac = lc.append('div').attr('id','vax-leg').attr('class','legend'),
+            unv = lc.append('div').attr('id','unvax-leg').attr('class','legend')
+
+        time.append('div').attr('class','brush-label').text('Filter by Month Range')
+
+        let dates = time.append('div').attr('class','legend-row')
+        dates.append('p').attr('id','left-date').attr('class','alignLeft').text('')
+        dates.append('p').attr('id','right-date').attr('class','alignRight ').text('')
+
+        time.append('div').attr('id','brush-chart')
+
+        let years = time.append('div').attr('class', 'legend-row')
+        years.append('p').attr('class','alignLeft').text('2021')
+        years.append('p').attr('class','alignRight ').text('2022')
+
+        vac.append('div').attr('class','legend-title').text('Rate of Vaccinated')
+        unv.append('div').attr('class','legend-title').text('Rate of Unvaccinated')
+        
+        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
+            vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
+            unv_row1 = unv.append('div'), unv_row2 = unv.append('div'), unv_row3 = unv.append('div')
+        
+        let rows = [leg_row1,leg_row2,vac_row1,vac_row2,vac_row3,unv_row1,unv_row2,unv_row3].map(d => d.attr('class','legend-row')),
+            rids = ['lsvg1','lsvg2','vsvg1','vsvg2','vsvg3','usvg1','usvg2','usvg3'],
+            rcolors = ['#ef701b','#0984ea','#9e3a26','#ef701b','#f4d166','#04386b','#0984ea','#7dc9f5'],
+            rlabels = ['Rate of Unvaccinated','Rate of Vaccinated','Ages 80+','Ages 50-79','Ages 18-49','Ages 80+','Ages 50-79','Ages 18-49']
+        
+        rows.forEach((d,i) => {
+            d.append('div').attr('class','legend-value').append('svg').attr('id',rids[i]).append('rect').style('fill',rcolors[i])
+            d.append('div').attr('class','legend-label').text(rlabels[i])
+        })
+
+        leg.style('display','none')
     }
 
     initVis() {
@@ -24,16 +85,15 @@
 
 
        // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 70, left: 70};
-        vis.width = 900 - vis.margin.left - vis.margin.right;
-        vis.height = 450 - vis.margin.top - vis.margin.bottom;
-        //
-        // vis.margin = {top: 50, right: 500, bottom: 70, left: 70},
-        //     vis.width = 1200 - vis.margin.left - vis.margin.right,
-        //     vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
+        vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        if(vis.totalWidth < 0) console.log(vis.totalWidth)
+        vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        if(vis.width < 0) console.log(vis.width)
+        vis.height = vis.totalWidth/2 - vis.margin.top - vis.margin.bottom;
+        if(vis.height < 0) console.log(vis.height)
 
-
-        vis.svg = d3.select("#chart")
+        vis.svg = d3.select('#chart')
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -46,7 +106,18 @@
             .range([0, vis.width])
             .padding([0.2]);
 
-        vis.x_axis = d3.axisBottom().scale(vis.x_scale);
+        vis.x_axis = d3.axisBottom().scale(vis.x_scale).tickFormat(
+            (d,i) => {
+                let [_,mo,day] = d.toISOString().split('T')[0].split('-')
+                return (vis.whole_data && i%2==1) ? '' : `${vis.months[+mo-1]} ${day}`
+            }
+        );
+
+        vis.x_axis2 = d3.axisBottom().scale(vis.x_scale).tickFormat(
+            (d,i) => {
+                let [_,mo,da] = d.toISOString().split('T')[0].split('-').map(d => +d)
+                return (i===0) ? '2021' : ((mo === 1 && da-7 < 0) ? '2022' : '')
+            });
 
         // Add Y axis
         vis.y_scale = d3.scaleLinear().range([vis.height, 0]);
@@ -61,8 +132,16 @@
             .style("text-anchor", "end")
             .attr("dx", "0.5em")
             .attr("dy", "1em")
-            .style('font-size', '12px')
-            .attr("transform", "rotate(0)");
+            .style('font-size', '12px');
+        
+        vis.svg.append("g")
+            .attr("transform", `translate(0, ${vis.height})`)
+            .attr("class", "x-axis2")
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "0.5em")
+            .attr("dy", "1em")
+            .style('font-size', '12px');
 
         vis.svg.append("g").attr("class", "y-axis");
 
@@ -82,27 +161,6 @@
             .style("padding", "10px")
             .style("display", "none")
 
-
-        //add year labels to x axis (year 2021)
-        vis.svg
-            .append("text")
-            .attr("x", 0)
-            .attr("y", vis.height+200)
-            .attr("class", "title_legend")
-            .text("2021")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
-        //add year labels to x axis (year 2022)
-        vis.svg
-            .append("text")
-            .attr("x", vis.width-100)
-            .attr("y", vis.height+40)
-            .attr("class", "title_legend1")
-            .text("2022")
-            .attr("fill","black")
-            .attr("font-size", "12")
-
         vis.initBrush();
 
         vis.wrangleData();
@@ -110,6 +168,7 @@
 
     wrangleData(startDate, endDate) {
         let vis = this;
+        vis.whole_data = Math.abs(startDate-endDate) > 15033600000 || isNaN(Math.abs(startDate-endDate))
 
         if (startDate && endDate) {
             vis.displayData = vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate);
@@ -126,7 +185,7 @@
 
 
         // List of groups = species here = value of the first column called group -> I show them on the X axis
-        vis.groups = vis.displayData.map(d => (d.Week));
+        vis.groups = vis.displayData.map(d => (d.Max_Week_Date));
 
         //stack the data? --> stack per subgroup
         const stackedData = d3.stack()
@@ -137,7 +196,11 @@
         vis.y_scale.domain([0, d3.max(stackedData, d => d3.max(d, function (d) { return d[1]; }))]);
 
         vis.svg.selectAll(".x-axis").transition().duration(200).call(vis.x_axis).style('font-size', '12px');
+        vis.svg.selectAll(".x-axis2").transition().duration(200).call(vis.x_axis2).style('font-size', '12px');
         vis.svg.selectAll(".y-axis").transition().duration(200).call(vis.y_axis).style('font-size', '12px');
+
+        vis.svg.select('.x-axis').selectAll('text').attr('transform','translate(-20,20) rotate(-45)')
+        vis.svg.select('.x-axis2').selectAll('text').attr('transform','translate(-20,40)')
 
         vis.svg.selectAll(".stacked").remove();
 
@@ -153,10 +216,19 @@
             // enter a second time = loop subgroup per subgroup to add all rectangles
             .data(d => d)
             .join("rect")
-            .attr("class", d => "main-rect rect-bar-" + d.data.Week)
-            .attr("x", d => vis.x_scale(d.data.Week))
+            .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date2)
+            .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
             .attr("y", d => vis.y_scale(d[1]))
-            .attr("height", d => vis.y_scale(d[0]) - vis.y_scale(d[1]))
+            .attr("height", d => {
+                let ret = vis.y_scale(d[0]) - vis.y_scale(d[1])
+                if(ret < 0){
+                    ret = -ret
+                }
+                if(isNaN(ret)){
+                    console.log(d)
+                }
+                return ret
+            })
             .attr("width", vis.x_scale.bandwidth());
 
 
@@ -188,7 +260,7 @@
         vis.mouseover = function(e, d) {
             const date = d.data.group;
             const year = yearFormat(d.data.Max_Week_Date);
-            const week = d.data.Week;
+            const week = d.data.Max_Week_Date2;
             let dataForDate = d.data;
             let total = 0;
             vis.subgroups.forEach(sg => total += parseInt(dataForDate[sg]));
@@ -232,7 +304,7 @@
             vis.svg.selectAll(".main-rect").style("opacity", 0.3);
 
             // reference this particular, highlighted bars with 1 opacity
-            vis.svg.selectAll(".rect-bar-" + d.data.Week).style("opacity", 1);
+            vis.svg.selectAll(".rect-bar-" + d.data.Max_Week_Date2).style("opacity", 1);
         };
 
         vis.mouseleave = function(event, d) {
@@ -251,9 +323,18 @@
             .join("rect")
             .attr("class", "overlay")
             // .attr("stroke", "black")
-            .attr("x", d => vis.x_scale(d.data.Week))
+            .attr("x", d => {
+                let ret = vis.x_scale(d.data.Max_Week_Date)
+                if(ret < 0) ret = -ret;
+                if(isNaN(ret)) console.log('ret',ret)
+                return ret;
+            })
             .attr("y", d => vis.y_scale(d[1])-500)
-            .attr("height", d => vis.y_scale(0) - vis.y_scale(d[1])+500)
+            .attr("height", d => {
+                let ret = vis.y_scale(0) - vis.y_scale(d[1])+500
+                if(ret < 0) ret = -ret;
+                return ret
+            })
             .attr("width", vis.x_scale.bandwidth())
            .style("fill", "transparent")
             .on("mouseover", vis.mouseover)
@@ -266,38 +347,57 @@
     initBrush() {
         let vis = this;
 
-        const height = 20;
-        const width = 180;
+        const width = d3.select('#brush-chart').node().getBoundingClientRect().width;
+        const height = width/8.8;
 
-        const groups2 = vis.data.map(d => (d.Week));
-
-        let x = d3.scaleBand()
-            .domain(groups2)
-            .range([0, width])
-            .padding([1.5]);
+        let x = d3.scaleTime()
+            .domain([new Date(2021,3,5), new Date(2022,1,7)])
+            .range([0, width]);
 
         let xAxis = d3.axisBottom()
             .scale(x)
-            .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
-            .ticks(5)
-            .tickSize([10]);
+            .ticks(21)
+            .tickSize([10])
+            .tickFormat(d3.timeFormat('%b'));
 
 
-        let xTime = d3.scaleTime()
-            .domain(d3.extent(vis.data, d => d.Max_Week_Date))
-            .range([0, width]);
-
+        
+        console.log('width,height', [width,height])
 
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
             .on("brush end", function(e) {
-                let startDate = xTime.invert(e.selection[0]);
-                let endDate = xTime.invert(e.selection[1]);
-                vis.wrangleData(startDate, endDate);
+                console.log(e.selection)
+                
+                if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
+                    d3.select('#vax-leg').style('display','none')
+                    d3.select('#unvax-leg').style('display','none')
+                    d3.select('#leg').style('display','block')
+                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
+                } 
+                else{
+                    d3.select('#vax-leg').style('display','block')
+                    d3.select('#unvax-leg').style('display','block')
+                    d3.select('#leg').style('display','none')
+                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
+                }
+                
+                let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
+                let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[1]) : x.invert(width) : x.invert(width);
 
-                vis.svg.select(".title_legend").remove();
-                vis.svg.select(".title_legend1").remove();
+                //console.log(startDate, endDate)
+                //console.log(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0])
+
+                d3.select('#left-date').text(startDate.toISOString().split('T')[0])
+                d3.select('#right-date').text(endDate.toISOString().split('T')[0])
+
+                let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
+                    sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
+
+                vis.color.range(e.selection ? ((e.selection[1] - e.selection[0] < 5) ? twoColors : sixColors) : twoColors)
+
+                vis.wrangleData(startDate, endDate);
             });
 
         let svg = d3.select("#brush-chart").append("svg")
@@ -324,7 +424,8 @@
         function brushed() {
             let range = d3.brushSelection(this);
 
-
+            console.log(range)
+            console.log(range[i])
 
             d3.selectAll("span")
                 .text(function(d, i) { return Math.round(range[i]); });
@@ -333,27 +434,29 @@
         }
 
         // // v3:  brushed();
-        brush.move(brushg, [20, 50].map(x));
+        brush.move(brushg, [14, 14].map(x));
+
+        let fontsize = Math.max(11,vis.width/36)
 
         //y axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/4)
-            .attr("y", 0-50)
-            .attr("font-size", "16")
-            .text("Case count per 100k people");
+            .attr("x", -vis.width/6)
+            .attr("y", 0-55)
+            .attr("font-size", fontsize)
+            .text("Cases per 100k people");
 
         //add x label
         vis.svg
             .append("text")
             .attr("text-anchor", "middle")
             .attr("x", vis.width/2)
-            .attr("y", vis.height+60)
+            .attr("y", vis.height+80)
             .attr("class", "title")
-            .text("Week Number")
+            .text("Week Start Date")
             .attr("fill","black")
-            .attr("font-size", "16")
+            .attr("font-size", fontsize)
 
     }
 }

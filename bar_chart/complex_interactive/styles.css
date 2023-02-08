@@ -18,7 +18,7 @@
 }
 
 .legend-content {
-    width: 180px;
+    width: 250px;
     float: right;
     font-size: 12px;
     margin-top: 60px;
@@ -30,7 +30,7 @@
 }
 
 .legend {
-    margin-top: 40px;
+    margin-top: 5%;
 }
 
 .legend-title {
@@ -39,6 +39,8 @@
 
 .legend-row {
     overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .legend-value {
@@ -46,12 +48,14 @@
     padding: 0 10px 0 0;
 }
 
-.legend-row2 {
-    overflow: hidden;
-    margin-top: -20px;
-    margin-left: 140px;
+.alignLeft {
+    float: left;
+    margin-bottom: 0;
+}
 
-
+.alignRight {
+    float: right;
+    margin-bottom: 0;
 }
 
 .legend-value svg, .legend-value rect {

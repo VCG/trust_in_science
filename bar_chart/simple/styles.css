@@ -45,5 +45,90 @@
 .axisMonths2 line{
     stroke: black;
     /*stroke-dasharray: 10,8;*/
+}
 
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+.legend-content {
+    width: 180px;
+    float: right;
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+}
+
+.helper {
+    margin-left: 70px;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.brush-label {
+    font-size: 13px;
+    padding-bottom: 4px;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+   ;
+}
+
+.legend {
+    margin-top: 5%;
+}
+
+.legend-title {
+    font-size: 13px;
+}
+
+.legend-row {
+    overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.legend-value {
+    display: inline;
+    padding: 0 10px 0 0;
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
+}
+
+.alignLeft {
+    float: left;
+    margin-bottom: 0;
+}
+
+.alignRight {
+    float: right;
+    margin-bottom: 0;
+}
+
+.Skin .QuestionText{
+    line-height: 1em!important;
 }

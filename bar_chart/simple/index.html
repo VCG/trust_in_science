@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Bar Chart plot</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
     <!-- Load external CSS file -->
     <link href="styles.css" rel="stylesheet">
 </head>
 
 <body style="padding: 5vh">
-<!--<body>-->
-<!--<div id="chartholder"></div>-->
+<div id="main-container" class="container">
+    <div class="QuestionText row"></div>
 
-
-<div width="200" height="200" id="bar_chart"></div>
-<div width="200" height="200" id="bar_chart2"></div>
-
-<div class="source">Source: Centers for Disease Control and Prevention <a href="https://data.cdc.gov/Public-Health-Surveillance/Rates-of-COVID-19-Cases-or-Deaths-by-Age-Group-and/3rge-nu2a/data" target="_blank">Here</a></div>
+</div>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
 
 <!-- Load external JS files -->
-<script src="js/d3.v6.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="js/d3-tip.js"></script>
 <script src="js/main.js"></script>
 <script src="js/bar_chart.js"></script>
