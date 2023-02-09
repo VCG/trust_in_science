@@ -1,9 +1,23 @@
 class LineChart {
-    constructor(data) {
+    constructor(data, selector) {
         this.data = data;
-
         // create a list of keys
-        this.keys = [ "Ages 80+","Ages 50-79","Ages 18-49"]
+        this.keys = ["Ages 80+", "Ages 50-79", "Ages 18-49"]
+        this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        this.num_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        this.weeks = {
+            14: 'Apr',
+            18: 'May',
+            23: 'Jun',
+            27: 'Jul',
+            31: 'Aug',
+            36: 'Sep',
+            40: 'Oct',
+            44: 'Nov',
+            49: 'Dec',
+            1: 'Jan',
+            6: 'Feb'
+        }
 
         this.color1 = d3.scaleOrdinal()
             .domain(this.keys)
@@ -11,18 +25,81 @@ class LineChart {
 
         this.color2 = d3.scaleOrdinal()
             .domain(this.keys)
-            .range(['#04386b','#0984ea','#7dc9f5']);
+            .range(['#04386b', '#0984ea', '#7dc9f5']);
 
+        this.buildHtml(selector);
         this.initVis();
+    }
+
+    buildHtml(selector) {
+        console.log('building html')
+        let container = selector
+            ? d3.select(`#${selector.questionId}`).select('.QuestionText')
+                .insert('div', ':first-child')
+                .attr('class', 'row')
+            : d3.select('#main-container').select('.QuestionText')
+
+
+        let mc = container.append('div').attr('class', 'col-8 main-content'),
+            lc = container.append('div').attr('class', 'col-4 legend-content')
+
+        mc.append('div').attr('class', 'title')
+            .append('h3').attr('id', 'chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
+        mc.append('br');
+        mc.append('div').attr('class', 'helper').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
+        mc.append('br');
+        mc.append('div').attr('id', 'chart');
+        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+
+        let time = lc.append('div').attr('id', 'time_filter_div'),
+            leg = lc.append('div').attr('id', 'leg').attr('class', 'legend'),
+            vac = lc.append('div').attr('id', 'vax-leg').attr('class', 'legend'),
+            unv = lc.append('div').attr('id', 'unvax-leg').attr('class', 'legend')
+
+        time.append('div').attr('class', 'brush-label').text('Filter by Month Range')
+
+        let dates = time.append('div').attr('class', 'legend-row')
+        dates.append('p').attr('id', 'left-date').attr('class', 'alignLeft').text('')
+        dates.append('p').attr('id', 'right-date').attr('class', 'alignRight ').text('')
+
+        time.append('div').attr('id', 'brush-chart')
+
+        let years = time.append('div').attr('class', 'legend-row')
+        years.append('p').attr('class', 'alignLeft').text('2021')
+        years.append('p').attr('class', 'alignRight ').text('2022')
+
+        vac.append('div').attr('class', 'legend-title').text('Rate of Vaccinated')
+        unv.append('div').attr('class', 'legend-title').text('Rate of Unvaccinated')
+
+        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
+            vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
+            unv_row1 = unv.append('div'), unv_row2 = unv.append('div'), unv_row3 = unv.append('div')
+
+        let rows = [leg_row1, leg_row2, vac_row1, vac_row2, vac_row3, unv_row1, unv_row2, unv_row3].map(d => d.attr('class', 'legend-row')),
+            rids = ['lsvg1', 'lsvg2', 'vsvg1', 'vsvg2', 'vsvg3', 'usvg1', 'usvg2', 'usvg3'],
+            rcolors = ['#ef701b', '#0984ea', '#9e3a26', '#ef701b', '#f4d166', '#04386b', '#0984ea', '#7dc9f5'],
+            rlabels = ['Rate of Unvaccinated', 'Rate of Vaccinated', 'Ages 80+', 'Ages 50-79', 'Ages 18-49', 'Ages 80+', 'Ages 50-79', 'Ages 18-49']
+
+        rows.forEach((d, i) => {
+            d.append('div').attr('class', 'legend-value').append('svg').attr('id', rids[i]).append('rect').style('fill', rcolors[i])
+            d.append('div').attr('class', 'legend-label').text(rlabels[i])
+        })
+
+        leg.style('display', 'none')
     }
 
 
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 370, bottom: 70, left: 70},
-            vis.width = 1150 - vis.margin.left - vis.margin.right,
-            vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        // set the dimensions and margins of the graph
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
+        vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
+        if (vis.totalWidth < 0) console.log(vis.totalWidth)
+        vis.width = vis.totalWidth - vis.margin.left - vis.margin.right;
+        if (vis.width < 0) console.log(vis.width)
+        vis.height = vis.totalWidth / 1.5 - vis.margin.top - vis.margin.bottom;
+        if (vis.height < 0) console.log(vis.height)
 
         vis.svg = d3.select("#chart")
             .append("svg")
@@ -58,15 +135,15 @@ class LineChart {
 
         vis.svg.append("g").attr("class", "y-axis");
 
+        let fontsize = Math.max(11, vis.width / 36)
 
         //x axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
-            .attr("font-size","12")
-            .attr("x", vis.width/2)
-            .attr("y", vis.height+70)
-            .attr("font-size", "16")
-            .attr("font-family", "Segoe UI")
+            .attr("font-size", "12")
+            .attr("x", vis.width / 2)
+            .attr("y", vis.height + 70)
+            .attr("font-size", fontsize)
             .text("Week");
 
         //unvaccinated legend
@@ -74,7 +151,9 @@ class LineChart {
             .data(vis.keys)//data set for legends
             .enter().append("g")
             .attr("class", "legend")
-            .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+            .attr("transform", function (d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
 
         // //vaccinated legend
         var legend2 = vis.svg.selectAll(".legend2")
@@ -82,24 +161,21 @@ class LineChart {
             .enter().append("g")
             .attr("class", "legend")
             .attr("font-family", "Segoe UI")
-            .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+            .attr("transform", function (d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
 
         //y axis label
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width/4)
-            .attr("y", 0-50)
-            .attr("font-family", "Segoe UI")
-            .attr("font-size", "16")
-            .text("Case count per 100k people");
-
+            .attr("x", -vis.width / 6)
+            .attr("y", 0 - 55)
+            .attr("font-size", fontsize)
+            .text("Cases per 100k people");
 
         vis.initBrush();
-
         vis.wrangleData();
-
-        vis.initTooltip();
     }
 
     wrangleData(startDate, endDate) {
@@ -107,8 +183,7 @@ class LineChart {
 
         if (startDate && endDate) {
             vis.displayData = vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate);
-        }
-        else {
+        } else {
             vis.displayData = [...vis.data];
         }
 
@@ -121,43 +196,33 @@ class LineChart {
         vis.svg.selectAll(".line").remove();
         vis.svg.selectAll(".grid").remove();
 
-
-
-       vis.x_time = d3.scaleTime()
-            .domain(d3.extent(vis.displayData, function(d) { return d.Max_Week_Date; }))
-            .range([ 0, vis.width ])
-
-
-        // vis.x_time.ticks(d3.time.months, 1);
-
+        vis.x_time = d3.scaleTime()
+            .domain(d3.extent(vis.displayData, function (d) {
+                return d.Max_Week_Date;
+            }))
+            .range([0, vis.width])
 
         // // Add Y axis
         vis.y = d3.scaleLinear()
-            .domain([0, d3.max(vis.displayData, function(d) { return +d.Unvax_50_79; })+500])
-            .range([ vis.height, 0 ]);
+            .domain([0, d3.max(vis.displayData, function (d) {
+                return +d.Unvax_50_79;
+            }) + 500])
+            .range([vis.height, 0]);
 
-       vis.test = vis.svg.selectAll(".x-axis").transition().call(d3.axisBottom(vis.x_time).ticks(d3.timeWeek));
-
-       // vis.svg.selectAll(".tick text").remove();
+        vis.test = vis.svg.selectAll(".x-axis").transition().call(d3.axisBottom(vis.x_time).ticks(d3.timeWeek));
 
         vis.test.selectAll("text").remove();
-
 
         vis.svg.selectAll(".x-axis2")
             .transition()
             .call(d3.axisBottom(vis.x_time).tickSize(10));
 
-        //
-        // var axisElements = svg.append("g").call(axis);
-        // axisElements.selectAll("text").remove();
-
-
-
         vis.svg.selectAll(".y-axis").transition().call(d3.axisLeft(vis.y));
 
         //grey y gridlines
-        vis.make_x_gridlines= function() { return d3.axisLeft(vis.y).ticks(10); };
-
+        vis.make_x_gridlines = function () {
+            return d3.axisLeft(vis.y).ticks(10);
+        };
 
         vis.svg.append("g")
             .attr("class", "grid")
@@ -176,8 +241,12 @@ class LineChart {
             .attr("stroke", "#f4d166")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Unvax_18_49) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Unvax_18_49)
+                })
             )
             .style("pointer-events", "none");
 
@@ -189,8 +258,12 @@ class LineChart {
             .attr("stroke", "#ef701b")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Unvax_50_79) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Unvax_50_79)
+                })
             )
             .style("pointer-events", "none");
 
@@ -203,8 +276,12 @@ class LineChart {
             .attr("stroke", "#9e3a26")
             .attr("stroke-width", 3.5)
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Unvax_80) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Unvax_80)
+                })
             )
             .style("pointer-events", "none");
 
@@ -217,8 +294,12 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Vax_18_49) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Vax_18_49)
+                })
             )
             .style("pointer-events", "none");
 
@@ -231,8 +312,12 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Vax_50_79) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Vax_50_79)
+                })
             )
             .style("pointer-events", "none");
 
@@ -245,11 +330,17 @@ class LineChart {
             .attr("stroke-width", 3.5)
             .attr("stroke-dasharray", ("4, 4"))
             .attr("d", d3.line()
-                .x(function(d) { return vis.x_time(d.Max_Week_Date) })
-                .y(function(d) { return vis.y(d.Vax_80) })
+                .x(function (d) {
+                    return vis.x_time(d.Max_Week_Date)
+                })
+                .y(function (d) {
+                    return vis.y(d.Vax_80)
+                })
             )
             .style("pointer-events", "none");
 
+        // Add tooltip here to draw on top of the chart
+        vis.initTooltip();
 
         vis.overlay = vis.svg.append("rect")
             .attr("width", vis.width)
@@ -267,58 +358,29 @@ class LineChart {
             //  .attr("fill", "white")
             .on("mouseover", function (event, d) {
                 vis.tooltip.attr("display", "null");
-
             })
             .on("mouseout", function (event, d) {
                 vis.tooltip.attr("display", "none");
             })
             .on("mousemove", mousemove);
 
-        let bisectDate = d3.bisector(d=>d.Max_Week_Date).left;
-        const yearFormat = d3.timeFormat("%Y");
-        //
-        // function mousemove(event) {
-        //     let x_coordinate = d3.pointer(event)[0];
-        //     let x_date = vis.x_time.invert(x_coordinate);
-        //     let index = bisectDate(vis.data, x_date);
-        //     let closest = vis.data[index];
-        //
-        //     vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
-        //     vis.text.text("Week: " + (closest.Max_Week_Date1));
-        //     vis.text2.text("Year: " + yearFormat(closest.Max_Week_Date));
-        //
-        //     vis.text3.text("Rate of Unvaccinated: ");
-        //     vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
-        //     vis.text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
-        //     vis.text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
-        //
-        //     vis.text7.text("Rate of Vaccinated: ");
-        //
-        //     vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
-        //     vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
-        //     vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
-        // }
+        let bisectDate = d3.bisector(d => d.Max_Week_Date).left;
 
         function mousemove(event) {
-
-
             let x_coordinate = d3.pointer(event)[0];
             let x_date = vis.x_time.invert(x_coordinate);
             let index = bisectDate(vis.data, x_date);
             // let closest = vis.data[index];
 
-
             let hang_right = false
-
-            let closest = null;
             let right = vis.data[index];
+            let closest = right;
             let x_right = vis.x_time(right.date);
             if (Math.abs(x_right - x_coordinate) < 10) {
                 closest = right;
                 hang_right = true
-
             } else if (index) {
-                let left = vis.data[index-1];
+                let left = vis.data[index - 1];
                 let x_left = vis.x_time(left.date);
                 if (Math.abs(x_left - x_coordinate) < 10) {
                     closest = left;
@@ -326,26 +388,23 @@ class LineChart {
                 }
             }
 
+            // Flip the tooltip info from left to right and the other way around
             if (x_coordinate > (vis.width / 2)) {
-                vis.svg.select(".tool-rect-background-r")
+                vis.tooltip.select(".tool-rect-background-r")
                     .attr("visibility", "hidden");
-                vis.svg.select(".tool-rect-background-l")
+                vis.tooltip.select(".tool-rect-background-l")
                     .attr("visibility", "visible");
-            }
-            else {
-                vis.svg.select(".tool-rect-background-r")
+            } else {
+                vis.tooltip.select(".tool-rect-background-r")
                     .attr("visibility", "visible");
-                vis.svg.select(".tool-rect-background-l")
+                vis.tooltip.select(".tool-rect-background-l")
                     .attr("visibility", "hidden");
             }
-
 
             let anchor = (x_coordinate > (vis.width / 2)) ? "end" : "start";
             let x_text = (x_coordinate > (vis.width / 2)) ? -20 : 20;
 
             vis.text.attr("text-anchor", anchor).attr("x", x_text);
-            // text1.attr("text-anchor", anchor).attr("x", x_text);
-            //vis.text2.attr("text-anchor", anchor).attr("x", x_text);
             vis.text3.attr("text-anchor", anchor).attr("x", x_text);
             vis.text4.attr("text-anchor", anchor).attr("x", x_text);
             vis.text5.attr("text-anchor", anchor).attr("x", x_text);
@@ -355,13 +414,8 @@ class LineChart {
             vis.text9.attr("text-anchor", anchor).attr("x", x_text);
             vis.text10.attr("text-anchor", anchor).attr("x", x_text);
 
-
-
-
             vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
             vis.text.text("Week: " + (closest.Max_Week_Date1));
-            //vis.text.text("Week: " );
-            //vis.text2.text("Year: " + yearFormat(closest.date));
 
             vis.text3.text("Rate of Unvaccinated: ");
             vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
@@ -373,75 +427,42 @@ class LineChart {
             vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
             vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
             vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
-
-
-            //
-
-            // function mousemove(event) {
-            //     let x_coordinate = d3.pointer(event)[0];
-            //     let x_date = x_time.invert(x_coordinate);
-            //     let index = bisectDate(vis.data, x_date);
-
-            // tooltip.attr("transform", "translate(" + x_coordinate + ")");
-
-
-
-
-
-
-
-
-            // text.text("Week: " + (closest.Max_Week_Date2));
-            // // text2.text("Year: " + yearFormat(closest.date));
-            // text3.text("Rate of Unvaccinated: " + (closest.Age_adjusted_unvax_IR) + " per 100k");
-            // text4.text("Rate of Vaccinated: " + (closest.Age_adjusted_vax_IR) + " per 100k");
-
-
-            // }
-
-            //
-
-
         }
 
     }
 
     initBrush() {
         let vis = this;
+        const width = d3.select('#brush-chart').node().getBoundingClientRect().width;
+        const height = width / 8.8;
 
-        const height = 20;
-        const width = 180;
-
-
-        // let x = d3.scaleTime()
-        //     .domain(d3.extent(vis.data, d => d.Max_Week_Date))
-        //     .range([0, width])
-        //  //   .padding([1.5]);
-
-        const groups2 = vis.data.map(d => (d.Week1));
-
-
-        let x = d3.scaleBand()
-            .domain(groups2)
-            .range([0, width])
-            .padding([1.5]);
+        let x = d3.scaleTime()
+            .domain([new Date(2021, 3, 5), new Date(2022, 1, 7)])
+            .range([0, width]);
 
         let xAxis = d3.axisBottom()
             .scale(x)
-            .tickFormat((interval,i) => { return i%5 !== 0 ? " ": interval; })
-           //  .ticks(5)
-           //  .tickSize([10]);
+            .ticks(21)
+            .tickSize([10])
+            .tickFormat(d3.timeFormat('%b'));
 
         let xTime = d3.scaleTime()
             .domain(d3.extent(vis.data, d => d.Max_Week_Date))
             .range([0, width]);
 
         let brush = d3.brushX()
-            .extent([[0,0], [width, height]])
+            .extent([[0, 0], [width, height]])
             .on("brush", brushed)
-            .on("brush end", function(e) {
-                let startDate = xTime.invert(e.selection[0]);
-                let endDate = xTime.invert(e.selection[1]);
+            .on("brush end", function (e) {
+                let startDate = xTime.invert(0)
+                let endDate = xTime.invert(width)
+                if (e.selection) { //if the user cancels selection back to whole range
+                    startDate = xTime.invert(e.selection[0]);
+                    endDate = xTime.invert(e.selection[1]);
+                }
+                //update the date values on the brush scale
+                d3.select('#left-date').text(startDate.toISOString().split('T')[0])
+                d3.select('#right-date').text(endDate.toISOString().split('T')[0])
                 vis.wrangleData(startDate, endDate);
             });
 
@@ -456,49 +477,24 @@ class LineChart {
             .attr("height", height)
             .call(brush);
 
-
-        // svg.append("g")
-        //     .attr("class", "axis axis--grid")
-        //     .attr("transform", "translate(0," + height + ")")
-        //     .call(d3.axisBottom(x)
-        //         .ticks(d3.timeHour, 12)
-        //         .tickSize(-height)
-        //         .tickFormat(function() { return null; }))
-        //     .selectAll(".tick")
-        //     .classed("tick--minor", function(d) { return d.getHours(); });
-        //
-        // vis.svg.append("g")
-        //     .attr("class", "axis axis--x")
-        //     .attr("transform", "translate(0," + height + ")")
-        //     // .call(d3.axisBottom(x)
-        //     //     .ticks(d3.timeDay)
-        //     //     .tickPadding(0))
-        //     .attr("text-anchor", null)
-        //     .selectAll("text")
-        //     .attr("x", 6);
-
         svg.append('line')
             .attr('x1', 0)
             .attr('y1', 0)
             .attr('x2', width)
             .attr('y2', 0)
-        // .attr('stroke', 'black');
 
         function brushed() {
             let range = d3.brushSelection(this);
 
             d3.selectAll("span")
-                .text(function(d, i) { return Math.round(range[i]); });
+                .text(function (d, i) {
+                    return Math.round(range[i]);
+                });
         }
 
-        // // v3:  brushed();
-        brush.move(brushg, [20, 50].map(x));
-
-        function resetBrush() {
-            brush
-                .clear()
-                .event(d3.select(".brush"));
-        }
+        //Init Brush Dates
+        d3.select('#left-date').text(xTime.invert(0).toISOString().split('T')[0])
+        d3.select('#right-date').text(xTime.invert(width).toISOString().split('T')[0])
     }
 
     initTooltip() {
@@ -510,21 +506,20 @@ class LineChart {
 
         vis.tooltip.append("rect")
             .attr("width", 200)
-            .attr("height", vis.height-180)
+            .attr("height", vis.height - 100)
             .attr("x", 0)
             .attr("y", 0)
             .style("fill", "white")
-            // .style("filter", "url(#md-shadow)")
-            .attr("class","tool-rect-background-r");
+            .style("background-color", "white")
+            .attr("class", "tool-rect-background-r");
 
         vis.tooltip.append("rect")
             .attr("width", 200)
-            .attr("height", vis.height-180)
+            .attr("height", vis.height - 100)
             .attr("x", -200)
             .attr("y", 0)
             .style("fill", "white")
-            // .style("filter", "url(#md-shadow)")
-            .attr("class","tool-rect-background-l");
+            .attr("class", "tool-rect-background-l");
 
         vis.tooltip.append("line")
             .attr("stroke", "black")
@@ -539,7 +534,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 10)
             .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
+            .attr('font-weight', 'bold')
             .style("fill", "black");
 
         vis.text2 = vis.tooltip.append("text")
@@ -547,7 +542,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 30)
             .attr("font-family", "Segoe UI")
-            .attr('font-weight','bold')
+            .attr('font-weight', 'bold')
             .style("fill", "black");
 
         vis.text3 = vis.tooltip.append("text")
@@ -556,7 +551,7 @@ class LineChart {
             .attr("y", 60)
             .attr("font-family", "Segoe UI")
             .style("fill", "black")
-            .attr('font-weight','bold')
+            .attr('font-weight', 'bold')
             .style("font-size", '14');
 
         vis.text4 = vis.tooltip.append("text")
@@ -588,7 +583,7 @@ class LineChart {
             .attr("x", 10)
             .attr("y", 160)
             .style("fill", "black")
-            .attr('font-weight','bold')
+            .attr('font-weight', 'bold')
             .attr("font-family", "Segoe UI")
             .style("font-size", '14');
 
@@ -616,4 +611,5 @@ class LineChart {
             .attr("font-family", "Segoe UI")
             .style("font-size", '13');
     }
+
 }
