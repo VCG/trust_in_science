@@ -50,7 +50,7 @@
         this.groups = this.displayData.map(d => (d.Max_Week_Date))
         this.subgroups = this.data.columns.slice(4);
 
-        this.buildHtml()
+        this.buildHtml(props.selector)
 
         // color palette = one color per subgroup
         this.color = d3.scaleOrdinal()
