@@ -1,29 +1,33 @@
-let chart;
-let parseDate = d3.timeParse("%Y-%m-%d");
 
-numbers_format = d3.format(".4r")
+function getBarChartData(){
+    let parseDate = d3.timeParse("%Y-%m-%d");
 
-d3.csv("data/bar_chart_complex2.csv", (row,i) => {
+    numbers_format = d3.format(".4r")
 
-    row.Index = i;
-    row.Vax_18_49 = numbers_format(+row.Vax_18_49);
-    row.Vax_50_79 = numbers_format(+row.Vax_50_79);
-    row.Vax_80 = numbers_format(+row.Vax_80);
-    row.Unvax_18_49 = numbers_format(+row.Unvax_18_49);
-    row.Unvax_50_79 = numbers_format(+row.Unvax_50_79);
-    row.Unvax_80 = numbers_format(+row.Unvax_80);
+    return d3.csv("data/bar_chart_complex2.csv", (row,i) => {
 
-    row.Age_adjusted_unvax_IR = (+row.Unvax_18_49)+(+row.Unvax_50_79)+(+row.Unvax_80);
-    row.Age_adjusted_vax_IR = (+row.Vax_18_49)+(+row.Vax_50_79)+(+row.Vax_80);
+        row.Index = i;
+        row.Vax_18_49 = numbers_format(+row.Vax_18_49);
+        row.Vax_50_79 = numbers_format(+row.Vax_50_79);
+        row.Vax_80 = numbers_format(+row.Vax_80);
+        row.Unvax_18_49 = numbers_format(+row.Unvax_18_49);
+        row.Unvax_50_79 = numbers_format(+row.Unvax_50_79);
+        row.Unvax_80 = numbers_format(+row.Unvax_80);
 
-    row.group= row.Week;
-    row.Max_Week_Date2 = row.Max_Week_Date
-    row.Max_Week_Date = parseDate(row.Max_Week_Date);
+        row.Age_adjusted_unvax_IR = (+row.Unvax_18_49)+(+row.Unvax_50_79)+(+row.Unvax_80);
+        row.Age_adjusted_vax_IR = (+row.Vax_18_49)+(+row.Vax_50_79)+(+row.Vax_80);
 
-    return row;
-})
+        row.group= row.Week;
+        row.Max_Week_Date2 = row.Max_Week_Date
+        row.Max_Week_Date = parseDate(row.Max_Week_Date);
+
+        return row;
+    })
+}
+
+getBarChartData()
 .then(data => {
-    chart = new StackedBarChart({
+    let chart = new StackedBarChart({
         data: data,
         stacked: true,
         interactive: true
