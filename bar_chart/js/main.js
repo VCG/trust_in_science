@@ -33,7 +33,6 @@ function getBarChartData(){
 //         interactive: true
 //     });
 //     chart.initVis('chart')
-//     chart.updateVis('chart')
 // });
 // .then(data => {
 //     chart = new StackedBarChart({

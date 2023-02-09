@@ -107,7 +107,8 @@
         mc.append('br');
         mc.append('div').attr('id','chart');
         if(!this.isStacked) mc.append('div').attr('id','chart2');
-        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+        mc.append('div')
+            .append('a').attr('href','https://data.cdc.gov/Public-Health-Surveillance/Rates-of-COVID-19-Cases-or-Deaths-by-Age-Group-and/3rge-nu2a/data').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
 
         if(vis.isInteractive){
             time = lc.append('div').attr('id','time_filter_div')
