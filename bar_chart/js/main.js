@@ -25,15 +25,15 @@ function getBarChartData(){
     })
 }
 
-// getBarChartData()
-// .then(data => {
-//     let chart = new StackedBarChart({
-//         data: data,
-//         stacked: true,
-//         interactive: true
-//     });
-//     chart.initVis('chart')
-// });
+getBarChartData()
+.then(data => {
+    let chart = new StackedBarChart({
+        data: data,
+        stacked: true,
+        interactive: true
+    });
+    chart.initVis('chart')
+});
 // .then(data => {
 //     chart = new StackedBarChart({
 //         data: data,
