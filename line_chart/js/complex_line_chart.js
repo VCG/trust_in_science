@@ -2,8 +2,8 @@ class LineChart {
 
     constructor(props) {
         // global metadata
-        this.interactive = props.interactive;
-        this.isComplex = false;
+        this.complex = props.isComplex;
+        this.interactive = !this.complex ? false : props.isInteractive;
         this.source = props.source;
 
         this.data = props.data;
@@ -76,22 +76,29 @@ class LineChart {
         let leg = lc.append('div').attr('id', 'leg').attr('class', 'legend'),
             vac = lc.append('div').attr('id', 'vax-leg').attr('class', 'legend'),
             unv = lc.append('div').attr('id', 'unvax-leg').attr('class', 'legend');
-        vac.append('div').attr('class', 'legend-title').text('Rate of Vaccinated')
-        unv.append('div').attr('class', 'legend-title').text('Rate of Unvaccinated')
 
-        let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
-            vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
-            unv_row1 = unv.append('div'), unv_row2 = unv.append('div'), unv_row3 = unv.append('div')
+        if (this.complex) {
+            vac.append('div').attr('class', 'legend-title').text('Rate of Vaccinated')
+            unv.append('div').attr('class', 'legend-title').text('Rate of Unvaccinated')
 
-        let rows = [leg_row1, leg_row2, vac_row1, vac_row2, vac_row3, unv_row1, unv_row2, unv_row3].map(d => d.attr('class', 'legend-row')),
-            rids = ['lsvg1', 'lsvg2', 'vsvg1', 'vsvg2', 'vsvg3', 'usvg1', 'usvg2', 'usvg3'],
-            rcolors = ['#ef701b', '#0984ea', '#9e3a26', '#ef701b', '#f4d166', '#04386b', '#0984ea', '#7dc9f5'],
-            rlabels = ['Rate of Unvaccinated', 'Rate of Vaccinated', 'Ages 80+', 'Ages 50-79', 'Ages 18-49', 'Ages 80+', 'Ages 50-79', 'Ages 18-49']
+            let leg_row1 = leg.append('div'), leg_row2 = leg.append('div'),
+                vac_row1 = vac.append('div'), vac_row2 = vac.append('div'), vac_row3 = vac.append('div'),
+                unv_row1 = unv.append('div'), unv_row2 = unv.append('div'), unv_row3 = unv.append('div')
+            let rows = [leg_row1, leg_row2, vac_row1, vac_row2, vac_row3, unv_row1, unv_row2, unv_row3].map(d => d.attr('class', 'legend-row')),
+                rids = ['lsvg1', 'lsvg2', 'vsvg1', 'vsvg2', 'vsvg3', 'usvg1', 'usvg2', 'usvg3'],
+                rcolors = ['#ef701b', '#0984ea', '#9e3a26', '#ef701b', '#f4d166', '#04386b', '#0984ea', '#7dc9f5'],
+                rlabels = ['Rate of Unvaccinated', 'Rate of Vaccinated', 'Ages 80+', 'Ages 50-79', 'Ages 18-49', 'Ages 80+', 'Ages 50-79', 'Ages 18-49']
 
-        rows.forEach((d, i) => {
-            d.append('div').attr('class', 'legend-value').append('svg').attr('id', rids[i]).append('rect').style('fill', rcolors[i])
-            d.append('div').attr('class', 'legend-label').text(rlabels[i])
-        })
+            rows.forEach((d, i) => {
+                d.append('div').attr('class', 'legend-value').append('svg').attr('id', rids[i]).append('rect').style('fill', rcolors[i])
+                d.append('div').attr('class', 'legend-label').text(rlabels[i])
+            })
+        } else {
+            vac.append('div').attr('class', 'legend-value').append('svg').attr('id', "vacced").append('rect').style('fill', "orange")
+            vac.append('div').attr('class', 'legend-label').text('Rate of Vaccinated')
+            unv.append('div').attr('class', 'legend-value').append('svg').attr('id', "vacced").append('rect').style('fill', "blue")
+            unv.append('div').attr('class', 'legend-label').text('Rate of Unvaccinated')
+        }
 
         leg.style('display', 'none')
     }
@@ -99,7 +106,7 @@ class LineChart {
 
     initVis(id) {
         let vis = this;
-
+        vis.complex = this.complex;
         // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 100, left: 70};
         vis.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
@@ -243,112 +250,145 @@ class LineChart {
                 .tickFormat("")
             );
 
-        // Add the unvaccinated line 18-49
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#f4d166")
-            .attr("stroke-width", 3.5)
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Unvax_18_49)
-                })
-            )
-            .style("pointer-events", "none");
+        if (this.complex) {
+            // Add the unvaccinated line 18-49
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#f4d166")
+                .attr("stroke-width", 3.5)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Unvax_18_49)
+                    })
+                )
+                .style("pointer-events", "none");
 
-        // Add the unvaccinated line 50-79
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#ef701b")
-            .attr("stroke-width", 3.5)
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Unvax_50_79)
-                })
-            )
-            .style("pointer-events", "none");
+            // Add the unvaccinated line 50-79
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#ef701b")
+                .attr("stroke-width", 3.5)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Unvax_50_79)
+                    })
+                )
+                .style("pointer-events", "none");
 
 
-        // Add the unvaccinated line 80+
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#9e3a26")
-            .attr("stroke-width", 3.5)
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Unvax_80)
-                })
-            )
-            .style("pointer-events", "none");
+            // Add the unvaccinated line 80+
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#9e3a26")
+                .attr("stroke-width", 3.5)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Unvax_80)
+                    })
+                )
+                .style("pointer-events", "none");
 
-        // Add the vaccinated line 18-49
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#7dc9f5")
-            .attr("stroke-width", 3.5)
-            .attr("stroke-dasharray", ("4, 4"))
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Vax_18_49)
-                })
-            )
-            .style("pointer-events", "none");
+            // Add the vaccinated line 18-49
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#7dc9f5")
+                .attr("stroke-width", 3.5)
+                .attr("stroke-dasharray", ("4, 4"))
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Vax_18_49)
+                    })
+                )
+                .style("pointer-events", "none");
 
-        // Add the vaccinated line 50-79
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#0984ea")
-            .attr("stroke-width", 3.5)
-            .attr("stroke-dasharray", ("4, 4"))
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Vax_50_79)
-                })
-            )
-            .style("pointer-events", "none");
+            // Add the vaccinated line 50-79
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#0984ea")
+                .attr("stroke-width", 3.5)
+                .attr("stroke-dasharray", ("4, 4"))
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Vax_50_79)
+                    })
+                )
+                .style("pointer-events", "none");
 
-        // Add the vaccinated line 80
-        vis.svg.append("path")
-            .datum(vis.displayData)
-            .attr("class", "line")
-            .attr("fill", "none")
-            .attr("stroke", "#04386b")
-            .attr("stroke-width", 3.5)
-            .attr("stroke-dasharray", ("4, 4"))
-            .attr("d", d3.line()
-                .x(function (d) {
-                    return vis.x_time(d.Max_Week_Date)
-                })
-                .y(function (d) {
-                    return vis.y(d.Vax_80)
-                })
-            )
-            .style("pointer-events", "none");
+            // Add the vaccinated line 80
+            vis.svg.append("path")
+                .datum(vis.displayData)
+                .attr("class", "line")
+                .attr("fill", "none")
+                .attr("stroke", "#04386b")
+                .attr("stroke-width", 3.5)
+                .attr("stroke-dasharray", ("4, 4"))
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Vax_80)
+                    })
+                )
+                .style("pointer-events", "none");
+        } else {
+            // Add the unvaccinated line
+            vis.svg.append("path")
+                .datum(vis.data)
+                .attr("fill", "none")
+                .attr("stroke", "orange")
+                .attr("stroke-width", 3.5)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Age_adjusted_unvax_IR)
+                    })
+                )
 
+            // Add the vaccinated line
+            vis.svg.append("path")
+                .datum(vis.data)
+                .attr("fill", "none")
+                .attr("stroke", "blue")
+                .attr("stroke-width", 3.5)
+                .attr("stroke-dasharray", ("4, 4"))
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return vis.x_time(d.Max_Week_Date)
+                    })
+                    .y(function (d) {
+                        return vis.y(d.Age_adjusted_vax_IR)
+                    })
+                )
+
+        }
         // Add tooltip here to draw on top of the chart
         vis.initTooltip();
 
@@ -415,28 +455,37 @@ class LineChart {
             let x_text = (x_coordinate > (vis.width / 2)) ? -20 : 20;
 
             vis.text.attr("text-anchor", anchor).attr("x", x_text);
+            if (vis.complex) {
+                vis.text5.attr("text-anchor", anchor).attr("x", x_text);
+                vis.text6.attr("text-anchor", anchor).attr("x", x_text);
+                vis.text9.attr("text-anchor", anchor).attr("x", x_text);
+                vis.text10.attr("text-anchor", anchor).attr("x", x_text);
+            }
             vis.text3.attr("text-anchor", anchor).attr("x", x_text);
             vis.text4.attr("text-anchor", anchor).attr("x", x_text);
-            vis.text5.attr("text-anchor", anchor).attr("x", x_text);
-            vis.text6.attr("text-anchor", anchor).attr("x", x_text);
             vis.text7.attr("text-anchor", anchor).attr("x", x_text);
             vis.text8.attr("text-anchor", anchor).attr("x", x_text);
-            vis.text9.attr("text-anchor", anchor).attr("x", x_text);
-            vis.text10.attr("text-anchor", anchor).attr("x", x_text);
 
             vis.tooltip.attr("transform", "translate(" + x_coordinate + ")")
             vis.text.text("Week: " + (closest.Max_Week_Date1));
 
-            vis.text3.text("Rate of Unvaccinated: ");
-            vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
-            vis.text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
-            vis.text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
+            if (vis.complex) {
+                vis.text3.text("Rate of Unvaccinated: ");
+                vis.text4.text("Ages 80+: " + (closest.Unvax_80) + " per 100k");
+                vis.text5.text("Ages 50-79: " + (closest.Unvax_50_79) + " per 100k");
+                vis.text6.text("Ages 18-49: " + (closest.Unvax_18_49) + " per 100k");
 
-            vis.text7.text("Rate of Vaccinated: ");
+                vis.text7.text("Rate of Vaccinated: ");
+                vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
+                vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
+                vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+            } else {
+                vis.text3.text("Rate of Unvaccinated: ");
+                vis.text4.text((closest.Age_adjusted_unvax_IR) + " per 100k");
+                vis.text7.text("Rate of Vaccinated: ");
+                vis.text8.text((closest.Age_adjusted_vax_IR) + " per 100k");
 
-            vis.text8.text("Ages 80+: " + (closest.Vax_80) + " per 100k");
-            vis.text9.text("Ages 50-79: " + (closest.Vax_50_79) + " per 100k");
-            vis.text10.text("Ages 18-49: " + (closest.Vax_18_49) + " per 100k");
+            }
         }
 
     }
@@ -516,7 +565,7 @@ class LineChart {
 
         vis.tooltip.append("rect")
             .attr("width", 200)
-            .attr("height", vis.height - 100)
+            .attr("height", vis.height - (this.complex ? 100 : 250))
             .attr("x", 0)
             .attr("y", 0)
             .style("fill", "white")
@@ -525,7 +574,7 @@ class LineChart {
 
         vis.tooltip.append("rect")
             .attr("width", 200)
-            .attr("height", vis.height - 100)
+            .attr("height", vis.height - (this.complex ? 100 : 250))
             .attr("x", -200)
             .attr("y", 0)
             .style("fill", "white")
@@ -547,18 +596,20 @@ class LineChart {
             .attr('font-weight', 'bold')
             .style("fill", "black");
 
-        vis.text2 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 30)
-            .attr("font-family", "Segoe UI")
-            .attr('font-weight', 'bold')
-            .style("fill", "black");
+        if (this.complex) {
+            vis.text2 = vis.tooltip.append("text")
+                .attr("class", "tooltip-text")
+                .attr("x", 10)
+                .attr("y", 30)
+                .attr("font-family", "Segoe UI")
+                .attr('font-weight', 'bold')
+                .style("fill", "black");
+        }
 
         vis.text3 = vis.tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 60)
+            .attr("y", this.complex ? 60 : 30)
             .attr("font-family", "Segoe UI")
             .style("fill", "black")
             .attr('font-weight', 'bold')
@@ -567,31 +618,32 @@ class LineChart {
         vis.text4 = vis.tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 80)
-            .style("fill", "#9e3a26")
+            .attr("y", this.complex ? 80 : 45)
+            .style("fill", this.complex ? "#9e3a26" : "orange")
             .attr("font-family", "Segoe UI")
             .style("font-size", '13');
 
-        vis.text5 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 100)
-            .style("fill", "#ef701b")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
+        if (this.complex) {
+            vis.text5 = vis.tooltip.append("text")
+                .attr("class", "tooltip-text")
+                .attr("x", 10)
+                .attr("y", 100)
+                .style("fill", "#ef701b")
+                .attr("font-family", "Segoe UI")
+                .style("font-size", '13');
 
-        vis.text6 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 120)
-            .style("fill", "#f4d166")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
-
+            vis.text6 = vis.tooltip.append("text")
+                .attr("class", "tooltip-text")
+                .attr("x", 10)
+                .attr("y", 120)
+                .style("fill", "#f4d166")
+                .attr("font-family", "Segoe UI")
+                .style("font-size", '13');
+        }
         vis.text7 = vis.tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 160)
+            .attr("y", this.complex ? 160 : 70)
             .style("fill", "black")
             .attr('font-weight', 'bold')
             .attr("font-family", "Segoe UI")
@@ -600,26 +652,28 @@ class LineChart {
         vis.text8 = vis.tooltip.append("text")
             .attr("class", "tooltip-text")
             .attr("x", 10)
-            .attr("y", 180)
-            .style("fill", "#04386b")
+            .attr("y", this.complex ? 180 : 85)
+            .style("fill", this.complex ? "#04386b" : "blue")
             .attr("font-family", "Segoe UI")
             .style("font-size", '13');
 
-        vis.text9 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 200)
-            .style("fill", "#0984ea")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
+        if (this.complex) {
+            vis.text9 = vis.tooltip.append("text")
+                .attr("class", "tooltip-text")
+                .attr("x", 10)
+                .attr("y", 200)
+                .style("fill", "#0984ea")
+                .attr("font-family", "Segoe UI")
+                .style("font-size", '13');
 
-        vis.text10 = vis.tooltip.append("text")
-            .attr("class", "tooltip-text")
-            .attr("x", 10)
-            .attr("y", 220)
-            .style("fill", "#7dc9f5")
-            .attr("font-family", "Segoe UI")
-            .style("font-size", '13');
+            vis.text10 = vis.tooltip.append("text")
+                .attr("class", "tooltip-text")
+                .attr("x", 10)
+                .attr("y", 220)
+                .style("fill", "#7dc9f5")
+                .attr("font-family", "Segoe UI")
+                .style("font-size", '13');
+        }
     }
 
 }
