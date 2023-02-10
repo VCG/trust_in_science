@@ -1,6 +1,12 @@
 class LineChart {
-    constructor(data, selector) {
-        this.data = data;
+
+    constructor(props) {
+        // global metadata
+        this.interactive = props.interactive;
+        this.isComplex = false;
+        this.source = props.source;
+
+        this.data = props.data;
         // create a list of keys
         this.keys = ["Ages 80+", "Ages 50-79", "Ages 18-49"]
         this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -27,8 +33,7 @@ class LineChart {
             .domain(this.keys)
             .range(['#04386b', '#0984ea', '#7dc9f5']);
 
-        this.buildHtml(selector);
-        this.initVis();
+        this.buildHtml(props.selector);
     }
 
     buildHtml(selector) {
@@ -53,23 +58,24 @@ class LineChart {
         mc.append('div').attr('id', 'chart');
         mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
 
-        let time = lc.append('div').attr('id', 'time_filter_div'),
-            leg = lc.append('div').attr('id', 'leg').attr('class', 'legend'),
+        if (this.interactive) {
+            let time = lc.append('div').attr('id', 'time_filter_div')
+            time.append('div').attr('class', 'brush-label').text('Filter by Month Range')
+
+            let dates = time.append('div').attr('class', 'legend-row')
+            dates.append('p').attr('id', 'left-date').attr('class', 'alignLeft').text('')
+            dates.append('p').attr('id', 'right-date').attr('class', 'alignRight ').text('')
+
+            time.append('div').attr('id', 'brush-chart')
+
+
+            let years = time.append('div').attr('class', 'legend-row')
+            years.append('p').attr('class', 'alignLeft').text('2021')
+            years.append('p').attr('class', 'alignRight ').text('2022')
+        }
+        let leg = lc.append('div').attr('id', 'leg').attr('class', 'legend'),
             vac = lc.append('div').attr('id', 'vax-leg').attr('class', 'legend'),
-            unv = lc.append('div').attr('id', 'unvax-leg').attr('class', 'legend')
-
-        time.append('div').attr('class', 'brush-label').text('Filter by Month Range')
-
-        let dates = time.append('div').attr('class', 'legend-row')
-        dates.append('p').attr('id', 'left-date').attr('class', 'alignLeft').text('')
-        dates.append('p').attr('id', 'right-date').attr('class', 'alignRight ').text('')
-
-        time.append('div').attr('id', 'brush-chart')
-
-        let years = time.append('div').attr('class', 'legend-row')
-        years.append('p').attr('class', 'alignLeft').text('2021')
-        years.append('p').attr('class', 'alignRight ').text('2022')
-
+            unv = lc.append('div').attr('id', 'unvax-leg').attr('class', 'legend');
         vac.append('div').attr('class', 'legend-title').text('Rate of Vaccinated')
         unv.append('div').attr('class', 'legend-title').text('Rate of Unvaccinated')
 
@@ -91,7 +97,7 @@ class LineChart {
     }
 
 
-    initVis() {
+    initVis(id) {
         let vis = this;
 
         // set the dimensions and margins of the graph
@@ -149,7 +155,7 @@ class LineChart {
             .text("Week");
 
         //unvaccinated legend
-        var legend = vis.svg.selectAll(".legend")
+        vis.svg.selectAll(".legend")
             .data(vis.keys)//data set for legends
             .enter().append("g")
             .attr("class", "legend")
@@ -158,7 +164,7 @@ class LineChart {
             });
 
         // //vaccinated legend
-        var legend2 = vis.svg.selectAll(".legend2")
+        vis.svg.selectAll(".legend2")
             .data(vis.keys)//data set for legends
             .enter().append("g")
             .attr("class", "legend")
@@ -176,7 +182,9 @@ class LineChart {
             .attr("font-size", fontsize)
             .text("Cases per 100k people");
 
-        vis.initBrush();
+        if (this.interactive) {
+            vis.initBrush();
+        }
         vis.wrangleData();
     }
 
