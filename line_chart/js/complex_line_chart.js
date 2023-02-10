@@ -36,8 +36,9 @@ class LineChart {
         this.buildHtml(props.selector);
     }
 
-    buildHtml(selector) {
+    buildHtml(selector=null) {
         console.log('building html')
+        let vis = this;
         let container = selector
             ? d3.select(`#${selector.questionId}`).select('.QuestionText')
                 .insert('div', ':first-child')
@@ -56,7 +57,7 @@ class LineChart {
         mc.append('div').attr('class', 'helper').text('*Hover over the lines to explore further and brush the timeline on the right to filter the data');
         mc.append('br');
         mc.append('div').attr('id', 'chart');
-        mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
+        if(vis.source) mc.append('div').append('a').attr('target','_').attr('href','https://data.cdc.gov/Public-Health-Surveillance/Rates-of-COVID-19-Cases-or-Deaths-by-Age-Group-and/3rge-nu2a/data').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
 
         if (this.interactive) {
             let time = lc.append('div').attr('id', 'time_filter_div')
