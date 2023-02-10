@@ -26,14 +26,14 @@ function getBarChartData(){
 }
 
 getBarChartData()
-.then(data => {
-    chart = new StackedBarChart({
-        data: data,
-        stacked: true,
-        interactive: true
-    });
-    chart.initVis('chart')
-});
+// .then(data => {
+//     chart = new StackedBarChart({
+//         data: data,
+//         stacked: true,
+//         interactive: true
+//     });
+//     chart.initVis('chart')
+// });
 // .then(data => {
 //     chart = new StackedBarChart({
 //         data: data,
@@ -43,12 +43,12 @@ getBarChartData()
 //     chart.initVis('chart')
 //     chart.updateVis('chart')
 // });
-// .then(data => {
-//     chart = new StackedBarChart({
-//         data: data,
-//         stacked: false,
-//         interactive: false
-//     });
-//     chart.initVis('chart',true)
-//     chart.initVis('chart2',false)
-// });
+.then(data => {
+    chart = new StackedBarChart({
+        data: data,
+        stacked: false,
+        interactive: false
+    });
+    chart.initVis('chart',true)
+    chart.initVis('chart2',false)
+});

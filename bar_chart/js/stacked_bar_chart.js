@@ -115,7 +115,7 @@
 
             let dates = time.append('div').attr('class','legend-row')
             
-            dates.append('p').attr('id','left-date').attr('class','alignLeft').text(new Date(3,5,2021).toISOString().split('T')[0])
+            dates.append('p').attr('id','left-date').attr('class','alignLeft').text(new Date(2021,3,5).toISOString().split('T')[0])
             dates.append('p').attr('id','right-date').attr('class','alignRight ').text(new Date(2022,1,7).toISOString().split('T')[0])
 
             time.append('div').attr('id','brush-chart')
@@ -230,7 +230,7 @@
                 time: vis.staging_hover.start,
                 label: 'hovered',
                 timeHovered: vis.staging_hover.end-vis.staging_hover.start,
-                data: d
+                data: vis.isStacked ? d.data : d
             })
             vis.staging_hover.start = null;
             vis.staging_hover.end = null;
@@ -345,28 +345,28 @@
                 // enter a second time = loop subgroup per subgroup to add all rectangles
                 .data(d => d)
                 .join("rect")
-                .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date2)
-                .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
-                .attr("y", d => vis.y_scale(d[1]))
-                .attr("height", d => {
-                    let ret = vis.y_scale(d[0]) - vis.y_scale(d[1])
-                    return (ret < 0) ? -ret : ret
-                })
-                .attr("width", vis.x_scale.bandwidth())
-                .on("mouseover", function(e,d){ vis.mouse_over(e,d,id) })
-                .on("mouseleave", function(e,d){vis.mouse_out(d,id)});
+                    .attr("class", d => "main-rect rect-bar-" + d.data.Max_Week_Date2)
+                    .attr("x", d => vis.x_scale(d.data.Max_Week_Date))
+                    .attr("y", d => vis.y_scale(d[1]))
+                    .attr("height", d => {
+                        let ret = vis.y_scale(d[0]) - vis.y_scale(d[1])
+                        return (ret < 0) ? -ret : ret
+                    })
+                    .attr("width", vis.x_scale.bandwidth())
+                    .on("mouseover", function(e,d){ vis.mouse_over(e,d,id) })
+                    .on("mouseout", function(e,d){ vis.mouse_out(d,id) });
         } else {
             vis.svgs[id].selectAll("mybar")
                 .data(vis.data)
-                .enter().append('rect')
-                .attr("class", d => "main-rect rect-bar-" + d.Max_Week_Date2)
-                .attr("x", d => vis.x_scale(d.Max_Week_Date))
-                .attr("y", d => vis.y_scale(isOne ? d.Age_adjusted_unvax_IR : d.Age_adjusted_vax_IR))
-                .attr("width", vis.x_scale.bandwidth())
-                .attr("height", d => vis.height - vis.y_scale(isOne ? d.Age_adjusted_unvax_IR : d.Age_adjusted_vax_IR))
-                .attr("fill", isOne ? "#ef701b" : "#0984ea")
-                .on("mouseover", function(e, d) { vis.mouse_over(e,d,id,isOne) })
-                .on("mouseout", function(e,d){ vis.mouse_out(d,id,vis) })
+                .join('rect')
+                    .attr("class", d => "main-rect rect-bar-" + d.Max_Week_Date2)
+                    .attr("x", d => vis.x_scale(d.Max_Week_Date))
+                    .attr("y", d => vis.y_scale(isOne ? d.Age_adjusted_unvax_IR : d.Age_adjusted_vax_IR))
+                    .attr("width", vis.x_scale.bandwidth())
+                    .attr("height", d => vis.height - vis.y_scale(isOne ? d.Age_adjusted_unvax_IR : d.Age_adjusted_vax_IR))
+                    .attr("fill", isOne ? "#ef701b" : "#0984ea")
+                    .on("mouseover", function(e, d) { vis.mouse_over(e,d,id,isOne) })
+                    .on("mouseout", function(e,d){ vis.mouse_out(d,id) })
         }
 
         //grey y gridlines
@@ -384,17 +384,11 @@
                 .tickSize(-vis.width)
                 .tickFormat("")
             );
-        
-        if(vis.setup_complete){
-            console.log('hello')
-        }
     }
 
     initBrush(id) {
         let vis = this;
-
-        const width = d3.select('#brush-chart').node().getBoundingClientRect().width;
-        const height = width/8.8;
+        const width = d3.select('#brush-chart').node().getBoundingClientRect().width, height = 25;
 
         let x = d3.scaleTime()
             .domain([new Date(2021,3,5), new Date(2022,1,7)])
@@ -438,13 +432,11 @@
 
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
-            .on("brush", brushed)
             .on("brush", function(e) {
                 vis.adjust_brush(e)
             })
             .on('end', function(e){
                 let [startDate,endDate] = vis.adjust_brush(e)
-
                 if(startDate < endDate){
                     if(vis.whole_data) vis.provenance.push({
                         time: Date.now(),
@@ -459,32 +451,19 @@
                 }
             });
 
-        let svg = d3.select("#brush-chart").append("svg")
+        d3.select("#brush-chart").append("svg")
             .attr("width", width)
             .attr("height", height)
-            .call(xAxis);
-
-        let brushg = svg.append("g")
-            .attr("class", "brush")
-            .attr("width", width)
-            .attr("height", height)
-            .call(brush);
-
-        svg.append('line')
-            .attr('x1', 0)
-            .attr('y1', 0)
-            .attr('x2', width)
-            .attr('y2', 0)
-
-        function brushed() {
-            let range = d3.brushSelection(this);
-
-            d3.selectAll("span")
-                .text(function(d, i) { return Math.round(range[i]); });
-
-        }
-
-        // // v3:  brushed();
-        //brush.move(brushg, [14, 14].map(x));
+            .call(xAxis)
+            .append("g")
+                .attr("class", "brush")
+                .attr("width", width)
+                .attr("height", height)
+                .call(brush)
+                .append('line')
+                    .attr('x1', 0)
+                    .attr('y1', 0)
+                    .attr('x2', width)
+                    .attr('y2', 0)
     }
 }
