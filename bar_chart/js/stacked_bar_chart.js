@@ -4,15 +4,15 @@
         // global metadata
         this.isInteractive = props.interactive;
         this.isStacked = props.stacked;
-        this.isComplex = false;
         this.source = props.source;
+        this.whole_data = true;
+        this.setup_complete = false;
 
         // formatting functions
         this.yearFormat = d3.timeFormat("%Y");
         this.number_format = d3.format(',');
         
         // global data
-        this.whole_data = true;
         this.data = props.data;
         this.displayData = props.data;
         this.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -27,7 +27,6 @@
         this.trigger = null;
         this.provenance = [];
         this.staging_hover = {
-            label: 'tooltip',
             start: null,
             end: null
         }
@@ -116,8 +115,8 @@
 
             let dates = time.append('div').attr('class','legend-row')
             
-            dates.append('p').attr('id','left-date').attr('class','alignLeft').text('')
-            dates.append('p').attr('id','right-date').attr('class','alignRight ').text('')
+            dates.append('p').attr('id','left-date').attr('class','alignLeft').text(new Date(3,5,2021).toISOString().split('T')[0])
+            dates.append('p').attr('id','right-date').attr('class','alignRight ').text(new Date(2022,1,7).toISOString().split('T')[0])
 
             time.append('div').attr('id','brush-chart')
 
@@ -159,11 +158,10 @@
         let vis = this;
 
         vis.trigger = setTimeout(() => {
-            vis.staging_hover.start = new Date()
-            /* add to provenance data () */
+            vis.staging_hover.start = Date.now() - 1000
         }, 1000); 
 
-        let tooltip_text = vis.isComplex 
+        let tooltip_text = !vis.whole_data 
             ? `<b>Week:</b> ${d.data.Max_Week_Date2}<br>
                <b>Year:</b> ${vis.yearFormat(d.data.Max_Week_Date)}<br>
                <br>
@@ -223,12 +221,17 @@
 
     }
 
-    mouse_out(id){
+    mouse_out(d,id){
         let vis = this;
         clearTimeout(vis.trigger)
         if(vis.staging_hover.start){
-            vis.staging_hover.end = new Date()
-            vis.provenance.push((x => x)(vis.staging_hover))
+            vis.staging_hover.end = Date.now()
+            vis.provenance.push({
+                time: vis.staging_hover.start,
+                label: 'hovered',
+                timeHovered: vis.staging_hover.end-vis.staging_hover.start,
+                data: d
+            })
             vis.staging_hover.start = null;
             vis.staging_hover.end = null;
         }
@@ -236,6 +239,10 @@
         vis.tooltip.style("opacity", 0)
             .style("display", "none")
         vis.svgs[id].selectAll(".main-rect").style("opacity", 1)
+    }
+
+    getProvenance(){
+        return this.provenance
     }
 
     initVis(id,isOne){
@@ -296,7 +303,6 @@
     wrangleData(startDate, endDate,id) {
         let vis = this;
         vis.whole_data = Math.abs(startDate-endDate) > 15033600000 || isNaN(Math.abs(startDate-endDate))
-        vis.isComplex = !vis.whole_data;
         vis.displayData = (startDate && endDate) 
             ? vis.data.filter(row => row.Max_Week_Date >= startDate && row.Max_Week_Date <= endDate)
             : [...vis.data];
@@ -348,7 +354,7 @@
                 })
                 .attr("width", vis.x_scale.bandwidth())
                 .on("mouseover", function(e,d){ vis.mouse_over(e,d,id) })
-                .on("mouseleave", function(e,d){vis.mouse_out(id)});
+                .on("mouseleave", function(e,d){vis.mouse_out(d,id)});
         } else {
             vis.svgs[id].selectAll("mybar")
                 .data(vis.data)
@@ -360,7 +366,7 @@
                 .attr("height", d => vis.height - vis.y_scale(isOne ? d.Age_adjusted_unvax_IR : d.Age_adjusted_vax_IR))
                 .attr("fill", isOne ? "#ef701b" : "#0984ea")
                 .on("mouseover", function(e, d) { vis.mouse_over(e,d,id,isOne) })
-                .on("mouseout", function(d){ vis.mouse_out(id) })
+                .on("mouseout", function(e,d){ vis.mouse_out(d,id,vis) })
         }
 
         //grey y gridlines
@@ -378,7 +384,10 @@
                 .tickSize(-vis.width)
                 .tickFormat("")
             );
-            
+        
+        if(vis.setup_complete){
+            console.log('hello')
+        }
     }
 
     initBrush(id) {
@@ -397,44 +406,57 @@
             .tickSize([10])
             .tickFormat(d3.timeFormat('%b'));
 
+        vis.adjust_brush = function(e){
+            let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
+            let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[1]) : x.invert(width) : x.invert(width);
 
-        
-        console.log('width,height', [width,height])
+            if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
+                d3.select('#vax-leg').style('display','none')
+                d3.select('#unvax-leg').style('display','none')
+                d3.select('#leg').style('display','block')
+                d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
+            } 
+            else{
+                d3.select('#vax-leg').style('display','block')
+                d3.select('#unvax-leg').style('display','block')
+                d3.select('#leg').style('display','none')
+                d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
+            }
+
+            d3.select('#left-date').text(startDate.toISOString().split('T')[0])
+            d3.select('#right-date').text(endDate.toISOString().split('T')[0])
+
+            let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
+                sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
+
+            vis.color.range(e.selection ? ((e.selection[1] - e.selection[0] < 5) ? twoColors : sixColors) : twoColors)
+
+            vis.wrangleData(startDate, endDate, id);
+
+            return [startDate, endDate]
+        }
 
         let brush = d3.brushX()
             .extent([[0,0], [width, height]])
             .on("brush", brushed)
-            .on("brush end", function(e) {
-                console.log(e.selection)
-                
-                if(!e.selection || e.selection[1] - e.selection[0] < 5 ){
-                    d3.select('#vax-leg').style('display','none')
-                    d3.select('#unvax-leg').style('display','none')
-                    d3.select('#leg').style('display','block')
-                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19')
-                } 
-                else{
-                    d3.select('#vax-leg').style('display','block')
-                    d3.select('#unvax-leg').style('display','block')
-                    d3.select('#leg').style('display','none')
-                    d3.select('#chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age')
+            .on("brush", function(e) {
+                vis.adjust_brush(e)
+            })
+            .on('end', function(e){
+                let [startDate,endDate] = vis.adjust_brush(e)
+
+                if(startDate < endDate){
+                    if(vis.whole_data) vis.provenance.push({
+                        time: Date.now(),
+                        label: 'cleared_brush'
+                    })
+                    else vis.provenance.push({
+                        time: Date.now(),
+                        label: 'brushed',
+                        startDate: startDate,
+                        endDate: endDate
+                    })
                 }
-                
-                let startDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[0]) : x.invert(0) : x.invert(0);
-                let endDate = e.selection ? e.selection[1] - e.selection[0] >= 5 ? x.invert(e.selection[1]) : x.invert(width) : x.invert(width);
-
-                //console.log(startDate, endDate)
-                //console.log(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0])
-
-                d3.select('#left-date').text(startDate.toISOString().split('T')[0])
-                d3.select('#right-date').text(endDate.toISOString().split('T')[0])
-
-                let twoColors = ['#0984ea','#0984ea','#0984ea', '#ef701b','#ef701b','#ef701b'],
-                    sixColors = ['#7dc9f5','#0984ea','#04386b', '#f4d166','#ef701b','#9e3a26']
-
-                vis.color.range(e.selection ? ((e.selection[1] - e.selection[0] < 5) ? twoColors : sixColors) : twoColors)
-
-                vis.wrangleData(startDate, endDate, id);
             });
 
         let svg = d3.select("#brush-chart").append("svg")
@@ -442,14 +464,11 @@
             .attr("height", height)
             .call(xAxis);
 
-
-
         let brushg = svg.append("g")
             .attr("class", "brush")
             .attr("width", width)
             .attr("height", height)
             .call(brush);
-
 
         svg.append('line')
             .attr('x1', 0)
@@ -457,23 +476,15 @@
             .attr('x2', width)
             .attr('y2', 0)
 
-
         function brushed() {
             let range = d3.brushSelection(this);
-
-            console.log(range)
-            console.log(range[i])
 
             d3.selectAll("span")
                 .text(function(d, i) { return Math.round(range[i]); });
 
-
         }
 
         // // v3:  brushed();
-        brush.move(brushg, [14, 14].map(x));
-
-        
-
+        //brush.move(brushg, [14, 14].map(x));
     }
 }
