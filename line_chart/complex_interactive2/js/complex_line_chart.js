@@ -46,7 +46,9 @@ class LineChart {
         mc.append('div').attr('class', 'title')
             .append('h3').attr('id', 'chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
         mc.append('br');
-        mc.append('div').attr('class', 'helper').text('*Hover over the bars to explore further and brush the timeline on the right to filter the data');
+        mc.append('div').attr('class', 'subtitle').text('Apr 2021-Feb 2022')
+        mc.append('br');
+        mc.append('div').attr('class', 'helper').text('*Hover over the lines to explore further and brush the timeline on the right to filter the data');
         mc.append('br');
         mc.append('div').attr('id', 'chart');
         mc.append('div').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
@@ -169,7 +171,7 @@ class LineChart {
         vis.svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.width / 6)
+            .attr("x", -vis.width / 4)
             .attr("y", 0 - 55)
             .attr("font-size", fontsize)
             .text("Cases per 100k people");
