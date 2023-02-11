@@ -1,5 +1,7 @@
-function startTour(type){
-  var tour = new Shepherd.Tour({
+function createTour(type){
+  if(!(['complex','moderate','simple'].includes(type))) return;
+
+  let steps=[], tour = new Shepherd.Tour({
     useModalOverlay: true,
     defaultStepOptions: {
       cancelIcon: {
@@ -15,24 +17,37 @@ function startTour(type){
   });
 
   switch(type){
-    case "complex": complexTour(tour); break;
+    case "complex": 
+      steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
+      steps.push(['#chart', 'bottom','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
+      steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
+          <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
+      steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
+          <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
+      startTour(tour,steps); 
+      break;
+    case "moderate":
+      steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
+      steps.push(['#chart', 'bottom','Bar Chart Visualization','This is the main visualization.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
+      steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
+          <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
+      startTour(tour,steps); 
+      break;
+    default:
+      steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
+      steps.push(['#chart', 'bottom','Bar Chart Visualization','This is the first of the two main visualizations.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
+      steps.push(['#chart2', 'top','Bar Chart Visualization','This is the second of the two main visualizations.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
+      steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
+          <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
+      startTour(tour,steps); 
+      break;
   }
 
   tour.start();
 }
 
 
-function complexTour(tour){
-  var steps =[];
-  steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
-  steps.push(['#chart', '','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
-  steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
-      <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
-  steps.push(['.legend', 'left', 'This is the legend.', 'You can use this legend to highlight different age groups!\
-      <br> <b>Your turn:</b> Try hovering over an age group to highlight that group.<br><br> That\'s it, have fun exploring the data!']);
-
-
-
+function startTour(tour,steps){
   for (i = 0; i < steps.length; i++) {
     btns = [];
     // no back button at the start

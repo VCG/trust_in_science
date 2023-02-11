@@ -96,7 +96,7 @@
 
         let mc = container.append('div').attr('class','col-8 main-content'),
             lc = container.append('div').attr('class','col-4 legend-content'),
-            rows, time, leg, vac, unv, leg_row1, leg_row2, vac_row1, vac_row2, vac_row3, unv_row1, unv_row2, unv_row3
+            rows, time, legend, leg, vac, unv, leg_row1, leg_row2, vac_row1, vac_row2, vac_row3, unv_row1, unv_row2, unv_row3
         
         mc.append('div').attr('class', 'title')
             .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
@@ -120,15 +120,17 @@
 
             time.append('div').attr('id','brush-chart')
 
-            leg = lc.append('div').attr('id','leg').attr('class','legend')
+            legend = lc.append('div').attr('class', 'legend')
+
+            leg = legend.append('div').attr('id','leg')
             leg_row1 = leg.append('div')
             leg_row2 = leg.append('div')
 
-            vac = lc.append('div').attr('id','vax-leg').attr('class','legend')
+            vac = legend.append('div').attr('id','vax-leg')
             vac.append('div').attr('class','legend-title').text('Rate of Vaccinated')
             vac_row1 = vac.append('div'); vac_row2 = vac.append('div'); vac_row3 = vac.append('div')
 
-            unv = lc.append('div').attr('id','unvax-leg').attr('class','legend')
+            unv = legend.append('div').attr('id','unvax-leg')
             unv.append('div').attr('class','legend-title').text('Rate of Unvaccinated')
             unv_row1 = unv.append('div'); unv_row2 = unv.append('div'); unv_row3 = unv.append('div')
 
@@ -136,7 +138,8 @@
             years.append('p').attr('class','alignLeft').text('2021')
             years.append('p').attr('class','alignRight ').text('2022')
 
-            leg.style('display','none')
+            vac.style('display','none')
+            unv.style('display', 'none')
 
         } else {
             leg = lc.append('div').attr('id','leg').attr('class','legend')
@@ -388,7 +391,7 @@
 
     initBrush(id) {
         let vis = this;
-        const width = d3.select('#brush-chart').node().getBoundingClientRect().width, height = 25;
+        const width = d3.select('#brush-chart').node().getBoundingClientRect().width, height = 32;
 
         let x = d3.scaleTime()
             .domain([new Date(2021,3,5), new Date(2022,1,7)])
@@ -454,16 +457,14 @@
         d3.select("#brush-chart").append("svg")
             .attr("width", width)
             .attr("height", height)
+            .attr('class', 'brush-axis')
             .call(xAxis)
             .append("g")
                 .attr("class", "brush")
                 .attr("width", width)
                 .attr("height", height)
                 .call(brush)
-                .append('line')
-                    .attr('x1', 0)
-                    .attr('y1', 0)
-                    .attr('x2', width)
-                    .attr('y2', 0)
+        
+        d3.select('.brush-axis').selectAll('text').attr('transform', 'translate(-17,8)rotate(-45)')
     }
 }
