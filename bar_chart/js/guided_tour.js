@@ -79,16 +79,18 @@ function startTour(tour,steps){
       });
     }
 
-    tour.addStep({
+    let step = {
       text: steps[i][3],
       title: steps[i][2],
-      attachTo: {
-        element: steps[i][0],
-        on: steps[i][1],
-      },
-      //classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
-      buttons: btns,
-    });
+      buttons: btns
+    }
+
+    if(steps[i][0]) step.attachTo = {
+      element: steps[i][0],
+      on: steps[i][1]
+    }
+
+    tour.addStep(step);
   }
 }
 
