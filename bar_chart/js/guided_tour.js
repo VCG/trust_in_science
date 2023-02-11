@@ -18,7 +18,7 @@ function createTour(type){
 
   switch(type){
     case "complex": 
-      steps.push(['', '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
+      steps.push([null, '','Bar Chart Tour','Before we show you the interactive bar chart, we will first guide you through the main components of the visualization.']);
       steps.push(['#chart', 'bottom','Bar Chart Visualization','This is the main visualization. Once you filter the data, all changes will directly show up here.<br> <b>Your turn:</b> Hover over a bar to see details about that bar.']);
       steps.push(['#time_filter_div', 'left','This is a time filter!','You can use this filter to brush and select a subset of weeks. Only the data of the selected weeks will be shown in the visualization.\
           <br> <b>Your turn:</b> Try creating a filter by clicking and dragging over a set of weeks.']);
