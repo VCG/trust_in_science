@@ -127,11 +127,11 @@
             leg_row2 = leg.append('div')
 
             vac = legend.append('div').attr('id','vax-leg')
-            vac.append('div').append('p').attr('class','legend-title').text('Rate of Vaccinated')
+            vac.append('div').attr('class','legend-title').text('Rate of Vaccinated')
             vac_row1 = vac.append('div'); vac_row2 = vac.append('div'); vac_row3 = vac.append('div')
 
             unv = legend.append('div').attr('id','unvax-leg')
-            unv.append('div').append('p').attr('class','legend-title').text('Rate of Unvaccinated')
+            unv.append('div').attr('class','legend-title').text('Rate of Unvaccinated')
             unv_row1 = unv.append('div'); unv_row2 = unv.append('div'); unv_row3 = unv.append('div')
 
             let years = time.append('div').attr('class', 'legend-row')
@@ -152,7 +152,7 @@
 
         rows.forEach((d,i) => {
             d.append('div').attr('class','legend-value').append('svg').attr('id',vis.rids[i]).append('rect').style('fill',vis.rcolors[i])
-            d.append('div').append('p').attr('class','legend-label').text(vis.rlabels[i])
+            d.append('div').attr('class','legend-label').text(vis.rlabels[i])
         })
         
     }

@@ -104,6 +104,7 @@ h3 {
     overflow: hidden;
     margin-bottom: 0;
     padding-bottom: 0;
+    height: 20px;
 }
 
 .legend-value {
@@ -118,6 +119,7 @@ h3 {
 
 .legend-label {
     display: inline-block;
+    height: 20px;
 }
 
 .alignLeft {
