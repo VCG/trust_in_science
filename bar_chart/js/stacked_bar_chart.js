@@ -61,7 +61,7 @@
         this.margin = {top: 20, right: 20, bottom: 100, left: 70};
         this.totalWidth = d3.select('#chart').node().getBoundingClientRect().width
         this.width = this.totalWidth - this.margin.left - this.margin.right;
-        this.height = this.totalWidth/(3-this.isStacked) - this.margin.top - this.margin.bottom;
+        this.height = this.totalWidth/(2-this.isStacked/2) - this.margin.top - this.margin.bottom;
 
         this.x_scale = d3.scaleBand()
             .range([0, this.width])
