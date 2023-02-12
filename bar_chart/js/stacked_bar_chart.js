@@ -100,11 +100,11 @@
         
         mc.append('div').attr('class', 'title')
             .append('h3').attr('id','chart-title').text('Weekly count of vaccinated & unvaccinated individuals who caught Covid-19, split by age');
-        mc.append('br');
-        mc.append('div').attr('class','helper').text(
+        //mc.append('br');
+        mc.append('div').append('p').attr('class','helper').text(
             '*Hover over the bars to explore further' + (vis.isInteractive ? ' and brush the timeline on the right to filter the data' : '')
             );
-        mc.append('br');
+        //mc.append('br');
         mc.append('div').attr('id','chart');
         if(!vis.isStacked) mc.append('div').attr('id','chart2');
         if(vis.source) mc.append('div').append('a').attr('target','_').attr('href','https://data.cdc.gov/Public-Health-Surveillance/Rates-of-COVID-19-Cases-or-Deaths-by-Age-Group-and/3rge-nu2a/data').attr('class', 'source').text('Source: Centers for Disease Control and Prevention');
