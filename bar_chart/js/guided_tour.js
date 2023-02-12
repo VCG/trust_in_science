@@ -65,6 +65,7 @@ function startTour(tour,steps){
       btns.push({
         text: 'Next',
         classes: 'shepherd-button-primary',
+        id: 'next-button-' + i,
         action: function () {
           return tour.next();
         }
