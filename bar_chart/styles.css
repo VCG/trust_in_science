@@ -93,7 +93,7 @@ h3 {
 }
 
 .legend {
-    margin-top: 5%;
+    margin-top: 0%;
 }
 
 .legend-title {
@@ -120,6 +120,7 @@ h3 {
 
 .legend-label {
     display: inline-block;
+    height: 30px;
 }
 
 .alignLeft {
