@@ -98,14 +98,14 @@ h3 {
 
 .legend-title {
     font-size: 13px;
-    height: 30px;
+    height: 25px;
 }
 
 .legend-row {
     overflow: hidden;
     margin: 0;
     padding: 0;
-    height: 30px;
+    height: 25px;
 }
 
 .legend-value {
@@ -120,7 +120,7 @@ h3 {
 
 .legend-label {
     display: inline-block;
-    height: 30px;
+    height: 25px;
 }
 
 .alignLeft {
