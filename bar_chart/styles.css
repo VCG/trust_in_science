@@ -103,8 +103,8 @@ h3 {
 
 .legend-row {
     overflow: hidden;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    margin: 0;
+    padding: 0;
     height: 30px;
 }
 
