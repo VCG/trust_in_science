@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map Chart plot</title>
+
+    <!-- Load external CSS file -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body style="padding: 5vh">
+
+<!--<div id="mapDiv" width="700" height="1000"></div>-->
+<div class="box red">
+<h3 class="main_title" >Cumulative Covid-19 cases across the US states as per week 4,  2022</h3>
+<div class="instructions">*Hover over the states to explore further</div>
+</div>
+
+<br>
+<div id="mapDiv"></div>
+
+<br>
+<br>
+<div class="source">Source: Centers for Disease Control and Prevention <a href="https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36" target="_blank">Here</a></div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+
+<!-- Load external JS files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="js/d3.v6.min.js"></script>
+
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+
+<script src="js/d3-tip.js"></script>
+<script src="js/map_vis.js"></script>
+<script src="js/main.js"></script>
+<!--<script src="js/data_table_test.js"></script>-->
+<!--<script src="js/old_code.js"></script>-->
+
+</body>
+</html>
