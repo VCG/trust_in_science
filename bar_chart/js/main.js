@@ -1,4 +1,4 @@
-
+var chart
 function getBarChartData(){
     let parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -25,14 +25,15 @@ function getBarChartData(){
     })
 }
 
-// getBarChartData()
+getBarChartData()
 // .then(data => {
-//     let chart = new StackedBarChart({
+//     chart = new StackedBarChart({
 //         data: data,
 //         stacked: true,
 //         interactive: true
 //     });
 //     chart.initVis('chart')
+//     createTour('complex')
 // });
 // .then(data => {
 //     chart = new StackedBarChart({
@@ -41,14 +42,15 @@ function getBarChartData(){
 //         interactive: false
 //     });
 //     chart.initVis('chart')
-//     chart.updateVis('chart')
+//     createTour('moderate')
 // });
-// .then(data => {
-//     chart = new StackedBarChart({
-//         data: data,
-//         stacked: false,
-//         interactive: false
-//     });
-//     chart.initVis('chart',true)
-//     chart.initVis('chart2',false)
-// });
+.then(data => {
+    chart = new StackedBarChart({
+        data: data,
+        stacked: false,
+        interactive: false
+    });
+    chart.initVis('chart',true)
+    chart.initVis('chart2',false)
+    createTour('simple')
+});
