@@ -266,3 +266,26 @@ h3 {
     font-size: 13px;
     z-index: 3;
 }
+
+
+#chart-overlay {
+    border: 1px solid grey;
+    position: absolute;
+    margin: 20px 0 0 20px;
+    z-index: 2;
+    background-color: white;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#chart-overlay .title {
+    position: absolute;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 4px;
+    font-weight: bold;
+}
+
+#chart-overlay .close {
+    margin-right: 6px;
+}

@@ -1,6 +1,3 @@
-$("#chart-overlay").hide();
-$("#chart-overlay .close").click(() => $("#chart-overlay").hide());
-
 let parseDate = d3.timeParse("%Y-%m-%d");
 let number_format = d3.format(",")
 
@@ -18,16 +15,6 @@ let promises = [
             d.value = +d.NewCasesAdj;
             d.value2 = +d.SevenDayAvgAdj;
         });
-        //const maxNewCases = d3.max(data, d => d.value);
-        // states.forEach(state => {
-        //     new LineChartSmall(`.state-${state.code.toLowerCase()}`, data, state, maxNewCases);
-        //     $(`.state-${state.code.toLowerCase()}`).click(() => {
-        //         new LineChartLarge("#chart-overlay", data, state.code);
-        //         new LineChartLarge("#chart-overlay", data, state.code);
-        //         $("#chart-overlay .title").text(state.name);
-        //         $("#chart-overlay").show();
-        //     });
-        // });
         return [_.chain(data).groupBy("State").map((v, k) => ({code: k, name: v[0].State2})).value(), data];
     })
 ];
@@ -48,7 +35,7 @@ getMapChartData()
         let chart = new MapChart({
             data: data,
             isComplex: true,
-            isInteractive: false,
+            isInteractive: true,
             source: true
         });
         chart.initVis('chart')

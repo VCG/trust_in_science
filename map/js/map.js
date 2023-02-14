@@ -30,6 +30,12 @@ class MapChart {
 
         if (vis.complex) {
             document.getElementById("chart").innerHTML =
+                '    <div id="chart-overlay">\n' +
+                '        <div class="title"></div>\n' +
+                '        <button type="button" class="close" aria-label="Close" title="Close">\n' +
+                '            <span aria-hidden="true">&times;</span>\n' +
+                '        </button>\n' +
+                '    </div>\n' +
                 '    <div class="grid-map">\n' +
                 '        <div class="grid-row">\n' +
                 '            <div class = "legend_title">Legend</div>\n' +
@@ -157,6 +163,9 @@ class MapChart {
                 '            <div class="grid-cell empty"></div>\n' +
                 '        </div>\n' +
                 '        <br>';
+
+            $("#chart-overlay").hide();
+            $("#chart-overlay .close").click(() => $("#chart-overlay").hide());
         }
 
         if (vis.source) mc.append('div').append('a').attr('target', '_')
@@ -175,9 +184,9 @@ class MapChart {
             vis.states.forEach(state => {
                 this.lineChartSmall(`.state-${state.code.toLowerCase()}`, vis.complexData, state, maxNewCases);
                 //only if interactive
-                if (this.interactive) {
+                if (vis.interactive) {
                     $(`.state-${state.code.toLowerCase()}`).click(() => {
-                        this.lineChartLarge("#chart-overlay", data, state.code);
+                        this.lineChartLarge("#chart-overlay", vis.complexData, state.code);
                         $("#chart-overlay .title").text(state.name);
                         $("#chart-overlay").show();
                     });
@@ -261,8 +270,8 @@ class MapChart {
         let vis = this;
         let data = dataIn.filter(d => d.State === state)
         let margin = {top: 50, right: 130, bottom: 50, left: 50},
-            width = 700 - margin.left - margin.right,
-            height = 440 - margin.top - margin.bottom;
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
         let x = d3.scaleTime().range([0, width]);
         let y = d3.scaleLinear().range([height, 0]);
@@ -284,8 +293,6 @@ class MapChart {
 
         x.domain(d3.extent(data, d => d.date));
         y.domain(d3.extent(data, d => d.value));
-
-        const dateFormatter = d3.timeFormat("%d/%m/%Y");
 
         svg.append("path")
             .data([data])
@@ -490,9 +497,6 @@ class MapChart {
 
         let bisectDate = d3.bisector(d => d.date).left;
         let formatTime = d3.timeFormat("%Y-%m-%d");
-
-        const yearFormat = d3.timeFormat("%Y");
-
         const x_time = d3.scaleTime()
             .domain(d3.extent(data, function (d) {
                 return d.date;
@@ -502,24 +506,19 @@ class MapChart {
         function mousemove(event) {
             let x_coordinate = d3.pointer(event)[0];
             let x_date = x_time.invert(x_coordinate);
-            let index = bisectDate(vis.data, x_date);
-            // let closest = vis.data[index];
-
+            let index = bisectDate(data, x_date);
             let hang_right = false
-
             let closest = null;
-            let right = vis.data[index];
+            let right = data[index];
             let x_right = x_time(right.date);
             if (Math.abs(x_right - x_coordinate) < 10) {
                 closest = right;
                 hang_right = true
-
             } else if (index) {
-                let left = vis.data[index - 1];
+                let left = data[index - 1];
                 let x_left = x_time(left.date);
                 if (Math.abs(x_left - x_coordinate) < 10) {
                     closest = left;
-
                 }
             }
 
@@ -550,14 +549,13 @@ class MapChart {
             text2.text("Date: " + formatTime(closest.date));
             text3.text("New Cases: " + closest.value);
             text4.text("7-Day New Cases Avg: " + (closest.value2.toFixed(0)));
-
         }
     }
 
     initVisSimple(id) {
         let vis = this;
         vis.margin = {top: 0, right: 20, bottom: 100, left: 0};
-        vis.totalWidth = d3.select(id).node().getBoundingClientRect().width
+        vis.totalWidth = d3.select("#" + id).node().getBoundingClientRect().width
         if (vis.totalWidth < 0) console.log(vis.totalWidth)
         vis.width = vis.totalWidth * 1.4 - vis.margin.left - vis.margin.right;
         if (vis.width < 0) console.log(vis.width)
@@ -565,7 +563,7 @@ class MapChart {
         if (vis.height < 0) console.log(vis.height)
 
         // init drawing area
-        vis.svg = d3.select("#chart")
+        vis.svg = d3.select("#" + id)
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
