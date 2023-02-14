@@ -12,7 +12,7 @@ let promises = [
         row.Tot_Cases2 = number_format(+row.Tot_Cases);
         return row;
     }),
-    d3.csv("data/data_fin.csv").then(function(data) {
+    d3.csv("data/data_fin.csv").then(function (data) {
         data.forEach(d => {
             d.date = parseDate(d.SubmissionDate);
             d.value = +d.NewCasesAdj;
@@ -28,7 +28,7 @@ let promises = [
         //         $("#chart-overlay").show();
         //     });
         // });
-        return _.chain(data).groupBy("State").map((v, k) => ({code: k, name: v[0].State2})).value();
+        return [_.chain(data).groupBy("State").map((v, k) => ({code: k, name: v[0].State2})).value(), data];
     })
 ];
 
@@ -44,10 +44,10 @@ function getMapChartData() {
 
 getMapChartData()
     .then(data => {
-      //  console.log(data)
+        //  console.log(data)
         let chart = new MapChart({
             data: data,
-            isComplex: false,
+            isComplex: true,
             isInteractive: false,
             source: true
         });
