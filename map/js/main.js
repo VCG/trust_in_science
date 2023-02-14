@@ -31,7 +31,6 @@ function getMapChartData() {
 
 getMapChartData()
     .then(data => {
-        //  console.log(data)
         let chart = new MapChart({
             data: data,
             isComplex: true,
