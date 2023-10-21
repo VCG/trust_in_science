@@ -1,0 +1,4 @@
+.idea/*
+/.idea/*
+/.idea/trust_in_science.iml
+node_modules/

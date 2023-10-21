@@ -1,0 +1,244 @@
+
+
+.container {
+    /*border: 1px solid red;*/
+    overflow: hidden;
+}
+
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+.legend-content {
+    width: 180px;
+    float: right;
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+.brush-label {
+    font-size: 14px;
+    padding-bottom: 4px;
+}
+
+.legend {
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+
+.legend-row {
+    font-size: 13px;
+    overflow: hidden;
+}
+
+.legend-value {
+    display: inline;
+    /*padding: 0 10px 0 0;*/
+}
+
+.legend-row2 {
+    overflow: hidden;
+    font-size: 13px;
+    margin-top: -15px;
+    margin-left: 140px;
+
+
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+
+
+h3 {
+    font-size: 20px;
+}
+
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.axis path,
+.axis line {
+
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+;
+}
+
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: #fff;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+
+
+
+.legend {
+    margin-top: 40px;
+}
+
+.legend-title {
+    font-size: 15px;
+}
+
+
+
+.legend-value {
+    display: inline;
+    padding: 0 10px 0 0;
+}
+
+
+
+
+.legend-label {
+    display: inline-block;
+
+}
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+}
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.axis path,
+.axis line {
+
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: #fff;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+
+
+
+
+
+.axis text {
+    font-size: 11px;
+}
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.bubbles {
+    stroke-width: 2px;
+    stroke: white;
+}
+.bubbles:hover {
+    stroke: black;
+}
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+}

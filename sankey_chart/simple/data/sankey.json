@@ -1,0 +1,48 @@
+{
+  "nodes":[
+    {"node":0,"name":"Immediately","perc":"37%"},
+    {"node":1,"name":"Delay","perc":"47%"},
+    {"node":2,"name":"Never","perc":"7%"},
+    {"node":3,"name":"Missing","perc":"8%"},
+
+    {"node":4,"name":"Vaccinated","perc":"77%"},
+    {"node":5,"name":"Immediately","perc":"6%"},
+    {"node":6,"name":"Delay","perc":"5%"},
+    {"node":7,"name":"Never","perc":"8%"},
+    {"node":8,"name":"Missing","perc":"4%"}
+
+  ],
+  "links":[
+    {"source":0,"target":4,"value":1829},
+    {"source":0,"target":5,"value":22},
+    {"source":0,"target":6,"value":81},
+    {"source":0,"target":7,"value":12},
+    {"source":0,"target":8,"value":75},
+
+
+    {"source":1,"target":4,"value":2095},
+    {"source":1,"target":5,"value":108},
+    {"source":1,"target":6,"value":62},
+    {"source":1,"target":7,"value":261},
+    {"source":1,"target":8,"value":61},
+
+
+
+    {"source":2,"target":4,"value":88},
+    {"source":2,"target":5,"value":56},
+    {"source":2,"target":6,"value":110},
+    {"source":2,"target":7,"value":97},
+    {"source":2,"target":8,"value":58},
+
+
+    {"source":3,"target":4,"value":197},
+    {"source":3,"target":5,"value":135},
+    {"source":3,"target":6,"value":30},
+    {"source":3,"target":7,"value":61},
+    {"source":3,"target":8,"value":20}
+
+
+
+
+
+  ]}

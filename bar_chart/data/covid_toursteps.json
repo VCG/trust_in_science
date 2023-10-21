@@ -1,0 +1,83 @@
+{
+    "complex": [
+      {
+        "id": "#chart",
+        "location": "bottom",
+        "title": "Interactive Stacked Bar Chart",
+        "text": "This is an interactive stacked bar chart. <br>  Each bar represents one week of COVID cases (per 100K people).  <br> <br> Yellow, orange, and red bars represent <b>unvaccinated</b> people within three age groups; light, medium, and dark blue bars represent <b>vaccinated</b> people in those same age groups.<br> <br> <b>Your turn:</b> Hover over a bar to see the data for the corresponding week.",
+        "class": "main-vis-step",
+        "disabled": false
+      },
+      {
+        "id": "#time_filter_div",
+        "location": "left",
+        "title": "Creating a Time Filter",
+        "text": "The x-axis shows time in weeks. <br> <br> You can select a subset of weeks to filter the data shown in the visualization.<br><br> <b>Your turn:</b> To proceed to the next step, create a selection by clicking and dragging over the time axis.<br>",
+        "class": "brush-step",
+        "disabled": true
+      },
+      {
+        "id": "#time_filter_div",
+        "location": "left",
+        "title": "Adjusting the Time Filter",
+        "text": "You can adjust the filter either by resizing the selection (on the left or right) or by dragging the entire filter.<br><br><b>Your turn:</b> Adjust the filter you have created.",
+        "class": "move-step",
+        "disabled": true
+      },
+      {
+        "id": "#time_filter_div",
+        "location": "left",
+        "title": "Clearing the Time Filter",
+        "text": "<b>Your turn:</b> Click on the time filter outside of the selection area (or press the 'Esc' key) to clear the filter.",
+        "class": "clear-step",
+        "disabled": true
+      },
+      {
+        "id": ".legend",
+        "location": "left",
+        "title": "Legend",
+        "text": "This is the legend. For both vaccinated and unvaccinated people, the data is broken down by age group.<br><br> That's it, have fun exploring the data!",
+        "class": "legend-step",
+        "disabled": false
+      }
+    ],
+    "moderate": [
+      {
+        "id": "#chart",
+        "location": "bottom",
+        "title": "Stacked Bar Chart",
+        "text": "This is a stacked bar chart.  <br> Each bar represents one week of COVID cases (per 100K people).  <br> <br> Orange bars represent <b>unvaccinated</b> people; blue bars represent <b>vaccinated</b> people. <br> <br> <b>Your turn:</b> Hover over a bar to see the data for the corresponding week.",
+        "class": "main-vis-step",
+        "disabled": false
+      },
+      {
+        "id": ".legend",
+        "location": "left",
+        "title": "Legend",
+        "text": "This is the legend, showing the colors for vaccinated (blue) and unvaccinated (orange) folks.  <br> <br> That's it, have fun exploring the data!",
+        "class": "legend-step",
+        "disabled": false
+      }
+    ],
+    "simple": [
+      {
+        "id": "#chart",
+        "location": "bottom",
+        "title": "Bar Chart",
+        "text": "This is a bar chart showing COVID case counts for <b>unvaccinated</b> people.  <br> <br>  <b>Your turn:</b> Hover over a bar to see the data for the corresponding week.",
+        "class": "first-vis-step",
+        "disabled": false
+      },
+      {
+        "id": "#chart2",
+        "location": "top",
+        "title": "Bar Chart",
+        "text": "This is a bar chart showing COVID case counts for <b>vaccinated</b> people.  <br> <br>  <b>Your turn:</b> Once again, you can hover over a bar to see the data for the corresponding week. <br><br> That's it, have fun exploring the data!",
+        "class": "second-vis-step",
+        "disabled": false
+      }
+    ]
+  }
+ 
+ 
+ 

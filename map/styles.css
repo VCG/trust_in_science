@@ -1,0 +1,291 @@
+
+.container {
+    /*border: 1px solid red;*/
+    overflow: hidden;
+}
+
+.shepherd-modal-overlay-container{
+    opacity:.2 !important
+}
+.shepherd-header{
+    background:#cac4ee !important
+}
+
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+.alignLeft {
+    float: left;
+    margin-bottom: 0;
+}
+
+.alignRight {
+    float: right;
+    margin-bottom: 0;
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
+}
+
+.title {
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.subtitle {;
+    font-size: 17px;
+}
+
+.source {
+    font-size: 12px;
+}
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.axis path,
+.axis line {
+
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.helper {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+;
+}
+
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: #fff;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    line-height: 1;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
+    font-family: Segoe UI;
+}
+
+
+.tooltip h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: Segoe UI;
+}
+
+.grid-row {
+    overflow: hidden;
+}
+
+.grid-cell {
+    float: left;
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+.grid-cell.state {
+    border: 1px solid #E1E1E1;
+    background-color: #F2F2F2;
+    color: #696969;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.grid-cell .state-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.line {
+    fill: none;
+    stroke: #011424;
+    stroke-width: 1px;
+}
+
+.line2 {
+    fill: none;
+    stroke: #f5033b;
+    stroke-width: 1px;
+}
+
+.legend_title {
+    position: absolute;
+    right: -129px;
+    width: 50px;
+    height: 20px;
+    font: 11px sans-serif;
+    /*border: 3px solid green;*/
+}
+
+.legend_background {
+    position: absolute;
+    right: -250px;
+    width: 68px;
+    height: 80px;
+    font: 8px sans-serif;
+    /*border: 3px solid green;*/
+}
+.legend_title_year1 {
+    position: absolute;
+    right: -124px;
+    width: 50px;
+    height: 80px;
+    font: 8px sans-serif;
+    /*border: 3px solid green;*/
+}
+.legend_title_year2 {
+    position: absolute;
+    right: -156px;
+    width: 50px;
+    height: 80px;
+    font: 8px sans-serif;
+    /*border: 3px solid green;*/
+}
+
+.legend_title_year3 {
+    position: absolute;
+    right: -258px;
+    width: 120px;
+    /*height: 200px;*/
+    font: 10px sans-serif;
+    /*border: 12px solid green;*/
+    border: 12px solid transparent;
+}
+.line{
+    position: absolute;
+    right: -111px;
+    width: 35px;
+    height: 2px;
+    /*color: red;*/
+    /*stroke: #f5033b;*/
+    background-color: black;
+    /*border-bottom: 2px solid red;*/
+
+}
+
+.line_background{
+    position: absolute;
+    right: -106px;
+    width: 30px;
+    height: 0.5px;
+    background-color: lightgray;
+    /*border-bottom: 2px solid red;*/
+
+}
+
+
+.line_avg{
+    position: absolute;
+    right: 520px;
+    width: 35px;
+    height: 2px;
+    /*color: red;*/
+    /*stroke: #f5033b;*/
+    background-color: red;
+    /*border-bottom: 2px solid red;*/
+
+}
+
+.helper {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.source {
+    margin-left: 0px;
+    font-size: 12px;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
+    z-index: 3;
+}
+
+
+#chart-overlay {
+    border: 1px solid grey;
+    position: absolute;
+    margin: 20px 0 0 20px;
+    z-index: 2;
+    background-color: white;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#chart-overlay .title {
+    position: absolute;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 4px;
+    font-weight: bold;
+}
+
+#chart-overlay .close {
+    margin-right: 6px;
+}

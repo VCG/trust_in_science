@@ -1,0 +1,2677 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={County Dashboard Comparison},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{County Dashboard Comparison}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## Loading required package: tidyverse
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.2     v tibble    3.2.1
+## v lubridate 1.9.2     v tidyr     1.3.0
+## v purrr     1.0.1     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+## 
+## Attaching package: 'psych'
+## 
+## 
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+## 
+## 
+## Loading required package: carData
+## 
+## 
+## Attaching package: 'car'
+## 
+## 
+## The following object is masked from 'package:psych':
+## 
+##     logit
+## 
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+## 
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     some
+## 
+## 
+## Loading required package: Matrix
+## 
+## 
+## Attaching package: 'Matrix'
+## 
+## 
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+## 
+## 
+## 
+## Attaching package: 'rstatix'
+## 
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## 
+## 
+## Attaching package: 'effectsize'
+## 
+## 
+## The following objects are masked from 'package:rstatix':
+## 
+##     cohens_d, eta_squared
+## 
+## 
+## The following object is masked from 'package:psych':
+## 
+##     phi
+## 
+## 
+## 
+## Attaching package: 'GPArotation'
+## 
+## 
+## The following objects are masked from 'package:psych':
+## 
+##     equamax, varimin
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: namespace 'ez' is not available and has been replaced
+## by .GlobalEnv when processing object 'anova_result'
+\end{verbatim}
+
+Load Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data\_clean.csv"}\NormalTok{)}
+
+\CommentTok{\# trust in data is the column: bar{-}data\_6}
+\CommentTok{\# trust in vis is the column: bar{-}vis\_6}
+\end{Highlighting}
+\end{Shaded}
+
+Converting covariates to factors
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# results$Gender \textless{}{-} as.factor(results$Gender)}
+\CommentTok{\# results$Education \textless{}{-} as.factor(results$Education)}
+\CommentTok{\# results$Parents\_education \textless{}{-} as.factor(results$Parents\_education)}
+\CommentTok{\# results$Language \textless{}{-} as.factor(results$Language)}
+\CommentTok{\# results$Ethnicity \textless{}{-} as.factor(results$Ethnicity)}
+\CommentTok{\# results$Income \textless{}{-} as.factor(results$Income)}
+\CommentTok{\# results$Religion \textless{}{-} as.factor(results$Religion)}
+\end{Highlighting}
+\end{Shaded}
+
+Trust in Vis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# results$isCovidData \textless{}{-} factor(results$isCovidData, levels = c(0, 1),}
+\CommentTok{\#                   labels = c("Crop Data", "Covid Data"))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MinMeanSEMMax }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  v }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(x), }\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{{-}} \FunctionTok{sd}\NormalTok{(x)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(x)), }\FunctionTok{mean}\NormalTok{(x), }\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{+} \FunctionTok{sd}\NormalTok{(x)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(x)), }\FunctionTok{max}\NormalTok{(x))}
+  \FunctionTok{names}\NormalTok{(v) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ymin"}\NormalTok{, }\StringTok{"lower"}\NormalTok{, }\StringTok{"middle"}\NormalTok{, }\StringTok{"upper"}\NormalTok{, }\StringTok{"ymax"}\NormalTok{)}
+\NormalTok{  v}
+\NormalTok{\}}
+
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# group\_by(complexity, isCovidData) \%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{( }\AttributeTok{x =}\NormalTok{ vis.trust\_6, }\AttributeTok{y =} \DecValTok{0}\NormalTok{, }\AttributeTok{cex=}\FloatTok{1.5}\NormalTok{, }\AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"purple"}\NormalTok{, }\StringTok{"orange"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results, }\AttributeTok{width =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{height =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{color =} \StringTok{"light gray"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\#stat\_summary(fun.data=MinMeanSEMMax, geom="boxplot", colour="red") +}
+
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{fatten =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+
+  \FunctionTok{geom\_segment}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{group\_by}\NormalTok{(complexity, isCovidData) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                           \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(vis.trust\_6),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(data.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)), }
+              \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mean, }\AttributeTok{xend =}\NormalTok{ mean, }\AttributeTok{y =} \SpecialCharTok{{-}}\NormalTok{.}\DecValTok{25}\NormalTok{, }\AttributeTok{yend =}\NormalTok{ .}\DecValTok{25}\NormalTok{,  }\AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(isCovidData)), }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+        \CommentTok{\# stat\_summary(fun.data = "mean\_cl\_boot", colour = "red", size = 0.5, position = position\_nudge(x=0.25, y=0), alpha=0.5) +}
+
+  \FunctionTok{geom\_text}\NormalTok{( }\AttributeTok{data =}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{group\_by}\NormalTok{(complexity, isCovidData) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                           \AttributeTok{mean =} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(vis.trust\_6),}\AttributeTok{digits=}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{se =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sd}\NormalTok{(data.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}\AttributeTok{digits=}\DecValTok{2}\NormalTok{),}
+                          \AttributeTok{vis.trust\_6 =} \FunctionTok{mean}\NormalTok{(vis.trust\_6)),}
+            \CommentTok{\# aes(label = paste(mean, "[",mean{-}se,",",mean+se,"]"), x = 6.2, y = 0.43, fontface = 3), size=3, colour = "black")+}
+              \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(mean), }\AttributeTok{x =}\NormalTok{ mean, }\AttributeTok{y =}\NormalTok{ .}\DecValTok{35}\NormalTok{, }\AttributeTok{fontface =} \DecValTok{3}\NormalTok{), }\AttributeTok{size=}\DecValTok{4}\NormalTok{, }\AttributeTok{colour =} \StringTok{"black"}\NormalTok{)}\SpecialCharTok{+}
+
+  \FunctionTok{facet\_grid}\NormalTok{(complexity }\SpecialCharTok{\textasciitilde{}}\NormalTok{ isCovidData) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Trust in Visualization"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{axis.ticks.y =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (`geom_segment()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"complexity\_dataType\_interaction.pdf"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(complexity, isCovidData) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(vis.trust\_6),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(vis.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   complexity [3]
+##   complexity isCovidData     n  mean    se
+##   <chr>            <int> <int> <dbl> <dbl>
+## 1 complex              0    94  4.59 0.122
+## 2 complex              1    78  4.23 0.138
+## 3 moderate             0    89  4.47 0.114
+## 4 moderate             1    98  4.48 0.149
+## 5 simple               0    92  4.41 0.106
+## 6 simple               1    93  4.86 0.124
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# results$isCovidData \textless{}{-} factor(results$isCovidData, levels = c(0, 1),}
+\CommentTok{\#                   labels = c("Crop Data", "Covid Data"))}
+
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ data.trust\_6, }\AttributeTok{y =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
+  \CommentTok{\# scale\_color\_manual(values = c("purple", "orange")) +}
+  \FunctionTok{ylim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results, }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{height =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{color =} \StringTok{"light gray"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{fatten =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{color =} \StringTok{"salmon"}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\# labs(title = "Trust in data") + }
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{group\_by}\NormalTok{(complexity) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                          \AttributeTok{data.trust\_6 =} \FunctionTok{mean}\NormalTok{(data.trust\_6)), }
+              \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ data.trust\_6), }\AttributeTok{size =} \DecValTok{1}\NormalTok{,}\AttributeTok{colour =} \StringTok{"salmon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{( }\AttributeTok{data =}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{group\_by}\NormalTok{(complexity) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                           \AttributeTok{mean =} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(data.trust\_6),}\AttributeTok{digits=}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{se =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sd}\NormalTok{(data.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}\AttributeTok{digits=}\DecValTok{2}\NormalTok{),}
+                          \AttributeTok{vis.trust\_6 =} \FunctionTok{mean}\NormalTok{(vis.trust\_6)),}
+            \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(mean, }\StringTok{"["}\NormalTok{,mean}\SpecialCharTok{{-}}\NormalTok{se,}\StringTok{","}\NormalTok{,mean}\SpecialCharTok{+}\NormalTok{se,}\StringTok{"]"}\NormalTok{), }\AttributeTok{x =} \FloatTok{6.8}\NormalTok{, }\AttributeTok{y =} \FloatTok{0.43}\NormalTok{, }\AttributeTok{fontface =} \DecValTok{3}\NormalTok{), }\AttributeTok{size=}\DecValTok{3}\NormalTok{, }\AttributeTok{colour =} \StringTok{"black"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(complexity)) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Trust in Data"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{axis.ticks.y =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"complexity\_interaction.pdf"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+## Removed 1 rows containing missing values (`geom_segment()`).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(complexity) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(data.trust\_6),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(data.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 4
+##   complexity     n  mean     se
+##   <chr>      <int> <dbl>  <dbl>
+## 1 complex      172  4.40 0.0935
+## 2 moderate     187  4.30 0.101 
+## 3 simple       185  4.6  0.0911
+\end{verbatim}
+
+Linear Regression Model for trust in vis as a function of
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{*}\NormalTok{ chartType}
+                                    \SpecialCharTok{+}\NormalTok{ Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+}\NormalTok{ Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+}\NormalTok{ need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1 ,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: vis.trust_6
+##                                              Df Sum Sq Mean Sq F value   Pr(>F)
+## complexity                                    2   4.49   2.244  1.8251  0.16234
+## as.factor(isCovidData)                        1   0.26   0.260  0.2114  0.64590
+## chartType                                     1   0.56   0.558  0.4537  0.50090
+## Age                                           1   2.78   2.780  2.2611  0.13332
+## Gender                                        1   2.89   2.894  2.3533  0.12568
+## State_1                                      45  84.39   1.875  1.5251  0.01849
+## Education                                     1   0.04   0.036  0.0295  0.86363
+## Parents_education                             1   2.97   2.969  2.4143  0.12090
+## Language                                      1   0.14   0.142  0.1152  0.73442
+## Ethnicity                                     1   2.71   2.709  2.2035  0.13836
+## Income                                        1   0.10   0.102  0.0828  0.77362
+## Religion                                      1   0.29   0.290  0.2358  0.62745
+## trust.in.science_7                            1  83.49  83.490 67.9016 1.68e-15
+## need_for_cognition                            1   4.64   4.636  3.7707  0.05275
+## interpersonal.trust_1                         1   9.61   9.614  7.8188  0.00538
+## complexity:as.factor(isCovidData)             2  15.30   7.651  6.2223  0.00215
+## complexity:chartType                          2   2.54   1.269  1.0324  0.35693
+## as.factor(isCovidData):chartType              1   0.40   0.405  0.3291  0.56646
+## complexity:as.factor(isCovidData):chartType   2   1.01   0.505  0.4106  0.66349
+## Residuals                                   476 585.28   1.230                 
+##                                                
+## complexity                                     
+## as.factor(isCovidData)                         
+## chartType                                      
+## Age                                            
+## Gender                                         
+## State_1                                     *  
+## Education                                      
+## Parents_education                              
+## Language                                       
+## Ethnicity                                      
+## Income                                         
+## Religion                                       
+## trust.in.science_7                          ***
+## need_for_cognition                          .  
+## interpersonal.trust_1                       ** 
+## complexity:as.factor(isCovidData)           ** 
+## complexity:chartType                           
+## as.factor(isCovidData):chartType               
+## complexity:as.factor(isCovidData):chartType    
+## Residuals                                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# post{-}hoc tests}
+\FunctionTok{aov}\NormalTok{(vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData), }\AttributeTok{data =}\NormalTok{ results) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tukey\_hsd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 19 x 9
+##    term             group1 group2 null.value estimate conf.low conf.high   p.adj
+##  * <chr>            <chr>  <chr>       <dbl>    <dbl>    <dbl>     <dbl>   <dbl>
+##  1 complexity       compl~ moder~          0  0.0515   -0.248      0.351 0.914  
+##  2 complexity       compl~ simple          0  0.213    -0.0872     0.514 0.218  
+##  3 complexity       moder~ simple          0  0.162    -0.132      0.456 0.4    
+##  4 as.factor(isCov~ 0      1               0  0.0436   -0.160      0.247 0.674  
+##  5 complexity:as.f~ compl~ moder~          0 -0.113    -0.624      0.398 0.988  
+##  6 complexity:as.f~ compl~ simpl~          0 -0.172    -0.679      0.335 0.927  
+##  7 complexity:as.f~ compl~ compl~          0 -0.354    -0.883      0.175 0.394  
+##  8 complexity:as.f~ compl~ moder~          0 -0.106    -0.604      0.393 0.991  
+##  9 complexity:as.f~ compl~ simpl~          0  0.275    -0.230      0.780 0.627  
+## 10 complexity:as.f~ moder~ simpl~          0 -0.0589   -0.572      0.455 0.999  
+## 11 complexity:as.f~ moder~ compl~          0 -0.241    -0.777      0.295 0.792  
+## 12 complexity:as.f~ moder~ moder~          0  0.00768  -0.498      0.513 1      
+## 13 complexity:as.f~ moder~ simpl~          0  0.388    -0.124      0.901 0.255  
+## 14 complexity:as.f~ simpl~ compl~          0 -0.182    -0.714      0.349 0.924  
+## 15 complexity:as.f~ simpl~ moder~          0  0.0665   -0.435      0.568 0.999  
+## 16 complexity:as.f~ simpl~ simpl~          0  0.447    -0.0608     0.955 0.121  
+## 17 complexity:as.f~ compl~ moder~          0  0.249    -0.275      0.773 0.752  
+## 18 complexity:as.f~ compl~ simpl~          0  0.629     0.0991     1.16  0.00958
+## 19 complexity:as.f~ moder~ simpl~          0  0.381    -0.119      0.881 0.25   
+## # i 1 more variable: p.adj.signif <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# effect sizes}
+\FunctionTok{eta\_squared}\NormalTok{(}\FunctionTok{aov}\NormalTok{(vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{+} 
+                  \SpecialCharTok{+}\NormalTok{ Age }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Gender) }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Education) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Parents\_education) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Language) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Ethnicity) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Income) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Religion) }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+}\NormalTok{ need\_for\_cognition }\SpecialCharTok{+} 
+\NormalTok{                  interpersonal.trust\_1,}
+             \AttributeTok{data =}\NormalTok{ results))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Effect Size for ANOVA (Type I)
+## 
+## Parameter                                   | Eta2 (partial) |       95% CI
+## ---------------------------------------------------------------------------
+## complexity                                  |       8.51e-03 | [0.00, 1.00]
+## as.factor(isCovidData)                      |       4.97e-04 | [0.00, 1.00]
+## chartType                                   |       1.07e-03 | [0.00, 1.00]
+## Age                                         |       5.29e-03 | [0.00, 1.00]
+## as.factor(Gender)                           |           0.01 | [0.00, 1.00]
+## State_1                                     |           0.14 | [0.01, 1.00]
+## as.factor(Education)                        |           0.05 | [0.01, 1.00]
+## as.factor(Parents_education)                |       4.09e-03 | [0.00, 1.00]
+## as.factor(Language)                         |       3.32e-03 | [0.00, 1.00]
+## as.factor(Ethnicity)                        |           0.02 | [0.00, 1.00]
+## as.factor(Income)                           |           0.05 | [0.00, 1.00]
+## as.factor(Religion)                         |           0.01 | [0.00, 1.00]
+## trust.in.science_7                          |           0.13 | [0.08, 1.00]
+## need_for_cognition                          |       5.59e-03 | [0.00, 1.00]
+## interpersonal.trust_1                       |           0.02 | [0.00, 1.00]
+## complexity:as.factor(isCovidData)           |           0.02 | [0.00, 1.00]
+## complexity:chartType                        |       2.51e-03 | [0.00, 1.00]
+## as.factor(isCovidData):chartType            |       1.25e-04 | [0.00, 1.00]
+## complexity:as.factor(isCovidData):chartType |       7.28e-04 | [0.00, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].
+\end{verbatim}
+
+Colinearity of trust in vis and trust in data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colinearity\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.aesthetic\_1 }\SpecialCharTok{+}\NormalTok{ affect.clarity\_1 }\SpecialCharTok{+}\NormalTok{ affect.science\_1 }\SpecialCharTok{+}\NormalTok{ vis.trust\_1 }\SpecialCharTok{+}\NormalTok{ vis.trust\_2 }\SpecialCharTok{+}\NormalTok{ vis.trust\_3 }\SpecialCharTok{+}\NormalTok{ vis.trust\_4 }\SpecialCharTok{+}\NormalTok{ vis.trust\_5 }\SpecialCharTok{+}\NormalTok{ vis.trust\_6 }\SpecialCharTok{+}\NormalTok{ data.trust\_6 }\SpecialCharTok{+}\NormalTok{ data.trust\_5 }\SpecialCharTok{+}\NormalTok{ data.trust\_4 }\SpecialCharTok{+}\NormalTok{ data.trust\_3 }\SpecialCharTok{+}\NormalTok{ data.trust\_2 }\SpecialCharTok{+}\NormalTok{ data.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{vif}\NormalTok{(colinearity\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## affect.aesthetic_1   affect.clarity_1   affect.science_1        vis.trust_1 
+##           1.220979           1.413676           1.293246           1.465104 
+##        vis.trust_2        vis.trust_3        vis.trust_4        vis.trust_5 
+##           1.524688           1.400902           1.237294           1.251994 
+##        vis.trust_6       data.trust_6       data.trust_5       data.trust_4 
+##           2.341983           1.995015           1.399050           1.624586 
+##       data.trust_3       data.trust_2       data.trust_1 
+##           1.928120           1.323701           1.971599
+\end{verbatim}
+
+vif(colinearity\_model)relation of trust in vis and trust in data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_frame }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(results}\SpecialCharTok{$}\NormalTok{vis.trust\_1, results}\SpecialCharTok{$}\NormalTok{vis.trust\_2, results}\SpecialCharTok{$}\NormalTok{vis.trust\_3, results}\SpecialCharTok{$}\NormalTok{vis.trust\_4, results}\SpecialCharTok{$}\NormalTok{vis.trust\_5, results}\SpecialCharTok{$}\NormalTok{vis.trust\_6, results}\SpecialCharTok{$}\NormalTok{data.trust\_1, results}\SpecialCharTok{$}\NormalTok{data.trust\_2, results}\SpecialCharTok{$}\NormalTok{data.trust\_3, results}\SpecialCharTok{$}\NormalTok{data.trust\_4, results}\SpecialCharTok{$}\NormalTok{data.trust\_5, results}\SpecialCharTok{$}\NormalTok{data.trust\_6)}
+\FunctionTok{cor}\NormalTok{(data\_frame)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                      results.vis.trust_1 results.vis.trust_2
+## results.vis.trust_1            1.0000000          0.30603364
+## results.vis.trust_2            0.3060336          1.00000000
+## results.vis.trust_3            0.3335126          0.31853977
+## results.vis.trust_4            0.2000276          0.05210595
+## results.vis.trust_5            0.2224657          0.11978012
+## results.vis.trust_6            0.4352392          0.37170940
+## results.data.trust_1           0.2643918          0.27183549
+## results.data.trust_2           0.3797543          0.13618213
+## results.data.trust_3           0.2386192          0.20486490
+## results.data.trust_4           0.3331735          0.46202164
+## results.data.trust_5           0.2999485          0.29194397
+## results.data.trust_6           0.3131253          0.24811104
+##                      results.vis.trust_3 results.vis.trust_4
+## results.vis.trust_1            0.3335126          0.20002764
+## results.vis.trust_2            0.3185398          0.05210595
+## results.vis.trust_3            1.0000000          0.15716715
+## results.vis.trust_4            0.1571672          1.00000000
+## results.vis.trust_5            0.2372243          0.38608498
+## results.vis.trust_6            0.4533384          0.16592087
+## results.data.trust_1           0.2688877          0.07258906
+## results.data.trust_2           0.2204795          0.14294443
+## results.data.trust_3           0.2522240          0.05789274
+## results.data.trust_4           0.2756532          0.07493081
+## results.data.trust_5           0.2867424          0.15387366
+## results.data.trust_6           0.2989314          0.13594851
+##                      results.vis.trust_5 results.vis.trust_6
+## results.vis.trust_1           0.22246570           0.4352392
+## results.vis.trust_2           0.11978012           0.3717094
+## results.vis.trust_3           0.23722429           0.4533384
+## results.vis.trust_4           0.38608498           0.1659209
+## results.vis.trust_5           1.00000000           0.1924151
+## results.vis.trust_6           0.19241512           1.0000000
+## results.data.trust_1          0.12108444           0.4865443
+## results.data.trust_2          0.12053449           0.3552367
+## results.data.trust_3          0.15379576           0.4687157
+## results.data.trust_4          0.08102357           0.3043290
+## results.data.trust_5          0.11528244           0.3330997
+## results.data.trust_6          0.17684795           0.6423608
+##                      results.data.trust_1 results.data.trust_2
+## results.vis.trust_1            0.26439184            0.3797543
+## results.vis.trust_2            0.27183549            0.1361821
+## results.vis.trust_3            0.26888772            0.2204795
+## results.vis.trust_4            0.07258906            0.1429444
+## results.vis.trust_5            0.12108444            0.1205345
+## results.vis.trust_6            0.48654432            0.3552367
+## results.data.trust_1           1.00000000            0.3542433
+## results.data.trust_2           0.35424334            1.0000000
+## results.data.trust_3           0.63316511            0.3038037
+## results.data.trust_4           0.33493202            0.2678861
+## results.data.trust_5           0.32765442            0.2409935
+## results.data.trust_6           0.47248947            0.2962105
+##                      results.data.trust_3 results.data.trust_4
+## results.vis.trust_1            0.23861919           0.33317352
+## results.vis.trust_2            0.20486490           0.46202164
+## results.vis.trust_3            0.25222404           0.27565318
+## results.vis.trust_4            0.05789274           0.07493081
+## results.vis.trust_5            0.15379576           0.08102357
+## results.vis.trust_6            0.46871568           0.30432896
+## results.data.trust_1           0.63316511           0.33493202
+## results.data.trust_2           0.30380365           0.26788614
+## results.data.trust_3           1.00000000           0.26620940
+## results.data.trust_4           0.26620940           1.00000000
+## results.data.trust_5           0.28423537           0.45078351
+## results.data.trust_6           0.51441546           0.31664466
+##                      results.data.trust_5 results.data.trust_6
+## results.vis.trust_1             0.2999485            0.3131253
+## results.vis.trust_2             0.2919440            0.2481110
+## results.vis.trust_3             0.2867424            0.2989314
+## results.vis.trust_4             0.1538737            0.1359485
+## results.vis.trust_5             0.1152824            0.1768480
+## results.vis.trust_6             0.3330997            0.6423608
+## results.data.trust_1            0.3276544            0.4724895
+## results.data.trust_2            0.2409935            0.2962105
+## results.data.trust_3            0.2842354            0.5144155
+## results.data.trust_4            0.4507835            0.3166447
+## results.data.trust_5            1.0000000            0.2811698
+## results.data.trust_6            0.2811698            1.0000000
+\end{verbatim}
+
+Trust in science, need for cognition, and interpersonal trust on trust
+in Vis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ variables, }\AttributeTok{value =}\NormalTok{ values, }
+\NormalTok{         trust.in.science\_7, need\_for\_cognition, interpersonal.trust\_1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ values, }\AttributeTok{y =}\NormalTok{ vis.trust\_6, }\AttributeTok{color =}\NormalTok{ variables)) }\SpecialCharTok{+}
+
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(variables)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_blank}\NormalTok{() }\SpecialCharTok{+} 
+   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+Trust in Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ data.trust\_6, }\AttributeTok{y =}\NormalTok{ isCovidData, }\AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results, }\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\# labs(title = "Trust in data") + }
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{group\_by}\NormalTok{(complexity, isCovidData, chartType) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                          \AttributeTok{data.trust\_6 =} \FunctionTok{mean}\NormalTok{(data.trust\_6)), }
+              \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ data.trust\_6, }\AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(complexity), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(chartType)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity', 'isCovidData'. You can
+## override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(complexity, isCovidData) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(data.trust\_6),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(data.trust\_6)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   complexity [3]
+##   complexity isCovidData     n  mean    se
+##   <chr>            <int> <int> <dbl> <dbl>
+## 1 complex              0    94  4.5  0.120
+## 2 complex              1    78  4.27 0.147
+## 3 moderate             0    89  4.15 0.126
+## 4 moderate             1    98  4.44 0.155
+## 5 simple               0    92  4.40 0.103
+## 6 simple               1    93  4.80 0.148
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{*}\NormalTok{ chartType}
+                                    \SpecialCharTok{+}\NormalTok{ Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+}\NormalTok{ Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+}\NormalTok{ need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1 ,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: data.trust_6
+##                                              Df Sum Sq Mean Sq F value
+## complexity                                    2   8.74   4.369  3.1830
+## as.factor(isCovidData)                        1   3.58   3.576  2.6058
+## chartType                                     1   1.02   1.019  0.7421
+## Age                                           1   0.60   0.600  0.4371
+## Gender                                        1   0.13   0.132  0.0962
+## State_1                                      45 128.29   2.851  2.0771
+## Education                                     1   0.94   0.936  0.6822
+## Parents_education                             1   4.11   4.114  2.9973
+## Language                                      1   0.00   0.000  0.0001
+## Ethnicity                                     1   0.29   0.289  0.2104
+## Income                                        1   4.23   4.233  3.0840
+## Religion                                      1   2.12   2.123  1.5470
+## trust.in.science_7                            1  50.70  50.703 36.9418
+## need_for_cognition                            1   6.90   6.898  5.0255
+## interpersonal.trust_1                         1  16.05  16.050 11.6941
+## complexity:as.factor(isCovidData)             2  10.20   5.100  3.7162
+## complexity:chartType                          2   2.43   1.214  0.8843
+## as.factor(isCovidData):chartType              1   9.11   9.107  6.6356
+## complexity:as.factor(isCovidData):chartType   2   2.74   1.371  0.9992
+## Residuals                                   476 653.31   1.372        
+##                                                Pr(>F)    
+## complexity                                  0.0423466 *  
+## as.factor(isCovidData)                      0.1071385    
+## chartType                                   0.3894265    
+## Age                                         0.5088534    
+## Gender                                      0.7565729    
+## State_1                                     9.901e-05 ***
+## Education                                   0.4092350    
+## Parents_education                           0.0840532 .  
+## Language                                    0.9902752    
+## Ethnicity                                   0.6466963    
+## Income                                      0.0797075 .  
+## Religion                                    0.2141902    
+## trust.in.science_7                          2.497e-09 ***
+## need_for_cognition                          0.0254365 *  
+## interpersonal.trust_1                       0.0006809 ***
+## complexity:as.factor(isCovidData)           0.0250357 *  
+## complexity:chartType                        0.4136749    
+## as.factor(isCovidData):chartType            0.0102967 *  
+## complexity:as.factor(isCovidData):chartType 0.3689541    
+## Residuals                                                
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# post{-}hoc tests}
+\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData), }\AttributeTok{data =}\NormalTok{ results) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tukey\_hsd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 19 x 9
+##    term             group1 group2 null.value estimate conf.low conf.high   p.adj
+##  * <chr>            <chr>  <chr>       <dbl>    <dbl>    <dbl>     <dbl>   <dbl>
+##  1 complexity       compl~ moder~          0  -0.0959  -0.414      0.222 0.759  
+##  2 complexity       compl~ simple          0   0.205   -0.114      0.524 0.288  
+##  3 complexity       moder~ simple          0   0.301   -0.0117     0.613 0.0622 
+##  4 as.factor(isCov~ 0      1               0   0.162   -0.0540     0.378 0.141  
+##  5 complexity:as.f~ compl~ moder~          0  -0.354   -0.896      0.188 0.423  
+##  6 complexity:as.f~ compl~ simpl~          0  -0.0978  -0.635      0.440 0.995  
+##  7 complexity:as.f~ compl~ compl~          0  -0.231   -0.792      0.331 0.848  
+##  8 complexity:as.f~ compl~ moder~          0  -0.0612  -0.590      0.468 0.999  
+##  9 complexity:as.f~ compl~ simpl~          0   0.296   -0.240      0.832 0.614  
+## 10 complexity:as.f~ moder~ simpl~          0   0.256   -0.289      0.801 0.76   
+## 11 complexity:as.f~ moder~ compl~          0   0.123   -0.445      0.692 0.99   
+## 12 complexity:as.f~ moder~ moder~          0   0.293   -0.244      0.829 0.625  
+## 13 complexity:as.f~ moder~ simpl~          0   0.650    0.106      1.19  0.00881
+## 14 complexity:as.f~ simpl~ compl~          0  -0.133   -0.697      0.431 0.985  
+## 15 complexity:as.f~ simpl~ moder~          0   0.0366  -0.495      0.569 1      
+## 16 complexity:as.f~ simpl~ simpl~          0   0.394   -0.145      0.932 0.295  
+## 17 complexity:as.f~ compl~ moder~          0   0.170   -0.387      0.726 0.953  
+## 18 complexity:as.f~ compl~ simpl~          0   0.526   -0.0362     1.09  0.0818 
+## 19 complexity:as.f~ moder~ simpl~          0   0.357   -0.174      0.887 0.388  
+## # i 1 more variable: p.adj.signif <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ chartType }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData), }\AttributeTok{data =}\NormalTok{ results) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tukey\_hsd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 9
+##   term   group1 group2 null.value estimate conf.low conf.high p.adj p.adj.signif
+## * <chr>  <chr>  <chr>       <dbl>    <dbl>    <dbl>     <dbl> <dbl> <chr>       
+## 1 chart~ bar    line            0   0.0870  -0.130      0.304 0.432 ns          
+## 2 as.fa~ 0      1               0   0.161   -0.0560     0.379 0.145 ns          
+## 3 chart~ bar:0  line:0          0  -0.0475  -0.449      0.353 0.99  ns          
+## 4 chart~ bar:0  bar:1           0   0.0284  -0.367      0.424 0.998 ns          
+## 5 chart~ bar:0  line:1          0   0.257   -0.149      0.663 0.362 ns          
+## 6 chart~ line:0 bar:1           0   0.0759  -0.325      0.477 0.962 ns          
+## 7 chart~ line:0 line:1          0   0.304   -0.106      0.715 0.225 ns          
+## 8 chart~ bar:1  line:1          0   0.229   -0.177      0.634 0.468 ns
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# effect sizes}
+\FunctionTok{eta\_squared}\NormalTok{(}\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{+} 
+\NormalTok{                  Age }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Gender) }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Education) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Parents\_education) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Language) }\SpecialCharTok{+} 
+                  \FunctionTok{as.factor}\NormalTok{(Ethnicity) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Income) }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Religion) }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+}\NormalTok{ need\_for\_cognition }\SpecialCharTok{+} 
+\NormalTok{                  interpersonal.trust\_1,}
+             \AttributeTok{data =}\NormalTok{ results))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Effect Size for ANOVA (Type I)
+## 
+## Parameter                                   | Eta2 (partial) |       95% CI
+## ---------------------------------------------------------------------------
+## complexity                                  |           0.02 | [0.00, 1.00]
+## as.factor(isCovidData)                      |       6.20e-03 | [0.00, 1.00]
+## chartType                                   |       1.77e-03 | [0.00, 1.00]
+## Age                                         |       1.05e-03 | [0.00, 1.00]
+## as.factor(Gender)                           |           0.01 | [0.00, 1.00]
+## State_1                                     |           0.19 | [0.06, 1.00]
+## as.factor(Education)                        |           0.04 | [0.00, 1.00]
+## as.factor(Parents_education)                |           0.01 | [0.00, 1.00]
+## as.factor(Language)                         |       3.37e-03 | [0.00, 1.00]
+## as.factor(Ethnicity)                        |           0.02 | [0.00, 1.00]
+## as.factor(Income)                           |           0.08 | [0.01, 1.00]
+## as.factor(Religion)                         |           0.02 | [0.00, 1.00]
+## trust.in.science_7                          |           0.08 | [0.04, 1.00]
+## need_for_cognition                          |       9.12e-03 | [0.00, 1.00]
+## interpersonal.trust_1                       |           0.02 | [0.00, 1.00]
+## complexity:as.factor(isCovidData)           |           0.01 | [0.00, 1.00]
+## complexity:chartType                        |       5.91e-03 | [0.00, 1.00]
+## as.factor(isCovidData):chartType            |           0.01 | [0.00, 1.00]
+## complexity:as.factor(isCovidData):chartType |       3.29e-03 | [0.00, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(}\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity , }\AttributeTok{data =}\NormalTok{ results) , }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  complexity emmean     SE  df lower.CL upper.CL
+##  complex       4.4 0.0982 541     4.20     4.59
+##  moderate      4.3 0.0941 541     4.11     4.48
+##  simple        4.6 0.0947 541     4.41     4.79
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+Trust in science, need for cognition, and interpersonal trust on trust
+in Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ variables, }\AttributeTok{value =}\NormalTok{ values, }
+\NormalTok{         trust.in.science\_7, need\_for\_cognition, interpersonal.trust\_1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ values, }\AttributeTok{y =}\NormalTok{ data.trust\_6, }\AttributeTok{color =}\NormalTok{ variables)) }\SpecialCharTok{+}
+
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(variables)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_blank}\NormalTok{() }\SpecialCharTok{+} 
+   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results\_long\_data }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(data.trust\_1, data.trust\_2, data.trust\_3,}
+\NormalTok{         data.trust\_4, data.trust\_5, data.trust\_6,}
+\NormalTok{         ResponseId, complexity,}
+\NormalTok{         vlat\_simple, vlat\_moderate, vlat\_complex) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ trustItemData, }\AttributeTok{value =}\NormalTok{ trustRatingData, }
+\NormalTok{         data.trust\_1, data.trust\_2, data.trust\_3, data.trust\_4, data.trust\_5, data.trust\_6)}
+
+\NormalTok{results\_long\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trustRatingData, }\AttributeTok{y =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =}\NormalTok{ complexity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Trust in data (All)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{data =}\NormalTok{ results\_long\_data }\SpecialCharTok{\%\textgreater{}\%} 
+               \FunctionTok{group\_by}\NormalTok{(complexity, trustItemData) }\SpecialCharTok{\%\textgreater{}\%}
+               \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+                         \AttributeTok{average =} \FunctionTok{mean}\NormalTok{(trustRatingData)), }
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ average, }\AttributeTok{color =}\NormalTok{ complexity)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\FunctionTok{vars}\NormalTok{(trustItemData)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'complexity'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\hypertarget{relationship-between-trust-in-data-and-vis-across-complexity}{%
+\section{Relationship between trust in data and vis, across
+complexity}\label{relationship-between-trust-in-data-and-vis-across-complexity}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results\_long\_data }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(data.trust\_1, data.trust\_2, data.trust\_3,}
+\NormalTok{         data.trust\_4, data.trust\_5, data.trust\_6,}
+\NormalTok{         ResponseId, complexity,}
+\NormalTok{         chartType, isCovidData, }
+\NormalTok{         vlat\_simple, vlat\_moderate, vlat\_complex) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ trustItemData, }\AttributeTok{value =}\NormalTok{ trustRatingData, }
+         \CommentTok{\# data.trust\_1, data.trust\_2, data.trust\_3, data.trust\_4, data.trust\_5, }
+\NormalTok{         data.trust\_6)}
+
+\NormalTok{results\_long\_vis }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ trustItemVis, }\AttributeTok{value =}\NormalTok{ trustRatingVis, }
+         \CommentTok{\# vis.trust\_1, vis.trust\_2, vis.trust\_3, vis.trust\_4, vis.trust\_5, }
+\NormalTok{         vis.trust\_6)}
+
+\NormalTok{results\_long\_all }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(results\_long\_vis, results\_long\_data, }
+                          \AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"ResponseId"}\NormalTok{, }\StringTok{"complexity"}\NormalTok{, }\StringTok{"chartType"}\NormalTok{, }\StringTok{"isCovidData"}\NormalTok{))}
+
+\NormalTok{model}\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(trustRatingVis }\SpecialCharTok{\textasciitilde{}}\NormalTok{  trustRatingData }\SpecialCharTok{*}\NormalTok{ complexity }\SpecialCharTok{+} 
+\NormalTok{              trustRatingData }\SpecialCharTok{*}\NormalTok{  chartType }\SpecialCharTok{+} 
+\NormalTok{              trustRatingData }\SpecialCharTok{*}  \FunctionTok{as.factor}\NormalTok{(isCovidData),}
+                      \AttributeTok{data =}\NormalTok{ results\_long\_all)}
+\FunctionTok{Anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Deviance Table (Type II tests)
+## 
+## Response: trustRatingVis
+##                                        LR Chisq Df Pr(>Chisq)    
+## trustRatingData                          384.33  1    < 2e-16 ***
+## complexity                                 2.39  2    0.30305    
+## chartType                                  0.20  1    0.65520    
+## as.factor(isCovidData)                     0.05  1    0.81628    
+## trustRatingData:complexity                10.69  2    0.00477 ** 
+## trustRatingData:chartType                  4.61  1    0.03172 *  
+## trustRatingData:as.factor(isCovidData)     2.16  1    0.14147    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results\_long\_all }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# filter(trustItemVis == "bar.vis\_2") \%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trustRatingVis, }\AttributeTok{y =}\NormalTok{ trustRatingData, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+              \AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x,}
+              \AttributeTok{geom =} \StringTok{"smooth"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Relationship bewteen trust in Vis and Data"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(chartType), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(complexity)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\hypertarget{do-the-trust-items-predict-trust}{%
+\section{Do the trust items predict
+trust?}\label{do-the-trust-items-predict-trust}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vis.trust\_1 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              vis.trust\_2 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              vis.trust\_3 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              vis.trust\_4 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              vis.trust\_5 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: vis.trust_6
+##                                     Df Sum Sq Mean Sq  F value    Pr(>F)    
+## vis.trust_1                          1 152.28 152.282 173.1599 < 2.2e-16 ***
+## as.factor(isCovidData)               1   1.14   1.136   1.2912  0.256397    
+## vis.trust_2                          1  49.69  49.689  56.5015 2.811e-13 ***
+## vis.trust_3                          1  60.25  60.245  68.5046 1.285e-15 ***
+## vis.trust_4                          1   2.44   2.439   2.7733  0.096505 .  
+## vis.trust_5                          1   0.33   0.327   0.3722  0.542080    
+## Age                                  1   1.53   1.532   1.7422  0.187499    
+## Gender                               1   0.84   0.837   0.9522  0.329650    
+## State_1                             45  71.40   1.587   1.8041  0.001543 ** 
+## Education                            1   0.00   0.000   0.0001  0.990991    
+## Parents_education                    1   0.59   0.592   0.6729  0.412463    
+## Language                             1   0.05   0.055   0.0625  0.802771    
+## Ethnicity                            1   0.10   0.104   0.1183  0.731013    
+## Income                               1   0.33   0.331   0.3769  0.539547    
+## Religion                             1   0.51   0.511   0.5810  0.446288    
+## trust.in.science_7                   1  36.57  36.570  41.5838 2.778e-10 ***
+## need_for_cognition                   1   0.93   0.927   1.0544  0.305013    
+## interpersonal.trust_1                1   4.62   4.624   5.2577  0.022285 *  
+## vis.trust_1:as.factor(isCovidData)   1   0.01   0.007   0.0079  0.929196    
+## as.factor(isCovidData):vis.trust_2   1   0.01   0.013   0.0146  0.903748    
+## as.factor(isCovidData):vis.trust_3   1   0.34   0.342   0.3889  0.533154    
+## as.factor(isCovidData):vis.trust_4   1   0.34   0.345   0.3922  0.531436    
+## as.factor(isCovidData):vis.trust_5   1   0.97   0.969   1.1015  0.294479    
+## Residuals                          476 418.61   0.879                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = vis.trust_6 ~ vis.trust_1 * as.factor(isCovidData) + 
+##     vis.trust_2 * as.factor(isCovidData) + vis.trust_3 * as.factor(isCovidData) + 
+##     vis.trust_4 * as.factor(isCovidData) + vis.trust_5 * as.factor(isCovidData) + 
+##     Age + Gender + State_1 + Education + Parents_education + 
+##     Language + Ethnicity + Income + Religion + trust.in.science_7 + 
+##     need_for_cognition + interpersonal.trust_1, data = results)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.8773 -0.5207  0.0217  0.5582  3.2650 
+## 
+## Coefficients:
+##                                       Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                         -9.9540917  5.7229385  -1.739 0.082623 .  
+## vis.trust_1                          0.2119431  0.0540206   3.923 0.000100 ***
+## as.factor(isCovidData)1              0.0416696  0.4449709   0.094 0.925430    
+## vis.trust_2                          0.2027925  0.0534737   3.792 0.000168 ***
+## vis.trust_3                          0.2841009  0.0516755   5.498 6.28e-08 ***
+## vis.trust_4                          0.0098439  0.0284399   0.346 0.729398    
+## vis.trust_5                         -0.0007802  0.0292475  -0.027 0.978730    
+## Age                                  0.0051125  0.0028779   1.776 0.076298 .  
+## Gender                               0.0171607  0.0792673   0.216 0.828697    
+## State_1Arizona                       0.3335349  0.3921608   0.851 0.395472    
+## State_1Arkansas                      0.4143523  0.5351867   0.774 0.439185    
+## State_1California                    0.0756582  0.2728692   0.277 0.781694    
+## State_1Colorado                      0.0071308  0.3811767   0.019 0.985082    
+## State_1Connecticut                  -0.3716075  0.4979212  -0.746 0.455844    
+## State_1Delaware                      0.3293908  0.7210338   0.457 0.648001    
+## State_1Florida                       0.1532619  0.2918343   0.525 0.599711    
+## State_1Georgia                      -0.1146918  0.3088288  -0.371 0.710522    
+## State_1Hawaii                        1.3559094  0.6190836   2.190 0.028995 *  
+## State_1Illinois                      0.3475432  0.3257636   1.067 0.286577    
+## State_1Indiana                      -0.5470888  0.4056802  -1.349 0.178116    
+## State_1Iowa                         -0.2409988  0.5379717  -0.448 0.654374    
+## State_1Kansas                        0.2236365  0.4326656   0.517 0.605480    
+## State_1Kentucky                     -0.3856816  0.4049927  -0.952 0.341419    
+## State_1Louisiana                    -0.1350212  0.4630317  -0.292 0.770718    
+## State_1Maine                         0.5136628  0.6054283   0.848 0.396626    
+## State_1Maryland                      0.2699705  0.3553763   0.760 0.447825    
+## State_1Massachusetts                 0.0410363  0.3556953   0.115 0.908201    
+## State_1Michigan                      0.1170436  0.3424409   0.342 0.732658    
+## State_1Minnesota                    -0.1211012  0.4929360  -0.246 0.806041    
+## State_1Mississippi                   0.5909542  0.5382926   1.098 0.272833    
+## State_1Missouri                     -0.0241133  0.4011217  -0.060 0.952090    
+## State_1Montana                       0.3422605  0.7185478   0.476 0.634063    
+## State_1Nebraska                      0.1604793  0.6037312   0.266 0.790499    
+## State_1Nevada                       -0.2061880  0.4609322  -0.447 0.654842    
+## State_1New Hampshire                 2.5055544  1.0295460   2.434 0.015314 *  
+## State_1New Jersey                    0.0731465  0.4212710   0.174 0.862228    
+## State_1New York                      0.3379607  0.3064186   1.103 0.270612    
+## State_1North Carolina               -0.0027368  0.3290524  -0.008 0.993367    
+## State_1Ohio                          0.0397806  0.3519538   0.113 0.910056    
+## State_1Oklahoma                      0.2854305  0.4688140   0.609 0.542924    
+## State_1Oregon                       -0.1862481  0.4247810  -0.438 0.661254    
+## State_1Pennsylvania                  0.0385778  0.2984822   0.129 0.897217    
+## State_1Rhode Island                 -0.0301492  0.6048199  -0.050 0.960264    
+## State_1South Carolina               -0.6933861  0.4936043  -1.405 0.160751    
+## State_1South Dakota                 -3.7459717  1.0157087  -3.688 0.000252 ***
+## State_1Tennessee                     0.5876792  0.3706110   1.586 0.113471    
+## State_1Texas                        -0.2414368  0.2876971  -0.839 0.401776    
+## State_1Utah                         -0.2168607  0.4630074  -0.468 0.639732    
+## State_1Vermont                      -1.0766183  0.7223418  -1.490 0.136767    
+## State_1Virginia                      0.0094756  0.4237948   0.022 0.982171    
+## State_1Washington                    0.2294027  0.3370422   0.681 0.496433    
+## State_1West Virginia                -0.3015064  0.6012565  -0.501 0.616279    
+## State_1Wisconsin                     0.0739541  0.3321842   0.223 0.823919    
+## State_1Wyoming                       0.0141456  0.9818235   0.014 0.988511    
+## Education                           -0.0214295  0.0257607  -0.832 0.405901    
+## Parents_education                    0.0120379  0.0592115   0.203 0.838985    
+## Language                             0.0684564  0.1661255   0.412 0.680469    
+## Ethnicity                           -0.0009461  0.0235988  -0.040 0.968037    
+## Income                              -0.0014227  0.0093345  -0.152 0.878922    
+## Religion                            -0.0241681  0.0444115  -0.544 0.586569    
+## trust.in.science_7                   0.1292041  0.0223979   5.769 1.44e-08 ***
+## need_for_cognition                  -0.0914597  0.0716736  -1.276 0.202557    
+## interpersonal.trust_1                0.0803311  0.0342667   2.344 0.019474 *  
+## vis.trust_1:as.factor(isCovidData)1  0.0024529  0.0729555   0.034 0.973193    
+## as.factor(isCovidData)1:vis.trust_2  0.0008529  0.0787182   0.011 0.991360    
+## as.factor(isCovidData)1:vis.trust_3 -0.0592930  0.0736064  -0.806 0.420909    
+## as.factor(isCovidData)1:vis.trust_4  0.0102089  0.0432103   0.236 0.813332    
+## as.factor(isCovidData)1:vis.trust_5  0.0496181  0.0472776   1.050 0.294479    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9378 on 476 degrees of freedom
+## Multiple R-squared:  0.4793, Adjusted R-squared:  0.406 
+## F-statistic: 6.539 on 67 and 476 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4 and 5 has to do with whether the vis is actionable. Would it be used in daily life? Really depends on the topic {-} crop stuff might not be relevant. Need to account for the topic!!!!! Add "isCovidData" to model. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ data.trust\_1 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              data.trust\_2 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              data.trust\_3 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              data.trust\_4 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+} 
+\NormalTok{              data.trust\_5 }\SpecialCharTok{*} \FunctionTok{as.factor}\NormalTok{(isCovidData) }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = data.trust_6 ~ data.trust_1 * as.factor(isCovidData) + 
+##     data.trust_2 * as.factor(isCovidData) + data.trust_3 * as.factor(isCovidData) + 
+##     data.trust_4 * as.factor(isCovidData) + data.trust_5 * as.factor(isCovidData) + 
+##     Age + Gender + State_1 + Education + Parents_education + 
+##     Language + Ethnicity + Income + Religion + trust.in.science_7 + 
+##     need_for_cognition + interpersonal.trust_1, data = results)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.8615 -0.4775 -0.0005  0.4795  3.9556 
+## 
+## Coefficients:
+##                                       Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                          -5.058251   6.120690  -0.826 0.408981    
+## data.trust_1                          0.331461   0.084381   3.928 9.83e-05 ***
+## as.factor(isCovidData)1               0.225129   0.496918   0.453 0.650719    
+## data.trust_2                          0.070922   0.052269   1.357 0.175464    
+## data.trust_3                          0.242575   0.066234   3.662 0.000278 ***
+## data.trust_4                          0.087374   0.061086   1.430 0.153272    
+## data.trust_5                          0.036810   0.056613   0.650 0.515873    
+## Age                                   0.002485   0.003084   0.806 0.420849    
+## Gender                               -0.075322   0.083717  -0.900 0.368724    
+## State_1Arizona                        0.396862   0.412283   0.963 0.336239    
+## State_1Arkansas                       0.076994   0.569144   0.135 0.892447    
+## State_1California                     0.180248   0.287912   0.626 0.531582    
+## State_1Colorado                       0.024541   0.399598   0.061 0.951056    
+## State_1Connecticut                   -0.587935   0.533696  -1.102 0.271180    
+## State_1Delaware                       0.211162   0.763313   0.277 0.782178    
+## State_1Florida                        0.267887   0.308725   0.868 0.385984    
+## State_1Georgia                       -0.024771   0.325332  -0.076 0.939339    
+## State_1Hawaii                        -0.765700   0.659989  -1.160 0.246561    
+## State_1Illinois                      -0.171894   0.346662  -0.496 0.620226    
+## State_1Indiana                       -1.322666   0.431993  -3.062 0.002325 ** 
+## State_1Iowa                          -0.780953   0.569821  -1.371 0.171170    
+## State_1Kansas                         0.091428   0.457726   0.200 0.841765    
+## State_1Kentucky                      -0.331683   0.429805  -0.772 0.440672    
+## State_1Louisiana                     -0.142803   0.491179  -0.291 0.771380    
+## State_1Maine                          0.360595   0.634575   0.568 0.570136    
+## State_1Maryland                       0.611578   0.376135   1.626 0.104622    
+## State_1Massachusetts                  0.358868   0.375345   0.956 0.339506    
+## State_1Michigan                       0.160455   0.360479   0.445 0.656439    
+## State_1Minnesota                      0.411557   0.518894   0.793 0.428090    
+## State_1Mississippi                    0.147402   0.573351   0.257 0.797222    
+## State_1Missouri                       0.644384   0.425346   1.515 0.130445    
+## State_1Montana                       -0.371953   0.764917  -0.486 0.627003    
+## State_1Nebraska                       0.471768   0.637478   0.740 0.459632    
+## State_1Nevada                         0.201743   0.488211   0.413 0.679625    
+## State_1New Hampshire                 -1.527282   1.061877  -1.438 0.151011    
+## State_1New Jersey                    -0.188256   0.443312  -0.425 0.671278    
+## State_1New York                       0.405115   0.320473   1.264 0.206807    
+## State_1North Carolina                 0.041771   0.342995   0.122 0.903123    
+## State_1Ohio                           0.017986   0.365622   0.049 0.960787    
+## State_1Oklahoma                       0.427856   0.491851   0.870 0.384800    
+## State_1Oregon                         0.239479   0.446380   0.536 0.591870    
+## State_1Pennsylvania                   0.402393   0.314721   1.279 0.201671    
+## State_1Rhode Island                  -0.268033   0.639979  -0.419 0.675540    
+## State_1South Carolina                 1.012178   0.517679   1.955 0.051142 .  
+## State_1South Dakota                  -1.810325   1.060051  -1.708 0.088331 .  
+## State_1Tennessee                     -0.729500   0.387059  -1.885 0.060076 .  
+## State_1Texas                         -0.194173   0.300807  -0.646 0.518910    
+## State_1Utah                           0.042312   0.487196   0.087 0.930829    
+## State_1Vermont                       -0.500535   0.758303  -0.660 0.509526    
+## State_1Virginia                       0.324863   0.445986   0.728 0.466717    
+## State_1Washington                     0.059798   0.350307   0.171 0.864532    
+## State_1West Virginia                 -0.155004   0.634192  -0.244 0.807017    
+## State_1Wisconsin                      0.529684   0.351640   1.506 0.132647    
+## State_1Wyoming                       -0.708338   1.038761  -0.682 0.495630    
+## Education                            -0.038483   0.027106  -1.420 0.156345    
+## Parents_education                     0.046412   0.062788   0.739 0.460159    
+## Language                             -0.025552   0.176124  -0.145 0.884710    
+## Ethnicity                            -0.024519   0.025103  -0.977 0.329197    
+## Income                                0.005705   0.009899   0.576 0.564661    
+## Religion                              0.016868   0.046885   0.360 0.719167    
+## trust.in.science_7                    0.067788   0.024246   2.796 0.005386 ** 
+## need_for_cognition                    0.122462   0.074268   1.649 0.099822 .  
+## interpersonal.trust_1                 0.104217   0.036695   2.840 0.004703 ** 
+## data.trust_1:as.factor(isCovidData)1 -0.385037   0.106591  -3.612 0.000336 ***
+## as.factor(isCovidData)1:data.trust_2 -0.011603   0.068013  -0.171 0.864616    
+## as.factor(isCovidData)1:data.trust_3  0.129051   0.089100   1.448 0.148169    
+## as.factor(isCovidData)1:data.trust_4  0.156862   0.093308   1.681 0.093394 .  
+## as.factor(isCovidData)1:data.trust_5  0.025248   0.087352   0.289 0.772680    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9921 on 476 degrees of freedom
+## Multiple R-squared:  0.4826, Adjusted R-squared:  0.4098 
+## F-statistic: 6.626 on 67 and 476 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: data.trust_6
+##                                      Df Sum Sq Mean Sq  F value    Pr(>F)    
+## data.trust_1                          1 202.15 202.146 205.3796 < 2.2e-16 ***
+## as.factor(isCovidData)                1   0.00   0.000   0.0004 0.9847988    
+## data.trust_2                          1  17.27  17.274  17.5500 3.336e-05 ***
+## data.trust_3                          1  63.53  63.525  64.5414 7.501e-15 ***
+## data.trust_4                          1  17.09  17.091  17.3640 3.666e-05 ***
+## data.trust_5                          1   1.95   1.953   1.9841 0.1596086    
+## Age                                   1   0.10   0.098   0.0997 0.7523360    
+## Gender                                1   1.01   1.008   1.0236 0.3121760    
+## State_1                              45  89.55   1.990   2.0219 0.0001760 ***
+## Education                             1   0.01   0.008   0.0082 0.9276928    
+## Parents_education                     1   1.15   1.148   1.1662 0.2807347    
+## Language                              1   0.05   0.048   0.0487 0.8254919    
+## Ethnicity                             1   0.10   0.102   0.1034 0.7479252    
+## Income                                1   0.97   0.973   0.9888 0.3205372    
+## Religion                              1   0.85   0.851   0.8649 0.3528415    
+## trust.in.science_7                    1  14.47  14.472  14.7036 0.0001427 ***
+## need_for_cognition                    1   4.07   4.066   4.1308 0.0426633 *  
+## interpersonal.trust_1                 1   7.14   7.136   7.2502 0.0073395 ** 
+## data.trust_1:as.factor(isCovidData)   1   9.20   9.202   9.3497 0.0023558 ** 
+## as.factor(isCovidData):data.trust_2   1   0.13   0.125   0.1272 0.7215274    
+## as.factor(isCovidData):data.trust_3   1   2.51   2.513   2.5536 0.1107050    
+## as.factor(isCovidData):data.trust_4   1   3.60   3.602   3.6600 0.0563331 .  
+## as.factor(isCovidData):data.trust_5   1   0.08   0.082   0.0835 0.7726801    
+## Residuals                           476 468.51   0.984                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ data.trust\_1, }\AttributeTok{y =}\NormalTok{ data.trust\_6, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{isCovidData) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+How does performance on VLAT questions predict trust?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{*}\NormalTok{ vlat\_moderate }\SpecialCharTok{*}\NormalTok{ vlat\_complex }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: vis.trust_6
+##                                         Df Sum Sq Mean Sq F value    Pr(>F)    
+## vlat_simple                              1   1.64   1.637  1.3161  0.251865    
+## vlat_moderate                            1   0.93   0.934  0.7509  0.386634    
+## vlat_complex                             1   3.49   3.489  2.8057  0.094582 .  
+## Age                                      1   2.23   2.231  1.7939  0.181089    
+## Gender                                   1   4.30   4.298  3.4556  0.063651 .  
+## State_1                                 45  83.54   1.856  1.4927  0.023955 *  
+## Education                                1   0.01   0.010  0.0078  0.929451    
+## Parents_education                        1   2.89   2.888  2.3226  0.128168    
+## Language                                 1   0.17   0.170  0.1364  0.712066    
+## Ethnicity                                1   2.14   2.136  1.7173  0.190670    
+## Income                                   1   0.04   0.042  0.0334  0.855019    
+## Religion                                 1   0.16   0.164  0.1321  0.716472    
+## trust.in.science_7                       1  80.19  80.192 64.4809 7.585e-15 ***
+## need_for_cognition                       1   4.52   4.523  3.6369  0.057110 .  
+## interpersonal.trust_1                    1   8.55   8.554  6.8782  0.009003 ** 
+## vlat_simple:vlat_moderate                1   4.73   4.731  3.8043  0.051702 .  
+## vlat_simple:vlat_complex                 1   7.04   7.043  5.6631  0.017715 *  
+## vlat_moderate:vlat_complex               1   0.27   0.269  0.2160  0.642280    
+## vlat_simple:vlat_moderate:vlat_complex   1   0.08   0.085  0.0681  0.794193    
+## Residuals                              480 596.95   1.244                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(}\FunctionTok{aov}\NormalTok{(vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{*}\NormalTok{ vlat\_complex , }\AttributeTok{data =}\NormalTok{ results) , }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{|}\NormalTok{ vlat\_complex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## vlat_complex = 0:
+##  vlat_simple emmean     SE  df lower.CL upper.CL
+##         0.77   4.43 0.0874 540     4.26     4.60
+## 
+## vlat_complex = 1:
+##  vlat_simple emmean     SE  df lower.CL upper.CL
+##         0.77   4.59 0.0664 540     4.46     4.72
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ vlat\_level, }\AttributeTok{value =}\NormalTok{ vlat\_performance, vlat\_simple,  vlat\_moderate, vlat\_complex) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ vis.trust\_6, }\AttributeTok{y =}\NormalTok{ vlat\_performance, }\AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(assigned\_vlat))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\# y(0, 2) + }
+  \CommentTok{\# labs(title = "Trust in data") + }
+  \CommentTok{\# geom\_vline(data = results \%\textgreater{}\% }
+  \CommentTok{\#              group\_by(complexity, isCovidData) \%\textgreater{}\%}
+  \CommentTok{\#              summarize(n = n(), }
+  \CommentTok{\#                        vis.trust\_6 = mean(vis.trust\_6)), }
+  \CommentTok{\#            aes(xintercept = vis.trust\_6, colour = as.factor(isCovidData))) +}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(vlat\_level), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(chartType)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+        \CommentTok{\# legend.position = "none")}
+\end{Highlighting}
+\end{Shaded}
+
+Overall distribution of VLAT performance
+
+Trust in Vis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# vlat\_long \textless{}{-} results \%\textgreater{}\%}
+\CommentTok{\#   gather(key = vlat\_level, value = vlat\_performance, vlat\_simple,  vlat\_moderate, vlat\_complex) }
+\CommentTok{\# }
+\CommentTok{\# model \textless{}{-} lmer(formula = vlat\_performance \textasciitilde{} vlat\_level * isCovidData * chartType +}
+\CommentTok{\#               Age + Gender + State\_1 + Education + Parents\_education + Language + }
+\CommentTok{\#               Ethnicity + Income + Religion + trust.in.science\_7 + }
+\CommentTok{\#               need\_for\_cognition + interpersonal.trust\_1 + (1|ResponseId),}
+\CommentTok{\#             data = vlat\_long)}
+\CommentTok{\# Anova(model)}
+\CommentTok{\# }
+\CommentTok{\# emmeans(aov(vlat\_performance \textasciitilde{} vlat\_level , data = results) , \textasciitilde{} vlat\_simple | vlat\_complex)}
+\CommentTok{\# }
+\CommentTok{\# \# post{-}hoc tests}
+\CommentTok{\# aov(vlat\_performance \textasciitilde{} vlat\_level * as.factor(isCovidData), data = vlat\_long) \%\textgreater{}\% tukey\_hsd()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ vlat\_level, }\AttributeTok{value =}\NormalTok{ vlat\_performance, vlat\_simple,  vlat\_moderate, vlat\_complex) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(vlat\_level, chartType, isCovidData) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean\_vlat\_performance =} \FunctionTok{mean}\NormalTok{(vlat\_performance),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(vlat\_performance)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ vlat\_level, }\AttributeTok{y =}\NormalTok{ mean\_vlat\_performance, }
+             \AttributeTok{ymax =}\NormalTok{ mean\_vlat\_performance }\SpecialCharTok{+}\NormalTok{ se, }\AttributeTok{ymin =}\NormalTok{ mean\_vlat\_performance }\SpecialCharTok{{-}}\NormalTok{ se,}
+             \AttributeTok{colour =}\NormalTok{ vlat\_level)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{() }\SpecialCharTok{+}
+  \CommentTok{\# labs(title = "Trust in data") + }
+  \CommentTok{\# geom\_vline(data = results \%\textgreater{}\% }
+  \CommentTok{\#              group\_by(complexity, isCovidData) \%\textgreater{}\%}
+  \CommentTok{\#              summarize(n = n(), }
+  \CommentTok{\#                        vis.trust\_6 = mean(vis.trust\_6)), }
+  \CommentTok{\#            aes(xintercept = vis.trust\_6, colour = as.factor(isCovidData))) +}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(isCovidData)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'vlat_level', 'chartType'. You can override
+## using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+        \CommentTok{\# legend.position = "none")}
+\end{Highlighting}
+\end{Shaded}
+
+Trust in Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{*}\NormalTok{ vlat\_moderate }\SpecialCharTok{*}\NormalTok{ vlat\_complex }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: data.trust_6
+##                                         Df Sum Sq Mean Sq F value    Pr(>F)    
+## vlat_simple                              1   0.00   0.005  0.0033 0.9545472    
+## vlat_moderate                            1   0.00   0.002  0.0017 0.9673539    
+## vlat_complex                             1   1.01   1.007  0.7029 0.4022243    
+## Age                                      1   0.52   0.518  0.3613 0.5480605    
+## Gender                                   1   0.04   0.041  0.0288 0.8653173    
+## State_1                                 45 128.33   2.852  1.9910 0.0002402 ***
+## Education                                1   0.91   0.906  0.6324 0.4268659    
+## Parents_education                        1   4.54   4.537  3.1678 0.0757362 .  
+## Language                                 1   0.04   0.041  0.0283 0.8665279    
+## Ethnicity                                1   0.07   0.068  0.0476 0.8273695    
+## Income                                   1   4.13   4.127  2.8811 0.0902722 .  
+## Religion                                 1   1.95   1.954  1.3640 0.2434309    
+## trust.in.science_7                       1  51.30  51.299 35.8161 4.247e-09 ***
+## need_for_cognition                       1   6.62   6.619  4.6210 0.0320825 *  
+## interpersonal.trust_1                    1  13.35  13.346  9.3176 0.0023955 ** 
+## vlat_simple:vlat_moderate                1   0.75   0.750  0.5235 0.4696899    
+## vlat_simple:vlat_complex                 1   3.54   3.536  2.4685 0.1168047    
+## vlat_moderate:vlat_complex               1   0.90   0.904  0.6311 0.4273312    
+## vlat_simple:vlat_moderate:vlat_complex   1   0.00   0.002  0.0011 0.9735414    
+## Residuals                              480 687.50   1.432                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(}\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{*}\NormalTok{ vlat\_complex , }\AttributeTok{data =}\NormalTok{ results) , }\SpecialCharTok{\textasciitilde{}}\NormalTok{ vlat\_simple }\SpecialCharTok{|}\NormalTok{ vlat\_complex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## vlat_complex = 0:
+##  vlat_simple emmean     SE  df lower.CL upper.CL
+##         0.77   4.40 0.0930 540     4.22     4.58
+## 
+## vlat_complex = 1:
+##  vlat_simple emmean     SE  df lower.CL upper.CL
+##         0.77   4.48 0.0707 540     4.34     4.62
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+\hypertarget{how-does-provenance-data-predict-trust}{%
+\section{How does provenance data predict
+trust?}\label{how-does-provenance-data-predict-trust}}
+
+Overall
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brushed }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ provenance\_type, }\AttributeTok{value =}\NormalTok{ provenance\_value, brushed, explore\_interactions, explore\_time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(provenance\_type, chartType, isCovidData, complexity) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(provenance\_value), }
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(provenance\_value)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(provenance\_type }\SpecialCharTok{==} \StringTok{"brushed"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ provenance\_type, }\AttributeTok{y =}\NormalTok{ mean, }\AttributeTok{ymax =}\NormalTok{ mean }\SpecialCharTok{+}\NormalTok{ se, }\AttributeTok{ymin =}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ se, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge2}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.66}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(complexity), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(isCovidData)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'provenance_type', 'chartType',
+## 'isCovidData'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brushed}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{interactions }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ provenance\_type, }\AttributeTok{value =}\NormalTok{ provenance\_value, brushed, explore\_interactions, explore\_time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(provenance\_type, chartType, isCovidData, complexity) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(provenance\_value), }
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(provenance\_value)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(provenance\_type }\SpecialCharTok{==} \StringTok{"explore\_interactions"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ provenance\_type, }\AttributeTok{y =}\NormalTok{ mean, }\AttributeTok{ymax =}\NormalTok{ mean }\SpecialCharTok{+}\NormalTok{ se, }\AttributeTok{ymin =}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ se, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge2}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.66}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(complexity), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(chartType)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'provenance_type', 'chartType',
+## 'isCovidData'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{interactions}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-27-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exploreTime }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ provenance\_type, }\AttributeTok{value =}\NormalTok{ provenance\_value, brushed, explore\_interactions, explore\_time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(provenance\_type, chartType, isCovidData, complexity) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(provenance\_value), }
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(provenance\_value)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(provenance\_type }\SpecialCharTok{==} \StringTok{"explore\_time"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ provenance\_type, }\AttributeTok{y =}\NormalTok{ mean, }\AttributeTok{ymax =}\NormalTok{ mean }\SpecialCharTok{+}\NormalTok{ se, }\AttributeTok{ymin =}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ se, }\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge2}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.66}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(chartType), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(complexity)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'provenance_type', 'chartType',
+## 'isCovidData'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exploreTime}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-27-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exploreTime }\SpecialCharTok{+}\NormalTok{ interactions }\SpecialCharTok{+}\NormalTok{ brushed}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-27-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"provenanceResults.png"}\NormalTok{, }\AttributeTok{width =} \DecValTok{26}\NormalTok{, }\AttributeTok{height =} \DecValTok{14}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+explore\_interactions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ explore\_interactions }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{*}\NormalTok{ isCovidData }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: explore_interactions
+##                                   Df Sum Sq Mean Sq F value    Pr(>F)    
+## complexity                         2   3.17  1.5830  1.1570   0.31530    
+## chartType                          1   0.05  0.0534  0.0390   0.84350    
+## isCovidData                        1   4.88  4.8777  3.5652   0.05961 .  
+## Age                                1  28.65 28.6470 20.9386 6.058e-06 ***
+## Gender                             1   4.02  4.0211  2.9391   0.08711 .  
+## State_1                           45  58.49  1.2998  0.9501   0.56721    
+## Education                          1   0.26  0.2613  0.1910   0.66227    
+## Parents_education                  1   4.21  4.2138  3.0800   0.07991 .  
+## Language                           1   0.41  0.4068  0.2973   0.58582    
+## Ethnicity                          1   8.15  8.1510  5.9577   0.01502 *  
+## Income                             1   0.30  0.3012  0.2202   0.63912    
+## Religion                           1   2.73  2.7283  1.9942   0.15856    
+## trust.in.science_7                 1   5.17  5.1678  3.7772   0.05254 .  
+## need_for_cognition                 1   4.03  4.0348  2.9491   0.08657 .  
+## interpersonal.trust_1              1   5.83  5.8336  4.2638   0.03947 *  
+## complexity:chartType               2   0.32  0.1581  0.1155   0.89092    
+## complexity:isCovidData             2   2.50  1.2491  0.9130   0.40201    
+## chartType:isCovidData              1   0.01  0.0086  0.0063   0.93681    
+## complexity:chartType:isCovidData   2   2.58  1.2913  0.9439   0.38985    
+## Residuals                        476 651.24  1.3681                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+explore\_time
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ explore\_time }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{*}\NormalTok{ isCovidData }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: explore_time
+##                                   Df     Sum Sq  Mean Sq F value   Pr(>F)   
+## complexity                         2   10994085  5497042  0.7614 0.467581   
+## chartType                          1   10089942 10089942  1.3976 0.237722   
+## isCovidData                        1   15158907 15158907  2.0997 0.147989   
+## Age                                1   74792429 74792429 10.3595 0.001376 **
+## Gender                             1    6756709  6756709  0.9359 0.333832   
+## State_1                           45  292563577  6501413  0.9005 0.657824   
+## Education                          1     912712   912712  0.1264 0.722330   
+## Parents_education                  1   11110744 11110744  1.5390 0.215384   
+## Language                           1    1589294  1589294  0.2201 0.639153   
+## Ethnicity                          1   64995338 64995338  9.0025 0.002838 **
+## Income                             1    2323373  2323373  0.3218 0.570788   
+## Religion                           1   48226925 48226925  6.6799 0.010047 * 
+## trust.in.science_7                 1   25344760 25344760  3.5105 0.061593 . 
+## need_for_cognition                 1    4886556  4886556  0.6768 0.411089   
+## interpersonal.trust_1              1   26492964 26492964  3.6696 0.056014 . 
+## complexity:chartType               2    7714867  3857433  0.5343 0.586433   
+## complexity:isCovidData             2    5883292  2941646  0.4074 0.665577   
+## chartType:isCovidData              1       3077     3077  0.0004 0.983538   
+## complexity:chartType:isCovidData   2    7319372  3659686  0.5069 0.602682   
+## Residuals                        476 3436560586  7219665                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Hypothesis: for the complex condition, we expect people who brushed more
+to have higher trust
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{complexCondition }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(complexity }\SpecialCharTok{==} \StringTok{"complex"}\NormalTok{)}
+
+\CommentTok{\# can change the predictor to bar.vis}
+\NormalTok{model}\OtherTok{\textless{}{-}} \FunctionTok{manova}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(data.trust\_1, }
+\NormalTok{                     data.trust\_2, }
+\NormalTok{                     data.trust\_3, }
+\NormalTok{                     data.trust\_4, }
+\NormalTok{                     data.trust\_5, }
+\NormalTok{                     data.trust\_6) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ brushed }\SpecialCharTok{+}\NormalTok{ explore\_interactions }\SpecialCharTok{+}\NormalTok{ explore\_time, }
+               \AttributeTok{data =}\NormalTok{ complexCondition)}
+\FunctionTok{summary.aov}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Response data.trust_1 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   0.014 0.01358  0.0092 0.9236
+## explore_interactions   1   0.005 0.00505  0.0034 0.9534
+## explore_time           1   0.260 0.26008  0.1765 0.6749
+## Residuals            168 247.489 1.47315               
+## 
+##  Response data.trust_2 :
+##                       Df Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   0.44 0.44061  0.2290 0.6329
+## explore_interactions   1   1.70 1.70271  0.8850 0.3482
+## explore_time           1   0.73 0.73208  0.3805 0.5382
+## Residuals            168 323.24 1.92405               
+## 
+##  Response data.trust_3 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   1.331 1.33131  0.7957 0.3737
+## explore_interactions   1   0.712 0.71243  0.4258 0.5149
+## explore_time           1   0.186 0.18588  0.1111 0.7393
+## Residuals            168 281.090 1.67316               
+## 
+##  Response data.trust_4 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   0.436 0.43648  0.2907 0.5905
+## explore_interactions   1   0.143 0.14305  0.0953 0.7580
+## explore_time           1   0.043 0.04309  0.0287 0.8657
+## Residuals            168 252.232 1.50138               
+## 
+##  Response data.trust_5 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   2.990 2.99005  1.7740 0.1847
+## explore_interactions   1   0.402 0.40205  0.2385 0.6259
+## explore_time           1   2.304 2.30354  1.3667 0.2440
+## Residuals            168 283.165 1.68550               
+## 
+##  Response data.trust_6 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   1.235 1.23469  0.8146 0.3680
+## explore_interactions   1   0.078 0.07843  0.0517 0.8203
+## explore_time           1   1.175 1.17467  0.7750 0.3799
+## Residuals            168 254.628 1.51565
+\end{verbatim}
+
+Hypothesis: for all the conditions, we expect people who hovered more to
+have higher trust
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# can change the predictor to bar.vis}
+\NormalTok{model}\OtherTok{\textless{}{-}} \FunctionTok{manova}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(vis.trust\_6, }
+\NormalTok{                     vis.trust\_5, }
+\NormalTok{                     vis.trust\_4, }
+\NormalTok{                     vis.trust\_3, }
+\NormalTok{                     vis.trust\_2, }
+\NormalTok{                     vis.trust\_1) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ brushed }\SpecialCharTok{+}\NormalTok{ explore\_interactions }\SpecialCharTok{+}\NormalTok{ explore\_time, }
+               \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{summary.aov}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Response vis.trust_6 :
+##                       Df Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   0.22 0.22139  0.1488 0.6999
+## explore_interactions   1   0.02 0.02019  0.0136 0.9073
+## explore_time           1   0.02 0.01509  0.0101 0.9198
+## Residuals            540 803.63 1.48820               
+## 
+##  Response vis.trust_5 :
+##                       Df  Sum Sq Mean Sq F value Pr(>F)
+## brushed                1    0.31  0.3144  0.0725 0.7878
+## explore_interactions   1    6.40  6.3983  1.4761 0.2249
+## explore_time           1   10.47 10.4729  2.4160 0.1207
+## Residuals            540 2340.75  4.3347               
+## 
+##  Response vis.trust_4 :
+##                       Df  Sum Sq Mean Sq F value  Pr(>F)  
+## brushed                1    1.91  1.9067  0.4068 0.52388  
+## explore_interactions   1    0.67  0.6694  0.1428 0.70564  
+## explore_time           1   13.54 13.5401  2.8887 0.08978 .
+## Residuals            540 2531.09  4.6872                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##  Response vis.trust_3 :
+##                       Df Sum Sq Mean Sq F value  Pr(>F)  
+## brushed                1   5.18  5.1797  3.0917 0.07926 .
+## explore_interactions   1   1.96  1.9620  1.1711 0.27965  
+## explore_time           1   4.17  4.1744  2.4917 0.11504  
+## Residuals            540 904.68  1.6753                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##  Response vis.trust_2 :
+##                       Df Sum Sq Mean Sq F value  Pr(>F)  
+## brushed                1   4.90  4.9035  3.4754 0.06283 .
+## explore_interactions   1   0.05  0.0518  0.0367 0.84818  
+## explore_time           1   1.50  1.5044  1.0663 0.30225  
+## Residuals            540 761.89  1.4109                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##  Response vis.trust_1 :
+##                       Df Sum Sq Mean Sq F value Pr(>F)
+## brushed                1   0.21 0.20567  0.1198 0.7294
+## explore_interactions   1   0.08 0.08061  0.0470 0.8285
+## explore_time           1   0.05 0.05321  0.0310 0.8603
+## Residuals            540 927.10 1.71685
+\end{verbatim}
+
+\hypertarget{affect-on-trust-its-own-section}{%
+\section{Affect on Trust \{it's own
+section\}}\label{affect-on-trust-its-own-section}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =}\NormalTok{ affects, }\AttributeTok{value =}\NormalTok{ affectRatings, affect.science\_1,  affect.clarity\_1, affect.aesthetic\_1) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(affects, chartType, isCovidData, complexity) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(affectRatings),}
+            \AttributeTok{se =} \FunctionTok{sd}\NormalTok{(affectRatings)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n),}
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ affects, }\AttributeTok{y =}\NormalTok{ mean, }
+             \AttributeTok{ymax =}\NormalTok{ mean }\SpecialCharTok{+}\NormalTok{ se, }\AttributeTok{ymin =}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ se,}
+             \AttributeTok{colour =} \FunctionTok{as.factor}\NormalTok{(isCovidData))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge2}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.66}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\# labs(title = "Trust in data") + }
+  \CommentTok{\# geom\_vline(data = results \%\textgreater{}\% }
+  \CommentTok{\#              group\_by(complexity, isCovidData) \%\textgreater{}\%}
+  \CommentTok{\#              summarize(n = n(), }
+  \CommentTok{\#                        vis.trust\_6 = mean(vis.trust\_6)), }
+  \CommentTok{\#            aes(xintercept = vis.trust\_6, colour = as.factor(isCovidData))) +}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(chartType), }\AttributeTok{cols =} \FunctionTok{vars}\NormalTok{(complexity)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.spacing =} \FunctionTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{, }\StringTok{"lines"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'affects', 'chartType', 'isCovidData'. You
+## can override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+        \CommentTok{\# legend.position = "none")}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"affectMeasures.png"}\NormalTok{, }\AttributeTok{width =} \DecValTok{17}\NormalTok{, }\AttributeTok{height =} \DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ affect.science\_1 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{*}\NormalTok{ isCovidData }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Gender) }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: affect.science_1
+##                                   Df Sum Sq Mean Sq F value   Pr(>F)    
+## complexity                         2    696   348.0  1.0148  0.36326    
+## chartType                          1    492   491.9  1.4344  0.23165    
+## isCovidData                        1    362   361.5  1.0543  0.30505    
+## Age                                1      1     1.4  0.0040  0.94991    
+## as.factor(Gender)                  3    173    57.6  0.1680  0.91795    
+## State_1                           45  14488   322.0  0.9389  0.58782    
+## Education                          1    820   819.8  2.3906  0.12273    
+## Parents_education                  1     77    77.0  0.2247  0.63570    
+## Language                           1     58    58.0  0.1692  0.68101    
+## Ethnicity                          1     21    20.6  0.0600  0.80668    
+## Income                             1    351   351.4  1.0248  0.31190    
+## Religion                           1   1027  1027.0  2.9951  0.08417 .  
+## trust.in.science_7                 1   9226  9226.5 26.9067 3.17e-07 ***
+## need_for_cognition                 1    472   471.6  1.3752  0.24151    
+## interpersonal.trust_1              1    222   221.9  0.6472  0.42150    
+## complexity:chartType               2     61    30.6  0.0892  0.91468    
+## complexity:isCovidData             2    591   295.7  0.8624  0.42281    
+## chartType:isCovidData              1    589   588.8  1.7171  0.19070    
+## complexity:chartType:isCovidData   2    585   292.3  0.8525  0.42700    
+## Residuals                        474 162538   342.9                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ affect.clarity\_1 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{*}\NormalTok{ isCovidData }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+} \FunctionTok{as.factor}\NormalTok{(Gender) }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: affect.clarity_1
+##                                   Df Sum Sq Mean Sq F value   Pr(>F)    
+## complexity                         2  11519  5759.6  8.5687 0.000221 ***
+## chartType                          1   2678  2678.4  3.9848 0.046485 *  
+## isCovidData                        1   1240  1240.5  1.8455 0.174956    
+## Age                                1    607   607.0  0.9030 0.342469    
+## as.factor(Gender)                  3    649   216.2  0.3217 0.809686    
+## State_1                           45  34141   758.7  1.1287 0.268328    
+## Education                          1   3168  3167.8  4.7127 0.030436 *  
+## Parents_education                  1    220   220.0  0.3274 0.567494    
+## Language                           1     97    96.8  0.1439 0.704559    
+## Ethnicity                          1    245   244.8  0.3641 0.546511    
+## Income                             1      4     4.0  0.0059 0.938582    
+## Religion                           1    137   136.9  0.2036 0.652016    
+## trust.in.science_7                 1   3107  3107.2  4.6226 0.032058 *  
+## need_for_cognition                 1   5919  5919.3  8.8063 0.003154 ** 
+## interpersonal.trust_1              1     87    87.1  0.1295 0.719072    
+## complexity:chartType               2   3347  1673.4  2.4896 0.084029 .  
+## complexity:isCovidData             2    643   321.7  0.4786 0.619950    
+## chartType:isCovidData              1    723   722.7  1.0751 0.300320    
+## complexity:chartType:isCovidData   2   1285   642.3  0.9556 0.385314    
+## Residuals                        474 318610   672.2                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = affect.clarity_1 ~ complexity * chartType * isCovidData + 
+##     Age + as.factor(Gender) + State_1 + Education + Parents_education + 
+##     Language + Ethnicity + Income + Religion + trust.in.science_7 + 
+##     need_for_cognition + interpersonal.trust_1, data = results)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -79.363 -10.076   6.612  16.885  49.691 
+## 
+## Coefficients:
+##                                               Estimate Std. Error t value
+## (Intercept)                                   98.29766  159.70011   0.616
+## complexitymoderate                            12.43973    5.67945   2.190
+## complexitysimple                              15.83482    5.61487   2.820
+## chartTypeline                                  9.68004    5.64525   1.715
+## isCovidData                                   -3.34656    5.99100  -0.559
+## Age                                           -0.03664    0.08009  -0.457
+## as.factor(Gender)2                            -0.68779    2.43226  -0.283
+## as.factor(Gender)3                             7.53409   11.58578   0.650
+## as.factor(Gender)5                             1.41453   26.81316   0.053
+## State_1Arizona                                -1.41702   10.78120  -0.131
+## State_1Arkansas                               -3.55016   14.91990  -0.238
+## State_1California                             10.31148    7.56978   1.362
+## State_1Colorado                                0.08705   10.56221   0.008
+## State_1Connecticut                           -16.60690   13.70491  -1.212
+## State_1Delaware                               -8.36370   19.89040  -0.420
+## State_1Florida                                 5.43970    8.05673   0.675
+## State_1Georgia                                 9.55988    8.49531   1.125
+## State_1Hawaii                                  0.46196   16.99317   0.027
+## State_1Illinois                               -0.57499    9.09463  -0.063
+## State_1Indiana                                 9.08861   11.20471   0.811
+## State_1Iowa                                   18.85560   14.90864   1.265
+## State_1Kansas                                 -0.66151   12.11907  -0.055
+## State_1Kentucky                               -4.08878   11.12264  -0.368
+## State_1Louisiana                               6.06059   12.78618   0.474
+## State_1Maine                                 -23.48927   16.69858  -1.407
+## State_1Maryland                               11.93823    9.81675   1.216
+## State_1Massachusetts                          -5.27871    9.84831  -0.536
+## State_1Michigan                                5.27484    9.50903   0.555
+## State_1Minnesota                               8.18153   13.61291   0.601
+## State_1Mississippi                             3.60018   14.83798   0.243
+## State_1Missouri                               -2.59586   11.16642  -0.232
+## State_1Montana                               -34.65084   19.94973  -1.737
+## State_1Nebraska                                6.40950   16.73084   0.383
+## State_1Nevada                                 27.40058   12.79224   2.142
+## State_1New Hampshire                         -63.23269   27.27639  -2.318
+## State_1New Jersey                              7.79841   11.54052   0.676
+## State_1New York                                5.35508    8.39530   0.638
+## State_1North Carolina                        -13.56659    9.02524  -1.503
+## State_1Ohio                                    5.60102    9.58782   0.584
+## State_1Oklahoma                               -2.61488   13.01374  -0.201
+## State_1Oregon                                  9.71871   11.70982   0.830
+## State_1Pennsylvania                           -0.84744    8.26974  -0.102
+## State_1Rhode Island                            5.37280   16.80511   0.320
+## State_1South Carolina                         -8.38149   13.53916  -0.619
+## State_1South Dakota                           16.26846   27.41089   0.594
+## State_1Tennessee                              -9.08785   10.16641  -0.894
+## State_1Texas                                   2.72877    7.88853   0.346
+## State_1Utah                                    7.81191   12.71358   0.614
+## State_1Vermont                                 9.89884   19.81308   0.500
+## State_1Virginia                               -3.13495   11.59913  -0.270
+## State_1Washington                              0.21149    9.16761   0.023
+## State_1West Virginia                           4.29083   16.69654   0.257
+## State_1Wisconsin                               4.59734    9.23331   0.498
+## State_1Wyoming                               -13.39967   27.34859  -0.490
+## Education                                      0.74257    0.71455   1.039
+## Parents_education                              0.62450    1.65232   0.378
+## Language                                      -1.48210    4.65657  -0.318
+## Ethnicity                                      0.26015    0.65401   0.398
+## Income                                        -0.11960    0.25945  -0.461
+## Religion                                       0.23786    1.23571   0.192
+## trust.in.science_7                             1.12682    0.61021   1.847
+## need_for_cognition                             5.55210    1.94890   2.849
+## interpersonal.trust_1                          0.32399    0.95307   0.340
+## complexitymoderate:chartTypeline              -6.90844    8.14947  -0.848
+## complexitysimple:chartTypeline               -14.02062    7.97124  -1.759
+## complexitymoderate:isCovidData                 7.87776    8.07181   0.976
+## complexitysimple:isCovidData                   3.37427    8.13509   0.415
+## chartTypeline:isCovidData                      6.66302    8.45336   0.788
+## complexitymoderate:chartTypeline:isCovidData  -9.98218   11.76198  -0.849
+## complexitysimple:chartTypeline:isCovidData     5.57794   11.52427   0.484
+##                                              Pr(>|t|)   
+## (Intercept)                                   0.53851   
+## complexitymoderate                            0.02899 * 
+## complexitysimple                              0.00500 **
+## chartTypeline                                 0.08705 . 
+## isCovidData                                   0.57670   
+## Age                                           0.64756   
+## as.factor(Gender)2                            0.77747   
+## as.factor(Gender)3                            0.51582   
+## as.factor(Gender)5                            0.95795   
+## State_1Arizona                                0.89549   
+## State_1Arkansas                               0.81202   
+## State_1California                             0.17379   
+## State_1Colorado                               0.99343   
+## State_1Connecticut                            0.22621   
+## State_1Delaware                               0.67432   
+## State_1Florida                                0.49989   
+## State_1Georgia                                0.26103   
+## State_1Hawaii                                 0.97832   
+## State_1Illinois                               0.94962   
+## State_1Indiana                                0.41769   
+## State_1Iowa                                   0.20658   
+## State_1Kansas                                 0.95649   
+## State_1Kentucky                               0.71333   
+## State_1Louisiana                              0.63572   
+## State_1Maine                                  0.16018   
+## State_1Maryland                               0.22455   
+## State_1Massachusetts                          0.59221   
+## State_1Michigan                               0.57935   
+## State_1Minnesota                              0.54812   
+## State_1Mississippi                            0.80840   
+## State_1Missouri                               0.81627   
+## State_1Montana                                0.08305 . 
+## State_1Nebraska                               0.70182   
+## State_1Nevada                                 0.03271 * 
+## State_1New Hampshire                          0.02086 * 
+## State_1New Jersey                             0.49953   
+## State_1New York                               0.52387   
+## State_1North Carolina                         0.13346   
+## State_1Ohio                                   0.55938   
+## State_1Oklahoma                               0.84084   
+## State_1Oregon                                 0.40698   
+## State_1Pennsylvania                           0.91842   
+## State_1Rhode Island                           0.74933   
+## State_1South Carolina                         0.53618   
+## State_1South Dakota                           0.55313   
+## State_1Tennessee                              0.37182   
+## State_1Texas                                  0.72956   
+## State_1Utah                                   0.53921   
+## State_1Vermont                                0.61758   
+## State_1Virginia                               0.78707   
+## State_1Washington                             0.98161   
+## State_1West Virginia                          0.79730   
+## State_1Wisconsin                              0.61878   
+## State_1Wyoming                                0.62439   
+## Education                                     0.29924   
+## Parents_education                             0.70563   
+## Language                                      0.75041   
+## Ethnicity                                     0.69098   
+## Income                                        0.64503   
+## Religion                                      0.84744   
+## trust.in.science_7                            0.06542 . 
+## need_for_cognition                            0.00458 **
+## interpersonal.trust_1                         0.73405   
+## complexitymoderate:chartTypeline              0.39702   
+## complexitysimple:chartTypeline                0.07924 . 
+## complexitymoderate:isCovidData                0.32958   
+## complexitysimple:isCovidData                  0.67849   
+## chartTypeline:isCovidData                     0.43097   
+## complexitymoderate:chartTypeline:isCovidData  0.39649   
+## complexitysimple:chartTypeline:isCovidData    0.62860   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 25.93 on 474 degrees of freedom
+## Multiple R-squared:  0.1797, Adjusted R-squared:  0.06034 
+## F-statistic: 1.505 on 69 and 474 DF,  p-value: 0.008144
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ affect.aesthetic\_1 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ complexity }\SpecialCharTok{*}\NormalTok{ chartType }\SpecialCharTok{*}\NormalTok{ isCovidData }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: affect.aesthetic_1
+##                                   Df Sum Sq Mean Sq F value   Pr(>F)   
+## complexity                         2    275   137.3  0.2691 0.764185   
+## chartType                          1    216   216.3  0.4240 0.515270   
+## isCovidData                        1    143   143.1  0.2806 0.596559   
+## Age                                1   2277  2277.2  4.4647 0.035122 * 
+## Gender                             1   2234  2233.7  4.3795 0.036903 * 
+## State_1                           45  18243   405.4  0.7948 0.827955   
+## Education                          1    378   377.5  0.7401 0.390050   
+## Parents_education                  1    625   625.2  1.2257 0.268801   
+## Language                           1     46    46.2  0.0906 0.763571   
+## Ethnicity                          1    556   556.5  1.0910 0.296782   
+## Income                             1    507   507.0  0.9940 0.319267   
+## Religion                           1      1     0.9  0.0017 0.966944   
+## trust.in.science_7                 1   3904  3904.4  7.6550 0.005882 **
+## need_for_cognition                 1   2887  2886.9  5.6602 0.017748 * 
+## interpersonal.trust_1              1   2448  2448.0  4.7997 0.028949 * 
+## complexity:chartType               2   2434  1217.0  2.3861 0.093089 . 
+## complexity:isCovidData             2    557   278.7  0.5464 0.579391   
+## chartType:isCovidData              1   1476  1476.0  2.8938 0.089576 . 
+## complexity:chartType:isCovidData   2     38    19.0  0.0372 0.963522   
+## Residuals                        476 242781   510.0                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = affect.aesthetic_1 ~ complexity * chartType * isCovidData + 
+##     Age + Gender + State_1 + Education + Parents_education + 
+##     Language + Ethnicity + Income + Religion + trust.in.science_7 + 
+##     need_for_cognition + interpersonal.trust_1, data = results)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -69.275 -12.197   1.691  15.044  45.767 
+## 
+## Coefficients:
+##                                                Estimate Std. Error t value
+## (Intercept)                                  -343.18480  138.53967  -2.477
+## complexitymoderate                             -4.64381    4.94707  -0.939
+## complexitysimple                               -5.65000    4.89075  -1.155
+## chartTypeline                                  -7.34731    4.91736  -1.494
+## isCovidData                                    -4.91980    5.21785  -0.943
+## Age                                             0.19631    0.06950   2.825
+## Gender                                         -4.46005    1.94088  -2.298
+## State_1Arizona                                 -7.70625    9.38801  -0.821
+## State_1Arkansas                                 9.54163   12.99591   0.734
+## State_1California                              -0.84290    6.58797  -0.128
+## State_1Colorado                                -0.12965    9.15381  -0.014
+## State_1Connecticut                            -13.60102   11.93321  -1.140
+## State_1Delaware                               -13.80856   17.32074  -0.797
+## State_1Florida                                 -6.44689    7.01727  -0.919
+## State_1Georgia                                 -5.49618    7.39898  -0.743
+## State_1Hawaii                                  10.20125   14.79687   0.689
+## State_1Illinois                                -0.31430    7.86413  -0.040
+## State_1Indiana                                  3.55061    9.75604   0.364
+## State_1Iowa                                    -2.52722   12.98262  -0.195
+## State_1Kansas                                   9.07849   10.55249   0.860
+## State_1Kentucky                                -2.45508    9.68638  -0.253
+## State_1Louisiana                                2.66259   11.13651   0.239
+## State_1Maine                                    7.72587   14.53748   0.531
+## State_1Maryland                                 3.20737    8.55124   0.375
+## State_1Massachusetts                            7.96405    8.57676   0.929
+## State_1Michigan                                -6.74239    8.28184  -0.814
+## State_1Minnesota                               -4.01388   11.85757  -0.339
+## State_1Mississippi                             -5.48221   12.91630  -0.424
+## State_1Missouri                                -4.36157    9.64818  -0.452
+## State_1Montana                                 10.34406   17.37623   0.595
+## State_1Nebraska                               -11.82145   14.57115  -0.811
+## State_1Nevada                                  -8.20670   11.14301  -0.736
+## State_1New Hampshire                           24.29003   23.74061   1.023
+## State_1New Jersey                              -4.48929   10.04522  -0.447
+## State_1New York                                -6.69492    7.31042  -0.916
+## State_1North Carolina                          -8.40750    7.85876  -1.070
+## State_1Ohio                                    -8.07746    8.35032  -0.967
+## State_1Oklahoma                                 6.69427   11.23780   0.596
+## State_1Oregon                                   1.44363   10.19863   0.142
+## State_1Pennsylvania                             2.54905    7.19235   0.354
+## State_1Rhode Island                           -24.84510   14.63861  -1.697
+## State_1South Carolina                          -7.96101   11.79358  -0.675
+## State_1South Dakota                           -39.20021   23.87625  -1.642
+## State_1Tennessee                               -7.41244    8.85314  -0.837
+## State_1Texas                                   -2.16939    6.86979  -0.316
+## State_1Utah                                    -9.21788   11.07341  -0.832
+## State_1Vermont                                -16.60592   17.25466  -0.962
+## State_1Virginia                               -14.01299   10.10358  -1.387
+## State_1Washington                              -6.87525    7.98370  -0.861
+## State_1West Virginia                            9.45129   14.54213   0.650
+## State_1Wisconsin                               -3.53710    8.04219  -0.440
+## State_1Wyoming                                  5.25649   23.81010   0.221
+## Education                                      -0.09478    0.62139  -0.153
+## Parents_education                              -1.74172    1.43913  -1.210
+## Language                                        2.02793    4.05567   0.500
+## Ethnicity                                       0.30928    0.56782   0.545
+## Income                                          0.15415    0.22469   0.686
+## Religion                                       -0.47930    1.07540  -0.446
+## trust.in.science_7                              1.01709    0.53127   1.914
+## need_for_cognition                              3.19323    1.68624   1.894
+## interpersonal.trust_1                           1.83396    0.82762   2.216
+## complexitymoderate:chartTypeline                9.65778    7.09203   1.362
+## complexitysimple:chartTypeline                  6.11217    6.94146   0.881
+## complexitymoderate:isCovidData                 -1.82717    7.01866  -0.260
+## complexitysimple:isCovidData                    4.32833    7.07960   0.611
+## chartTypeline:isCovidData                       6.95523    7.36274   0.945
+## complexitymoderate:chartTypeline:isCovidData    1.49074   10.21876   0.146
+## complexitysimple:chartTypeline:isCovidData     -1.19256   10.03678  -0.119
+##                                              Pr(>|t|)   
+## (Intercept)                                   0.01359 * 
+## complexitymoderate                            0.34836   
+## complexitysimple                              0.24857   
+## chartTypeline                                 0.13580   
+## isCovidData                                   0.34622   
+## Age                                           0.00493 **
+## Gender                                        0.02200 * 
+## State_1Arizona                                0.41214   
+## State_1Arkansas                               0.46319   
+## State_1California                             0.89825   
+## State_1Colorado                               0.98871   
+## State_1Connecticut                            0.25496   
+## State_1Delaware                               0.42572   
+## State_1Florida                                0.35871   
+## State_1Georgia                                0.45795   
+## State_1Hawaii                                 0.49090   
+## State_1Illinois                               0.96814   
+## State_1Indiana                                0.71606   
+## State_1Iowa                                   0.84574   
+## State_1Kansas                                 0.39005   
+## State_1Kentucky                               0.80002   
+## State_1Louisiana                              0.81114   
+## State_1Maine                                  0.59536   
+## State_1Maryland                               0.70777   
+## State_1Massachusetts                          0.35359   
+## State_1Michigan                               0.41598   
+## State_1Minnesota                              0.73513   
+## State_1Mississippi                            0.67144   
+## State_1Missouri                               0.65143   
+## State_1Montana                                0.55193   
+## State_1Nebraska                               0.41760   
+## State_1Nevada                                 0.46180   
+## State_1New Hampshire                          0.30676   
+## State_1New Jersey                             0.65514   
+## State_1New York                               0.36023   
+## State_1North Carolina                         0.28524   
+## State_1Ohio                                   0.33387   
+## State_1Oklahoma                               0.55166   
+## State_1Oregon                                 0.88749   
+## State_1Pennsylvania                           0.72319   
+## State_1Rhode Island                           0.09031 . 
+## State_1South Carolina                         0.49998   
+## State_1South Dakota                           0.10129   
+## State_1Tennessee                              0.40286   
+## State_1Texas                                  0.75230   
+## State_1Utah                                   0.40558   
+## State_1Vermont                                0.33634   
+## State_1Virginia                               0.16611   
+## State_1Washington                             0.38958   
+## State_1West Virginia                          0.51605   
+## State_1Wisconsin                              0.66027   
+## State_1Wyoming                                0.82537   
+## Education                                     0.87883   
+## Parents_education                             0.22678   
+## Language                                      0.61729   
+## Ethnicity                                     0.58623   
+## Income                                        0.49302   
+## Religion                                      0.65602   
+## trust.in.science_7                            0.05616 . 
+## need_for_cognition                            0.05887 . 
+## interpersonal.trust_1                         0.02717 * 
+## complexitymoderate:chartTypeline              0.17391   
+## complexitysimple:chartTypeline                0.37902   
+## complexitymoderate:isCovidData                0.79472   
+## complexitysimple:isCovidData                  0.54124   
+## chartTypeline:isCovidData                     0.34532   
+## complexitymoderate:chartTypeline:isCovidData  0.88408   
+## complexitysimple:chartTypeline:isCovidData    0.90547   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 22.58 on 476 degrees of freedom
+## Multiple R-squared:  0.1392, Adjusted R-squared:  0.01799 
+## F-statistic: 1.148 on 67 and 476 DF,  p-value: 0.2094
+\end{verbatim}
+
+Trust in Vis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.science\_1 }\SpecialCharTok{*}\NormalTok{ affect.clarity\_1 }\SpecialCharTok{*}\NormalTok{ affect.aesthetic\_1 }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: vis.trust_6
+##                                                       Df Sum Sq Mean Sq F value
+## affect.science_1                                       1 108.31 108.310 97.3240
+## affect.clarity_1                                       1  17.84  17.837 16.0279
+## affect.aesthetic_1                                     1   8.28   8.276  7.4364
+## Age                                                    1   2.68   2.678  2.4065
+## Gender                                                 1   3.59   3.591  3.2270
+## State_1                                               45  64.59   1.435  1.2898
+## Education                                              1   0.65   0.651  0.5846
+## Parents_education                                      1   2.70   2.696  2.4228
+## Language                                               1   0.03   0.031  0.0277
+## Ethnicity                                              1   1.50   1.503  1.3508
+## Income                                                 1   0.02   0.021  0.0186
+## Religion                                               1   0.02   0.015  0.0138
+## trust.in.science_7                                     1  48.42  48.416 43.5048
+## need_for_cognition                                     1   1.19   1.190  1.0695
+## interpersonal.trust_1                                  1   6.51   6.507  5.8472
+## affect.science_1:affect.clarity_1                      1   0.49   0.492  0.4423
+## affect.science_1:affect.aesthetic_1                    1   0.90   0.898  0.8068
+## affect.clarity_1:affect.aesthetic_1                    1   1.64   1.635  1.4693
+## affect.science_1:affect.clarity_1:affect.aesthetic_1   1   0.36   0.359  0.3229
+## Residuals                                            480 534.18   1.113        
+##                                                         Pr(>F)    
+## affect.science_1                                     < 2.2e-16 ***
+## affect.clarity_1                                     7.230e-05 ***
+## affect.aesthetic_1                                    0.006626 ** 
+## Age                                                   0.121492    
+## Gender                                                0.073063 .  
+## State_1                                               0.104842    
+## Education                                             0.444890    
+## Parents_education                                     0.120236    
+## Language                                              0.867939    
+## Ethnicity                                             0.245710    
+## Income                                                0.891437    
+## Religion                                              0.906447    
+## trust.in.science_7                                   1.119e-10 ***
+## need_for_cognition                                    0.301573    
+## interpersonal.trust_1                                 0.015974 *  
+## affect.science_1:affect.clarity_1                     0.506318    
+## affect.science_1:affect.aesthetic_1                   0.369527    
+## affect.clarity_1:affect.aesthetic_1                   0.226058    
+## affect.science_1:affect.clarity_1:affect.aesthetic_1  0.570139    
+## Residuals                                                         
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(}\FunctionTok{aov}\NormalTok{(vis.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.science\_1 }\SpecialCharTok{*}\NormalTok{ affect.clarity\_1 , }\AttributeTok{data =}\NormalTok{ results) , }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.clarity\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NOTE: Results may be misleading due to involvement in interactions
+\end{verbatim}
+
+\begin{verbatim}
+##  affect.clarity_1 emmean     SE  df lower.CL upper.CL
+##              75.6    4.5 0.0497 540      4.4      4.6
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+Trust in Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.science\_1 }\SpecialCharTok{*}\NormalTok{ affect.clarity\_1 }\SpecialCharTok{*}\NormalTok{ affect.aesthetic\_1 }\SpecialCharTok{+}
+\NormalTok{              Age }\SpecialCharTok{+}\NormalTok{ Gender }\SpecialCharTok{+}\NormalTok{ State\_1 }\SpecialCharTok{+}\NormalTok{ Education }\SpecialCharTok{+}\NormalTok{ Parents\_education }\SpecialCharTok{+}\NormalTok{ Language }\SpecialCharTok{+} 
+\NormalTok{              Ethnicity }\SpecialCharTok{+}\NormalTok{ Income }\SpecialCharTok{+}\NormalTok{ Religion }\SpecialCharTok{+}\NormalTok{ trust.in.science\_7 }\SpecialCharTok{+} 
+\NormalTok{              need\_for\_cognition }\SpecialCharTok{+}\NormalTok{ interpersonal.trust\_1,}
+            \AttributeTok{data =}\NormalTok{ results)}
+\FunctionTok{anova}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: data.trust_6
+##                                                       Df Sum Sq Mean Sq F value
+## affect.science_1                                       1  89.71  89.711 67.9000
+## affect.clarity_1                                       1  17.73  17.733 13.4220
+## affect.aesthetic_1                                     1   9.82   9.822  7.4341
+## Age                                                    1   0.47   0.470  0.3557
+## Gender                                                 1   0.03   0.034  0.0255
+## State_1                                               45  99.16   2.203  1.6678
+## Education                                              1   0.02   0.020  0.0151
+## Parents_education                                      1   4.54   4.538  3.4350
+## Language                                               1   0.08   0.076  0.0575
+## Ethnicity                                              1   0.00   0.000  0.0000
+## Income                                                 1   2.69   2.691  2.0370
+## Religion                                               1   0.81   0.811  0.6137
+## trust.in.science_7                                     1  27.74  27.744 20.9991
+## need_for_cognition                                     1   2.71   2.715  2.0548
+## interpersonal.trust_1                                  1  11.00  11.003  8.3280
+## affect.science_1:affect.clarity_1                      1   0.52   0.520  0.3936
+## affect.science_1:affect.aesthetic_1                    1   3.22   3.218  2.4356
+## affect.clarity_1:affect.aesthetic_1                    1   0.34   0.341  0.2578
+## affect.science_1:affect.clarity_1:affect.aesthetic_1   1   0.70   0.696  0.5271
+## Residuals                                            480 634.18   1.321        
+##                                                         Pr(>F)    
+## affect.science_1                                     1.652e-15 ***
+## affect.clarity_1                                     0.0002764 ***
+## affect.aesthetic_1                                   0.0066341 ** 
+## Age                                                  0.5511621    
+## Gender                                               0.8732163    
+## State_1                                              0.0054312 ** 
+## Education                                            0.9024074    
+## Parents_education                                    0.0644403 .  
+## Language                                             0.8105316    
+## Ethnicity                                            0.9964490    
+## Income                                               0.1541610    
+## Religion                                             0.4338006    
+## trust.in.science_7                                   5.866e-06 ***
+## need_for_cognition                                   0.1523801    
+## interpersonal.trust_1                                0.0040796 ** 
+## affect.science_1:affect.clarity_1                    0.5307322    
+## affect.science_1:affect.aesthetic_1                  0.1192669    
+## affect.clarity_1:affect.aesthetic_1                  0.6118972    
+## affect.science_1:affect.clarity_1:affect.aesthetic_1 0.4681710    
+## Residuals                                                         
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{emmeans}\NormalTok{(}\FunctionTok{aov}\NormalTok{(data.trust\_6 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.science\_1 }\SpecialCharTok{*}\NormalTok{ affect.clarity\_1 , }\AttributeTok{data =}\NormalTok{ results) , }\SpecialCharTok{\textasciitilde{}}\NormalTok{ affect.clarity\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NOTE: Results may be misleading due to involvement in interactions
+\end{verbatim}
+
+\begin{verbatim}
+##  affect.clarity_1 emmean    SE  df lower.CL upper.CL
+##              75.6   4.41 0.054 540     4.31     4.52
+## 
+## Confidence level used: 0.95
+\end{verbatim}
+
+\hypertarget{factor-analysis}{%
+\section{Factor Analysis}\label{factor-analysis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{factorAnalysis }\OtherTok{\textless{}{-}}\NormalTok{ results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(data.trust\_1, data.trust\_2, data.trust\_3, data.trust\_4, data.trust\_5, data.trust\_6,}
+\NormalTok{         vis.trust\_1, vis.trust\_2, vis.trust\_3, vis.trust\_4, vis.trust\_5, vis.trust\_6,}
+\NormalTok{         trust.in.science\_1, trust.in.science\_2, trust.in.science\_3, trust.in.science\_4, trust.in.science\_5,}
+\NormalTok{         trust.in.science\_6, trust.in.science\_7, trust.in.science\_8, }
+\NormalTok{         cognition\_1, cognition\_2, cognition\_3, cognition\_4, cognition\_5, cognition\_6,}
+         \CommentTok{\# brushed, explore\_interactions, \# explore\_time, }
+\NormalTok{         interpersonal.trust\_1,}
+\NormalTok{         vlat\_simple, vlat\_moderate, vlat\_complex,}
+         \CommentTok{\# initial impression}
+\NormalTok{         affect.science\_1, affect.clarity\_1, affect.aesthetic\_1)}
+
+\FunctionTok{nfactors}\NormalTok{(factorAnalysis)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{trustFullAnalysis_6.12.2023_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\begin{verbatim}
+## 
+## Number of factors
+## Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+##     n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+## VSS complexity 1 achieves a maximimum of 0.7  with  3  factors
+## VSS complexity 2 achieves a maximimum of 0.78  with  4  factors
+## The Velicer MAP achieves a minimum of 0.01  with  3  factors 
+## Empirical BIC achieves a minimum of  -1558.7  with  7  factors
+## Sample Size adjusted BIC achieves a minimum of  -409.76  with  8  factors
+## 
+## Statistics by number of factors 
+##    vss1 vss2   map dof chisq     prob sqresid  fit RMSEA   BIC SABIC complex
+## 1  0.45 0.00 0.035 495  5191  0.0e+00    45.2 0.45 0.132  2073  3645     1.0
+## 2  0.56 0.63 0.030 463  3337  0.0e+00    30.1 0.63 0.107   421  1890     1.3
+## 3  0.70 0.77 0.012 432  1732 8.7e-155    17.9 0.78 0.074  -989   382     1.2
+## 4  0.64 0.78 0.012 402  1375 1.5e-106    15.7 0.81 0.067 -1157   119     1.4
+## 5  0.62 0.77 0.012 373  1145  2.2e-79    14.0 0.83 0.062 -1204   -20     1.6
+## 6  0.63 0.77 0.014 345  1010  1.7e-66    12.5 0.85 0.060 -1163   -68     1.7
+## 7  0.60 0.76 0.015 318   664  1.6e-26    11.5 0.86 0.045 -1339  -330     1.8
+## 8  0.57 0.75 0.016 292   503  2.2e-13    10.5 0.87 0.036 -1337  -410     2.0
+## 9  0.57 0.74 0.017 267   434  4.1e-10     9.6 0.88 0.034 -1248  -400     1.8
+## 10 0.56 0.73 0.019 243   355  3.7e-06     9.0 0.89 0.029 -1176  -404     1.8
+## 11 0.55 0.73 0.022 220   298  3.7e-04     8.4 0.90 0.025 -1088  -390     1.9
+## 12 0.55 0.72 0.024 198   249  8.6e-03     7.9 0.90 0.022  -999  -370     1.9
+## 13 0.56 0.73 0.028 177   221  1.3e-02     7.1 0.91 0.021  -894  -332     1.9
+## 14 0.55 0.73 0.032 157   184  7.0e-02     6.4 0.92 0.018  -805  -307     1.9
+## 15 0.55 0.73 0.037 138   151  2.2e-01     6.1 0.93 0.013  -719  -281     1.9
+## 16 0.55 0.73 0.043 120   131  2.3e-01     5.8 0.93 0.013  -625  -244     1.9
+## 17 0.56 0.73 0.051 103    97  6.4e-01     5.3 0.94 0.000  -551  -225     1.9
+## 18 0.56 0.71 0.061  87    85  5.4e-01     5.2 0.94 0.000  -463  -187     2.0
+## 19 0.56 0.72 0.069  72    66  6.6e-01     4.5 0.95 0.000  -387  -159     1.9
+## 20 0.55 0.71 0.075  58    45  9.0e-01     4.4 0.95 0.000  -321  -137     1.9
+##     eChisq   SRMR eCRMS  eBIC
+## 1  11818.0 0.1434 0.148  8700
+## 2   6122.6 0.1032 0.110  3206
+## 3   1618.1 0.0531 0.059 -1103
+## 4   1145.3 0.0446 0.051 -1387
+## 5    834.2 0.0381 0.045 -1515
+## 6    634.9 0.0332 0.041 -1538
+## 7    444.4 0.0278 0.036 -1559
+## 8    306.9 0.0231 0.031 -1532
+## 9    217.8 0.0195 0.027 -1464
+## 10   163.2 0.0169 0.025 -1367
+## 11   121.6 0.0146 0.023 -1264
+## 12    90.4 0.0125 0.020 -1157
+## 13    70.5 0.0111 0.019 -1044
+## 14    56.4 0.0099 0.018  -933
+## 15    46.3 0.0090 0.018  -823
+## 16    36.4 0.0080 0.017  -719
+## 17    28.4 0.0070 0.016  -620
+## 18    21.1 0.0061 0.015  -527
+## 19    14.6 0.0050 0.014  -439
+## 20     9.5 0.0041 0.012  -356
+\end{verbatim}
+
+Factor 4 seem to have minimum compelxity, BIC is pretty low, and big
+jump for root mean 5 seems meh becuase of the big jump from 4-5 on
+complexity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f7 }\OtherTok{\textless{}{-}} \FunctionTok{fa}\NormalTok{(factorAnalysis, }\DecValTok{7}\NormalTok{)}
+\FunctionTok{pdf}\NormalTok{(}\AttributeTok{file =} \StringTok{"f7.pdf"}\NormalTok{,   }\CommentTok{\# The directory you want to save the file in}
+    \AttributeTok{width =} \DecValTok{15}\NormalTok{, }\CommentTok{\# The width of the plot in inches}
+    \AttributeTok{height =} \DecValTok{23}\NormalTok{) }\CommentTok{\# The height of the plot in inches}
+\FunctionTok{fa.diagram}\NormalTok{(f7)}
+\FunctionTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# based on the factor analysis, it looks like not all the vis Qs go together and not all the data Qs go together. }
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

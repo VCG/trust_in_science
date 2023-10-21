@@ -1,0 +1,56 @@
+
+.node rect {
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+}
+
+.node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 12px;
+}
+
+.link {
+    fill: none;
+    /*stroke: #ec1111;*/
+    stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke-opacity: .5;
+}
+
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+}
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+}

@@ -1,0 +1,90 @@
+
+.node rect {
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+    cursor: pointer;
+    stroke-width: 0.5;
+}
+
+.node text {
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.link {
+    fill: none;
+    /*stroke: #ec1111;*/
+    /*stroke: #CCCCCC;*/
+    stroke-opacity: .2;
+}
+
+.link:hover {
+    /* stroke-opacity: .5; */
+}
+
+.node rect.hidden-node {
+    fill-opacity: 0.2;
+    shape-rendering: auto;
+    stroke-width: 0;
+}
+
+/*.node rect.hidden-node-click {*/
+/*    fill-opacity: 0.1;*/
+/*    shape-rendering: auto;*/
+/*    stroke-width: 0;*/
+/*}*/
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 15px;
+}
+
+.form {
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 13px;
+}
+
+.form .form-group {
+    padding: 0;
+}
+
+.form .spacer {
+    margin: 0 10px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+}
+
+.helper {
+    margin-left: 70px;
+    font-size: 13px;
+    font-style: italic;
+}
+
+
+#tooltip {
+    position: absolute;
+    pointer-events: none;
+    font-size: 0.7em;
+    font-family: sans-serif;
+    padding: 3px;
+    width: auto;
+    height: auto;
+    background-color: #F2F2F2;
+    -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    -mox-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 5px rbga(0, 0, 0, 0.4);
+    pointer-events: none;
+}

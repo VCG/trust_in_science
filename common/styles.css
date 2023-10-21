@@ -1,0 +1,163 @@
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+
+.axis path,
+.axis line {
+    fill: light;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 11px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+    font-family: Segoe UI
+}
+
+.axisMonths line {
+    stroke: transparent;
+
+}
+
+
+.axisMonths2 line {
+    stroke: black;
+    /*stroke-dasharray: 10,8;*/
+}
+
+.main-content {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 920px;
+}
+
+.legend-content {
+    width: 180px;
+    float: right;
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+.title {
+    margin-left: 70px;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+.subtitle {
+    margin-left: 70px;
+    font-size: 17px;
+}
+
+.helper {
+    margin-left: 70px;
+    font-size: 13px;
+    font-style: italic;
+    line-height: normal;
+}
+
+.brush-label {
+    font-size: 13px;
+    padding-bottom: 4px;
+}
+
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;;
+}
+
+.legend {
+    margin-top: 0%;
+}
+
+.legend-title {
+    font-size: 13px;
+    height: 25px;
+}
+
+.legend-row {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 25px;
+}
+
+.legend-value {
+    display: inline;
+    padding: 0 10px 0 0;
+}
+
+.legend-value svg, .legend-value rect {
+    width: 10px;
+    height: 10px;
+}
+
+.legend-label {
+    display: inline-block;
+    height: 25px;
+}
+
+.alignLeft {
+    float: left;
+    margin-bottom: 0;
+}
+
+.alignRight {
+    float: right;
+    margin-bottom: 0;
+}
+
+.disabled-button {
+    background-color: grey;
+}
+
+
+.tooltip-group {
+    z-index: 4;
+}
+
+.tool-rect-background {
+    -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+}
+
+.tool-rect-background-r {
+    -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+}
+
+.tool-rect-background-l {
+    -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .3));
+}
+
+.legend-content-line {
+    float: right;
+    font-size: 12px;
+    margin-top: 120px;
+}

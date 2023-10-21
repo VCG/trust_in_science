@@ -1,0 +1,82 @@
+{
+  "complex": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Interactive Line Chart",
+      "text": "This is an interactive line chart showing pest counts for different types of crop diseases. <br> <br> Yellow, orange, and red lines represent <b>insect-related</b> crop diseases; light, medium, and dark blue lines represent <b>fungi-related</b> crop diseases.<br> <br> <b>Your turn:</b> Hover over the line chart to see the data for the corresponding date.",
+      "class": "main-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#time_filter_div",
+      "location": "left",
+      "title": "Creating a Time Filter",
+      "text": "The x-axis shows time in weeks. <br> <br> You can select a subset of weeks to filter the data shown in the visualization.<br><br> <b>Your turn:</b> To proceed to the next step, create a selection by clicking and dragging over the time axis.<br>",
+      "class": "brush-step",
+      "disabled": true
+    },
+    {
+      "id": "#time_filter_div",
+      "location": "left",
+      "title": "Adjusting the Time Filter",
+      "text": "You can adjust the filter either by resizing the selection (on the left or right) or by dragging the entire filter.<br><br><b>Your turn:</b> Adjust the filter you have created.",
+      "class": "move-step",
+      "disabled": true
+    },
+    {
+      "id": "#time_filter_div",
+      "location": "left",
+      "title": "Clearing the Time Filter",
+      "text": "<b>Your turn:</b> Click on the time filter outside of the selection area (or press the 'Esc' key) to clear the filter.",
+      "class": "clear-step",
+      "disabled": true
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend. For both fungi-related and insect-related crop diseases, the data is broken down by pest species.<br><br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ],
+  "moderate": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Line Chart with Min/Max Range",
+      "text": "This is a line chart. The line shows the mean pest count and the shaded areas indicate the range (min/max) of the underlying data. <br> <br> The orange line represents <b>insect-related</b> crop diseases; the blue line represents <b>fungi-related</b> crop diseases. <br> <br> <b>Your turn:</b> Hover over the line chart to see the data for the corresponding date.",
+      "class": "main-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend, showing the colors for fungi-related (blue) and insect-related (orange) crop diseases.  <br> <br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ],
+  "simple": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Line Chart",
+      "text": "This is a line chart showing pest counts for different types of crop diseases. <br><br> The orange line represents <b>insect-related</b> crop diseases; the blue line represents <b>fungi-related</b> crop diseases. <br> <br> <b>Your turn:</b> Hover over the line chart to see the data for the corresponding date.",
+      "class": "first-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend, showing the colors for fungi-related (blue) and insect-related (orange) crop diseases.  <br> <br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ]
+}
+
+

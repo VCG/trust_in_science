@@ -1,0 +1,762 @@
+---
+title: "Trust in Science Analysis"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+```{r echo = FALSE}
+require(tidyverse)
+library(psych)
+library(ggplot2)
+library(car)
+library(lme4)
+library(emmeans)
+library(pwr)
+library(patchwork)
+library(rstatix)
+library(effectsize)
+library(GPArotation)
+# environment to include the ss_psych450_rws3 platform
+load("ss_psych450_rws3")
+```
+
+Load Data
+
+```{r}
+# results <- read.csv("data_clean.csv")
+results <- read.csv("../data_clean.csv")
+
+# trust in data is the column: bar-data_6
+# trust in vis is the column: bar-vis_6
+```
+
+
+
+```{r}
+ggplot(aes(x=complexity,y=data.trust_4),data=results)+
+ geom_bar(stat = "summary", fun = "mean")+
+  
+   theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+
+```
+
+
+
+```{r, fig.height=2 ,fig.width =4}
+
+# levels(results$isCovidData) <- list('0'="Crop Diseases", '1'="COVID")
+results %>%
+  group_by(complexity,isCovidData) %>%
+  summarize(n = n(), 
+            se = sd(vis.trust_6)/sqrt(n),
+            vis.trust_6 = mean(vis.trust_6),
+            n = n)%>%
+    ggplot(aes(x = vis.trust_6, y = 0, xmax= vis.trust_6+se, xmin = vis.trust_6-se, colour = as.factor(isCovidData))) +
+  geom_point()+
+  geom_jitter(aes(x=vis.trust_6, y=0),data=results)+
+  geom_errorbar(height=0.3)+
+  ylim(-1,1)+
+  xlim(1, 7)+
+  # labs(title = "Trust in data") + 
+  facet_grid(complexity~isCovidData)+
+  #facet_grid(rows = vars(complexity), cols = vars(chartType)) +
+  theme_minimal()
+
+results %>% 
+  group_by(complexity, isCovidData) %>%
+  summarize(n = n(), 
+            mean = mean(vis.trust_6),
+            se = sd(vis.trust_6)/sqrt(n),
+            n = n)
+```
+
+
+Trust in Vis
+
+```{r, fig.height=2 ,fig.width =4}
+
+# levels(results$isCovidData) <- list('0'="Crop Diseases", '1'="COVID")
+results %>%
+  ggplot(aes(x = vis.trust_6, y = 0, colour = as.factor(isCovidData))) +
+  geom_violin(scale = "width", trim = FALSE, aes(fill = as.factor(isCovidData)), colour=NA, alpha = 0.3)+
+  geom_jitter( height = 0.05, width = 0.2, alpha = 0.2) +
+  xlim(1, 7)+
+  # labs(title = "Trust in data") + 
+  geom_segment(data = results %>% 
+                group_by(complexity, isCovidData) %>%
+                summarize(n = n(), 
+                          vis.trust_6 = mean(vis.trust_6)), 
+              aes(xend = vis.trust_6, yend=(0 -.35), y=(0 +.35),colour = as.factor(isCovidData)),size=1) +
+  facet_grid(complexity~isCovidData)+
+  #facet_grid(rows = vars(complexity), cols = vars(chartType)) +
+  theme_minimal()
+
+```
+
+
+```{r, fig.height=2 ,fig.width =4}
+
+# levels(results$isCovidData) <- list('0'="Crop Diseases", '1'="COVID")
+results %>%
+  ggplot(aes(x = data.trust_6, y = 0)) +
+  geom_violin(aes(fill = data.trust_6), colour=NA, alpha = 0.3)+
+  geom_jitter(data = results, width = 0.2, alpha = 0.2) +
+  xlim(1, 7)+
+  # labs(title = "Trust in data") + 
+  geom_segment(data = results %>% 
+                group_by(complexity) %>%
+                summarize(n = n(), 
+                          data.trust_6 = mean(data.trust_6)), 
+              aes(xend = data.trust_6, yend=(0 -.35), y=(0 +.35),colour = data.trust_6),size=1) +
+  facet_grid(complexity~.)+
+  #facet_grid(rows = vars(complexity), cols = vars(chartType)) +
+  theme_minimal()
+
+```
+
+```{r}
+model <- lm(formula = data.trust_6 ~ data.trust_1 + data.trust_2 + data.trust_3 + data.trust_4 + data.trust_5 
+           + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 
+            , data = results)
+summary(model)
+
+```
+
+
+
+```{r}
+model <- lm(formula = vis.trust_6 ~ vis.trust_1 + vis.trust_2 + vis.trust_3 + vis.trust_4 + vis.trust_5 
+            # + complexity + chartType + as.factor(isCovidData) + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 
+            , data = results)
+anova(model)
+
+```
+
+
+
+
+```{r}
+model <- lm(formula = vis.trust_3 ~  complexity  * chartType + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 , data = results%>%filter(isCovidData == 1))
+anova(model)
+
+
+```
+
+
+```{r}
+model <- lm(formula = vis.trust_6 ~ 
+              # affect.science_1 + affect.clarity_1+  affect.aesthetic_1 
+              +vis.trust_1 + 
+              vis.trust_2 + vis.trust_3 + vis.trust_4 + vis.trust_5 + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 , data = results)
+summary(model)
+
+
+# # post-hoc tests
+# aov(vis.trust_6 ~ complexity * as.factor(isCovidData), data = results) %>% tukey_hsd()
+# # effect sizes
+# eta_squared(aov(vis.trust_6 ~ complexity * as.factor(isCovidData) * chartType + 
+#                   Age + Gender + State_1 + Education + Parents_education + Language + 
+#                   Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + 
+#                   interpersonal.trust_1,
+#              data = results))
+
+# ggplot(data=results%>%filter(isCovidData == 0),aes(x=complexity, y = vis.trust_5))+
+#   geom_bar(stat = "summary", fun = "mean")
+
+```
+
+```{r}
+model <- lm(formula = vis.trust_3 ~ ordinal_complexity + as.factor(isCovidData) + chartType + as.factor(isCovidData) +
+                                    + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 ,data = results)
+# 
+            
+summary(model)
+#anova(model)
+
+
+# # post-hoc tests
+# aov(vis.trust_6 ~ complexity * as.factor(isCovidData), data = results) %>% tukey_hsd()
+# # effect sizes
+# eta_squared(aov(vis.trust_6 ~ complexity * as.factor(isCovidData) * chartType + 
+#                   Age + Gender + State_1 + Education + Parents_education + Language + 
+#                   Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + 
+#                   interpersonal.trust_1,
+#              data = results))
+
+# ggplot(data=results,aes(x=complexity, y = data.trust_4))+
+#   geom_bar(stat = "summary", fun = "mean")
+
+```
+
+Trust in science, need for cognition, and interpersonal trust on trust in Vis
+```{r}
+results %>%
+  gather(key = variables, value = values, 
+         trust.in.science_7, need_for_cognition, interpersonal.trust_1) %>%
+  ggplot(aes(x = values, y = vis.trust_6, color = variables)) +
+
+  facet_grid(cols = vars(variables)) +
+    geom_jitter() +
+  geom_smooth(method='lm', color = "black") +
+  geom_blank() + 
+   theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+```
+
+
+
+
+
+
+Trust in Data
+
+```{r}
+results %>%
+  ggplot(aes(x = data.trust_6, y = isCovidData, colour = as.factor(isCovidData))) +
+  geom_jitter(data = results, width = 0.5) +
+  # labs(title = "Trust in data") + 
+  geom_vline(data = results %>% 
+                group_by(complexity, isCovidData, chartType) %>%
+                summarize(n = n(), 
+                          data.trust_6 = mean(data.trust_6)), 
+              aes(xintercept = data.trust_6, colour = as.factor(isCovidData))) +
+  facet_grid(rows = vars(complexity), cols = vars(chartType)) +
+  theme_minimal()
+
+results %>% 
+  group_by(complexity, isCovidData) %>%
+  summarize(n = n(), 
+            mean = mean(data.trust_6),
+            se = sd(data.trust_6)/sqrt(n),
+            n = n)
+```
+
+```{r}
+model <- lm(formula = data.trust_4 ~ complexity * as.factor(isCovidData) * chartType
+                                    + Age + Gender + State_1 + Education + Parents_education + Language + Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + interpersonal.trust_1 ,
+            data = results)
+anova(model)
+
+# post-hoc tests
+aov(data.trust_6 ~ complexity * as.factor(isCovidData), data = results) %>% tukey_hsd()
+aov(data.trust_6 ~ chartType * as.factor(isCovidData), data = results) %>% tukey_hsd()
+# effect sizes
+eta_squared(aov(data.trust_6 ~ complexity * as.factor(isCovidData) * chartType + 
+                  Age + Gender + State_1 + Education + Parents_education + Language + 
+                  Ethnicity + Income + Religion + trust.in.science_7 + need_for_cognition + 
+                  interpersonal.trust_1,
+             data = results))
+emmeans(aov(data.trust_6 ~ complexity , data = results) , ~ complexity)
+```
+
+Trust in science, need for cognition, and interpersonal trust on trust in Data
+```{r}
+results %>%
+  gather(key = variables, value = values, 
+         trust.in.science_7, need_for_cognition, interpersonal.trust_1) %>%
+  ggplot(aes(x = values, y = data.trust_6, color = variables)) +
+
+  facet_grid(cols = vars(variables)) +
+    geom_jitter() +
+  geom_smooth(color = "black") +
+  geom_blank() + 
+   theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+results_long_data <- results %>%
+  select(data.trust_1, data.trust_2, data.trust_3,
+         data.trust_4, data.trust_5, data.trust_6,
+         ResponseId, complexity,
+         vlat_simple, vlat_moderate, vlat_complex) %>%
+  gather(key = trustItemData, value = trustRatingData, 
+         data.trust_1, data.trust_2, data.trust_3, data.trust_4, data.trust_5, data.trust_6)
+
+results_long_data %>%
+  ggplot(aes(x = trustRatingData, y = 1, color = complexity)) +
+  geom_jitter() +
+  ylim(0, 2) + 
+  labs(title = "Trust in data (All)") + 
+  geom_vline(data = results_long_data %>% 
+               group_by(complexity, trustItemData) %>%
+               summarize(n = n(), 
+                         average = mean(trustRatingData)), 
+             aes(xintercept = average, color = complexity)) +
+  facet_grid(vars(trustItemData)) +
+  theme_minimal()
+```
+
+
+# Relationship between trust in data and vis, across complexity
+
+```{r}
+results_long_data <- results %>%
+  select(data.trust_1, data.trust_2, data.trust_3,
+         data.trust_4, data.trust_5, data.trust_6,
+         ResponseId, complexity,
+         chartType, isCovidData, 
+         vlat_simple, vlat_moderate, vlat_complex) %>%
+  gather(key = trustItemData, value = trustRatingData, 
+         # data.trust_1, data.trust_2, data.trust_3, data.trust_4, data.trust_5, 
+         data.trust_6)
+
+results_long_vis <- results %>%
+  gather(key = trustItemVis, value = trustRatingVis, 
+         # vis.trust_1, vis.trust_2, vis.trust_3, vis.trust_4, vis.trust_5, 
+         vis.trust_6)
+
+results_long_all <- merge(results_long_vis, results_long_data, 
+                          by = c("ResponseId", "complexity", "chartType", "isCovidData"))
+
+model<- glm(trustRatingVis ~  trustRatingData * complexity + 
+              trustRatingData *  chartType + 
+              trustRatingData *  as.factor(isCovidData),
+                      data = results_long_all)
+Anova(model)
+```
+
+```{r}
+results_long_all %>%
+  # filter(trustItemVis == "bar.vis_2") %>%
+  ggplot(aes(x = trustRatingVis, y = trustRatingData, color = as.factor(isCovidData))) +
+  geom_jitter(alpha = 0.25) +
+  stat_smooth(method = "lm",
+              formula = y ~ x,
+              geom = "smooth", color = "black") +
+  labs(title = "Relationship bewteen trust in Vis and Data") + 
+  facet_grid(rows = vars(chartType), cols = vars(complexity)) +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Does the trust items predict trust?
+
+
+```{r}
+model <- lm(formula = vis.trust_6 ~ vis.trust_1 * as.factor(isCovidData) + 
+              vis.trust_2 * as.factor(isCovidData) + 
+              vis.trust_3 * as.factor(isCovidData) + 
+              vis.trust_4 * as.factor(isCovidData) + 
+              vis.trust_5 * as.factor(isCovidData) + 
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+summary(model)
+
+# 4 and 5 has to do with whether the vis is actionable. Would it be used in daily life? Really depends on the topic - crop stuff might not be relevant. Need to account for the topic!!!!! Add "isCovidData" to model. 
+```
+
+```{r}
+model <- lm(formula = data.trust_6 ~ data.trust_1 * as.factor(isCovidData) + 
+              data.trust_2 * as.factor(isCovidData) + 
+              data.trust_3 * as.factor(isCovidData) + 
+              data.trust_4 * as.factor(isCovidData) + 
+              data.trust_5 * as.factor(isCovidData) +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+summary(model)
+#anova(model)
+```
+
+```{r}
+results %>%
+  ggplot(aes(x = data.trust_1, y = data.trust_6, color = as.factor(isCovidData))) +
+  geom_jitter() +
+  geom_smooth(method="lm") +
+  facet_wrap(~isCovidData) +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+
+How does performance on VLAT questions predict trust?
+
+```{r}
+model <- lm(formula = vis.trust_6 ~ vlat_simple * vlat_moderate * vlat_complex +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+
+emmeans(aov(vis.trust_6 ~ vlat_simple * vlat_complex , data = results) , ~ vlat_simple | vlat_complex)
+```
+
+```{r}
+results %>%
+  gather(key = vlat_level, value = vlat_performance, vlat_simple,  vlat_moderate, vlat_complex) %>%
+  ggplot(aes(x = vis.trust_6, y = vlat_performance, colour = as.factor(assigned_vlat))) +
+  geom_jitter(width = 0.5) +
+  # y(0, 2) + 
+  # labs(title = "Trust in data") + 
+  # geom_vline(data = results %>% 
+  #              group_by(complexity, isCovidData) %>%
+  #              summarize(n = n(), 
+  #                        vis.trust_6 = mean(vis.trust_6)), 
+  #            aes(xintercept = vis.trust_6, colour = as.factor(isCovidData))) +
+  facet_grid(rows = vars(vlat_level), cols = vars(chartType)) +
+  theme_minimal() + 
+  theme(panel.spacing = unit(2, "lines"))
+        # legend.position = "none")
+```
+
+
+Overall distribution of VLAT performance
+
+Trust in Vis 
+```{r}
+vlat_long <- results %>%
+  gather(key = vlat_level, value = vlat_performance, vlat_simple,  vlat_moderate, vlat_complex) 
+
+model <- lmer(formula = vlat_performance ~ vlat_level * isCovidData * chartType +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1 + (1|ResponseId),
+            data = vlat_long)
+Anova(model)
+
+emmeans(aov(vlat_performance ~ vlat_level , data = results) , ~ vlat_simple | vlat_complex)
+
+# post-hoc tests
+aov(vlat_performance ~ vlat_level * as.factor(isCovidData), data = vlat_long) %>% tukey_hsd()
+```
+
+```{r}
+results %>%
+  gather(key = vlat_level, value = vlat_performance, vlat_simple,  vlat_moderate, vlat_complex) %>%
+  group_by(vlat_level, chartType, isCovidData) %>%
+  summarize(n = n(),
+            mean_vlat_performance = mean(vlat_performance),
+            se = sd(vlat_performance)/sqrt(n),
+            n = n()) %>%
+  ggplot(aes(x = vlat_level, y = mean_vlat_performance, 
+             ymax = mean_vlat_performance + se, ymin = mean_vlat_performance - se,
+             colour = vlat_level)) +
+  geom_point() +
+  geom_errorbar() +
+  # labs(title = "Trust in data") + 
+  # geom_vline(data = results %>% 
+  #              group_by(complexity, isCovidData) %>%
+  #              summarize(n = n(), 
+  #                        vis.trust_6 = mean(vis.trust_6)), 
+  #            aes(xintercept = vis.trust_6, colour = as.factor(isCovidData))) +
+  facet_grid(rows = vars(isCovidData)) +
+  theme_minimal() + 
+  theme(panel.spacing = unit(2, "lines"))
+        # legend.position = "none")
+```
+
+
+Trust in Data
+
+
+```{r}
+model <- lm(formula = data.trust_6 ~ vlat_simple * vlat_moderate * vlat_complex +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+
+emmeans(aov(data.trust_6 ~ vlat_simple * vlat_complex , data = results) , ~ vlat_simple | vlat_complex)
+```
+
+
+
+
+
+
+
+
+
+# How does provenance data predict trust?
+
+Overall
+
+```{r}
+brushed <- results %>%
+  gather(key = provenance_type, value = provenance_value, brushed, explore_interactions, explore_time) %>%
+  group_by(provenance_type, chartType, isCovidData, complexity) %>%
+  summarize(n = n(), 
+            mean = mean(provenance_value), 
+            se = sd(provenance_value)/sqrt(n),
+            n = n) %>%
+  filter(provenance_type == "brushed") %>%
+  ggplot(aes(x = provenance_type, y = mean, ymax = mean + se, ymin = mean - se, color = as.factor(isCovidData))) +
+  geom_point(position = position_dodge2(width = 0.5)) +
+  geom_errorbar(width = 0.5, size = 0.66, position = "dodge") +
+  facet_grid(rows = vars(complexity), cols = vars(isCovidData)) + 
+  theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+brushed
+
+interactions <- results %>%
+  gather(key = provenance_type, value = provenance_value, brushed, explore_interactions, explore_time) %>%
+  group_by(provenance_type, chartType, isCovidData, complexity) %>%
+  summarize(n = n(), 
+            mean = mean(provenance_value), 
+            se = sd(provenance_value)/sqrt(n),
+            n = n) %>%
+  filter(provenance_type == "explore_interactions") %>%
+  ggplot(aes(x = provenance_type, y = mean, ymax = mean + se, ymin = mean - se, color = as.factor(isCovidData))) +
+  geom_point(position = position_dodge2(width = 0.5)) +
+  geom_errorbar(width = 0.5, size = 0.66, position = "dodge") +
+  facet_grid(rows = vars(complexity), cols = vars(chartType)) + 
+  theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+interactions
+
+exploreTime <- results %>%
+  gather(key = provenance_type, value = provenance_value, brushed, explore_interactions, explore_time) %>%
+  group_by(provenance_type, chartType, isCovidData, complexity) %>%
+  summarize(n = n(), 
+            mean = mean(provenance_value), 
+            se = sd(provenance_value)/sqrt(n),
+            n = n) %>%
+  filter(provenance_type == "explore_time") %>%
+  ggplot(aes(x = provenance_type, y = mean, ymax = mean + se, ymin = mean - se, color = as.factor(isCovidData))) +
+  geom_point(position = position_dodge2(width = 0.5)) +
+  geom_errorbar(width = 0.5, size = 0.66, position = "dodge") +
+  facet_grid(rows = vars(chartType), cols = vars(complexity)) + 
+  theme_minimal() +
+  theme(panel.spacing = unit(2, "lines"))
+exploreTime
+
+exploreTime + interactions + brushed
+ggsave("provenanceResults.png", width = 26, height = 14)
+```
+explore_interactions
+
+```{r}
+model <- lm(formula = explore_interactions ~ complexity * chartType * isCovidData +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+```
+
+explore_time
+
+```{r}
+model <- lm(formula = vis.trust_6 ~ explore_time * explore_interactions * complexity * chartType * isCovidData +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+```
+
+
+
+Hypothesis:
+for the complex condition, we expect people who brushed more to have higher trust
+
+```{r}
+complexCondition <- results %>%
+  filter(complexity == "complex")
+
+# can change the predictor to bar.vis
+model<- manova(cbind(data.trust_1, 
+                     data.trust_2, 
+                     data.trust_3, 
+                     data.trust_4, 
+                     data.trust_5, 
+                     data.trust_6) ~ brushed + explore_interactions + explore_time, 
+               data = complexCondition)
+summary.aov(model)
+```
+
+Hypothesis:
+for all the conditions, we expect people who hovered more to have higher trust
+
+
+```{r}
+# can change the predictor to bar.vis
+model<- manova(cbind(vis.trust_6, 
+                     vis.trust_5, 
+                     vis.trust_4, 
+                     vis.trust_3, 
+                     vis.trust_2, 
+                     vis.trust_1) ~ brushed + explore_interactions + explore_time, 
+               data = results)
+summary.aov(model)
+```
+
+
+
+# Affect on Trust {it's own section}
+
+```{r}
+results %>%
+  gather(key = affects, value = affectRatings, affect.science_1,  affect.clarity_1, affect.aesthetic_1) %>%
+  group_by(affects, chartType, isCovidData, complexity) %>%
+  summarize(n = n(),
+            mean = mean(affectRatings),
+            se = sd(affectRatings)/sqrt(n),
+            n = n()) %>%
+  ggplot(aes(x = affects, y = mean, 
+             ymax = mean + se, ymin = mean - se,
+             colour = as.factor(isCovidData))) +
+  geom_point(position = position_dodge2(width = 0.5)) +
+  geom_errorbar(width = 0.5, size = 0.66, position = "dodge") +
+  # labs(title = "Trust in data") + 
+  # geom_vline(data = results %>% 
+  #              group_by(complexity, isCovidData) %>%
+  #              summarize(n = n(), 
+  #                        vis.trust_6 = mean(vis.trust_6)), 
+  #            aes(xintercept = vis.trust_6, colour = as.factor(isCovidData))) +
+  facet_grid(rows = vars(chartType), cols = vars(complexity)) +
+  theme_minimal() + 
+  theme(panel.spacing = unit(2, "lines"))
+        # legend.position = "none")
+ggsave("affectMeasures.png", width = 17, height = 9)
+```
+
+
+```{r}
+model <- lm(formula = affect.science_1 ~ complexity * chartType * isCovidData +
+              Age + as.factor(Gender) + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+```
+
+```{r}
+model <- lm(formula = affect.clarity_1 ~ complexity * chartType * isCovidData +
+              Age + as.factor(Gender) + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+summary(model)
+```
+```{r}
+model <- lm(formula = affect.aesthetic_1 ~ complexity * chartType * isCovidData +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+summary(model)
+```
+
+Trust in Vis
+
+
+```{r}
+model <- lm(formula = vis.trust_4 ~  vis.trust_1 + vis.trust_2 + vis.trust_3 + vis.trust_6 +
+              data.trust_1 + data.trust_2 + data.trust_3 + data.trust_4 + data.trust_5 + data.trust_6 + 
+              affect.science_1 + affect.clarity_1 + affect.aesthetic_1 + 
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+summary(model)
+
+emmeans(aov(vis.trust_6 ~ affect.science_1 * affect.clarity_1 , data = results) , ~ affect.clarity_1)
+```
+
+
+Trust in Data
+
+```{r}
+model <- lm(formula = data.trust_6 ~ affect.science_1 * affect.clarity_1 * affect.aesthetic_1 +
+              Age + Gender + State_1 + Education + Parents_education + Language + 
+              Ethnicity + Income + Religion + trust.in.science_7 + 
+              need_for_cognition + interpersonal.trust_1,
+            data = results)
+anova(model)
+
+emmeans(aov(data.trust_6 ~ affect.science_1 * affect.clarity_1 , data = results) , ~ affect.clarity_1)
+```
+
+
+
+
+
+
+
+
+
+
+# Factor Analysis 
+
+
+```{r}
+factorAnalysis <- results %>%
+  select(data.trust_1, data.trust_2, data.trust_3, data.trust_4, data.trust_5, data.trust_6,
+         vis.trust_1, vis.trust_2, vis.trust_3, vis.trust_4, vis.trust_5, vis.trust_6,
+         trust.in.science_1, trust.in.science_2, trust.in.science_3, trust.in.science_4, trust.in.science_5,
+         trust.in.science_6, trust.in.science_7, trust.in.science_8, 
+         cognition_1, cognition_2, cognition_3, cognition_4, cognition_5, cognition_6,
+         # brushed, explore_interactions, # explore_time, 
+         interpersonal.trust_1,
+         vlat_simple, vlat_moderate, vlat_complex,
+         # initial impression
+         affect.science_1, affect.clarity_1, affect.aesthetic_1)
+
+nfactors(factorAnalysis)
+```
+
+Factor 4 seem to have minimum compelxity, BIC is pretty low, and big jump for root mean
+5 seems meh becuase of the big jump from 4-5 on complexity. 
+
+```{r}
+f7 <- fa(factorAnalysis, 7)
+pdf(file = "f7.pdf",   # The directory you want to save the file in
+    width = 15, # The width of the plot in inches
+    height = 23) # The height of the plot in inches
+fa.diagram(f7)
+dev.off()
+# based on the factor analysis, it looks like not all the vis Qs go together and not all the data Qs go together. 
+```
+
+
+

@@ -1,0 +1,43 @@
+
+.axis path,
+.axis line {
+    fill: light;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+/*.axis text {*/
+/*    font-size: 11px;*/
+/*}*/
+
+.grid line {
+    stroke: darkgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+.bubbles {
+    stroke-width: 2px;
+    stroke: white;
+}
+.bubbles:hover {
+    stroke: black;
+}
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 15px;
+}
+
+.source {
+    margin-left: 70px;
+    font-size: 12px;
+    font-family: Segoe UI;
+}

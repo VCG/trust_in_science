@@ -1,0 +1,56 @@
+{
+  "complex": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Map Chart",
+      "text": "This is a map showing total cumulative COVID case counts. <b>Your turn:</b> Hover over the map to see the data for the corresponding state.",
+      "class": "first-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend, showing how the colors correspond to case counts<br> <br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ],
+  "moderate": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Map Chart",
+      "text": "This is a map showing total cumulative COVID case counts. <b>Your turn:</b> Hover over the map to see the data for the corresponding state.",
+      "class": "first-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend, showing how the colors correspond to case counts<br> <br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ],
+  "simple": [
+    {
+      "id": "#chart",
+      "location": "bottom",
+      "title": "Map Chart",
+      "text": "This is a map showing total cumulative COVID case counts. <b>Your turn:</b> Hover over the map to see the data for the corresponding state.",
+      "class": "first-vis-step",
+      "disabled": false
+    },
+    {
+      "id": "#legend",
+      "location": "left",
+      "title": "Legend",
+      "text": "This is the legend, showing how the colors correspond to case counts<br> <br> That's it, have fun exploring the data!",
+      "class": "legend-step",
+      "disabled": false
+    }
+  ]
+}
